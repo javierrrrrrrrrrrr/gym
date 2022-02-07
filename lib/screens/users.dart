@@ -14,56 +14,70 @@ class _UsersPageState extends State<UsersPage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: Stack(
-      alignment: AlignmentDirectional.bottomEnd,
-      children: [
-        Column(
-          children: [
-            CustomNav(
-              titulo: "Gestion de Clientes",
-              height: height,
-              width: width,
-            ),
-            // SizedBox(
-            //   height: height * 0.1,
-            // ),
-            SizedBox(
-              height: height * 0.70,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        listitem(),
-                        listitem(),
-                        listitem(),
-                        listitem(),
-                      ],
-                      shrinkWrap: true,
+        body: SingleChildScrollView(
+      child: Stack(
+        alignment: AlignmentDirectional.bottomEnd,
+        children: [
+          Column(
+            children: [
+              CustomNav(
+                titulo: "Gestion de Clientes",
+                height: height,
+                width: width,
+              ),
+              // SizedBox(
+              //   height: height * 0.1,
+              // ),
+              SizedBox(
+                height: height * 0.80,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                          listitem(),
+                        ],
+                        shrinkWrap: true,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-        Positioned(
-          child: FloatingActionButton(
-            backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
-            onPressed: () {},
-            child: const Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Image(
-                color: Colors.white,
-                fit: BoxFit.cover,
-                image: AssetImage('assets/add_user.png'),
-              ),
-            ),
+            ],
           ),
-          bottom: 30,
-          right: 30,
-        ),
-      ],
+          Positioned(
+            child: FloatingActionButton(
+              backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
+              onPressed: () {},
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Image(
+                  color: Colors.white,
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/add_user.png'),
+                ),
+              ),
+            ),
+            bottom: 30,
+            right: 30,
+          ),
+        ],
+      ),
     ));
   }
 
