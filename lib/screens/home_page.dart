@@ -42,14 +42,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 2, vertical: 6),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: width * 0.04, vertical: width * 0.035),
                       border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                       enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Color.fromRGBO(45, 49, 146, 1))),
-                      hintText: '  avaldesa007@gmail.com',
+                      hintText: 'avaldesa007@gmail.com',
                       hintStyle:
                           const TextStyle(color: Colors.black54, fontSize: 20),
                       suffixIcon: IconButton(
@@ -63,16 +63,16 @@ class _HomePageState extends State<HomePage> {
                     height: height * 0.03,
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 2, vertical: 6),
-                      border: OutlineInputBorder(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: width * 0.04, vertical: width * 0.035),
+                      border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8))),
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Color.fromRGBO(45, 49, 146, 1))),
                       hintText: '  Enter Password',
-                      hintStyle: TextStyle(
+                      hintStyle: const TextStyle(
                           color: Color.fromRGBO(150, 152, 154, 0.5),
                           fontSize: 20),
                     ),

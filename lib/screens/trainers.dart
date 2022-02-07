@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gym/widgets/widgets.dart';
 
-class UsersPage extends StatefulWidget {
-  const UsersPage({Key? key}) : super(key: key);
+class TrainerPage extends StatefulWidget {
+  const TrainerPage({Key? key}) : super(key: key);
 
   @override
-  State<UsersPage> createState() => _UsersPageState();
+  State<TrainerPage> createState() => _TrainerPageState();
 }
 
-class _UsersPageState extends State<UsersPage> {
+class _TrainerPageState extends State<TrainerPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -21,10 +21,13 @@ class _UsersPageState extends State<UsersPage> {
           Column(
             children: [
               CustomNav(
-                titulo: "Gestion de Clientes",
+                titulo: "Gestion de Entrenadores",
                 height: height,
                 width: width,
               ),
+              // SizedBox(
+              //   height: height * 0.1,
+              // ),
               ListViewPage(height: height),
             ],
           ),
@@ -32,7 +35,7 @@ class _UsersPageState extends State<UsersPage> {
             child: FloatingActionButton(
               backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
               onPressed: () {
-                Navigator.pushNamed(context, 'add_user');
+                Navigator.pushNamed(context, 'add_trainer');
               },
               child: Padding(
                 padding: EdgeInsets.all(width * 0.03),

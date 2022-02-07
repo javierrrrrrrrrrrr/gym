@@ -21,7 +21,7 @@ class CustomNav extends StatelessWidget {
             bottomRight: Radius.circular(height * 0.015)),
         child: Container(
           color: const Color.fromRGBO(45, 49, 146, 1),
-          height: height * 0.180,
+          height: height * 0.184,
           width: width,
           child: Column(
             children: [
@@ -30,21 +30,31 @@ class CustomNav extends StatelessWidget {
               ),
               Text(
                 titulo,
-                style: TextStyle(color: Colors.white, fontSize: 32),
+                style: const TextStyle(color: Colors.white, fontSize: 32),
               ),
               SizedBox(
                 height: height * 0.015,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
+                padding:
+                    EdgeInsets.only(left: width * 0.085, right: width * 0.085),
                 child: TextFormField(
                   decoration: InputDecoration(
                     fillColor: Colors.white,
                     filled: true,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 15),
-                    border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: width * 0.060, vertical: width * 0.04),
+                    border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(width * 0.03))),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(width * 0.03)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(width * 0.03)),
+                    ),
                     hintText: '   Buscar Usuario',
                     hintStyle: const TextStyle(
                       color: Color.fromRGBO(150, 152, 154, 0.5),
@@ -52,10 +62,10 @@ class CustomNav extends StatelessWidget {
                     ),
                     suffixIcon: IconButton(
                       onPressed: () {},
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.search,
-                        color: Color.fromRGBO(150, 152, 154, 0.5),
-                        size: 35,
+                        color: const Color.fromRGBO(150, 152, 154, 0.5),
+                        size: width * 0.090,
                       ),
                     ),
                   ),

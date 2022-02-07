@@ -4,6 +4,7 @@ import 'package:gym/widgets/widgets.dart';
 
 class PanelAdmin extends StatelessWidget {
   const PanelAdmin({Key? key}) : super(key: key);
+  static String routeName = 'home';
 
   @override
   Widget build(BuildContext context) {
@@ -13,50 +14,34 @@ class PanelAdmin extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          SafeArea(
-            child: Container(
-              margin: EdgeInsets.zero,
-              height: height * 0.07,
-              width: width,
-              decoration: BoxDecoration(
-                border: Border.all(),
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10)),
-                color: const Color.fromRGBO(45, 49, 146, 1),
-              ),
-              child: const Center(
-                child: Text(
-                  'Panel de Administracion',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.9)),
-                  textScaleFactor: 1.85,
-                ),
-              ),
-            ),
+          BannerTop(
+            height: height,
+            width: width,
+            title: "Panel de Administración",
           ),
           separador(height),
           Row(
             children: [
               GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, 'users');
-                },
+                onTap: () => Navigator.pushNamed(context, 'users'),
                 child: Carta(
                   width: width,
                   height: height,
-                  texto: "Gestion de clientes",
+                  texto: "Gestión de clientes",
                   imgurl: "assets/add_user.png",
                 ),
               ),
               SizedBox(
                 width: width * 0.05,
               ),
-              Carta(
-                width: width,
-                height: height,
-                texto: "Gestion de Entrenador",
-                imgurl: "assets/add_user.png",
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, 'trainers'),
+                child: Carta(
+                  width: width,
+                  height: height,
+                  texto: "Gestión de Entrenador",
+                  imgurl: "assets/add_user.png",
+                ),
               ),
             ],
           ),
@@ -66,7 +51,7 @@ class PanelAdmin extends StatelessWidget {
               Carta(
                 width: width,
                 height: height,
-                texto: "Gestion de clientes",
+                texto: "Gestión de clientes",
                 imgurl: "assets/supplies.png",
               ),
               SizedBox(
@@ -75,7 +60,7 @@ class PanelAdmin extends StatelessWidget {
               Carta(
                 width: width,
                 height: height,
-                texto: "Gestion de Entrenador",
+                texto: "Gestión de Entrenador",
                 imgurl: "assets/add_user.png",
               ),
             ],

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym/screens/add_trainer.dart';
+import 'package:gym/screens/add_user.dart';
 import 'package:gym/screens/pages.dart';
+import 'package:gym/screens/trainers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +24,9 @@ class MyApp extends StatelessWidget {
         'home': (BuildContext context) => const HomePage(),
         'Admin': (BuildContext context) => const PanelAdmin(),
         'users': (BuildContext context) => const UsersPage(),
+        'trainers': (BuildContext context) => const TrainerPage(),
+        'add_user': (BuildContext context) => const AddUser(),
+        'add_trainer': (BuildContext context) => const AddTrainer(),
       },
     );
   }

@@ -19,7 +19,7 @@ class Carta extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           border: Border.all(),
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(width * 0.06),
           color: const Color.fromRGBO(45, 49, 146, 1),
         ),
         margin: EdgeInsets.only(left: width * 0.05),
@@ -29,8 +29,8 @@ class Carta extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.only(top: height * 0.035),
-              height: 120,
-              width: 120,
+              height: height * 0.138,
+              width: width * 0.31,
               child: Image(
                 image: AssetImage(imgurl),
                 color: Colors.white,
