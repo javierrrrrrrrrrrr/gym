@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/screens/home_page.dart';
-import 'package:gym/screens/panel_admin.dart';
+import 'package:gym/screens/pages.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (BuildContext context) => const HomePage(),
         'Admin': (BuildContext context) => const PanelAdmin(),
+        'users': (BuildContext context) => const UsersPage(),
       },
     );
   }
