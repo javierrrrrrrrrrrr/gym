@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/screens/add_trainer.dart';
-import 'package:gym/screens/add_user.dart';
-import 'package:gym/screens/home_page.dart';
-import 'package:gym/screens/panel_admin.dart';
-import 'package:gym/screens/trainers.dart';
-import 'package:gym/screens/users.dart';
+import 'package:gym/screens/pages.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
   'home': (BuildContext context) => const HomePage(),
