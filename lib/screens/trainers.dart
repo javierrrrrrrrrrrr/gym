@@ -14,7 +14,10 @@ class _TrainerPageState extends State<TrainerPage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: FloatingABCustom(width: width),
+      floatingActionButton: FloatingABCustom(
+        width: width,
+        route: "add_trainer",
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
