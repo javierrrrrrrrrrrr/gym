@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/login_form_controller.dart';
+import 'package:gym/providers/login_provider.dart';
 import 'package:gym/routes/routes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => LoginFormController(),
+        lazy: false,
+      ),
+      ChangeNotifierProvider(
+        create: (_) => LoginProvider(),
+        lazy: false,
+      )
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
