@@ -18,17 +18,15 @@ class _TrainerPageState extends State<TrainerPage> {
         width: width,
         route: "add_trainer",
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomNav(
-              titulo: "Gestion de Entrenadores",
-              height: height,
-              width: width,
-            ),
-            ListViewPage(height: height),
-          ],
-        ),
+      body: Column(
+        children: [
+          CustomNav(
+            titulo: "Gestion de Entrenadores",
+            height: height,
+            width: width,
+          ),
+          ListViewPage(height: height)
+        ],
       ),
     );
   }

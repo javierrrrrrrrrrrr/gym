@@ -12,33 +12,27 @@ class ListViewPage extends StatefulWidget {
 class _ListViewPageState extends State<ListViewPage> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height * 0.78,
-      child: Column(
+    return Expanded(
+      child: ListView(
+        padding: const EdgeInsets.all(0),
+        //  padding: const EdgeInsets.only(bottom: 10),
         children: [
-          Expanded(
-            child: ListView(
-              children: [
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-                listitem(),
-              ],
-              shrinkWrap: true,
-            ),
-          ),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
+          listitem(),
         ],
       ),
     );

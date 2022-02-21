@@ -13,17 +13,15 @@ class UsersPage extends StatelessWidget {
         width: width,
         route: "add_user",
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomNav(
-              titulo: "Gestion de Clientes",
-              height: height,
-              width: width,
-            ),
-            ListViewPage(height: height),
-          ],
-        ),
+      body: Column(
+        children: [
+          CustomNav(
+            titulo: "Gestion de Clientes",
+            height: height,
+            width: width,
+          ),
+          ListViewPage(height: height)
+        ],
       ),
     );
   }
