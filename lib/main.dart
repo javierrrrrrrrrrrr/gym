@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym/providers/login_form_controller.dart';
 import 'package:gym/providers/login_provider.dart';
+import 'package:gym/providers/users_provider.dart';
 import 'package:gym/routes/routes.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,10 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),
+        lazy: false,
+      ),
+      ChangeNotifierProvider(
+        create: (_) => UsersProvider(),
         lazy: false,
       )
     ],
