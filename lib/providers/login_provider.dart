@@ -19,7 +19,6 @@ class LoginProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final Map<String, dynamic> decodedResp =
           json.decode(await response.stream.bytesToString());
-      print(decodedResp);
       if (decodedResp.containsKey('token')) {
         await storage.write(key: 'token', value: decodedResp['token']);
       }

@@ -51,7 +51,6 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       textFormField(width, 'Enter Email', (value) {
-                        print(value);
                         loginController.email = value;
                       }, (value) {
                         String gmailpatter =
@@ -70,7 +69,6 @@ class _HomePageState extends State<HomePage> {
 
                           //onChange
                           (value) {
-                        print(value);
                         loginController.password = value;
                       },
 
@@ -103,11 +101,7 @@ class _HomePageState extends State<HomePage> {
       LoginFormController loginController) {
     return GestureDetector(
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: BorderRadius.circular(8),
-          color: const Color.fromRGBO(45, 49, 146, 1),
-        ),
+        decoration: _boxDecoration(),
         child: const Center(
           child: Text(
             "Acceder",
@@ -165,6 +159,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  BoxDecoration _boxDecoration() {
+    return BoxDecoration(
+      border: Border.all(),
+      borderRadius: BorderRadius.circular(8),
+      color: const Color.fromRGBO(45, 49, 146, 1),
+    );
+  }
+
   TextFormField textFormField(
     double width,
     String hintText,
@@ -172,24 +174,27 @@ class _HomePageState extends State<HomePage> {
     String? Function(String?)? validator,
     bool value,
   ) {
-    const color = Color.fromRGBO(150, 152, 154, 0.5);
-
     return TextFormField(
       obscureText: value,
       keyboardType: TextInputType.emailAddress,
       onChanged: onChange,
       validator: validator,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(
-            horizontal: width * 0.04, vertical: width * 0.035),
-        border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8))),
-        enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromRGBO(45, 49, 146, 1))),
-        hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.black54, fontSize: 20),
-        suffixIcon: const Icon(Icons.check_circle, color: color),
-      ),
+      decoration: _inputDecoration(width, hintText),
+    );
+  }
+
+  InputDecoration _inputDecoration(double width, String hintText) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.symmetric(
+          horizontal: width * 0.04, vertical: width * 0.035),
+      border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8))),
+      enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Color.fromRGBO(45, 49, 146, 1))),
+      hintText: hintText,
+      hintStyle: const TextStyle(color: Colors.black54, fontSize: 20),
+      suffixIcon: const Icon(Icons.check_circle,
+          color: Color.fromRGBO(150, 152, 154, 0.5)),
     );
   }
 }

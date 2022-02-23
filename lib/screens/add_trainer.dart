@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/users_provider.dart';
 import 'package:gym/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class AddTrainer extends StatelessWidget {
   const AddTrainer({Key? key}) : super(key: key);
@@ -20,24 +22,41 @@ class AddTrainer extends StatelessWidget {
                 height: height * 0.02,
               ),
               InputFieldWidget(
+                keyboardType: TextInputType.text,
+                onChanged: (value) {},
+                validator: (value) {
+                  if ((value != null && value.length > 3)) {
+                    // controlcontrsena = true;
+
+                    return null;
+                  } else {
+                    // controlcontrsena = false;
+                    return "El nombre debe ser mayor de 3 caracteres";
+                  }
+                },
                 width: width,
                 hinttext: 'Nombre',
               ),
               _separador(height),
               InputFieldWidget(
+                onChanged: (value) => {},
+                validator: (value) {
+                  //TODO:Validator
+                },
+                keyboardType: TextInputType.text,
                 width: width,
                 hinttext: 'Apellidos',
               ),
               _separador(height),
-              InputFieldWidget(
-                width: width,
-                hinttext: 'email',
-              ),
-              _separador(height),
-              InputFieldWidget(
-                width: width,
-                hinttext: 'Contraseña',
-              ),
+              // InputFieldWidget(
+              //   width: width,
+              //   hinttext: 'email',
+              // ),
+              // _separador(height),
+              // InputFieldWidget(
+              //   width: width,
+              //   hinttext: 'Contraseña',
+              // ),
               SizedBox(
                 height: height * 0.1,
               ),
