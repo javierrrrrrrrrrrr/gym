@@ -8,7 +8,7 @@ class User {
     required this.age,
     required this.height,
     required this.weight,
-    required this.email,
+    this.email,
     required this.datetime,
     required this.phone,
     this.imc,
@@ -28,7 +28,7 @@ class User {
   int age;
   String height;
   String weight;
-  String email;
+  String? email;
   DateTime datetime;
   String phone;
   String? imc;

@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       InputFieldWidget(
+                        obscureText: false,
                         width: width,
                         hinttext: 'Enter Email',
                         onChanged: (value) {

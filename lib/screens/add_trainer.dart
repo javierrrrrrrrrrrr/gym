@@ -20,6 +20,7 @@ class AddTrainer extends StatelessWidget {
                 height: height * 0.02,
               ),
               InputFieldWidget(
+                obscureText: false,
                 keyboardType: TextInputType.text,
                 onChanged: (value) {},
                 validator: (value) {
@@ -37,6 +38,7 @@ class AddTrainer extends StatelessWidget {
               ),
               _separador(height),
               InputFieldWidget(
+                obscureText: false,
                 onChanged: (value) => {},
                 keyboardType: TextInputType.text,
                 width: width,

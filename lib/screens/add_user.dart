@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:dropdown_plus/dropdown_plus.dart';
+
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
@@ -17,7 +19,8 @@ class AddUser extends StatelessWidget {
         child: Container(
           color: const Color.fromRGBO(253, 254, 255, 1),
           child: Form(
-            // key: userFormController.formkey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: userFormController.formkey,
             child: Column(
               children: [
                 BannerTop(height: height, width: width, title: "Crear Cliente"),
@@ -26,25 +29,17 @@ class AddUser extends StatelessWidget {
                   height: height * 0.02,
                 ),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.text,
                   onChanged: ((value) {
                     userFormController.firstname = value;
                   }),
-                  validator: (value) {
-                    if ((value != null && value.length > 3)) {
-                      // controlcontrsena = true;
-
-                      return null;
-                    } else {
-                      // controlcontrsena = false;
-                      return "El nombre debe ser mayor de 3 caracteres";
-                    }
-                  },
                   width: width,
                   hinttext: 'Nombre',
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   onChanged: (value) => userFormController.lastname = value,
                   keyboardType: TextInputType.text,
                   width: width,
@@ -52,6 +47,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.phone,
                   onChanged: (value) => userFormController.phone = value,
                   width: width,
@@ -59,54 +55,125 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) => userFormController.email = value,
                   width: width,
                   hinttext: 'Email',
+                  validator: (value) {
+                    String gmailpatter =
+                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                    RegExp regExp = RegExp(gmailpatter);
+                    if (regExp.hasMatch(value ?? "")) {
+                      return null;
+                    } else {
+                      return 'Introduce un correo valido';
+                    }
+                  },
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.age = value,
                   width: width,
                   hinttext: 'Edad',
+                  validator: (value) {
+                    if (value != null && value.length < 3) {
+                      return null;
+                    } else {
+                      return "La edad debe ser una edad logica";
+                    }
+                  },
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.height = value,
                   width: width,
                   hinttext: 'Estatura',
+                  validator: (value) {
+                    if (value != null && value.length < 4) {
+                      return null;
+                    } else {
+                      return "La altura debe ser de solo 3 digitos";
+                    }
+                  },
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.weight = value,
                   width: width,
                   hinttext: 'Peso',
+                  validator: (value) {
+                    if (value != null && value.length < 4) {
+                      return null;
+                    } else {
+                      return "El peso debe ser de solo 3 digitos";
+                    }
+                  },
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.imc = value,
                   width: width,
                   hinttext: 'Imc',
+                  validator: (value) {
+                    if (value != null && value.length < 4) {
+                      return null;
+                    } else {
+                      return "El Imc debe ser de solo 3 digitos";
+                    }
+                  },
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.icc = value,
                   width: width,
                   hinttext: 'Icc',
+                  validator: (value) {
+                    if (value == null || value.length < 4) {
+                      return null;
+                    } else {
+                      return "El Icc debe ser de solo 3 digitos";
+                    }
+                  },
                 ),
                 _separador(height),
-                InputFieldWidget(
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) => userFormController.services = value,
-                  width: width,
-                  hinttext: 'Servicios',
+                // DropDown List;
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: TextDropdownFormField(
+                    onSaved: (value) {
+                      userFormController.services = value!;
+                    },
+                    options: const ["TRAINING", "AEROBICS", "MASSAGE"],
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromRGBO(45, 49, 146, 1)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        suffixIcon: Icon(Icons.arrow_drop_down),
+                        labelText: "Services"),
+                    dropdownHeight: 200,
+                  ),
                 ),
-                _separador(height),
+
+                const SizedBox(
+                  height: 100,
+                ),
                 MaterialButton(
                   onPressed: () {
                     final userProvider =

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gym/models/createUserModel.dart';
 
 import 'package:gym/models/getUsersModel.dart';
@@ -9,46 +11,40 @@ import 'package:http/http.dart' as http;
 import '../models/users_model.dart';
 
 class UsersProvider extends ChangeNotifier {
-  String token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjExMzc4YTczMTI1ZjZjN2YyN2MzNTYiLCJpYXQiOjE2NDU2NDM2ODksImV4cCI6MTY0NTczMDA4OX0.wUN905rKE_qaAm1rHKI-ajJmVAhaL08DUklq9roK9bY';
+  String token = '';
+
   List<User> users = [];
   String photo = "";
+  final storage = const FlutterSecureStorage();
 
   UsersProvider() {
     getUsers();
   }
+  Future<String> readDataFromStorage(String valor) async {
+    return await storage.read(key: valor) ?? '';
+  }
+
+  Future<String> getToken() async {
+    token = await readDataFromStorage('token');
+    notifyListeners();
+    return token;
+  }
 
   getUsers() async {
-    var headers = {'Authorization': token};
-    var request = http.Request(
-        'GET', Uri.parse('http://152.206.177.70:3000/api/clients'));
+    await getToken();
 
-    request.headers.addAll(headers);
+    final resp = await http.get(
+        Uri.parse("http://152.206.177.70:3000/api/clients?limit=1000&page=1"),
+        headers: {HttpHeaders.authorizationHeader: token});
 
-    http.StreamedResponse response = await request.send();
-    final respuesta =
-        GetUsersResponse.fromJson(await response.stream.bytesToString());
+    final Map<String, dynamic> usersmap = json.decode(resp.body);
+
+    final respuesta = GetUsersResponse.fromMap(usersmap);
 
     users = respuesta.clients;
     notifyListeners();
     print(users);
   }
-
-  // getPictureById(String id) async {
-  //   var request = http.Request(
-  //       'GET', Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$id'));
-
-  //   http.StreamedResponse response = await request.send();
-
-  //   if (response.statusCode == 200) {
-  //     print(await response.stream.bytesToString());
-  //     photo = await response.stream.bytesToString();
-  //     notifyListeners();
-  //     return photo;
-  //   } else {
-  //     print(response.reasonPhrase);
-  //   }
-  // }
 
   createUser(
     String firstname,
@@ -62,13 +58,10 @@ class UsersProvider extends ChangeNotifier {
     String icc,
     String services,
   ) async {
-    var headers = {
-      'Authorization':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjExMzc4YTczMTI1ZjZjN2YyN2MzNTYiLCJpYXQiOjE2NDU2NzI0MjMsImV4cCI6MTY0NTc1ODgyM30.Nlg8DK2a9OP_S9c46SWCl5Krv5nInSLmlfClmKhAB7A',
-      'Content-Type': 'application/json'
-    };
-    var request = http.Request(
-        'POST', Uri.parse('http://152.206.177.70:3000/api/clients/'));
+    await getToken();
+    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var request = http.Request('POST',
+        Uri.parse('http://152.206.177.70:3000/api/clients?limit=1000&page=1'));
     request.body = json.encode({
       "firstname": firstname,
       "lastname": lastname,
@@ -79,17 +72,25 @@ class UsersProvider extends ChangeNotifier {
       "phone": phone,
       "imc": imc,
       "icc": icc,
-      "services": services,
+      "services": "TRAINING"
     });
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+
     print("EL estado de la respuesta: ${response.statusCode}");
 
     final respuesta =
-        GetUsersResponse.fromJson(await response.stream.bytesToString());
+        CreateUserResponse.fromJson(await response.stream.bytesToString());
 
-    users.add(respuesta.clients.last);
+    users.add(respuesta.client!);
+
     print(respuesta);
     print(users);
     notifyListeners();

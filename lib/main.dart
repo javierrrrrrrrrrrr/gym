@@ -21,7 +21,7 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => UsersProvider(),
-        lazy: false,
+        lazy: true,
       )
     ],
     child: const MyApp(),
