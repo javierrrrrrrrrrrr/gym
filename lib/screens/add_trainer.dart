@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/users_provider.dart';
 import 'package:gym/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
 class AddTrainer extends StatelessWidget {
   const AddTrainer({Key? key}) : super(key: key);
@@ -40,9 +38,6 @@ class AddTrainer extends StatelessWidget {
               _separador(height),
               InputFieldWidget(
                 onChanged: (value) => {},
-                validator: (value) {
-                  //TODO:Validator
-                },
                 keyboardType: TextInputType.text,
                 width: width,
                 hinttext: 'Apellidos',

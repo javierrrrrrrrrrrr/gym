@@ -8,6 +8,7 @@ class InputFieldWidget extends StatelessWidget {
     this.validator,
     required this.onChanged,
     required this.keyboardType,
+    this.obscureText,
   }) : super(key: key);
   final double width;
   final String hinttext;
@@ -15,6 +16,7 @@ class InputFieldWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final TextInputType? keyboardType;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {

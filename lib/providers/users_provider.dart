@@ -34,24 +34,23 @@ class UsersProvider extends ChangeNotifier {
     print(users);
   }
 
-  getPictureById(String id) async {
-    var request = http.Request(
-        'GET', Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$id'));
+  // getPictureById(String id) async {
+  //   var request = http.Request(
+  //       'GET', Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$id'));
 
-    http.StreamedResponse response = await request.send();
+  //   http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      photo = await response.stream.bytesToString();
-      notifyListeners();
-      return photo;
-    } else {
-      print(response.reasonPhrase);
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     print(await response.stream.bytesToString());
+  //     photo = await response.stream.bytesToString();
+  //     notifyListeners();
+  //     return photo;
+  //   } else {
+  //     print(response.reasonPhrase);
+  //   }
+  // }
 
   createUser(
-    String token,
     String firstname,
     String lastname,
     int age,
@@ -63,7 +62,11 @@ class UsersProvider extends ChangeNotifier {
     String icc,
     String services,
   ) async {
-    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var headers = {
+      'Authorization':
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjExMzc4YTczMTI1ZjZjN2YyN2MzNTYiLCJpYXQiOjE2NDU2NzI0MjMsImV4cCI6MTY0NTc1ODgyM30.Nlg8DK2a9OP_S9c46SWCl5Krv5nInSLmlfClmKhAB7A',
+      'Content-Type': 'application/json'
+    };
     var request = http.Request(
         'POST', Uri.parse('http://152.206.177.70:3000/api/clients/'));
     request.body = json.encode({
@@ -81,21 +84,15 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    print("EL estado de la respuesta: ${response.statusCode}");
 
     final respuesta =
-        CreateUserResponse.fromJson(await response.stream.bytesToString());
-    print(respuesta);
+        GetUsersResponse.fromJson(await response.stream.bytesToString());
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-      final respuesta =
-          GetUsersResponse.fromJson(await response.stream.bytesToString());
-      users = respuesta.clients;
-      notifyListeners();
-      return "creado correctamete";
-    } else {
-      print(response.reasonPhrase);
-      return "Error";
-    }
+    users.add(respuesta.clients.last);
+    print(respuesta);
+    print(users);
+    notifyListeners();
+    return "creado correctamete";
   }
 }

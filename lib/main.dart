@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/login_form_controller.dart';
-import 'package:gym/providers/login_provider.dart';
-import 'package:gym/providers/user_form_controller.dart';
-import 'package:gym/providers/users_provider.dart';
-import 'package:gym/routes/routes.dart';
 import 'package:provider/provider.dart';
+
+import 'package:gym/providers/providers.dart';
+import 'package:gym/routes/routes.dart';
 
 void main() {
   runApp(MultiProvider(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gym/providers/user_form_controller.dart';
-import 'package:gym/providers/users_provider.dart';
-import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
+
+import 'package:gym/providers/providers.dart';
+import 'package:gym/widgets/widgets.dart';
 
 class AddUser extends StatelessWidget {
   const AddUser({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class AddUser extends StatelessWidget {
         child: Container(
           color: const Color.fromRGBO(253, 254, 255, 1),
           child: Form(
-            key: userFormController.formkey,
+            // key: userFormController.formkey,
             child: Column(
               children: [
                 BannerTop(height: height, width: width, title: "Crear Cliente"),
@@ -47,9 +46,6 @@ class AddUser extends StatelessWidget {
                 _separador(height),
                 InputFieldWidget(
                   onChanged: (value) => userFormController.lastname = value,
-                  validator: (value) {
-                    //TODO:Validator
-                  },
                   keyboardType: TextInputType.text,
                   width: width,
                   hinttext: 'Apellidos',
@@ -117,7 +113,6 @@ class AddUser extends StatelessWidget {
                         Provider.of<UsersProvider>(context, listen: false);
 
                     userProvider.createUser(
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjExMzc4YTczMTI1ZjZjN2YyN2MzNTYiLCJpYXQiOjE2NDU2NTU0NTcsImV4cCI6MTY0NTc0MTg1N30.fKRIGnOdrJw83hFj3Eu4KDA0Nj35zsYYPbkb6u9yASs",
                         userFormController.firstname,
                         userFormController.lastname,
                         int.parse(userFormController.age),
@@ -128,6 +123,8 @@ class AddUser extends StatelessWidget {
                         userFormController.imc,
                         userFormController.icc,
                         userFormController.services);
+
+                    Navigator.pushNamed(context, 'users');
                   },
                   height: 60,
                   minWidth: 240,

@@ -1,10 +1,10 @@
-import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
-import 'package:gym/providers/login_form_controller.dart';
-import 'package:gym/providers/login_provider.dart';
+import 'package:elegant_notification/resources/arrays.dart';
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:provider/provider.dart';
 
-import 'package:elegant_notification/elegant_notification.dart';
+import 'package:gym/providers/providers.dart';
+import 'package:gym/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,40 +50,45 @@ class _HomePageState extends State<HomePage> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     children: [
-                      textFormField(width, 'Enter Email', (value) {
-                        loginController.email = value;
-                      }, (value) {
-                        String gmailpatter =
-                            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                        RegExp regExp = RegExp(gmailpatter);
-                        if (regExp.hasMatch(value ?? "")) {
-                          return null;
-                        } else {
-                          return 'Introduce un correo valido';
-                        }
-                      }, false),
-                      SizedBox(
-                        height: height * 0.03,
+                      InputFieldWidget(
+                        width: width,
+                        hinttext: 'Enter Email',
+                        onChanged: (value) {
+                          loginController.email = value;
+                        },
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          String gmailpatter =
+                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                          RegExp regExp = RegExp(gmailpatter);
+                          if (regExp.hasMatch(value ?? "")) {
+                            return null;
+                          } else {
+                            return 'Introduce un correo valido';
+                          }
+                        },
                       ),
-                      textFormField(width, 'Enter Password',
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      InputFieldWidget(
+                          obscureText: true,
+                          width: width,
+                          hinttext: 'Enter Password',
+                          onChanged: (value) {
+                            loginController.password = value;
+                          },
+                          validator: (value) {
+                            if ((value != null && value.length > 5)) {
+                              // controlcontrsena = true;
 
-                          //onChange
-                          (value) {
-                        loginController.password = value;
-                      },
-
-                          //Validator
-
-                          (value) {
-                        if ((value != null && value.length > 5)) {
-                          // controlcontrsena = true;
-
-                          return null;
-                        } else {
-                          // controlcontrsena = false;
-                          return "La contrasena debe tener 6 caracteres";
-                        }
-                      }, true),
+                              return null;
+                            } else {
+                              // controlcontrsena = false;
+                              return "La contrasena debe tener 6 caracteres";
+                            }
+                          },
+                          keyboardType: TextInputType.emailAddress),
                       SizedBox(
                         height: height * 0.05,
                       ),
@@ -130,13 +135,10 @@ class _HomePageState extends State<HomePage> {
           String? resp = await loginProvider.loginUser(
               loginController.email, loginController.password);
 
-          ;
           if (resp == '') {
             Navigator.pop(context);
-            Navigator.pushReplacementNamed(context, 'Admin');
+            Navigator.pushReplacementNamed(context, 'admin');
           } else {
-            print(resp);
-
             Navigator.pop(context);
             ElegantNotification.error(
               toastDuration: const Duration(milliseconds: 4000),
@@ -146,7 +148,6 @@ class _HomePageState extends State<HomePage> {
             ).show(context);
           }
         } catch (e) {
-          print("error desde la consulta $e");
           Navigator.pop(context);
           ElegantNotification.error(
             toastDuration: const Duration(milliseconds: 4000),

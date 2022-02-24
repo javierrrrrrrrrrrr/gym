@@ -41,11 +41,6 @@ class ListUserWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final usersProvider = Provider.of<UsersProvider>(context);
-
-    print(" los id son :${user.id}");
-    print('http://152.206.177.70:3000/api/uploads/clients/${user.id}');
     return SizedBox(
       height: 75,
       width: double.infinity,

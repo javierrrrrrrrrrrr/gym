@@ -11,15 +11,15 @@ class User {
     required this.email,
     required this.datetime,
     required this.phone,
-    required this.imc,
-    required this.icc,
+    this.imc,
+    this.icc,
     required this.services,
-    required this.status,
-    required this.payments,
-    required this.observations,
-    required this.trainer,
-    required this.img,
-    required this.v,
+    this.status,
+    this.payments,
+    this.observations,
+    this.trainer,
+    this.img,
+    this.v,
   });
 
   String id;
@@ -31,15 +31,15 @@ class User {
   String email;
   DateTime datetime;
   String phone;
-  String imc;
-  String icc;
+  String? imc;
+  String? icc;
   List<String> services;
-  bool status;
-  List<String> payments;
-  List<dynamic> observations;
-  String trainer;
-  String img;
-  int v;
+  bool? status;
+  List<String>? payments;
+  List<dynamic>? observations;
+  String? trainer;
+  String? img;
+  int? v;
 
   User copyWith({
     String? id,
@@ -104,4 +104,25 @@ class User {
         img: json["img"],
         v: json["__v"],
       );
+
+  Map<String, dynamic> toMap() => {
+        "firstname": firstname,
+        "lastname": lastname,
+        "age": age,
+        "height": height,
+        "weight": weight,
+        "email": email,
+        "datetime": datetime.toIso8601String(),
+        "phone": phone,
+        "imc": imc,
+        "icc": icc,
+        "services": List<dynamic>.from(services.map((x) => x)),
+        "status": status,
+        "payments": List<dynamic>.from(payments!.map((x) => x)),
+        "observations": List<dynamic>.from(observations!.map((x) => x)),
+        "trainer": trainer,
+        "img": img,
+        "_id": id,
+        "__v": v,
+      };
 }
