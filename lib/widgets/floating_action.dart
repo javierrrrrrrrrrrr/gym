@@ -15,7 +15,7 @@ class FloatingABCustom extends StatelessWidget {
     return FloatingActionButton(
       backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
       onPressed: () {
-        Navigator.pushNamed(context, route);
+        Navigator.pushReplacementNamed(context, route);
       },
       child: Padding(
         padding: EdgeInsets.all(width * 0.03),

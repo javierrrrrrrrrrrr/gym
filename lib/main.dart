@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/image_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gym/providers/providers.dart';
@@ -22,7 +23,11 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => UsersProvider(),
         lazy: true,
-      )
+      ),
+      ChangeNotifierProvider(
+        create: (_) => SelectImg(),
+        lazy: true,
+      ),
     ],
     child: const MyApp(),
   ));
@@ -39,7 +44,7 @@ class MyApp extends StatelessWidget {
       ),
       title: "Gym",
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
+      initialRoute: 'admin',
       routes: appRoutes,
     );
   }

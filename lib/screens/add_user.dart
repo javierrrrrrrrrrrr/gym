@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/image_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:dropdown_plus/dropdown_plus.dart';
@@ -14,6 +15,7 @@ class AddUser extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -175,11 +177,22 @@ class AddUser extends StatelessWidget {
                   height: 100,
                 ),
                 MaterialButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        });
+
+                    final imageProvider =
+                        Provider.of<SelectImg>(context, listen: false);
+
                     final userProvider =
                         Provider.of<UsersProvider>(context, listen: false);
 
-                    userProvider.createUser(
+                    final userId = await userProvider.createUser(
                         userFormController.firstname,
                         userFormController.lastname,
                         int.parse(userFormController.age),
@@ -191,7 +204,16 @@ class AddUser extends StatelessWidget {
                         userFormController.icc,
                         userFormController.services);
 
-                    Navigator.pushNamed(context, 'users');
+                    if (userId != '') {
+                      if (imageProvider.imagePath != '') {
+                        await userProvider
+                            .uploadImage(imageProvider.imagePath!, userId)
+                            .whenComplete(() {
+                          Navigator.pop(context);
+                          Navigator.pushReplacementNamed(context, 'users');
+                        });
+                      }
+                    }
                   },
                   height: 60,
                   minWidth: 240,

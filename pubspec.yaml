@@ -35,6 +35,9 @@ dependencies:
     sdk: flutter
   flutter_secure_storage: ^5.0.2
   http: ^0.13.4
+  image_cropper: ^1.5.0
+  image_picker: ^0.8.4+10
+  flutter_image_compress: ^1.1.0
   
 
   

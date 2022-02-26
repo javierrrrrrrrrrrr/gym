@@ -46,7 +46,7 @@ class UsersProvider extends ChangeNotifier {
     print(users);
   }
 
-  createUser(
+  Future<String> createUser(
     String firstname,
     String lastname,
     int age,
@@ -78,22 +78,32 @@ class UsersProvider extends ChangeNotifier {
 
     http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.reasonPhrase);
-    }
-
     print("EL estado de la respuesta: ${response.statusCode}");
 
     final respuesta =
         CreateUserResponse.fromJson(await response.stream.bytesToString());
 
-    users.add(respuesta.client!);
+    if (response.statusCode == 201) {
+      getUsers();
+      notifyListeners();
 
-    print(respuesta);
-    print(users);
-    notifyListeners();
-    return "creado correctamete";
+      return respuesta.client!.id;
+    } else {
+      return '';
+    }
+  }
+
+  Future uploadImage(String path, String userid) async {
+    await getToken();
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': token
+    };
+    var request = http.MultipartRequest('PUT',
+        Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$userid'));
+    request.files.add(await http.MultipartFile.fromPath('archivo', path));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
   }
 }
