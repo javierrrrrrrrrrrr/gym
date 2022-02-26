@@ -8,7 +8,7 @@ import 'package:gym/models/createUserModel.dart';
 import 'package:gym/models/getUsersModel.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/users_model.dart';
+import '../models/usersmodel.dart';
 
 class UsersProvider extends ChangeNotifier {
   String token = '';

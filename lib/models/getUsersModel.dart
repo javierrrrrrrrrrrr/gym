@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:gym/models/users_model.dart';
+import 'package:gym/models/usersmodel.dart';
 
 class GetUsersResponse {
   GetUsersResponse({

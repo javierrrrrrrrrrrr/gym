@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gym/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../models/users_model.dart';
+import '../models/usersmodel.dart';
 
 class ListViewPage extends StatefulWidget {
   const ListViewPage({Key? key, required this.height}) : super(key: key);
