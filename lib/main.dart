@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       ),
       title: "Gym",
       debugShowCheckedModeBanner: false,
-      initialRoute: 'admin',
+      initialRoute: 'home',
       routes: appRoutes,
     );
   }
