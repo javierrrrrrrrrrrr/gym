@@ -14,12 +14,14 @@ class UsersProvider extends ChangeNotifier {
   String token = '';
 
   List<User> users = [];
+  User? selectedUser;
   String photo = "";
   final storage = const FlutterSecureStorage();
 
   UsersProvider() {
     getUsers();
   }
+
   Future<String> readDataFromStorage(String valor) async {
     return await storage.read(key: valor) ?? '';
   }
@@ -30,7 +32,7 @@ class UsersProvider extends ChangeNotifier {
     return token;
   }
 
-  getUsers() async {
+  Future<List<User>> getUsers() async {
     await getToken();
 
     final resp = await http.get(
@@ -43,6 +45,7 @@ class UsersProvider extends ChangeNotifier {
 
     users = respuesta.clients;
     notifyListeners();
+    return users;
     print(users);
   }
 

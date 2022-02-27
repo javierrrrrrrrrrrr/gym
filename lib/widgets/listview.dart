@@ -86,7 +86,13 @@ class ListUserWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                final userProvider =
+                    Provider.of<UsersProvider>(context, listen: false);
+                userProvider.selectedUser = user;
+
+                Navigator.pushNamed(context, 'edit_user');
+              },
               icon: const Icon(Icons.edit, size: 35),
             ),
           ),
