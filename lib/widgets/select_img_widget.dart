@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/providers/image_provider.dart';
+import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class SelectIMGWidget extends StatelessWidget {
@@ -23,7 +24,8 @@ class SelectIMGWidget extends StatelessWidget {
                   onTap: () {
                     imageProvider.pikeImage();
                   },
-                  child: Container(
+                  child: ImgUserContainer(
+                      child: Container(
                     height: height * 0.25,
                     width: width * 0.4,
                     child: const Center(
@@ -37,7 +39,7 @@ class SelectIMGWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: const Color.fromRGBO(196, 196, 196, 1),
                         borderRadius: BorderRadius.circular(10)),
-                  ),
+                  )),
                 )
               : Stack(
                   children: [
