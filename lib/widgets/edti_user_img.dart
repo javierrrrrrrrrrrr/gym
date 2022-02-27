@@ -18,6 +18,13 @@ class EditUserImg extends StatefulWidget {
 
 class _EditUserImgState extends State<EditUserImg> {
   @override
+  void initState() {
+    super.initState();
+    final imageProvider = Provider.of<SelectImg>(context, listen: false);
+    imageProvider.imagePath = "";
+  }
+
+  @override
   Widget build(BuildContext context) {
     final imageProvider = Provider.of<SelectImg>(context);
     final usersProvider = Provider.of<UsersProvider>(context);
