@@ -27,6 +27,10 @@ class Observ extends StatelessWidget {
               height: 20,
             ),
             InputFieldWidget(
+              ico: true,
+              maxline: 1,
+              right: 55,
+              left: 25,
               initialvalue: "",
               obscureText: false,
               width: width,
@@ -34,23 +38,23 @@ class Observ extends StatelessWidget {
               hinttext: "",
               onChanged: null,
             ),
-            Padding(
-              padding: const EdgeInsets.all(26),
-              child: TextFormField(
-                maxLines: 10,
-                decoration: const InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                  hintText: 'Comentario de la observación',
-                  hintStyle: TextStyle(color: Colors.black54, fontSize: 20),
-                ),
-              ),
+            const SizedBox(
+              height: 25,
+            ),
+            InputFieldWidget(
+              ico: false,
+              maxline: 10,
+              right: 55,
+              left: 25,
+              initialvalue: "",
+              obscureText: false,
+              width: width,
+              keyboardType: TextInputType.name,
+              hinttext: "Comentario de la Observacion",
+              onChanged: null,
+            ),
+            const SizedBox(
+              height: 16,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -70,7 +74,7 @@ class Observ extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 45,
+              height: 20,
             ),
             MaterialButton(
               onPressed: () {},

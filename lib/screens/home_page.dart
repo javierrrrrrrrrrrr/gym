@@ -51,6 +51,10 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       InputFieldWidget(
+                        ico: true,
+                        maxline: 1,
+                        right: 18,
+                        left: 15,
                         initialvalue: "",
                         obscureText: false,
                         width: width,
@@ -74,6 +78,10 @@ class _HomePageState extends State<HomePage> {
                         height: height * 0.01,
                       ),
                       InputFieldWidget(
+                          ico: true,
+                          maxline: 1,
+                          right: 18,
+                          left: 15,
                           initialvalue: "",
                           obscureText: true,
                           width: width,

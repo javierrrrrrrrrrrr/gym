@@ -39,6 +39,10 @@ class EditUser extends StatelessWidget {
                       height: height * 0.02,
                     ),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.firstname,
                       obscureText: false,
                       keyboardType: TextInputType.text,
@@ -50,6 +54,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.lastname,
                       obscureText: false,
                       onChanged: (value) => userFormController.lastname = value,
@@ -59,6 +67,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.phone,
                       obscureText: false,
                       keyboardType: TextInputType.phone,
@@ -68,6 +80,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.email!,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
@@ -87,6 +103,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.age.toString(),
                       obscureText: false,
                       keyboardType: TextInputType.number,
@@ -103,6 +123,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.height,
                       obscureText: false,
                       keyboardType: TextInputType.number,
@@ -119,6 +143,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.weight,
                       obscureText: false,
                       keyboardType: TextInputType.number,
@@ -135,6 +163,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.imc!,
                       obscureText: false,
                       keyboardType: TextInputType.number,
@@ -151,6 +183,10 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      ico: true,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
                       initialvalue: user.icc!,
                       obscureText: false,
                       keyboardType: TextInputType.number,
@@ -289,7 +325,9 @@ class EditUser extends StatelessWidget {
                           size: 35,
                           color: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'pago');
+                        },
                       ),
                       const SizedBox(
                         height: 30,
