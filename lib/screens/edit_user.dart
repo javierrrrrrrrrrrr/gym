@@ -285,7 +285,7 @@ class EditUser extends StatelessWidget {
                               .uploadImage(imageProvider.imagePath!, user.id)
                               .whenComplete(() {
                             imageProvider.isTouch = false;
-                            Timer(Duration(seconds: 10), () {
+                            Timer(const Duration(seconds: 10), () {
                               Navigator.pop(context);
                               Navigator.pushReplacementNamed(context, 'users');
                             });
@@ -326,7 +326,7 @@ class EditUser extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, 'pago');
+                          Navigator.pushNamed(context, 'lista_pagos');
                         },
                       ),
                       const SizedBox(
@@ -339,7 +339,7 @@ class EditUser extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, 'ob');
+                          Navigator.pushNamed(context, 'lista_obs');
                         },
                       ),
                     ]),
