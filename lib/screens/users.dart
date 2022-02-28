@@ -20,7 +20,7 @@ class UsersPage extends StatelessWidget {
             height: height,
             width: width,
           ),
-          ListViewPage(height: height)
+          ListViewUsers(height: height)
         ],
       ),
     );

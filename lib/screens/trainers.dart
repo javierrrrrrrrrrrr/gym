@@ -25,7 +25,7 @@ class _TrainerPageState extends State<TrainerPage> {
             height: height,
             width: width,
           ),
-          ListViewPage(height: height)
+          ListViewUsers(height: height)
         ],
       ),
     );

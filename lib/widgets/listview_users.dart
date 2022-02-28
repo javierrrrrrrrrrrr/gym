@@ -4,16 +4,16 @@ import 'package:provider/provider.dart';
 
 import '../models/usersmodel.dart';
 
-class ListViewPage extends StatefulWidget {
-  const ListViewPage({Key? key, required this.height}) : super(key: key);
+class ListViewUsers extends StatefulWidget {
+  const ListViewUsers({Key? key, required this.height}) : super(key: key);
 
   final double height;
 
   @override
-  State<ListViewPage> createState() => _ListViewPageState();
+  State<ListViewUsers> createState() => _ListViewUsersState();
 }
 
-class _ListViewPageState extends State<ListViewPage> {
+class _ListViewUsersState extends State<ListViewUsers> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
@@ -88,6 +88,7 @@ class ListUserWidget extends StatelessWidget {
             padding: const EdgeInsets.only(right: 15),
             child: IconButton(
               onPressed: () {
+                userProvider.getImg(user.id);
                 print(user.firstname);
                 print(user.age);
                 userProvider.selectedUser = user;

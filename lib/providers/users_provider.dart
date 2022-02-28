@@ -138,6 +138,19 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
+  getImg(String id) async {
+    var request = http.Request(
+        'GET', Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$id'));
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   Future uploadImage(String path, String userid) async {
     await getToken();
     var headers = {

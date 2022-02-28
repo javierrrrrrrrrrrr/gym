@@ -242,9 +242,6 @@ class EditUser extends StatelessWidget {
                         final imageProvider =
                             Provider.of<SelectImg>(context, listen: false);
 
-                        final userProvider =
-                            Provider.of<UsersProvider>(context, listen: false);
-
                         await userProvider.updateUser(
                           id: user.id,
                           firstname: userFormController.firstname == ''
