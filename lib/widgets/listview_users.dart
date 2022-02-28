@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import '../models/usersmodel.dart';
 
 class ListViewUsers extends StatefulWidget {
-  const ListViewUsers({Key? key, required this.height}) : super(key: key);
-
-  final double height;
+  const ListViewUsers({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ListViewUsers> createState() => _ListViewUsersState();
@@ -88,9 +88,6 @@ class ListUserWidget extends StatelessWidget {
             padding: const EdgeInsets.only(right: 15),
             child: IconButton(
               onPressed: () {
-                userProvider.getImg(user.id);
-                print(user.firstname);
-                print(user.age);
                 userProvider.selectedUser = user;
 
                 Navigator.pushReplacementNamed(context, 'edit_user');
