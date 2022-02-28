@@ -9,7 +9,7 @@ class InputFieldWidget extends StatelessWidget {
     required this.onChanged,
     required this.keyboardType,
     required this.obscureText,
-    this.initialvalue,
+    required this.initialvalue,
   }) : super(key: key);
   final double width;
   final String hinttext;
@@ -18,7 +18,7 @@ class InputFieldWidget extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? keyboardType;
   final bool obscureText;
-  final String? initialvalue;
+  final String initialvalue;
 
   @override
   Widget build(BuildContext context) {
