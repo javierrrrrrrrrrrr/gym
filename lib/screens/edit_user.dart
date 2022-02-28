@@ -300,7 +300,9 @@ class EditUser extends StatelessWidget {
                           size: 35,
                           color: Colors.white,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'ob');
+                        },
                       ),
                     ]),
               ),

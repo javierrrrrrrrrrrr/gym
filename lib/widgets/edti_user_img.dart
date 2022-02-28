@@ -46,6 +46,7 @@ class _EditUserImgState extends State<EditUserImg> {
                     height: widget.height * 0.25,
                     width: widget.width * 0.4,
                     child: Image(
+                        fit: BoxFit.cover,
                         image: NetworkImage((user.img != "no-avatar.png")
                             ? 'http://152.206.177.70:3000/api/uploads/clients/${user.id}'
                             : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo=')),
