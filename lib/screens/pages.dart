@@ -7,3 +7,4 @@ export 'package:gym/screens/add_user.dart';
 
 export 'package:gym/screens/trainers.dart';
 export 'package:gym/screens/add_trainer.dart';
+export 'package:gym/screens/add_observacion.dart';
