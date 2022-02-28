@@ -27,6 +27,7 @@ class Observ extends StatelessWidget {
               height: 20,
             ),
             InputFieldWidget(
+              initialvalue: "",
               obscureText: false,
               width: width,
               keyboardType: TextInputType.name,
