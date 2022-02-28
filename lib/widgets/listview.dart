@@ -92,7 +92,7 @@ class ListUserWidget extends StatelessWidget {
                 print(user.age);
                 userProvider.selectedUser = user;
 
-                Navigator.pushNamed(context, 'edit_user');
+                Navigator.pushReplacementNamed(context, 'edit_user');
               },
               icon: const Icon(Icons.edit, size: 35),
             ),

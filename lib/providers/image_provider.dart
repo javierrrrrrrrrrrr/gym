@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class SelectImg extends ChangeNotifier {
+  bool isTouch = false;
   String? imagePath = "";
   final ImagePicker _picker = ImagePicker();
   ImageCropper crop = ImageCropper();
@@ -23,6 +24,7 @@ class SelectImg extends ChangeNotifier {
       img = File(photo.path);
       print(img.lengthSync());
       imagePath = photo.path;
+      notifyListeners();
     }
 
     lowImgQuality(img, imagePath!);
@@ -68,6 +70,7 @@ class SelectImg extends ChangeNotifier {
     notifyListeners();
     print(file.lengthSync());
 
+    notifyListeners();
     return result;
   }
 }
