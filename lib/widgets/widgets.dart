@@ -9,3 +9,4 @@ export 'package:gym/widgets/select_img_widget.dart';
 export 'package:gym/widgets/floating_action.dart';
 export 'package:gym/widgets/img_user_container.dart';
 export 'package:gym/widgets/edti_user_img.dart';
+export 'package:gym/widgets/custom_button.dart';

@@ -221,7 +221,8 @@ class AddUser extends StatelessWidget {
                 const SizedBox(
                   height: 100,
                 ),
-                MaterialButton(
+                CustomButton(
+                  title: "Crear",
                   onPressed: () async {
                     showDialog(
                         context: context,
@@ -260,13 +261,6 @@ class AddUser extends StatelessWidget {
                       }
                     }
                   },
-                  height: 60,
-                  minWidth: 240,
-                  color: const Color.fromRGBO(45, 49, 146, 1),
-                  child: const Text(
-                    'Agregar',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
                 ),
                 _separador(height),
               ],

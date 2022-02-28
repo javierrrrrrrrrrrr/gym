@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
-import 'package:gym/providers/image_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:dropdown_plus/dropdown_plus.dart';
@@ -229,7 +228,8 @@ class EditUser extends StatelessWidget {
                     const SizedBox(
                       height: 100,
                     ),
-                    MaterialButton(
+                    CustomButton(
+                      title: "Guardar",
                       onPressed: () async {
                         showDialog(
                             context: context,
@@ -289,13 +289,6 @@ class EditUser extends StatelessWidget {
                           });
                         }
                       },
-                      height: 60,
-                      minWidth: 240,
-                      color: const Color.fromRGBO(45, 49, 146, 1),
-                      child: const Text(
-                        'Agregar',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
                     ),
                     _separador(height),
                   ],

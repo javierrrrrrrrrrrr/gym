@@ -100,22 +100,7 @@ class Pagos extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Center(
-              child: MaterialButton(
-                onPressed: () {},
-                height: 60,
-                minWidth: 240,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 0,
-                splashColor: Colors.transparent,
-                color: const Color.fromRGBO(45, 49, 146, 1),
-                child: const Text(
-                  'Enviar Pago(s)',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-            ),
+            Center(child: CustomButton(onPressed: () {}, title: "Añadir Pago")),
           ],
         ),
       ),

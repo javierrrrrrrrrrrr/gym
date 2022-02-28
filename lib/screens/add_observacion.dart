@@ -76,20 +76,7 @@ class Observ extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            MaterialButton(
-              onPressed: () {},
-              height: 60,
-              minWidth: 240,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              elevation: 0,
-              splashColor: Colors.transparent,
-              color: const Color.fromRGBO(45, 49, 146, 1),
-              child: const Text(
-                'Añadir',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
+            CustomButton(title: "Guardar", onPressed: () {})
           ],
         ),
       ),
