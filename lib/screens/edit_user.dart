@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/models/models.dart';
 import 'package:gym/providers/image_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -7,14 +8,16 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
-class AddUser extends StatelessWidget {
-  const AddUser({Key? key}) : super(key: key);
+class EditUser extends StatelessWidget {
+  const EditUser({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
+    final userProvider = Provider.of<UsersProvider>(context);
+    User user = userProvider.selectedUser!;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -26,11 +29,12 @@ class AddUser extends StatelessWidget {
             child: Column(
               children: [
                 BannerTop(height: height, width: width, title: "Crear Cliente"),
-                SelectIMGWidget(width: width, height: height),
+                EditUserImg(width: width, height: height),
                 SizedBox(
                   height: height * 0.02,
                 ),
                 InputFieldWidget(
+                  initialvalue: user.firstname,
                   obscureText: false,
                   keyboardType: TextInputType.text,
                   onChanged: ((value) {
@@ -41,6 +45,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.lastname,
                   obscureText: false,
                   onChanged: (value) => userFormController.lastname = value,
                   keyboardType: TextInputType.text,
@@ -49,6 +54,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.phone,
                   obscureText: false,
                   keyboardType: TextInputType.phone,
                   onChanged: (value) => userFormController.phone = value,
@@ -57,6 +63,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.email!,
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) => userFormController.email = value,
@@ -75,6 +82,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.age.toString(),
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.age = value,
@@ -90,6 +98,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.height,
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.height = value,
@@ -105,6 +114,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.weight,
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.weight = value,
@@ -120,6 +130,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.imc!,
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.imc = value,
@@ -135,6 +146,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: user.icc!,
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.icc = value,
@@ -178,6 +190,16 @@ class AddUser extends StatelessWidget {
                 ),
                 MaterialButton(
                   onPressed: () async {
+                    print('Estos son los datos del user ${user.firstname}');
+                    print('Estos son los datos del user ${user.height}');
+                    print('Estos son los datos del user ${user.age}');
+                    print(
+                        'Estos son los datos del userFormController ${user.firstname}');
+                    print(
+                        'Estos son los datos del userFormController ${user.height}');
+                    print(
+                        'Estos son los datos del userFormController ${user.age}');
+
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -192,28 +214,42 @@ class AddUser extends StatelessWidget {
                     final userProvider =
                         Provider.of<UsersProvider>(context, listen: false);
 
-                    final userId = await userProvider.createUser(
-                        userFormController.firstname,
-                        userFormController.lastname,
-                        int.parse(userFormController.age),
-                        userFormController.height,
-                        userFormController.weight,
-                        userFormController.email,
-                        userFormController.phone,
-                        userFormController.imc,
-                        userFormController.icc,
-                        userFormController.services);
-
-                    if (userId != '') {
-                      if (imageProvider.imagePath != '') {
-                        await userProvider
-                            .uploadImage(imageProvider.imagePath!, userId)
-                            .whenComplete(() {
-                          Navigator.pop(context);
-                          Navigator.pushReplacementNamed(context, 'users');
-                        });
-                      }
-                    }
+                    await userProvider
+                        .updateUser(
+                      id: user.id,
+                      firstname: userFormController.firstname == ''
+                          ? user.firstname
+                          : userFormController.firstname,
+                      lastname: userFormController.lastname == ''
+                          ? user.lastname
+                          : userFormController.lastname,
+                      age: userFormController.age == ''
+                          ? user.age
+                          : int.parse(userFormController.age),
+                      height: userFormController.height == ''
+                          ? user.height
+                          : userFormController.height,
+                      weight: userFormController.weight == ''
+                          ? user.weight
+                          : userFormController.weight,
+                      email: userFormController.email == ''
+                          ? user.email!
+                          : userFormController.email,
+                      phone: userFormController.phone == ''
+                          ? user.phone
+                          : userFormController.phone,
+                      imc: userFormController.imc == ''
+                          ? user.imc!
+                          : userFormController.imc,
+                      icc: userFormController.icc == ''
+                          ? user.icc!
+                          : userFormController.icc,
+                      services: userFormController.services,
+                    )
+                        .whenComplete(() {
+                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, 'users');
+                    });
                   },
                   height: 60,
                   minWidth: 240,

@@ -9,6 +9,7 @@ class InputFieldWidget extends StatelessWidget {
     required this.onChanged,
     required this.keyboardType,
     required this.obscureText,
+    required this.initialvalue,
   }) : super(key: key);
   final double width;
   final String hinttext;
@@ -17,12 +18,14 @@ class InputFieldWidget extends StatelessWidget {
   final void Function(String)? onChanged;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final String initialvalue;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: width * 0.07, right: width * 0.07),
       child: TextFormField(
+        initialValue: initialvalue,
         obscureText: obscureText,
         keyboardType: keyboardType,
         validator: validator,

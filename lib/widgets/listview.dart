@@ -41,6 +41,7 @@ class ListUserWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UsersProvider>(context);
     return SizedBox(
       height: 75,
       width: double.infinity,
@@ -86,7 +87,13 @@ class ListUserWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                print(user.firstname);
+                print(user.age);
+                userProvider.selectedUser = user;
+
+                Navigator.pushNamed(context, 'edit_user');
+              },
               icon: const Icon(Icons.edit, size: 35),
             ),
           ),

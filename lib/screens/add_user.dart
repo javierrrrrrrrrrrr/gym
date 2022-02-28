@@ -31,6 +31,7 @@ class AddUser extends StatelessWidget {
                   height: height * 0.02,
                 ),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.text,
                   onChanged: ((value) {
@@ -41,6 +42,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   onChanged: (value) => userFormController.lastname = value,
                   keyboardType: TextInputType.text,
@@ -49,6 +51,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.phone,
                   onChanged: (value) => userFormController.phone = value,
@@ -57,6 +60,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
                   onChanged: (value) => userFormController.email = value,
@@ -75,6 +79,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.age = value,
@@ -90,6 +95,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.height = value,
@@ -105,6 +111,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.weight = value,
@@ -120,6 +127,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.imc = value,
@@ -135,6 +143,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
                   onChanged: (value) => userFormController.icc = value,

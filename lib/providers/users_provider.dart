@@ -14,12 +14,15 @@ class UsersProvider extends ChangeNotifier {
   String token = '';
 
   List<User> users = [];
+  User? selectedUser;
+
   String photo = "";
   final storage = const FlutterSecureStorage();
 
   UsersProvider() {
     getUsers();
   }
+
   Future<String> readDataFromStorage(String valor) async {
     return await storage.read(key: valor) ?? '';
   }
@@ -30,7 +33,7 @@ class UsersProvider extends ChangeNotifier {
     return token;
   }
 
-  getUsers() async {
+  Future<List<User>> getUsers() async {
     await getToken();
 
     final resp = await http.get(
@@ -43,6 +46,7 @@ class UsersProvider extends ChangeNotifier {
 
     users = respuesta.clients;
     notifyListeners();
+    return users;
     print(users);
   }
 
@@ -90,6 +94,47 @@ class UsersProvider extends ChangeNotifier {
       return respuesta.client!.id;
     } else {
       return '';
+    }
+  }
+
+  Future updateUser({
+    required String id,
+    required String firstname,
+    required String lastname,
+    required int age,
+    required String height,
+    required String weight,
+    required String email,
+    required String phone,
+    required String imc,
+    required String icc,
+    required String services,
+  }) async {
+    await getToken();
+    var headers = {'Content-Type': 'application/json', 'Authorization': token};
+    var request = http.Request(
+        'PUT', Uri.parse('http://152.206.177.70:3000/api/clients/$id'));
+    request.body = json.encode({
+      "firstname": firstname,
+      "lastname": lastname,
+      "age": age,
+      "height": height,
+      "weight": weight,
+      "email": email,
+      "phone": phone,
+      "imc": imc,
+      "icc": icc,
+      "services": 'TRAINING'
+    });
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      await getUsers();
+    } else {
+      print(response.reasonPhrase);
     }
   }
 

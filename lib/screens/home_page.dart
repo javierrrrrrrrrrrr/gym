@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       InputFieldWidget(
+                        initialvalue: "",
                         obscureText: false,
                         width: width,
                         hinttext: 'Enter Email',
@@ -73,6 +74,7 @@ class _HomePageState extends State<HomePage> {
                         height: height * 0.01,
                       ),
                       InputFieldWidget(
+                          initialvalue: "",
                           obscureText: true,
                           width: width,
                           hinttext: 'Enter Password',
