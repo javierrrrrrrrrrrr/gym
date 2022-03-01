@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
 import 'package:provider/provider.dart';
 
-import 'package:dropdown_plus/dropdown_plus.dart';
-
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
@@ -18,12 +16,25 @@ class EditUser extends StatefulWidget {
 
 class _EditUserState extends State<EditUser> {
   @override
+  void initState() {
+    super.initState();
+    final userFormController =
+        Provider.of<UserFormController>(context, listen: false);
+    final userProvider = Provider.of<UsersProvider>(context, listen: false);
+    if (userProvider.selectedUser!.services.contains("TRAINING")) {
+      userFormController.training = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
     final userProvider = Provider.of<UsersProvider>(context);
     User user = userProvider.selectedUser!;
+    print(userFormController.services);
+    print(user.services);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -206,7 +217,36 @@ class _EditUserState extends State<EditUser> {
                       },
                     ),
                     _separador(height),
+
                     // DropDown List;
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 28),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 25),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.teal),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: CheckboxListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          title: const Text("Training"),
+                          value: userFormController.training,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              userFormController.training = value;
+                              if (userFormController.training == true) {
+                                userFormController.services.add("TRAINING");
+                              } else {
+                                userFormController.services.remove("TRAINING");
+                              }
+                            });
+                            print(userFormController.services);
+                          },
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 28),
                       child: CheckboxListTile(
