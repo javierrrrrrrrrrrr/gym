@@ -9,9 +9,14 @@ import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
-class EditUser extends StatelessWidget {
+class EditUser extends StatefulWidget {
   const EditUser({Key? key}) : super(key: key);
 
+  @override
+  State<EditUser> createState() => _EditUserState();
+}
+
+class _EditUserState extends State<EditUser> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -38,7 +43,7 @@ class EditUser extends StatelessWidget {
                       height: height * 0.02,
                     ),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -53,7 +58,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -66,7 +71,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -79,7 +84,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -102,7 +107,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -122,7 +127,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -142,7 +147,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -162,7 +167,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -182,7 +187,7 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     InputFieldWidget(
-                      ico: true,
+                      icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
@@ -202,29 +207,24 @@ class EditUser extends StatelessWidget {
                     ),
                     _separador(height),
                     // DropDown List;
-
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: TextDropdownFormField(
-                        onSaved: (value) {
-                          userFormController.services = value!;
+                      child: CheckboxListTile(
+                        title: const Text("Aerobics"),
+                        value: userFormController.aerobics,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            userFormController.aerobics = value;
+                            if (userFormController.aerobics == true) {
+                              userFormController.services.add("AEROBICS");
+                            } else {
+                              userFormController.services.remove("AEROBICS");
+                            }
+                          });
+                          print(userFormController.services);
                         },
-                        options: const ["TRAINING", "AEROBICS", "MASSAGE"],
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromRGBO(45, 49, 146, 1)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
-                            suffixIcon: Icon(Icons.arrow_drop_down),
-                            labelText: "Services"),
-                        dropdownHeight: 200,
                       ),
                     ),
-
                     const SizedBox(
                       height: 100,
                     ),
