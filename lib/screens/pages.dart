@@ -12,3 +12,4 @@ export 'package:gym/screens/edit_user.dart';
 export 'package:gym/screens/add_pago.dart';
 export 'package:gym/screens/lista_observecions.dart';
 export 'package:gym/screens/lista_pagos.dart';
+export 'package:gym/screens/prueba.dart';

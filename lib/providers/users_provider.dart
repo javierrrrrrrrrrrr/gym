@@ -15,6 +15,7 @@ class UsersProvider extends ChangeNotifier {
 
   List<User> users = [];
   User? selectedUser;
+  bool isLoading = true;
 
   String photo = "";
   final storage = const FlutterSecureStorage();

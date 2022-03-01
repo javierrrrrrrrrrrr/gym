@@ -48,6 +48,9 @@ class ListUserWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          const CircleAvatar(
+            backgroundImage: NetworkImage(''),
+          ),
           Container(
             margin: const EdgeInsets.only(left: 10),
             height: 50,

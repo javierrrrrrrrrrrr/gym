@@ -38,6 +38,7 @@ dependencies:
   image_cropper: ^1.5.0
   image_picker: ^0.8.4+10
   flutter_image_compress: ^1.1.0
+  shimmer: ^2.0.0
   
 
   
