@@ -61,7 +61,7 @@ class UsersProvider extends ChangeNotifier {
     String phone,
     String imc,
     String icc,
-    String services,
+    List<String> services,
   ) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
@@ -77,7 +77,7 @@ class UsersProvider extends ChangeNotifier {
       "phone": phone,
       "imc": imc,
       "icc": icc,
-      "services": "TRAINING"
+      "services": services,
     });
     request.headers.addAll(headers);
 
@@ -109,7 +109,7 @@ class UsersProvider extends ChangeNotifier {
     required String phone,
     required String imc,
     required String icc,
-    required String services,
+    required List<String> services,
   }) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
@@ -125,7 +125,7 @@ class UsersProvider extends ChangeNotifier {
       "phone": phone,
       "imc": imc,
       "icc": icc,
-      "services": 'TRAINING'
+      "services": services
     });
 
     request.headers.addAll(headers);
@@ -134,6 +134,19 @@ class UsersProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
       await getUsers();
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  getImg(String id) async {
+    var request = http.Request(
+        'GET', Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$id'));
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
     }

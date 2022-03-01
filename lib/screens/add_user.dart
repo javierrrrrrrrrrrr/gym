@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/image_provider.dart';
-import 'package:provider/provider.dart';
 
-import 'package:dropdown_plus/dropdown_plus.dart';
+import 'package:provider/provider.dart';
 
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
-class AddUser extends StatelessWidget {
+class AddUser extends StatefulWidget {
   const AddUser({Key? key}) : super(key: key);
 
+  @override
+  State<AddUser> createState() => _AddUserState();
+}
+
+class _AddUserState extends State<AddUser> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -31,7 +34,7 @@ class AddUser extends StatelessWidget {
                   height: height * 0.02,
                 ),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -46,7 +49,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -59,7 +62,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -72,7 +75,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -95,7 +98,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -115,7 +118,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -135,7 +138,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -155,7 +158,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -175,7 +178,7 @@ class AddUser extends StatelessWidget {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  ico: true,
+                  icon: true,
                   maxline: 1,
                   right: 55,
                   left: 25,
@@ -198,30 +201,55 @@ class AddUser extends StatelessWidget {
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: TextDropdownFormField(
-                    onSaved: (value) {
-                      userFormController.services = value!;
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 25),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.teal),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: CheckboxListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      title: const Text("Training"),
+                      value: userFormController.training,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          userFormController.training = value;
+                          if (userFormController.training == true) {
+                            userFormController.services.add("TRAINING");
+                          } else {
+                            userFormController.services.remove("TRAINING");
+                          }
+                        });
+                        print(userFormController.services);
+                      },
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: CheckboxListTile(
+                    title: const Text("Aerobics"),
+                    value: userFormController.aerobics,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        userFormController.aerobics = value;
+                        if (userFormController.aerobics == true) {
+                          userFormController.services.add("AEROBICS");
+                        } else {
+                          userFormController.services.remove("AEROBICS");
+                        }
+                      });
+                      print(userFormController.services);
                     },
-                    options: const ["TRAINING", "AEROBICS", "MASSAGE"],
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromRGBO(45, 49, 146, 1)),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12))),
-                        suffixIcon: Icon(Icons.arrow_drop_down),
-                        labelText: "Services"),
-                    dropdownHeight: 200,
                   ),
                 ),
 
                 const SizedBox(
                   height: 100,
                 ),
-                MaterialButton(
+                CustomButton(
+                  title: "Crear",
                   onPressed: () async {
                     showDialog(
                         context: context,
@@ -260,13 +288,6 @@ class AddUser extends StatelessWidget {
                       }
                     }
                   },
-                  height: 60,
-                  minWidth: 240,
-                  color: const Color.fromRGBO(45, 49, 146, 1),
-                  child: const Text(
-                    'Agregar',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
                 ),
                 _separador(height),
               ],

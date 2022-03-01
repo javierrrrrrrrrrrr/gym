@@ -19,7 +19,7 @@ class Pagos extends StatelessWidget {
               height: 25,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 30,
               left: 25,
@@ -41,7 +41,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 160,
               left: 25,
@@ -56,7 +56,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 30,
               left: 25,
@@ -71,7 +71,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 30,
               left: 25,
@@ -86,7 +86,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 5,
               right: 30,
               left: 25,
@@ -100,22 +100,7 @@ class Pagos extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Center(
-              child: MaterialButton(
-                onPressed: () {},
-                height: 60,
-                minWidth: 240,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 0,
-                splashColor: Colors.transparent,
-                color: const Color.fromRGBO(45, 49, 146, 1),
-                child: const Text(
-                  'Enviar Pago(s)',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-            ),
+            Center(child: CustomButton(onPressed: () {}, title: "Añadir Pago")),
           ],
         ),
       ),

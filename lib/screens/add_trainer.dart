@@ -20,7 +20,7 @@ class AddTrainer extends StatelessWidget {
                 height: height * 0.02,
               ),
               InputFieldWidget(
-                ico: true,
+                icon: true,
                 maxline: 1,
                 right: 55,
                 left: 25,
@@ -43,7 +43,7 @@ class AddTrainer extends StatelessWidget {
               ),
               _separador(height),
               InputFieldWidget(
-                ico: true,
+                icon: true,
                 maxline: 1,
                 right: 55,
                 left: 25,

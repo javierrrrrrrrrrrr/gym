@@ -27,7 +27,7 @@ class Observ extends StatelessWidget {
               height: 20,
             ),
             InputFieldWidget(
-              ico: true,
+              icon: true,
               maxline: 1,
               right: 55,
               left: 25,
@@ -42,7 +42,7 @@ class Observ extends StatelessWidget {
               height: 25,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 10,
               right: 55,
               left: 25,
@@ -76,20 +76,7 @@ class Observ extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            MaterialButton(
-              onPressed: () {},
-              height: 60,
-              minWidth: 240,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              elevation: 0,
-              splashColor: Colors.transparent,
-              color: const Color.fromRGBO(45, 49, 146, 1),
-              child: const Text(
-                'Añadir',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
+            CustomButton(title: "Guardar", onPressed: () {})
           ],
         ),
       ),

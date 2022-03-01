@@ -4,25 +4,26 @@ import 'package:provider/provider.dart';
 
 import '../models/usersmodel.dart';
 
-class ListViewPage extends StatefulWidget {
-  const ListViewPage({Key? key, required this.height}) : super(key: key);
-
-  final double height;
+class ListViewTrainers extends StatefulWidget {
+  const ListViewTrainers({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<ListViewPage> createState() => _ListViewPageState();
+  State<ListViewTrainers> createState() => _ListViewUsersState();
 }
 
-class _ListViewPageState extends State<ListViewPage> {
+class _ListViewUsersState extends State<ListViewTrainers> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
+    // final trainerProvider = Provider.of<TrainerProvider>(context);
 
     return Expanded(
       child: ListView.builder(
         itemCount: userProvider.users.length,
         itemBuilder: (BuildContext context, index) {
-          return ListUserWidget(user: userProvider.users[index]);
+          return ListTrainerWidget(user: userProvider.users[index]);
         },
         padding: const EdgeInsets.all(0),
         //  padding: const EdgeInsets.only(bottom: 10),
@@ -31,8 +32,8 @@ class _ListViewPageState extends State<ListViewPage> {
   }
 }
 
-class ListUserWidget extends StatelessWidget {
-  const ListUserWidget({
+class ListTrainerWidget extends StatelessWidget {
+  const ListTrainerWidget({
     Key? key,
     required this.user,
   }) : super(key: key);
@@ -48,9 +49,6 @@ class ListUserWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const CircleAvatar(
-            backgroundImage: NetworkImage(''),
-          ),
           Container(
             margin: const EdgeInsets.only(left: 10),
             height: 50,
@@ -91,8 +89,6 @@ class ListUserWidget extends StatelessWidget {
             padding: const EdgeInsets.only(right: 15),
             child: IconButton(
               onPressed: () {
-                print(user.firstname);
-                print(user.age);
                 userProvider.selectedUser = user;
 
                 Navigator.pushReplacementNamed(context, 'edit_user');

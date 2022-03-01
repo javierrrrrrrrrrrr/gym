@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class InputFieldWidget extends StatelessWidget {
   const InputFieldWidget({
     Key? key,
-    required this.ico,
+    required this.icon,
     required this.maxline,
     required this.left,
     required this.right,
@@ -26,7 +26,7 @@ class InputFieldWidget extends StatelessWidget {
   final double left;
   final double right;
   final int maxline;
-  final bool ico;
+  final bool icon;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class InputFieldWidget extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         onChanged: onChanged,
-        decoration: inputDecoration(hinttext, ico),
+        decoration: inputDecoration(hinttext, icon),
       ),
     );
   }
