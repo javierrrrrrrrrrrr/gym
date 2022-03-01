@@ -60,7 +60,7 @@ class UsersProvider extends ChangeNotifier {
     String phone,
     String imc,
     String icc,
-    String services,
+    List<String> services,
   ) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
@@ -76,7 +76,7 @@ class UsersProvider extends ChangeNotifier {
       "phone": phone,
       "imc": imc,
       "icc": icc,
-      "services": "TRAINING"
+      "services": services,
     });
     request.headers.addAll(headers);
 
@@ -108,7 +108,7 @@ class UsersProvider extends ChangeNotifier {
     required String phone,
     required String imc,
     required String icc,
-    required String services,
+    required List<String> services,
   }) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
@@ -124,7 +124,7 @@ class UsersProvider extends ChangeNotifier {
       "phone": phone,
       "imc": imc,
       "icc": icc,
-      "services": 'TRAINING'
+      "services": services
     });
 
     request.headers.addAll(headers);

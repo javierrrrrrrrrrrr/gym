@@ -27,7 +27,7 @@ class Observ extends StatelessWidget {
               height: 20,
             ),
             InputFieldWidget(
-              ico: true,
+              icon: true,
               maxline: 1,
               right: 55,
               left: 25,
@@ -42,7 +42,7 @@ class Observ extends StatelessWidget {
               height: 25,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 10,
               right: 55,
               left: 25,

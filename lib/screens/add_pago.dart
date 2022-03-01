@@ -19,7 +19,7 @@ class Pagos extends StatelessWidget {
               height: 25,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 30,
               left: 25,
@@ -41,7 +41,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 160,
               left: 25,
@@ -56,7 +56,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 30,
               left: 25,
@@ -71,7 +71,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 1,
               right: 30,
               left: 25,
@@ -86,7 +86,7 @@ class Pagos extends StatelessWidget {
               height: 15,
             ),
             InputFieldWidget(
-              ico: false,
+              icon: false,
               maxline: 5,
               right: 30,
               left: 25,

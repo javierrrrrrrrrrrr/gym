@@ -13,7 +13,9 @@ class UserFormController extends ChangeNotifier {
   String phone = "";
   String imc = "";
   String icc = "";
-  String services = "";
+  List<String> services = [];
+  bool? training = false;
+  bool? aerobics = false;
 
   bool isValidForm() {
     return formkey.currentState?.validate() ?? false;
