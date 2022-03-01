@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import '../models/usersmodel.dart';
 
 class UsersProvider extends ChangeNotifier {
+  final String _baseUrl = "http://78.108.216.56:3000";
   String token = '';
 
   List<User> users = [];
@@ -38,7 +39,7 @@ class UsersProvider extends ChangeNotifier {
     await getToken();
 
     final resp = await http.get(
-        Uri.parse("http://152.206.177.70:3000/api/clients?limit=1000&page=1"),
+        Uri.parse("$_baseUrl/api/clients?limit=1000&page=1"),
         headers: {HttpHeaders.authorizationHeader: token});
 
     final Map<String, dynamic> usersmap = json.decode(resp.body);
@@ -65,8 +66,8 @@ class UsersProvider extends ChangeNotifier {
   ) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
-    var request = http.Request('POST',
-        Uri.parse('http://152.206.177.70:3000/api/clients?limit=1000&page=1'));
+    var request = http.Request(
+        'POST', Uri.parse('$_baseUrl/api/clients?limit=1000&page=1'));
     request.body = json.encode({
       "firstname": firstname,
       "lastname": lastname,
@@ -84,6 +85,7 @@ class UsersProvider extends ChangeNotifier {
     http.StreamedResponse response = await request.send();
 
     print("EL estado de la respuesta: ${response.statusCode}");
+    print("EL estado de la respuesta: ${response.reasonPhrase}");
 
     final respuesta =
         CreateUserResponse.fromJson(await response.stream.bytesToString());
@@ -113,8 +115,7 @@ class UsersProvider extends ChangeNotifier {
   }) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
-    var request = http.Request(
-        'PUT', Uri.parse('http://152.206.177.70:3000/api/clients/$id'));
+    var request = http.Request('PUT', Uri.parse('$_baseUrl/api/clients/$id'));
     request.body = json.encode({
       "firstname": firstname,
       "lastname": lastname,
@@ -140,8 +141,8 @@ class UsersProvider extends ChangeNotifier {
   }
 
   getImg(String id) async {
-    var request = http.Request(
-        'GET', Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$id'));
+    var request =
+        http.Request('GET', Uri.parse('$_baseUrl/api/uploads/clients/$id'));
 
     http.StreamedResponse response = await request.send();
 
@@ -158,8 +159,8 @@ class UsersProvider extends ChangeNotifier {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': token
     };
-    var request = http.MultipartRequest('PUT',
-        Uri.parse('http://152.206.177.70:3000/api/uploads/clients/$userid'));
+    var request = http.MultipartRequest(
+        'PUT', Uri.parse('$_baseUrl/api/uploads/clients/$userid'));
     request.files.add(await http.MultipartFile.fromPath('archivo', path));
     request.headers.addAll(headers);
 
