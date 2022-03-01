@@ -39,7 +39,7 @@ class UsersProvider extends ChangeNotifier {
     await getToken();
 
     final resp = await http.get(
-        Uri.parse("$_baseUrl/api/clients?limit=1000&page=1"),
+        Uri.parse("$_baseUrl/api/clients?limit=40&page=1"),
         headers: {HttpHeaders.authorizationHeader: token});
 
     final Map<String, dynamic> usersmap = json.decode(resp.body);

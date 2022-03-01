@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/providers/users_provider.dart';
+import 'package:gym/screens/prueba.dart';
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -13,33 +14,23 @@ class UsersPage extends StatelessWidget {
 
     final userProvider = Provider.of<UsersProvider>(context);
 
-    if (userProvider.isLoading == true) {
-      userProvider
-          .getUsers()
-          .whenComplete(() => userProvider.isLoading = false);
+    userProvider.getUsers().whenComplete(() => userProvider.isLoading = false);
 
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    } else {
-      return Scaffold(
-        floatingActionButton: FloatingABCustom(
-          width: width,
-          route: "add_user",
-        ),
-        body: Column(
-          children: [
-            CustomNav(
-              titulo: "Gestion de Clientes",
-              height: height,
-              width: width,
-            ),
-            const ListViewUsers(),
-          ],
-        ),
-      );
-    }
+    return Scaffold(
+      floatingActionButton: FloatingABCustom(
+        width: width,
+        route: "add_user",
+      ),
+      body: Column(
+        children: [
+          CustomNav(
+            titulo: "Gestion de Clientes",
+            height: height,
+            width: width,
+          ),
+          userProvider.isLoading ? const Prueba() : const ListViewUsers(),
+        ],
+      ),
+    );
   }
 }
