@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -13,6 +15,13 @@ class AddUser extends StatefulWidget {
 }
 
 class _AddUserState extends State<AddUser> {
+  @override
+  void initState() {
+    super.initState();
+    final imageProvider = Provider.of<SelectImg>(context, listen: false);
+    imageProvider.imagePath = "";
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -281,7 +290,8 @@ class _AddUserState extends State<AddUser> {
                       if (imageProvider.imagePath != '') {
                         await userProvider
                             .uploadImage(imageProvider.imagePath!, userId)
-                            .whenComplete(() {
+                            .whenComplete(() async {
+                          await userProvider.getUsers();
                           Navigator.pop(context);
                           Navigator.pushReplacementNamed(context, 'users');
                         });

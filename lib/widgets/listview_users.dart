@@ -22,7 +22,9 @@ class _ListViewUsersState extends State<ListViewUsers> {
       child: ListView.builder(
         itemCount: userProvider.users.length,
         itemBuilder: (BuildContext context, index) {
-          return ListUserWidget(user: userProvider.users[index]);
+          return ListUserWidget(
+            user: userProvider.users[index],
+          );
         },
         padding: const EdgeInsets.all(0),
         //  padding: const EdgeInsets.only(bottom: 10),
@@ -42,23 +44,23 @@ class ListUserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
+
     return SizedBox(
       height: 75,
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            margin: const EdgeInsets.only(left: 10),
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(500),
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage((user.img != "no-avatar.png")
-                        ? 'http://78.108.216.56:3000/api/uploads/clients/${user.id}'
-                        : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo='))),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: CircleAvatar(
+              radius: 25,
+              backgroundImage: const AssetImage(
+                  'assets/JovialMeagerBull-size_restricted.gif'),
+              foregroundImage: NetworkImage((user.img != "no-avatar.png")
+                  ? 'http://78.108.216.56:3000/api/uploads/clients/${user.id}'
+                  : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo='),
+            ),
           ),
           Expanded(
             child: Padding(
@@ -90,7 +92,7 @@ class ListUserWidget extends StatelessWidget {
               onPressed: () {
                 userProvider.selectedUser = user;
 
-                Navigator.pushReplacementNamed(context, 'edit_user');
+                Navigator.pushNamed(context, 'edit_user');
               },
               icon: const Icon(Icons.edit, size: 35),
             ),

@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gym/models/createUserModel.dart';
+import 'package:gym/models/getUserByIdResponse.dart';
 
 import 'package:gym/models/getUsersModel.dart';
+import 'package:gym/models/updateUserResponse.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/usersmodel.dart';
@@ -13,16 +15,18 @@ import '../models/usersmodel.dart';
 class UsersProvider extends ChangeNotifier {
   final String _baseUrl = "http://78.108.216.56:3000";
   String token = '';
+  String imgCreateUser = '';
 
   List<User> users = [];
   User? selectedUser;
-  bool isLoading = true;
+  bool isLoading = false;
 
-  String photo = "";
   final storage = const FlutterSecureStorage();
 
   UsersProvider() {
-    getUsers();
+    getUsers().whenComplete(() => isLoading = false);
+
+    notifyListeners();
   }
 
   Future<String> readDataFromStorage(String valor) async {
@@ -38,8 +42,7 @@ class UsersProvider extends ChangeNotifier {
   Future<List<User>> getUsers() async {
     await getToken();
 
-    final resp = await http.get(
-        Uri.parse("$_baseUrl/api/clients?limit=40&page=1"),
+    final resp = await http.get(Uri.parse("$_baseUrl/api/clients?limit=100"),
         headers: {HttpHeaders.authorizationHeader: token});
 
     final Map<String, dynamic> usersmap = json.decode(resp.body);
@@ -49,7 +52,6 @@ class UsersProvider extends ChangeNotifier {
     users = respuesta.clients;
     notifyListeners();
     return users;
-    print(users);
   }
 
   Future<String> createUser(
@@ -89,9 +91,10 @@ class UsersProvider extends ChangeNotifier {
 
     final respuesta =
         CreateUserResponse.fromJson(await response.stream.bytesToString());
+    print("esta es la respuesta del create user: ${respuesta.client!.img}");
 
     if (response.statusCode == 201) {
-      getUsers();
+      await getUsers();
       notifyListeners();
 
       return respuesta.client!.id;
@@ -100,7 +103,7 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
-  Future updateUser({
+  Future<String> updateUser({
     required String id,
     required String firstname,
     required String lastname,
@@ -132,9 +135,34 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    final respuesta =
+        UpdateUserResponse.fromJson(await response.stream.bytesToString());
 
     if (response.statusCode == 200) {
-      await getUsers();
+      print(respuesta.client.id);
+      return respuesta.client.id;
+    } else {
+      return response.reasonPhrase.toString();
+    }
+  }
+
+  getUserByID(String id) async {
+    await getToken();
+    var headers = {'Authorization': token};
+    var request = http.Request(
+        'GET', Uri.parse('http://78.108.216.56:3000/api/clients/$id'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    final respuesta =
+        GetUserByIdResponse.fromJson(await response.stream.bytesToString());
+    print(respuesta.client!.img);
+    imgCreateUser = respuesta.client!.img!;
+    notifyListeners();
+    if (response.statusCode == 200) {
+      print('Userid del cliente' + await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
     }
@@ -165,5 +193,8 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      await getUsers();
+    }
   }
 }

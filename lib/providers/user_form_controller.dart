@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../models/usersmodel.dart';
-
 class UserFormController extends ChangeNotifier {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   String firstname = "";

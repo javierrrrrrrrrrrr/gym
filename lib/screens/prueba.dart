@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/providers.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class Prueba extends StatefulWidget {
@@ -11,6 +13,7 @@ class Prueba extends StatefulWidget {
 class PruebaState extends State<Prueba> {
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UsersProvider>(context);
     return (Container(
       height: 600,
       width: double.infinity,
@@ -72,7 +75,7 @@ class PruebaState extends State<Prueba> {
                     ],
                   ),
                 ),
-                itemCount: 6,
+                itemCount: userProvider.users.length,
               ),
             ),
           ),

@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
 import 'package:provider/provider.dart';
-
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
@@ -24,6 +21,16 @@ class _EditUserState extends State<EditUser> {
     if (userProvider.selectedUser!.services.contains("TRAINING")) {
       userFormController.training = true;
     }
+    userFormController.firstname = '';
+    userFormController.lastname = '';
+    userFormController.age = '';
+    userFormController.height = '';
+    userFormController.weight = '';
+    userFormController.email = '';
+    userFormController.phone = '';
+    userFormController.imc = '';
+    userFormController.icc = '';
+    userFormController.services = [];
   }
 
   @override
@@ -33,8 +40,6 @@ class _EditUserState extends State<EditUser> {
     final userFormController = Provider.of<UserFormController>(context);
     final userProvider = Provider.of<UsersProvider>(context);
     User user = userProvider.selectedUser!;
-    print(userFormController.services);
-    print(user.services);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -282,7 +287,7 @@ class _EditUserState extends State<EditUser> {
                         final imageProvider =
                             Provider.of<SelectImg>(context, listen: false);
 
-                        await userProvider.updateUser(
+                        String userid = await userProvider.updateUser(
                           id: user.id,
                           firstname: userFormController.firstname == ''
                               ? user.firstname
@@ -315,19 +320,17 @@ class _EditUserState extends State<EditUser> {
                         );
 
                         if (imageProvider.isTouch == false) {
+                          await userProvider.getUsers();
                           Navigator.pop(context);
                           Navigator.pushReplacementNamed(context, 'users');
                         } else {
-                          await userProvider
-                              .uploadImage(imageProvider.imagePath!, user.id)
-                              .whenComplete(() {
-                            imageProvider.isTouch = false;
-                            Timer(const Duration(seconds: 10), () {
-                              Navigator.pop(context);
-                              Navigator.pushReplacementNamed(context, 'users');
-                            });
-                          });
+                          await userProvider.uploadImage(
+                              imageProvider.imagePath!, userid);
+                          //Evaluar si se puede borrar de aqui el metodo de abajo :)
+                          await userProvider.getUsers();
                         }
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, 'users');
                       },
                     ),
                     _separador(height),

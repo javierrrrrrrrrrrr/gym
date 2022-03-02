@@ -22,13 +22,13 @@ class SelectImg extends ChangeNotifier {
         maxWidth: 600);
     if (photo != null) {
       img = File(photo.path);
-      print(img.lengthSync());
+      // print(img.lengthSync());
       imagePath = photo.path;
       notifyListeners();
     }
 
     lowImgQuality(img, imagePath!);
-    print(img.lengthSync());
+    // print(img.lengthSync());
     notifyListeners();
   }
 
@@ -54,7 +54,7 @@ class SelectImg extends ChangeNotifier {
           ));
 
       img = croppedFile ?? img;
-      print(img.lengthSync());
+      // print(img.lengthSync());
       notifyListeners();
     } catch (e) {}
   }
@@ -68,7 +68,7 @@ class SelectImg extends ChangeNotifier {
 
     img = result!;
     notifyListeners();
-    print(file.lengthSync());
+    //print(file.lengthSync());
 
     notifyListeners();
     return result;
