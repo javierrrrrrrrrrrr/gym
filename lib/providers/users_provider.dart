@@ -146,6 +146,23 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
+  deleteUser(String id) async {
+    await getToken();
+    var headers = {'Authorization': token};
+    var request = http.Request(
+        'DELETE', Uri.parse('http://78.108.216.56:3000/api/clients/$id'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      await getUsers();
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   getUserByID(String id) async {
     await getToken();
     var headers = {'Authorization': token};

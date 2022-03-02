@@ -5,10 +5,12 @@ class CustomButton extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.title,
+    this.color,
   }) : super(key: key);
 
   final String title;
   final void Function()? onPressed;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class CustomButton extends StatelessWidget {
       splashColor: Colors.transparent,
       height: 60,
       minWidth: 240,
-      color: const Color.fromRGBO(45, 49, 146, 1),
+      color: (color == null) ? const Color.fromRGBO(45, 49, 146, 1) : color,
       child: Text(
         title,
         style: const TextStyle(fontSize: 20, color: Colors.white),

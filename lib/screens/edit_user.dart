@@ -1,3 +1,4 @@
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
 import 'package:provider/provider.dart';
@@ -334,6 +335,23 @@ class _EditUserState extends State<EditUser> {
                       },
                     ),
                     _separador(height),
+                    CustomButton(
+                        color: Colors.red[400],
+                        onPressed: () async {
+                          _showMyDialog(context, user.id);
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (BuildContext context) {
+                          //       return const Center(
+                          //         child: CircularProgressIndicator(),
+                          //       );
+                          //     });
+
+                          // Navigator.pop(context);
+                          // Navigator.pushReplacementNamed(context, 'users');
+                        },
+                        title: "Borrar Usuario"),
+                    _separador(height),
                   ],
                 ),
               ),
@@ -389,4 +407,58 @@ class _EditUserState extends State<EditUser> {
       height: height * 0.02,
     );
   }
+}
+
+Future<void> _showMyDialog(BuildContext context, String id) async {
+  final userProvider = Provider.of<UsersProvider>(context, listen: false);
+  return showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Borrar usuario'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text(
+                'Esta accion borrara de forma permanente el usuario del sistema',
+                textAlign: TextAlign.start,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                '¿ Desea Continuar ?',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Si'),
+            onPressed: () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  });
+              await userProvider.deleteUser(id);
+              Navigator.pop(context);
+              Navigator.of(context).pop();
+              Navigator.pushReplacementNamed(context, 'users');
+            },
+          ),
+          TextButton(
+            child: const Text('No'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
