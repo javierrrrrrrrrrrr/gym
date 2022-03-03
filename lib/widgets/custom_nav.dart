@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/search/search_delegate.dart';
 
 class CustomNav extends StatelessWidget {
   const CustomNav({Key? key, required this.title}) : super(key: key);
@@ -56,7 +57,9 @@ class CustomNav extends StatelessWidget {
                       fontSize: 20,
                     ),
                     suffixIcon: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showSearch(context: context, delegate: UserSerch());
+                      },
                       icon: Icon(
                         Icons.search,
                         color: const Color.fromRGBO(150, 152, 154, 0.5),

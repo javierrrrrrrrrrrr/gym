@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'dart:io';
@@ -5,6 +6,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gym/models/create_payment_response.dart';
+
+import 'package:gym/helpers/debouncer.dart';
+
+import 'package:gym/models/search_model.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -24,6 +29,16 @@ class UsersProvider extends ChangeNotifier {
   bool isLoading = true;
 
   Payment? payment;
+
+  final debauncer = Debouncer(
+    duration: const Duration(milliseconds: 500),
+    // onValue: (value){}
+  );
+
+  final StreamController<List> _suggestionsStreamController =
+      StreamController.broadcast();
+
+  Stream<List> get suggestionStream => this._suggestionsStreamController.stream;
 
   UsersProvider() {
     getUsers();
@@ -90,13 +105,8 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
-    print("EL estado de la respuesta: ${response.statusCode}");
-    print("EL estado de la respuesta: ${response.reasonPhrase}");
-
     final respuesta =
         CreateUserResponse.fromJson(await response.stream.bytesToString());
-    print("esta es la respuesta del create user: ${respuesta.client!.img}");
 
     if (response.statusCode == 201) {
       await getUsers();
@@ -162,9 +172,7 @@ class UsersProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
       await getUsers();
-    } else {
-      print(response.reasonPhrase);
-    }
+    } else {}
   }
 
   getUserByID(String id) async {
@@ -184,19 +192,6 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
     if (response.statusCode == 200) {
       print('Userid del cliente' + await response.stream.bytesToString());
-    } else {
-      print(response.reasonPhrase);
-    }
-  }
-
-  getImg(String id) async {
-    var request =
-        http.Request('GET', Uri.parse('$_baseUrl/api/uploads/clients/$id'));
-
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
     }
@@ -223,6 +218,24 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
+  Future<List> searchUser(String query) async {
+    await getToken();
+    var headers = {'Authorization': token};
+    var request =
+        http.Request('GET', Uri.parse('$_baseUrl/api/search/clients/$query'));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    final searchResponse =
+        SearchModel.fromJson(await response.stream.bytesToString());
+
+    if (response.statusCode == 200) {
+    } else {
+      print(response.reasonPhrase);
+    }
+    return searchResponse.clientes;
+  }
+
   //Payments
 
   Future<Payment> createPaymnet(
@@ -236,11 +249,7 @@ class UsersProvider extends ChangeNotifier {
         'POST', Uri.parse('http://78.108.216.56:3000/api/payments'));
     request.body = json.encode(
         {"amount": amount, "client": id, "months": mounth, "comment": comment});
-
-    request.headers.addAll(headers);
-
     http.StreamedResponse response = await request.send();
-
     final respuesta =
         CreatePaymentResponse.fromJson(await response.stream.bytesToString());
     Payment pago = Payment(
@@ -316,5 +325,20 @@ class UsersProvider extends ChangeNotifier {
     } else {
       print(response.reasonPhrase);
     }
+  }
+
+  void getSuggestionByQuery(String serchterm) {
+    debauncer.value = '';
+    debauncer.onValue = (value) async {
+      final result = await searchUser(value);
+      _suggestionsStreamController.add(result);
+    };
+
+    final timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
+      debauncer.value = serchterm;
+    });
+
+    Future.delayed(const Duration(milliseconds: 301))
+        .then((_) => timer.cancel());
   }
 }
