@@ -3,14 +3,14 @@ import 'package:gym/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Prueba extends StatefulWidget {
-  const Prueba({Key? key}) : super(key: key);
+class ChargingPage extends StatefulWidget {
+  const ChargingPage({Key? key}) : super(key: key);
 
   @override
-  PruebaState createState() => PruebaState();
+  ChargingPageState createState() => ChargingPageState();
 }
 
-class PruebaState extends State<Prueba> {
+class ChargingPageState extends State<ChargingPage> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);

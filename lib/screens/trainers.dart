@@ -11,21 +11,16 @@ class TrainerPage extends StatefulWidget {
 class _TrainerPageState extends State<TrainerPage> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      floatingActionButton: FloatingABCustom(
-        width: width,
+      floatingActionButton: const FloatingABCustom(
         route: "add_trainer",
       ),
       body: Column(
-        children: [
+        children: const [
           CustomNav(
-            titulo: "Gestion de Entrenadores",
-            height: height,
-            width: width,
+            title: "Gestion de Entrenadores",
           ),
-          const ListViewTrainers()
+          ListViewTrainers()
         ],
       ),
     );

@@ -22,19 +22,19 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => UsersProvider(),
-        lazy: false,
+        lazy: true,
       ),
       ChangeNotifierProvider(
         create: (_) => SelectImg(),
         lazy: true,
       ),
     ],
-    child: const MyApp(),
+    child: const GymApp(),
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class GymApp extends StatelessWidget {
+  const GymApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

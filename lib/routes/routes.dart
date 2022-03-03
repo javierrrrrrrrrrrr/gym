@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gym/screens/pages.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
-  'home': (BuildContext context) => const HomePage(),
+  'login': (BuildContext context) => const LoginPage(),
   'admin': (BuildContext context) => const PanelAdmin(),
   'users': (BuildContext context) => const UsersPage(),
   'trainers': (BuildContext context) => const TrainerPage(),
@@ -14,5 +14,5 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'pago': (BuildContext context) => const Pagos(),
   'lista_obs': (BuildContext context) => const ListaObservaciones(),
   'lista_pagos': (BuildContext context) => const ListaPagos(),
-  'pruebas': (BuildContext context) => const Prueba(),
+  'charging_page': (BuildContext context) => const ChargingPage(),
 };

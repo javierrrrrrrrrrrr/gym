@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomNav extends StatelessWidget {
-  const CustomNav(
-      {Key? key,
-      required this.height,
-      required this.width,
-      required this.titulo})
-      : super(key: key);
+  const CustomNav({Key? key, required this.title}) : super(key: key);
 
-  final double height;
-  final double width;
-  final String titulo;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -29,7 +24,7 @@ class CustomNav extends StatelessWidget {
                 height: height * 0.015,
               ),
               Text(
-                titulo,
+                title,
                 style: const TextStyle(color: Colors.white, fontSize: 32),
               ),
               SizedBox(
@@ -55,7 +50,7 @@ class CustomNav extends StatelessWidget {
                       borderRadius:
                           BorderRadius.all(Radius.circular(width * 0.03)),
                     ),
-                    hintText: '   Buscar Usuario',
+                    hintText: '    Buscar Usuario',
                     hintStyle: const TextStyle(
                       color: Color.fromRGBO(150, 152, 154, 0.5),
                       fontSize: 20,
