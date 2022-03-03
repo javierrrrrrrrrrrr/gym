@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:gym/models/models.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';

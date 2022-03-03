@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:gym/helpers/debouncer.dart';
 
 import 'package:gym/models/getUserByIdResponse.dart';
+import 'package:gym/models/search_model.dart';
 
 import 'package:gym/models/updateUserResponse.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +24,16 @@ class UsersProvider extends ChangeNotifier {
 
   User? selectedUser;
   bool isLoading = true;
+
+  final debauncer = Debouncer(
+    duration: const Duration(milliseconds: 500),
+    // onValue: (value){}
+  );
+
+  final StreamController<List> _suggestionsStreamController =
+      StreamController.broadcast();
+
+  Stream<List> get suggestionStream => this._suggestionsStreamController.stream;
 
   UsersProvider() {
     getUsers();
@@ -214,5 +227,39 @@ class UsersProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       await getUsers();
     }
+  }
+
+  Future<List> searchUser(String query) async {
+    await getToken();
+    var headers = {'Authorization': token};
+    var request = http.Request('GET',
+        Uri.parse('http://78.108.216.56:3000/api/search/clients/$query'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    final searchResponse =
+        SearchModel.fromJson(await response.stream.bytesToString());
+
+    if (response.statusCode == 200) {
+    } else {
+      print(response.reasonPhrase);
+    }
+    return searchResponse.clientes;
+  }
+
+  void getSuggestionByQuery(String serchterm) {
+    debauncer.value = '';
+    debauncer.onValue = (value) async {
+      final result = await searchUser(value);
+      _suggestionsStreamController.add(result);
+    };
+
+    final timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
+      debauncer.value = serchterm;
+    });
+
+    Future.delayed(const Duration(milliseconds: 301))
+        .then((_) => timer.cancel());
   }
 }
