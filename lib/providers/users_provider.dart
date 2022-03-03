@@ -1,12 +1,11 @@
 import 'dart:convert';
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:gym/models/create_payment_response.dart';
 
-import 'package:gym/models/getUserByIdResponse.dart';
-
-import 'package:gym/models/updateUserResponse.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/models.dart';
@@ -16,11 +15,15 @@ class UsersProvider extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
 
   List<User> users = [];
+  List<Payment> payments = [];
+
   String token = '';
   String imgCreateUser = '';
 
   User? selectedUser;
   bool isLoading = true;
+
+  Payment? payment;
 
   UsersProvider() {
     getUsers();
@@ -211,8 +214,107 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    final respuesta = User.fromJson(await response.stream.bytesToString());
+    final index = users.indexWhere((element) => element.id == respuesta.id);
+    users[index] = respuesta;
+    notifyListeners();
     if (response.statusCode == 200) {
       await getUsers();
+    }
+  }
+
+  //Payments
+
+  Future<Payment> createPaymnet(
+      {required String id,
+      required String amount,
+      required String comment,
+      required String mounth}) async {
+    await getToken();
+    var headers = {'Content-Type': 'application/json', 'Authorization': token};
+    var request = http.Request(
+        'POST', Uri.parse('http://78.108.216.56:3000/api/payments'));
+    request.body = json.encode(
+        {"amount": amount, "client": id, "months": mounth, "comment": comment});
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    final respuesta =
+        CreatePaymentResponse.fromJson(await response.stream.bytesToString());
+    Payment pago = Payment(
+        amount: respuesta.payment.amount,
+        comment: respuesta.payment.comment,
+        datetime: respuesta.payment.datetime,
+        days: respuesta.payment.days,
+        discount: respuesta.payment.discount,
+        id: respuesta.payment.id,
+        status: respuesta.payment.status,
+        v: respuesta.payment.v,
+        client: selectedUser!);
+
+    payments.add(pago);
+    notifyListeners();
+    return pago;
+  }
+
+  Future<Payment?> getPaymentByIdentifier(String id) async {
+    await getToken();
+    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var request = http.Request(
+        'GET', Uri.parse('http://78.108.216.56:3000/api/payments/$id'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    final respuesta = Payment.fromJson(await response.stream.bytesToString());
+    if (response.statusCode == 200) {
+      payment = respuesta;
+      notifyListeners();
+      return payment;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<Payment>> getAllPaymentsByIdnety() async {
+    int index = selectedUser!.payments!.length;
+
+    for (var i = 0; i < index; i++) {
+      payments.add((await getPaymentByIdentifier(selectedUser!.payments![i]))!);
+      notifyListeners();
+    }
+
+    return payments;
+  }
+
+  getAllPaymentsByUserId(String userId) async {
+    getToken();
+
+    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var request =
+        http.Request('GET', Uri.parse('$_baseUrl/api/payments/user/$userId'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    final List<dynamic> decodedResp =
+        json.decode(await response.stream.bytesToString());
+
+    for (var i = 0; i < decodedResp.length; i++) {
+      final Map<String, dynamic> resp = decodedResp[i];
+      final respuesta = Payment.fromMap(resp);
+
+      payments = [...payments, respuesta];
+      notifyListeners();
+    }
+
+    if (response.statusCode == 200) {
+      return payments;
+    } else {
+      print(response.reasonPhrase);
     }
   }
 }

@@ -14,6 +14,7 @@ class InputFieldWidget extends StatelessWidget {
     required this.keyboardType,
     required this.obscureText,
     required this.initialvalue,
+    this.enabled,
   }) : super(key: key);
   final double width;
   final String hinttext;
@@ -27,12 +28,14 @@ class InputFieldWidget extends StatelessWidget {
   final double right;
   final int maxline;
   final bool icon;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: left, right: right),
       child: TextFormField(
+        enabled: (enabled == null) ? true : enabled,
         maxLines: maxline,
         initialValue: initialvalue,
         obscureText: obscureText,

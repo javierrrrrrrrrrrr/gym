@@ -53,8 +53,7 @@ class _EditUserState extends State<EditUser> {
                 key: userFormController.formkey,
                 child: Column(
                   children: [
-                    BannerTop(
-                        height: height, width: width, title: "Editar Cliente"),
+                    const BannerTop(title: "Editar Cliente"),
                     EditUserImg(width: width, height: height),
                     SizedBox(
                       height: height * 0.02,
@@ -328,7 +327,7 @@ class _EditUserState extends State<EditUser> {
                           //Evaluar si se puede borrar de aqui el metodo de abajo :)
                           await userProvider.getUsers();
                           Navigator.pop(context);
-                          Navigator.pushReplacementNamed(context, 'admin');
+                          Navigator.pushReplacementNamed(context, 'users');
                         }
                       },
                     ),
@@ -374,7 +373,8 @@ class _EditUserState extends State<EditUser> {
                           size: 35,
                           color: Colors.white,
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          await userProvider.getAllPaymentsByUserId(user.id);
                           Navigator.pushNamed(context, 'lista_pagos');
                         },
                       ),

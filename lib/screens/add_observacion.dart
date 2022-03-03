@@ -14,10 +14,8 @@ class Observ extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            BannerTop(
+            const BannerTop(
               title: "Añadir Observación",
-              height: height,
-              width: width,
             ),
             EditUserImg(
               width: width,

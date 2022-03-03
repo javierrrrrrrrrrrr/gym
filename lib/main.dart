@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/payment_form_controller.dart';
 
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,10 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => UserFormController(),
         lazy: false,
+      ),
+      ChangeNotifierProvider(
+        create: (_) => PaymentFormController(),
+        lazy: true,
       ),
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),

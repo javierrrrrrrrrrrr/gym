@@ -15,9 +15,7 @@ class PanelAdmin extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            BannerTop(
-              height: height,
-              width: width,
+            const BannerTop(
               title: "Panel de Administración",
             ),
             separador(height),

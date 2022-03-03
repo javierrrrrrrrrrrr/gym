@@ -37,7 +37,7 @@ class _AddUserState extends State<AddUser> {
             key: userFormController.formkey,
             child: Column(
               children: [
-                BannerTop(height: height, width: width, title: "Crear Cliente"),
+                const BannerTop(title: "Crear Cliente"),
                 SelectIMGWidget(width: width, height: height),
                 SizedBox(
                   height: height * 0.02,

@@ -15,12 +15,6 @@ class ListViewUsers extends StatefulWidget {
 
 class _ListViewUsersState extends State<ListViewUsers> {
   @override
-  void initState() {
-    super.initState();
-    print("Pagina creada o entrada");
-  }
-
-  @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
 

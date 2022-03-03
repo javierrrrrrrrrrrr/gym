@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 class BannerTop extends StatelessWidget {
   const BannerTop({
     Key? key,
-    required this.height,
-    required this.width,
     required this.title,
   }) : super(key: key);
-  final double height;
-  final double width;
+
   final String title;
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Container(
         margin: EdgeInsets.zero,
