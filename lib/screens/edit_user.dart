@@ -1,4 +1,3 @@
-import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +39,7 @@ class _EditUserState extends State<EditUser> {
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
     final userProvider = Provider.of<UsersProvider>(context);
+    final imageProvider = Provider.of<SelectImg>(context, listen: false);
     User user = userProvider.selectedUser!;
 
     return Scaffold(
@@ -248,7 +248,7 @@ class _EditUserState extends State<EditUser> {
                                 userFormController.services.remove("TRAINING");
                               }
                             });
-                            print(userFormController.services);
+                            //     print(userFormController.services);
                           },
                         ),
                       ),
@@ -267,7 +267,7 @@ class _EditUserState extends State<EditUser> {
                               userFormController.services.remove("AEROBICS");
                             }
                           });
-                          print(userFormController.services);
+                          //  print(userFormController.services);
                         },
                       ),
                     ),
@@ -284,9 +284,6 @@ class _EditUserState extends State<EditUser> {
                                 child: CircularProgressIndicator(),
                               );
                             });
-
-                        final imageProvider =
-                            Provider.of<SelectImg>(context, listen: false);
 
                         String userid = await userProvider.updateUser(
                           id: user.id,
@@ -325,13 +322,14 @@ class _EditUserState extends State<EditUser> {
                           Navigator.pop(context);
                           Navigator.pushReplacementNamed(context, 'users');
                         } else {
+                          imageProvider.isTouch = false;
                           await userProvider.uploadImage(
                               imageProvider.imagePath!, userid);
                           //Evaluar si se puede borrar de aqui el metodo de abajo :)
                           await userProvider.getUsers();
+                          Navigator.pop(context);
+                          Navigator.pushReplacementNamed(context, 'admin');
                         }
-                        Navigator.pop(context);
-                        Navigator.pushReplacementNamed(context, 'users');
                       },
                     ),
                     _separador(height),

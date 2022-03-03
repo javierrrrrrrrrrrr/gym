@@ -6,15 +6,11 @@ class ListaPagos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
-        children: [
+        children: const [
           CustomNav(
-            titulo: "Lista de Pagos",
-            height: height,
-            width: width,
+            title: "Lista de Pagos",
           ),
         ],
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gym/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../models/usersmodel.dart';
+import '../models/models.dart';
 
 class ListViewUsers extends StatefulWidget {
   const ListViewUsers({
@@ -15,6 +15,12 @@ class ListViewUsers extends StatefulWidget {
 
 class _ListViewUsersState extends State<ListViewUsers> {
   @override
+  void initState() {
+    super.initState();
+    print("Pagina creada o entrada");
+  }
+
+  @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
 
@@ -22,7 +28,7 @@ class _ListViewUsersState extends State<ListViewUsers> {
       child: ListView.builder(
         itemCount: userProvider.users.length,
         itemBuilder: (BuildContext context, index) {
-          return ListUserWidget(
+          return ListUserBody(
             user: userProvider.users[index],
           );
         },
@@ -33,8 +39,8 @@ class _ListViewUsersState extends State<ListViewUsers> {
   }
 }
 
-class ListUserWidget extends StatelessWidget {
-  const ListUserWidget({
+class ListUserBody extends StatelessWidget {
+  const ListUserBody({
     Key? key,
     required this.user,
   }) : super(key: key);

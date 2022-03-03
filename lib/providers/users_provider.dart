@@ -3,30 +3,27 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:gym/models/createUserModel.dart';
+
 import 'package:gym/models/getUserByIdResponse.dart';
 
-import 'package:gym/models/getUsersModel.dart';
 import 'package:gym/models/updateUserResponse.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/usersmodel.dart';
+import '../models/models.dart';
 
 class UsersProvider extends ChangeNotifier {
   final String _baseUrl = "http://78.108.216.56:3000";
+  final storage = const FlutterSecureStorage();
+
+  List<User> users = [];
   String token = '';
   String imgCreateUser = '';
 
-  List<User> users = [];
   User? selectedUser;
-  bool isLoading = false;
-
-  final storage = const FlutterSecureStorage();
+  bool isLoading = true;
 
   UsersProvider() {
-    getUsers().whenComplete(() => isLoading = false);
-
-    notifyListeners();
+    getUsers();
   }
 
   Future<String> readDataFromStorage(String valor) async {
@@ -49,23 +46,28 @@ class UsersProvider extends ChangeNotifier {
 
     final respuesta = GetUsersResponse.fromMap(usersmap);
 
+    if (resp.statusCode == 200) {
+      isLoading = false;
+      notifyListeners();
+    }
+
     users = respuesta.clients;
     notifyListeners();
     return users;
   }
 
-  Future<String> createUser(
-    String firstname,
-    String lastname,
-    int age,
-    String height,
-    String weight,
-    String email,
-    String phone,
-    String imc,
-    String icc,
-    List<String> services,
-  ) async {
+  Future<String> createUser({
+    required String firstname,
+    required String lastname,
+    required int age,
+    required String height,
+    required String weight,
+    required String email,
+    required String phone,
+    required String imc,
+    required String icc,
+    required List<String> services,
+  }) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
     var request = http.Request(
@@ -95,7 +97,6 @@ class UsersProvider extends ChangeNotifier {
 
     if (response.statusCode == 201) {
       await getUsers();
-      notifyListeners();
 
       return respuesta.client!.id;
     } else {
