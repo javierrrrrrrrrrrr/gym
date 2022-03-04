@@ -135,7 +135,6 @@ class Pagos extends StatelessWidget {
                               comment: paymentProvider.comentario,
                               mounth: paymentProvider.cantMeses)
                           .whenComplete(() async {
-                        await userProvider.getAllPaymentsByIdnety();
                         Navigator.pop(context);
                         Navigator.pushReplacementNamed(context, 'lista_pagos');
                       });

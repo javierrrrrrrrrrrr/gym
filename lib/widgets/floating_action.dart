@@ -21,20 +21,14 @@ class FloatingABCustom extends StatelessWidget {
     return FloatingActionButton(
       backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
       onPressed: () {
-        const _chars =
-            'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-        Random _rnd = Random();
-        String getRandomString(int length) =>
-            String.fromCharCodes(Iterable.generate(
-                length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
         userProvider.selectedUser = User(
-            id: getRandomString(24),
+            id: '',
             firstname: '',
             age: 0,
             height: '',
             lastname: '',
             phone: '',
-            services: ["Training"],
+            services: ["TRAINING"],
             weight: '');
 
         Navigator.pushNamed(context, route);

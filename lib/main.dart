@@ -22,6 +22,10 @@ void main() {
         lazy: true,
       ),
       ChangeNotifierProvider(
+        create: (_) => ObservationFormController(),
+        lazy: true,
+      ),
+      ChangeNotifierProvider(
         create: (_) => LoginProvider(),
         lazy: false,
       ),

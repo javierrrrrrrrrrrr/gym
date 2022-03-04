@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:gym/models/create_observation_response.dart';
 import 'package:gym/models/create_payment_response.dart';
 
 import 'package:gym/helpers/debouncer.dart';
@@ -21,6 +22,7 @@ class UsersProvider extends ChangeNotifier {
 
   List<User> users = [];
   List<Payment> payments = [];
+  List<Observation> observation = [];
 
   String token = '';
   String imgCreateUser = '';
@@ -218,7 +220,22 @@ class UsersProvider extends ChangeNotifier {
     return searchResponse.clientes;
   }
 
-  //Payments
+  void getSuggestionByQuery(String serchterm) {
+    debauncer.value = '';
+    debauncer.onValue = (value) async {
+      final result = await searchUser(value);
+      _suggestionsStreamController.add(result);
+    };
+
+    final timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
+      debauncer.value = serchterm;
+    });
+
+    Future.delayed(const Duration(milliseconds: 301))
+        .then((_) => timer.cancel());
+  }
+
+  //Payments !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   Future<Payment> createPaymnet(
       {required String id,
@@ -231,7 +248,9 @@ class UsersProvider extends ChangeNotifier {
         'POST', Uri.parse('http://78.108.216.56:3000/api/payments'));
     request.body = json.encode(
         {"amount": amount, "client": id, "months": mounth, "comment": comment});
+    request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
+
     final respuesta =
         CreatePaymentResponse.fromJson(await response.stream.bytesToString());
     Payment pago = Payment(
@@ -298,7 +317,7 @@ class UsersProvider extends ChangeNotifier {
       final Map<String, dynamic> resp = decodedResp[i];
       final respuesta = Payment.fromMap(resp);
 
-      payments = [...payments, respuesta];
+      payments.add(respuesta);
       notifyListeners();
     }
 
@@ -309,18 +328,98 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
-  void getSuggestionByQuery(String serchterm) {
-    debauncer.value = '';
-    debauncer.onValue = (value) async {
-      final result = await searchUser(value);
-      _suggestionsStreamController.add(result);
+  deletePayment(String idPago) async {
+    getToken();
+    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var request =
+        http.Request('DELETE', Uri.parse('$_baseUrl/api/payments/$idPago'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    //:TODO Eliminar pago local
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  //Observaciones del user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  getObservationsByIdUser(String idUser) async {
+    getToken();
+    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var request = http.Request(
+        'GET', Uri.parse('$_baseUrl/api/observations/user/$idUser'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    final List<dynamic> decodedResp =
+        json.decode(await response.stream.bytesToString());
+    for (var i = 0; i < decodedResp.length; i++) {
+      final Map<String, dynamic> resp = decodedResp[i];
+      final respuesta = Observation.fromMap(resp);
+
+      observation.add(respuesta);
+      notifyListeners();
+    }
+
+    if (response.statusCode == 200) {
+      return observation;
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  Future<Observation?> createObservation({
+    required String icc,
+    required String imc,
+    required String weight,
+    required String observations,
+    required String idUser,
+  }) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization':
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjFlNDkzMzgxOTBiNzhlODQ0YjRhNTgiLCJpYXQiOjE2NDY0MTMwNDgsImV4cCI6MTY0NjQ5OTQ0OH0.8D70O2Gx6F4DyAmhcLpKInAvcMou2fEyxIJkYpmn3Uw'
     };
-
-    final timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
-      debauncer.value = serchterm;
+    var request = http.Request(
+        'POST', Uri.parse('http://78.108.216.56:3000/api/observations'));
+    request.body = json.encode({
+      "icc": icc,
+      "imc": imc,
+      "weight": weight,
+      "observations": observations,
+      "client": idUser
     });
+    request.headers.addAll(headers);
 
-    Future.delayed(const Duration(milliseconds: 301))
-        .then((_) => timer.cancel());
+    http.StreamedResponse response = await request.send();
+    final respuesta = CreateObservationResponse.fromJson(
+        await response.stream.bytesToString());
+
+    Observation obs = Observation(
+      client: selectedUser!,
+      datetime: respuesta.observation.datetime,
+      icc: respuesta.observation.icc,
+      imc: respuesta.observation.imc,
+      observation: respuesta.observation.observation,
+      weight: respuesta.observation.weight,
+      id: respuesta.observation.id,
+      status: respuesta.observation.status,
+      v: respuesta.observation.v,
+    );
+
+    if (response.statusCode == 200) {
+      observation.add(obs);
+      notifyListeners();
+      return obs;
+    } else {
+      print(response.reasonPhrase);
+    }
   }
 }

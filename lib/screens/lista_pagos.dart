@@ -47,7 +47,7 @@ class _ListPaymentBodyState extends State<ListPaymentBody> {
 
     return Expanded(
       child: ListView.separated(
-          itemCount: userProvider.selectedUser!.payments!.length,
+          itemCount: userProvider.payments.length,
           itemBuilder: (BuildContext context, index) {
             return _ListPaymentBody(
               payment: userProvider.payments[index],
@@ -93,9 +93,11 @@ class _ListPaymentBody extends StatelessWidget {
                 height: 30,
               ),
               const Spacer(),
-              const Icon(
-                Icons.delete,
-                size: 40,
+              IconButton(
+                onPressed: () {
+                  userProvider.deletePayment(payment.id);
+                },
+                icon: const Icon(Icons.delete, size: 40),
               ),
             ],
           ),

@@ -21,6 +21,8 @@ class _EditUserState extends State<EditUser> {
     if (userProvider.selectedUser!.services.contains("TRAINING")) {
       userFormController.training = true;
     }
+    userProvider.payments = [];
+    userProvider.observation = [];
   }
 
   @override
@@ -359,7 +361,9 @@ class _EditUserState extends State<EditUser> {
                           size: 35,
                           color: Colors.white,
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          await userProvider.getObservationsByIdUser(user.id);
+
                           Navigator.pushNamed(context, 'lista_obs');
                         },
                       ),
