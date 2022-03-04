@@ -74,33 +74,24 @@ class UsersProvider extends ChangeNotifier {
     return users;
   }
 
-  Future<String> createUser({
-    required String firstname,
-    required String lastname,
-    required int age,
-    required String height,
-    required String weight,
-    required String email,
-    required String phone,
-    required String imc,
-    required String icc,
-    required List<String> services,
+  Future<String?> createUser({
+    required User user,
   }) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
     var request = http.Request(
         'POST', Uri.parse('$_baseUrl/api/clients?limit=1000&page=1'));
     request.body = json.encode({
-      "firstname": firstname,
-      "lastname": lastname,
-      "age": age,
-      "height": height,
-      "weight": weight,
-      "email": email,
-      "phone": phone,
-      "imc": imc,
-      "icc": icc,
-      "services": services,
+      "firstname": user.firstname,
+      "lastname": user.lastname,
+      "age": user.age,
+      "height": user.height,
+      "weight": user.weight,
+      "email": user.email,
+      "phone": user.phone,
+      "imc": user.imc,
+      "icc": user.icc,
+      "services": (user.services),
     });
     request.headers.addAll(headers);
 
@@ -117,33 +108,24 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
-  Future<String> updateUser({
-    required String id,
-    required String firstname,
-    required String lastname,
-    required int age,
-    required String height,
-    required String weight,
-    required String email,
-    required String phone,
-    required String imc,
-    required String icc,
-    required List<String> services,
+  Future<String?> updateUser({
+    required User user,
   }) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
-    var request = http.Request('PUT', Uri.parse('$_baseUrl/api/clients/$id'));
+    var request =
+        http.Request('PUT', Uri.parse('$_baseUrl/api/clients/${user.id}'));
     request.body = json.encode({
-      "firstname": firstname,
-      "lastname": lastname,
-      "age": age,
-      "height": height,
-      "weight": weight,
-      "email": email,
-      "phone": phone,
-      "imc": imc,
-      "icc": icc,
-      "services": services
+      "firstname": user.firstname,
+      "lastname": user.lastname,
+      "age": user.age,
+      "height": user.height,
+      "weight": user.weight,
+      "email": user.email,
+      "phone": user.phone,
+      "imc": user.imc,
+      "icc": user.icc,
+      "services": user.services
     });
 
     request.headers.addAll(headers);

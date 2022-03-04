@@ -21,16 +21,6 @@ class _EditUserState extends State<EditUser> {
     if (userProvider.selectedUser!.services.contains("TRAINING")) {
       userFormController.training = true;
     }
-    userFormController.firstname = '';
-    userFormController.lastname = '';
-    userFormController.age = '';
-    userFormController.height = '';
-    userFormController.weight = '';
-    userFormController.email = '';
-    userFormController.phone = '';
-    userFormController.imc = '';
-    userFormController.icc = '';
-    userFormController.services = [];
   }
 
   @override
@@ -67,7 +57,7 @@ class _EditUserState extends State<EditUser> {
                       obscureText: false,
                       keyboardType: TextInputType.text,
                       onChanged: ((value) {
-                        userFormController.firstname = value;
+                        userFormController.user!.firstname = value;
                       }),
                       width: width,
                       hinttext: 'Nombre',
@@ -80,7 +70,8 @@ class _EditUserState extends State<EditUser> {
                       left: 25,
                       initialvalue: user.lastname,
                       obscureText: false,
-                      onChanged: (value) => userFormController.lastname = value,
+                      onChanged: (value) =>
+                          userFormController.user!.lastname = value,
                       keyboardType: TextInputType.text,
                       width: width,
                       hinttext: 'Apellidos',
@@ -94,7 +85,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.phone,
                       obscureText: false,
                       keyboardType: TextInputType.phone,
-                      onChanged: (value) => userFormController.phone = value,
+                      onChanged: (value) =>
+                          userFormController.user!.phone = value,
                       width: width,
                       hinttext: 'Teléfono',
                     ),
@@ -107,7 +99,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.email!,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) => userFormController.email = value,
+                      onChanged: (value) =>
+                          userFormController.user!.email = value,
                       width: width,
                       hinttext: 'Email',
                       validator: (value) {
@@ -130,7 +123,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.age.toString(),
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) => userFormController.age = value,
+                      onChanged: (value) =>
+                          userFormController.user!.age = int.parse(value),
                       width: width,
                       hinttext: 'Edad',
                       validator: (value) {
@@ -150,7 +144,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.height,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) => userFormController.height = value,
+                      onChanged: (value) =>
+                          userFormController.user!.height = value,
                       width: width,
                       hinttext: 'Estatura',
                       validator: (value) {
@@ -170,7 +165,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.weight,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) => userFormController.weight = value,
+                      onChanged: (value) =>
+                          userFormController.user!.weight = value,
                       width: width,
                       hinttext: 'Peso',
                       validator: (value) {
@@ -190,7 +186,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.imc!,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) => userFormController.imc = value,
+                      onChanged: (value) =>
+                          userFormController.user!.imc = value,
                       width: width,
                       hinttext: 'Imc',
                       validator: (value) {
@@ -210,7 +207,8 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.icc!,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) => userFormController.icc = value,
+                      onChanged: (value) =>
+                          userFormController.user!.icc = value,
                       width: width,
                       hinttext: 'Icc',
                       validator: (value) {
@@ -242,9 +240,11 @@ class _EditUserState extends State<EditUser> {
                             setState(() {
                               userFormController.training = value;
                               if (userFormController.training == true) {
-                                userFormController.services.add("TRAINING");
+                                userFormController.user!.services
+                                    .add("TRAINING");
                               } else {
-                                userFormController.services.remove("TRAINING");
+                                userFormController.user!.services
+                                    .remove("TRAINING");
                               }
                             });
                             //     print(userFormController.services);
@@ -261,9 +261,10 @@ class _EditUserState extends State<EditUser> {
                           setState(() {
                             userFormController.aerobics = value;
                             if (userFormController.aerobics == true) {
-                              userFormController.services.add("AEROBICS");
+                              userFormController.user!.services.add("AEROBICS");
                             } else {
-                              userFormController.services.remove("AEROBICS");
+                              userFormController.user!.services
+                                  .remove("AEROBICS");
                             }
                           });
                           //  print(userFormController.services);
@@ -284,37 +285,8 @@ class _EditUserState extends State<EditUser> {
                               );
                             });
 
-                        String userid = await userProvider.updateUser(
-                          id: user.id,
-                          firstname: userFormController.firstname == ''
-                              ? user.firstname
-                              : userFormController.firstname,
-                          lastname: userFormController.lastname == ''
-                              ? user.lastname
-                              : userFormController.lastname,
-                          age: userFormController.age == ''
-                              ? user.age
-                              : int.parse(userFormController.age),
-                          height: userFormController.height == ''
-                              ? user.height
-                              : userFormController.height,
-                          weight: userFormController.weight == ''
-                              ? user.weight
-                              : userFormController.weight,
-                          email: userFormController.email == ''
-                              ? user.email!
-                              : userFormController.email,
-                          phone: userFormController.phone == ''
-                              ? user.phone
-                              : userFormController.phone,
-                          imc: userFormController.imc == ''
-                              ? user.imc!
-                              : userFormController.imc,
-                          icc: userFormController.icc == ''
-                              ? user.icc!
-                              : userFormController.icc,
-                          services: userFormController.services,
-                        );
+                        String? userid = await userProvider.updateUser(
+                            user: userFormController.user!);
 
                         if (imageProvider.isTouch == false) {
                           await userProvider.getUsers();
@@ -323,7 +295,7 @@ class _EditUserState extends State<EditUser> {
                         } else {
                           imageProvider.isTouch = false;
                           await userProvider.uploadImage(
-                              imageProvider.imagePath!, userid);
+                              imageProvider.imagePath!, userid!);
                           //Evaluar si se puede borrar de aqui el metodo de abajo :)
                           await userProvider.getUsers();
                           Navigator.pop(context);

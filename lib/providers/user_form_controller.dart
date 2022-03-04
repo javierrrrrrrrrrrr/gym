@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gym/models/models.dart';
 
 class UserFormController extends ChangeNotifier {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  String firstname = "";
-  String lastname = "";
-  String age = "";
-  String height = "";
-  String weight = "";
-  String email = "";
-  String phone = "";
-  String imc = "";
-  String icc = "";
-  List<String> services = [];
+  User? user;
   bool? training = false;
   bool? aerobics = false;
+
+  UserFormController({this.user});
 
   bool isValidForm() {
     return formkey.currentState?.validate() ?? false;

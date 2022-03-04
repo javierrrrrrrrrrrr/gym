@@ -51,7 +51,7 @@ class _AddUserState extends State<AddUser> {
                   obscureText: false,
                   keyboardType: TextInputType.text,
                   onChanged: ((value) {
-                    userFormController.firstname = value;
+                    userFormController.user!.firstname = value;
                   }),
                   width: width,
                   hinttext: 'Nombre',
@@ -64,7 +64,8 @@ class _AddUserState extends State<AddUser> {
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
-                  onChanged: (value) => userFormController.lastname = value,
+                  onChanged: (value) =>
+                      userFormController.user!.lastname = value,
                   keyboardType: TextInputType.text,
                   width: width,
                   hinttext: 'Apellidos',
@@ -78,7 +79,7 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.phone,
-                  onChanged: (value) => userFormController.phone = value,
+                  onChanged: (value) => userFormController.user!.phone = value,
                   width: width,
                   hinttext: 'Teléfono',
                 ),
@@ -91,7 +92,7 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) => userFormController.email = value,
+                  onChanged: (value) => userFormController.user!.email = value,
                   width: width,
                   hinttext: 'Email',
                   validator: (value) {
@@ -114,7 +115,8 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.age = value,
+                  onChanged: (value) =>
+                      userFormController.user!.age = int.parse(value),
                   width: width,
                   hinttext: 'Edad',
                   validator: (value) {
@@ -134,7 +136,7 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.height = value,
+                  onChanged: (value) => userFormController.user!.height = value,
                   width: width,
                   hinttext: 'Estatura',
                   validator: (value) {
@@ -154,7 +156,7 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.weight = value,
+                  onChanged: (value) => userFormController.user!.weight = value,
                   width: width,
                   hinttext: 'Peso',
                   validator: (value) {
@@ -174,7 +176,7 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.imc = value,
+                  onChanged: (value) => userFormController.user!.imc = value,
                   width: width,
                   hinttext: 'Imc',
                   validator: (value) {
@@ -194,7 +196,7 @@ class _AddUserState extends State<AddUser> {
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.icc = value,
+                  onChanged: (value) => userFormController.user!.icc = value,
                   width: width,
                   hinttext: 'Icc',
                   validator: (value) {
@@ -225,12 +227,13 @@ class _AddUserState extends State<AddUser> {
                         setState(() {
                           userFormController.training = value;
                           if (userFormController.training == true) {
-                            userFormController.services.add("TRAINING");
+                            userFormController.user!.services.add("TRAINING");
                           } else {
-                            userFormController.services.remove("TRAINING");
+                            userFormController.user!.services
+                                .remove("TRAINING");
                           }
                         });
-                        print(userFormController.services);
+                        print(userFormController.user!.services);
                       },
                     ),
                   ),
@@ -244,12 +247,12 @@ class _AddUserState extends State<AddUser> {
                       setState(() {
                         userFormController.aerobics = value;
                         if (userFormController.aerobics == true) {
-                          userFormController.services.add("AEROBICS");
+                          userFormController.user!.services.add("AEROBICS");
                         } else {
-                          userFormController.services.remove("AEROBICS");
+                          userFormController.user!.services.remove("AEROBICS");
                         }
                       });
-                      print(userFormController.services);
+                      print(userFormController.user!.services);
                     },
                   ),
                 ),
@@ -275,27 +278,16 @@ class _AddUserState extends State<AddUser> {
                         Provider.of<UsersProvider>(context, listen: false);
 
                     final userId = await userProvider.createUser(
-                        firstname: userFormController.firstname,
-                        lastname: userFormController.lastname,
-                        age: int.parse(userFormController.age),
-                        height: userFormController.height,
-                        weight: userFormController.weight,
-                        email: userFormController.email,
-                        phone: userFormController.phone,
-                        imc: userFormController.imc,
-                        icc: userFormController.icc,
-                        services: userFormController.services);
+                        user: userFormController.user!);
 
-                    if (userId != '') {
-                      if (imageProvider.imagePath != '') {
-                        await userProvider
-                            .uploadImage(imageProvider.imagePath!, userId)
-                            .whenComplete(() async {
-                          await userProvider.getUsers();
-                          Navigator.pop(context);
-                          Navigator.pushReplacementNamed(context, 'users');
-                        });
-                      }
+                    if (imageProvider.imagePath != '') {
+                      await userProvider
+                          .uploadImage(imageProvider.imagePath!, userId!)
+                          .whenComplete(() async {
+                        await userProvider.getUsers();
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, 'users');
+                      });
                     }
                   },
                 ),

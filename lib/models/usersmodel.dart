@@ -9,7 +9,7 @@ class User {
     required this.height,
     required this.weight,
     this.email,
-    required this.datetime,
+    this.datetime,
     required this.phone,
     this.imc,
     this.icc,
@@ -29,7 +29,7 @@ class User {
   String height;
   String weight;
   String? email;
-  DateTime datetime;
+  DateTime? datetime;
   String phone;
   String? imc;
   String? icc;
@@ -112,7 +112,7 @@ class User {
         "height": height,
         "weight": weight,
         "email": email,
-        "datetime": datetime.toIso8601String(),
+        "datetime": datetime!.toIso8601String(),
         "phone": phone,
         "imc": imc,
         "icc": icc,

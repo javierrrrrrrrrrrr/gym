@@ -10,11 +10,11 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-        create: (_) => LoginFormController(),
-        lazy: false,
+        create: (_) => UsersProvider(),
+        lazy: true,
       ),
       ChangeNotifierProvider(
-        create: (_) => UserFormController(),
+        create: (_) => LoginFormController(),
         lazy: false,
       ),
       ChangeNotifierProvider(
@@ -24,10 +24,6 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),
         lazy: false,
-      ),
-      ChangeNotifierProvider(
-        create: (_) => UsersProvider(),
-        lazy: true,
       ),
       ChangeNotifierProvider(
         create: (_) => SelectImg(),
@@ -43,14 +39,19 @@ class GymApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    final user = Provider.of<UsersProvider>(context);
+    return ChangeNotifierProvider(
+      create: (_) => UserFormController(user: user.selectedUser!),
+      lazy: true,
+      child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        title: "Gym",
+        debugShowCheckedModeBanner: false,
+        initialRoute: 'admin',
+        routes: appRoutes,
       ),
-      title: "Gym",
-      debugShowCheckedModeBanner: false,
-      initialRoute: 'admin',
-      routes: appRoutes,
     );
   }
 }
