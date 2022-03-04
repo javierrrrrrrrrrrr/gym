@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
-class Observ extends StatelessWidget {
+class Observ extends StatefulWidget {
   const Observ({Key? key}) : super(key: key);
+
+  @override
+  State<Observ> createState() => _ObservState();
+}
+
+class _ObservState extends State<Observ> {
+  @override
+  void initState() {
+    super.initState();
+    final obervableController =
+        Provider.of<ObservationFormController>(context, listen: false);
+
+    obervableController.comment = '';
+    obervableController.icc = '';
+    obervableController.imc = '';
+    obervableController.peso = '';
+  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final userProvider = Provider.of<UsersProvider>(context);
+    final obervableController = Provider.of<ObservationFormController>(context);
     return Scaffold(
       backgroundColor: const Color.fromRGBO(253, 254, 255, 1),
       body: SingleChildScrollView(
@@ -25,11 +46,12 @@ class Observ extends StatelessWidget {
               height: 20,
             ),
             InputFieldWidget(
+              enabled: false,
               icon: true,
               maxline: 1,
               right: 55,
               left: 25,
-              initialvalue: "",
+              initialvalue: userProvider.selectedUser!.firstname,
               obscureText: false,
               width: width,
               keyboardType: TextInputType.name,
@@ -49,7 +71,9 @@ class Observ extends StatelessWidget {
               width: width,
               keyboardType: TextInputType.name,
               hinttext: "Comentario de la Observacion",
-              onChanged: null,
+              onChanged: (value) {
+                obervableController.comment = value;
+              },
             ),
             const SizedBox(
               height: 16,
@@ -59,32 +83,78 @@ class Observ extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 95,
-                  child: textFormFieldChiquito("Peso"),
+                  child: textFormFieldChiquito(
+                      text: "Peso",
+                      onChanged: (value) {
+                        obervableController.peso = value;
+                      }),
                 ),
                 SizedBox(
                   width: 95,
-                  child: textFormFieldChiquito("IMC"),
+                  child: textFormFieldChiquito(
+                      text: "IMC",
+                      onChanged: (value) {
+                        obervableController.imc = value;
+                      }),
                 ),
                 SizedBox(
                   width: 95,
-                  child: textFormFieldChiquito("ICC"),
+                  child: textFormFieldChiquito(
+                      text: "ICC",
+                      onChanged: (value) {
+                        obervableController.icc = value;
+                      }),
                 ),
               ],
             ),
             const SizedBox(
               height: 20,
             ),
-            CustomButton(title: "Guardar", onPressed: () {})
+            CustomButton(
+                title: "Guardar",
+                onPressed: () async {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      });
+                  await userProvider
+                      .createObservation(
+                    icc: obervableController.icc == ''
+                        ? obervableController.icc
+                        : userProvider.selectedUser!.icc ?? "",
+                    idUser: userProvider.selectedUser!.id,
+                    imc: obervableController.imc == ''
+                        ? obervableController.imc
+                        : userProvider.selectedUser!.imc ?? '',
+                    observations: obervableController.comment,
+                    weight: obervableController.peso == ''
+                        ? obervableController.peso
+                        : userProvider.selectedUser!.weight,
+                  )
+                      .whenComplete(() {
+                    Navigator.of(context);
+                    Navigator.pushReplacementNamed(context, 'lista_obs');
+                  });
+                })
           ],
         ),
       ),
     );
   }
 
-  Stack textFormFieldChiquito(String text) {
+  Stack textFormFieldChiquito(
+      {required String text,
+      String? initialvalue,
+      Function(String)? onChanged}) {
     return Stack(
       children: [
-        TextFormField(decoration: _inputDecoration(text)),
+        TextFormField(
+            onChanged: onChanged,
+            initialValue: initialvalue,
+            decoration: _inputDecoration(text)),
         const Positioned(
             right: 5,
             top: 12,
