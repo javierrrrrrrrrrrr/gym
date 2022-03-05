@@ -38,10 +38,7 @@ class _ObservState extends State<Observ> {
             const BannerTop(
               title: "Añadir Observación",
             ),
-            EditUserImg(
-              width: width,
-              height: height,
-            ),
+            const EditUserImg(),
             const SizedBox(
               height: 20,
             ),
@@ -131,7 +128,8 @@ class _ObservState extends State<Observ> {
                   )
                       .whenComplete(() {
                     Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, 'lista_obs');
+                    Navigator.pop(context);
+                    // Navigator.pushReplacementNamed(context, 'lista_obs');
                   });
                 })
           ],

@@ -6,11 +6,7 @@ import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class EditUserImg extends StatefulWidget {
-  const EditUserImg({required this.width, required this.height, Key? key})
-      : super(key: key);
-
-  final double width;
-  final double height;
+  const EditUserImg({Key? key}) : super(key: key);
 
   @override
   State<EditUserImg> createState() => _EditUserImgState();
@@ -26,12 +22,14 @@ class _EditUserImgState extends State<EditUserImg> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final imageProvider = Provider.of<SelectImg>(context);
     final usersProvider = Provider.of<UsersProvider>(context);
     User user = usersProvider.selectedUser!;
 
     return Padding(
-      padding: EdgeInsets.only(top: widget.height * 0.045),
+      padding: EdgeInsets.only(top: height * 0.045),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -43,13 +41,14 @@ class _EditUserImgState extends State<EditUserImg> {
                   },
                   child: ImgUserContainer(
                       child: Container(
-                    height: widget.height * 0.25,
-                    width: widget.width * 0.4,
-                    child: Image(
+                    height: height * 0.25,
+                    width: width * 0.4,
+                    child: FadeInImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage((user.img != "no-avatar.png")
-                            ? 'http://78.108.216.56:3000/api/uploads/clients/${user.id}'
-                            : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo=')),
+                        placeholder: const AssetImage(
+                            'assets/JovialMeagerBull-size_restricted.gif'),
+                        image: NetworkImage(
+                            'http://78.108.216.56:3000/api/uploads/clients/${user.id}')),
                     decoration: BoxDecoration(
                         color: const Color.fromRGBO(196, 196, 196, 1),
                         borderRadius: BorderRadius.circular(10)),
@@ -58,8 +57,8 @@ class _EditUserImgState extends State<EditUserImg> {
               : Stack(
                   children: [
                     SizedBox(
-                      height: widget.height * 0.25,
-                      width: widget.width * 0.4,
+                      height: height * 0.25,
+                      width: width * 0.4,
                       child: Image.file(
                         imageProvider.img,
                         fit: BoxFit.cover,
@@ -85,18 +84,18 @@ class _EditUserImgState extends State<EditUserImg> {
                   ],
                 ),
           SizedBox(
-            width: widget.width * 0.065,
+            width: width * 0.065,
           ),
           SizedBox(
-            height: widget.height * 0.25,
-            width: widget.width * 0.4,
+            height: height * 0.25,
+            width: width * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Image(
                   image: const AssetImage('assets/gym.jpeg'),
                   fit: BoxFit.cover,
-                  height: widget.height * 0.18,
+                  height: height * 0.18,
                 ),
                 const Text(
                   'Formulario de Inscripción',

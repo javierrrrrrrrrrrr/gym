@@ -11,7 +11,6 @@ class Pagos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final userProvider = Provider.of<UsersProvider>(context);
     final paymentProvider = Provider.of<PaymentFormController>(context);
@@ -23,7 +22,7 @@ class Pagos extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const BannerTop(title: "Anadir Pago"),
-            EditUserImg(width: width, height: height),
+            const EditUserImg(),
             const SizedBox(
               height: 25,
             ),
@@ -137,7 +136,8 @@ class Pagos extends StatelessWidget {
                               mounth: paymentProvider.cantMeses)
                           .whenComplete(() async {
                         Navigator.pop(context);
-                        Navigator.pushReplacementNamed(context, 'lista_pagos');
+                        Navigator.pop(context);
+                        // Navigator.pushReplacementNamed(context, 'lista_pagos');
                       });
                     },
                     title: "Añadir Pago")),

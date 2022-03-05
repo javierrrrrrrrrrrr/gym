@@ -289,6 +289,10 @@ class _AddUserState extends State<AddUser> {
                         Navigator.pop(context);
                         Navigator.pushReplacementNamed(context, 'users');
                       });
+                    } else {
+                      await userProvider.getUsers();
+                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, 'users');
                     }
                   },
                 ),

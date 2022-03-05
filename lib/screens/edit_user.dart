@@ -44,7 +44,7 @@ class _EditUserState extends State<EditUser> {
                 child: Column(
                   children: [
                     const BannerTop(title: "Editar Cliente"),
-                    EditUserImg(width: width, height: height),
+                    const EditUserImg(),
                     SizedBox(
                       height: height * 0.02,
                     ),

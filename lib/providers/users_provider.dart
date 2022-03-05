@@ -377,11 +377,8 @@ class UsersProvider extends ChangeNotifier {
     required String observations,
     required String idUser,
   }) async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Authorization':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MjFlNDkzMzgxOTBiNzhlODQ0YjRhNTgiLCJpYXQiOjE2NDY0MTMwNDgsImV4cCI6MTY0NjQ5OTQ0OH0.8D70O2Gx6F4DyAmhcLpKInAvcMou2fEyxIJkYpmn3Uw'
-    };
+    getToken();
+    var headers = {'Content-Type': 'application/json', 'Authorization': token};
     var request = http.Request(
         'POST', Uri.parse('http://78.108.216.56:3000/api/observations'));
     request.body = json.encode({
