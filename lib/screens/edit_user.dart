@@ -96,7 +96,7 @@ class _EditUserState extends State<EditUser> {
                       maxline: 1,
                       right: 55,
                       left: 25,
-                      initialvalue: user.email!,
+                      initialvalue: user.email ?? '',
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) =>
@@ -204,7 +204,7 @@ class _EditUserState extends State<EditUser> {
                       maxline: 1,
                       right: 55,
                       left: 25,
-                      initialvalue: user.icc!,
+                      initialvalue: user.icc ?? '',
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       onChanged: (value) =>
@@ -278,6 +278,7 @@ class _EditUserState extends State<EditUser> {
                       title: "Guardar",
                       onPressed: () async {
                         showDialog(
+                            barrierDismissible: false,
                             context: context,
                             builder: (BuildContext context) {
                               return const Center(
@@ -346,8 +347,20 @@ class _EditUserState extends State<EditUser> {
                           color: Colors.white,
                         ),
                         onPressed: () async {
-                          await userProvider.getAllPaymentsByUserId(user.id);
-                          Navigator.pushNamed(context, 'lista_pagos');
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              });
+                          await userProvider
+                              .getAllPaymentsByUserId(user.id)
+                              .whenComplete(() {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, 'lista_pagos');
+                          });
                         },
                       ),
                       const SizedBox(
@@ -360,9 +373,20 @@ class _EditUserState extends State<EditUser> {
                           color: Colors.white,
                         ),
                         onPressed: () async {
-                          await userProvider.getObservationsByIdUser(user.id);
-
-                          Navigator.pushNamed(context, 'lista_obs');
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              });
+                          await userProvider
+                              .getObservationsByIdUser(user.id)
+                              .whenComplete(() {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, 'lista_obs');
+                          });
                         },
                       ),
                     ]),
@@ -411,6 +435,7 @@ Future<void> _showMyDialog(BuildContext context, String id) async {
             child: const Text('Si'),
             onPressed: () async {
               showDialog(
+                  barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
                     return const Center(
@@ -419,14 +444,14 @@ Future<void> _showMyDialog(BuildContext context, String id) async {
                   });
               await userProvider.deleteUser(id);
               Navigator.pop(context);
-              Navigator.of(context).pop();
+              Navigator.pop(context);
               Navigator.pushReplacementNamed(context, 'users');
             },
           ),
           TextButton(
             child: const Text('No'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
         ],

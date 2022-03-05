@@ -40,7 +40,7 @@ class UsersProvider extends ChangeNotifier {
   final StreamController<List> _suggestionsStreamController =
       StreamController.broadcast();
 
-  Stream<List> get suggestionStream => this._suggestionsStreamController.stream;
+  Stream<List> get suggestionStream => _suggestionsStreamController.stream;
 
   UsersProvider() {
     getUsers();
@@ -59,12 +59,12 @@ class UsersProvider extends ChangeNotifier {
   Future<List<User>> getUsers() async {
     await getToken();
 
-    final resp = await http.get(Uri.parse("$_baseUrl/api/clients?limit=100"),
+    final resp = await http.get(Uri.parse("$_baseUrl/api/clients?limit=10000"),
         headers: {HttpHeaders.authorizationHeader: token});
 
     final Map<String, dynamic> usersmap = json.decode(resp.body);
 
-    final respuesta = GetUsersResponse.fromMap(usersmap);
+    final respuesta = GetAllUsersResponse.fromMap(usersmap);
 
     if (resp.statusCode == 200) {
       isLoading = false;
@@ -171,14 +171,12 @@ class UsersProvider extends ChangeNotifier {
 
     final respuesta =
         GetUserByIdResponse.fromJson(await response.stream.bytesToString());
-    print(respuesta.client!.img);
+
     imgCreateUser = respuesta.client!.img!;
     notifyListeners();
     if (response.statusCode == 200) {
       print('Userid del cliente' + await response.stream.bytesToString());
-    } else {
-      print(response.reasonPhrase);
-    }
+    } else {}
   }
 
   Future uploadImage(String path, String userid) async {
@@ -265,6 +263,7 @@ class UsersProvider extends ChangeNotifier {
         client: selectedUser!);
 
     payments.add(pago);
+    selectedUser!.active = true;
     notifyListeners();
     return pago;
   }
@@ -288,7 +287,7 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
-  getAllPaymentsByUserId(String userId) async {
+  Future getAllPaymentsByUserId(String userId) async {
     getToken();
     payments = [];
     notifyListeners();
@@ -331,7 +330,10 @@ class UsersProvider extends ChangeNotifier {
     //:TODO Eliminar pago local
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      final index = payments.indexWhere((element) => element.id == idPago);
+      payments.remove(payments[index]);
+      selectedUser!.active = false;
+      notifyListeners();
     } else {
       print(response.reasonPhrase);
     }
@@ -339,7 +341,7 @@ class UsersProvider extends ChangeNotifier {
 
   //Observaciones del user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  getObservationsByIdUser(String idUser) async {
+  Future getObservationsByIdUser(String idUser) async {
     getToken();
     observation = [];
     notifyListeners();
@@ -411,6 +413,24 @@ class UsersProvider extends ChangeNotifier {
       observation.add(obs);
       notifyListeners();
       return obs;
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
+  deleteObservation(String idOb) async {
+    getToken();
+    var headers = {'Authorization': token, 'Content-Type': 'application/json'};
+    var request = http.Request('DELETE',
+        Uri.parse('http://78.108.216.56:3000/api/observations/$idOb'));
+    request.body = '''''';
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+      final index = observation.indexWhere((element) => element.id == idOb);
+      observation.remove(observation[index]);
+      notifyListeners();
     } else {
       print(response.reasonPhrase);
     }

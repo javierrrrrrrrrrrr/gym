@@ -264,6 +264,7 @@ class _AddUserState extends State<AddUser> {
                   title: "Crear",
                   onPressed: () async {
                     showDialog(
+                        barrierDismissible: false,
                         context: context,
                         builder: (BuildContext context) {
                           return const Center(

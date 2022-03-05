@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           validator: (value) {
                             if ((value != null && value.length > 5)) {
                               // controlcontrsena = true;
-
+                              loginController.setisvalidPassw = true;
                               return null;
                             } else {
                               // controlcontrsena = false;
@@ -129,43 +129,46 @@ class _LoginPageState extends State<LoginPage> {
         width: width * 0.65,
       ),
       onTap: () async {
-        final loginProvider =
-            Provider.of<LoginProvider>(context, listen: false);
+        if (loginController.isValidForm()) {
+          final loginProvider =
+              Provider.of<LoginProvider>(context, listen: false);
 
-        FocusScope.of(context).unfocus();
+          FocusScope.of(context).unfocus();
 
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            });
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (BuildContext context) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              });
 
-        try {
-          String? resp = await loginProvider.loginUser(
-              loginController.email, loginController.password);
+          try {
+            String? resp = await loginProvider.loginUser(
+                loginController.email, loginController.password);
 
-          if (resp == '') {
-            Navigator.pop(context);
-            Navigator.pushReplacementNamed(context, 'admin');
-          } else {
+            if (resp == '') {
+              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, 'admin');
+            } else {
+              Navigator.pop(context);
+              ElegantNotification.error(
+                toastDuration: const Duration(milliseconds: 4000),
+                animation: ANIMATION.fromTop,
+                title: const Text('Error'),
+                description: const Text('Por favor verifica los datos'),
+              ).show(context);
+            }
+          } catch (e) {
             Navigator.pop(context);
             ElegantNotification.error(
               toastDuration: const Duration(milliseconds: 4000),
               animation: ANIMATION.fromTop,
               title: const Text('Error'),
-              description: const Text('Por favor verifica los datos'),
+              description: const Text('Problemas de conexion'),
             ).show(context);
           }
-        } catch (e) {
-          Navigator.pop(context);
-          ElegantNotification.error(
-            toastDuration: const Duration(milliseconds: 4000),
-            animation: ANIMATION.fromTop,
-            title: const Text('Error'),
-            description: const Text('Problemas de conexion'),
-          ).show(context);
         }
       },
     );

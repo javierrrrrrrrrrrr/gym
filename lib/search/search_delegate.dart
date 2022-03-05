@@ -3,6 +3,8 @@ import 'package:gym/models/usersmodel.dart';
 import 'package:gym/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../models/getUsersModel.dart';
+
 class UserSerch extends SearchDelegate {
   @override
   String get searchFieldLabel => "Buscar Usuario";

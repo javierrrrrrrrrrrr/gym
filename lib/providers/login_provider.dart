@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
-class LoginProvider extends ChangeNotifier {
-  final String _baseUrl = "http://78.108.216.56:3000";
-  final storage = const FlutterSecureStorage();
+const String _baseUrl = "http://78.108.216.56:3000";
+const storage = FlutterSecureStorage();
 
+class LoginProvider extends ChangeNotifier {
   Future<String?> loginUser(String email, String password) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse('$_baseUrl/api/auth/login'));

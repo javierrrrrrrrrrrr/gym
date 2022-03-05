@@ -113,9 +113,14 @@ class ObservationListBody extends StatelessWidget {
               const SizedBox(
                 width: 25,
               ),
-              const Icon(
-                Icons.delete,
-                size: 30,
+              IconButton(
+                onPressed: () {
+                  _showMyDeleteDialog(context, observation.id);
+                },
+                icon: const Icon(
+                  Icons.delete,
+                  size: 30,
+                ),
               ),
             ],
           ),
@@ -125,6 +130,60 @@ class ObservationListBody extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showMyDeleteDialog(BuildContext context, String id) async {
+    final userProvider = Provider.of<UsersProvider>(context, listen: false);
+    return showDialog(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Borrar observacion'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text(
+                  'Esta accion borrara de forma permanente la observacion del sistema',
+                  textAlign: TextAlign.start,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  '¿ Desea Continuar ?',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: const Text('Si'),
+              onPressed: () async {
+                showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    });
+                await userProvider.deleteObservation(id);
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

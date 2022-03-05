@@ -121,6 +121,7 @@ class Pagos extends StatelessWidget {
                 child: CustomButton(
                     onPressed: () async {
                       showDialog(
+                          barrierDismissible: false,
                           context: context,
                           builder: (BuildContext context) {
                             return const Center(

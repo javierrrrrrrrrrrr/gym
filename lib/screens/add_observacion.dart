@@ -114,6 +114,7 @@ class _ObservState extends State<Observ> {
                 title: "Guardar",
                 onPressed: () async {
                   showDialog(
+                      barrierDismissible: false,
                       context: context,
                       builder: (BuildContext context) {
                         return const Center(
@@ -129,7 +130,7 @@ class _ObservState extends State<Observ> {
                     weight: obervableController.peso,
                   )
                       .whenComplete(() {
-                    Navigator.of(context);
+                    Navigator.pop(context);
                     Navigator.pushReplacementNamed(context, 'lista_obs');
                   });
                 })
