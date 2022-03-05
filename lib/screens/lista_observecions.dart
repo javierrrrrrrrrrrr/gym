@@ -5,9 +5,14 @@ import 'package:provider/provider.dart';
 
 import '../providers/providers.dart';
 
-class ListaObservaciones extends StatelessWidget {
+class ListaObservaciones extends StatefulWidget {
   const ListaObservaciones({Key? key}) : super(key: key);
 
+  @override
+  State<ListaObservaciones> createState() => _ListaObservacionesState();
+}
+
+class _ListaObservacionesState extends State<ListaObservaciones> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +51,7 @@ class _ListViewOBState extends State<ListViewOB> {
     final userProvider = Provider.of<UsersProvider>(context);
     return Expanded(
       child: ListView.separated(
+          physics: const BouncingScrollPhysics(),
           itemCount: userProvider.observation.length,
           itemBuilder: (BuildContext context, index) {
             return ObservationListBody(
@@ -101,7 +107,7 @@ class ObservationListBody extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "Peso: ${userProvider.selectedUser!.weight}Kg",
+                "Peso: ${observation.weight}Kg",
                 style: const TextStyle(fontSize: 21),
               ),
               const SizedBox(

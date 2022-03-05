@@ -288,20 +288,10 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
-  Future<List<Payment>> getAllPaymentsByIdnety() async {
-    int index = selectedUser!.payments!.length;
-
-    for (var i = 0; i < index; i++) {
-      payments.add((await getPaymentByIdentifier(selectedUser!.payments![i]))!);
-      notifyListeners();
-    }
-
-    return payments;
-  }
-
   getAllPaymentsByUserId(String userId) async {
     getToken();
-
+    payments = [];
+    notifyListeners();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
     var request =
         http.Request('GET', Uri.parse('$_baseUrl/api/payments/user/$userId'));
@@ -351,6 +341,9 @@ class UsersProvider extends ChangeNotifier {
 
   getObservationsByIdUser(String idUser) async {
     getToken();
+    observation = [];
+    notifyListeners();
+
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
     var request = http.Request(
         'GET', Uri.parse('$_baseUrl/api/observations/user/$idUser'));
@@ -414,7 +407,7 @@ class UsersProvider extends ChangeNotifier {
       v: respuesta.observation.v,
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       observation.add(obs);
       notifyListeners();
       return obs;

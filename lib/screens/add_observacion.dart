@@ -122,17 +122,11 @@ class _ObservState extends State<Observ> {
                       });
                   await userProvider
                       .createObservation(
-                    icc: obervableController.icc == ''
-                        ? obervableController.icc
-                        : userProvider.selectedUser!.icc ?? "",
+                    icc: obervableController.icc,
                     idUser: userProvider.selectedUser!.id,
-                    imc: obervableController.imc == ''
-                        ? obervableController.imc
-                        : userProvider.selectedUser!.imc ?? '',
+                    imc: obervableController.imc,
                     observations: obervableController.comment,
-                    weight: obervableController.peso == ''
-                        ? obervableController.peso
-                        : userProvider.selectedUser!.weight,
+                    weight: obervableController.peso,
                   )
                       .whenComplete(() {
                     Navigator.of(context);

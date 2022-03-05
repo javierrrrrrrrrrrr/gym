@@ -21,8 +21,6 @@ class _EditUserState extends State<EditUser> {
     if (userProvider.selectedUser!.services.contains("TRAINING")) {
       userFormController.training = true;
     }
-    userProvider.payments = [];
-    userProvider.observation = [];
   }
 
   @override

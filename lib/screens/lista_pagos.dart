@@ -47,6 +47,7 @@ class _ListPaymentBodyState extends State<ListPaymentBody> {
 
     return Expanded(
       child: ListView.separated(
+          physics: const BouncingScrollPhysics(),
           itemCount: userProvider.payments.length,
           itemBuilder: (BuildContext context, index) {
             return _ListPaymentBody(

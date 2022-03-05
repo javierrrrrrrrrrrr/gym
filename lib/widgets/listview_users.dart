@@ -20,6 +20,7 @@ class _ListViewUsersState extends State<ListViewUsers> {
 
     return Expanded(
       child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
         itemCount: userProvider.users.length,
         itemBuilder: (BuildContext context, index) {
           return ListUserBody(
