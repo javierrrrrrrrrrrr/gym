@@ -125,7 +125,7 @@ class ObservationListBody extends StatelessWidget {
             ],
           ),
           Text(
-            observation.observation ?? "",
+            observation.observation,
             style: const TextStyle(fontSize: 22),
           ),
         ],
