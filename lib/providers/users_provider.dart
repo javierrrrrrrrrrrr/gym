@@ -42,9 +42,9 @@ class UsersProvider extends ChangeNotifier {
 
   Stream<List> get suggestionStream => _suggestionsStreamController.stream;
 
-  UsersProvider() {
-    getUsers();
-  }
+  // UsersProvider() {
+  //  getUsers();
+  // }
 
   Future<String> readDataFromStorage(String valor) async {
     return await storage.read(key: valor) ?? '';
@@ -60,7 +60,7 @@ class UsersProvider extends ChangeNotifier {
     await getToken();
 
     final resp = await http.get(Uri.parse("$_baseUrl/api/clients?limit=10000"),
-        headers: {HttpHeaders.authorizationHeader: token});
+        headers: {HttpHeaders.authorizationHeader: await getToken()});
 
     final Map<String, dynamic> usersmap = json.decode(resp.body);
 

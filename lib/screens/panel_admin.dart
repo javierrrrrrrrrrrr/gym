@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/users_provider.dart';
 
 import 'package:gym/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class PanelAdmin extends StatelessWidget {
   const PanelAdmin({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class PanelAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final userProvider = Provider.of<UsersProvider>(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -22,7 +25,10 @@ class PanelAdmin extends StatelessWidget {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, 'users'),
+                  onTap: () async {
+                    await userProvider.getUsers().whenComplete(
+                        () => Navigator.pushNamed(context, 'users'));
+                  },
                   child: Carta(
                     width: width,
                     height: height,

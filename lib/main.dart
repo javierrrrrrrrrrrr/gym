@@ -27,7 +27,7 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),
-        lazy: false,
+        lazy: true,
       ),
       ChangeNotifierProvider(
         create: (_) => SelectImg(),
@@ -53,7 +53,7 @@ class GymApp extends StatelessWidget {
         ),
         title: "Gym",
         debugShowCheckedModeBanner: false,
-        initialRoute: 'admin',
+        initialRoute: 'login',
         routes: appRoutes,
       ),
     );

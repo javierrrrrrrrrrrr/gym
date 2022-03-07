@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           validator: (value) {
                             if ((value != null && value.length > 5)) {
                               // controlcontrsena = true;
-                              loginController.setisvalidPassw = true;
+                              //  loginController.setisvalidPassw = true;
                               return null;
                             } else {
                               // controlcontrsena = false;
