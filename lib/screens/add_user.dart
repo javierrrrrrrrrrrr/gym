@@ -368,14 +368,14 @@ class _AddUserState extends State<AddUser> {
                         await userProvider
                             .uploadImage(imageProvider.imagePath!, userId!)
                             .whenComplete(() async {
-                          await userProvider.getUsers();
+                          // await userProvider.getUsers();
                           Navigator.pop(context);
-                          Navigator.pushReplacementNamed(context, 'users');
+                          Navigator.pop(context);
                         });
                       } else {
-                        await userProvider.getUsers();
+                        // await userProvider.getUsers();
                         Navigator.pop(context);
-                        Navigator.pushReplacementNamed(context, 'users');
+                        Navigator.pop(context);
                       }
                     }
                   },

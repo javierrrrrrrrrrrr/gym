@@ -59,6 +59,13 @@ class _EditUserState extends State<EditUser> {
                       onChanged: ((value) {
                         userFormController.user!.firstname = value;
                       }),
+                      validator: (value) {
+                        if (value!.length > 1 && value != "") {
+                          return null;
+                        } else {
+                          return "El nombre debe tener al menos un caracter :)";
+                        }
+                      },
                       width: width,
                       hinttext: 'Nombre',
                     ),
@@ -75,6 +82,13 @@ class _EditUserState extends State<EditUser> {
                       keyboardType: TextInputType.text,
                       width: width,
                       hinttext: 'Apellidos',
+                      validator: (value) {
+                        if (value!.length > 1 && value != "" || value == "") {
+                          return null;
+                        } else {
+                          return "El apellido debe tener al menos un caracter :)";
+                        }
+                      },
                     ),
                     _separador(height),
                     InputFieldWidget(
@@ -89,6 +103,14 @@ class _EditUserState extends State<EditUser> {
                           userFormController.user!.phone = value,
                       width: width,
                       hinttext: 'Teléfono',
+                      validator: (value) {
+                        if (value != null && value.length > 5 && value != "" ||
+                            value == "") {
+                          return null;
+                        } else {
+                          return "Un numero de telefono valido contiene al menos 5 caracteres :)";
+                        }
+                      },
                     ),
                     _separador(height),
                     InputFieldWidget(
@@ -107,7 +129,7 @@ class _EditUserState extends State<EditUser> {
                         String gmailpatter =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                         RegExp regExp = RegExp(gmailpatter);
-                        if (regExp.hasMatch(value ?? "")) {
+                        if (regExp.hasMatch(value ?? "") || value == "") {
                           return null;
                         } else {
                           return 'Introduce un correo valido';
@@ -128,10 +150,17 @@ class _EditUserState extends State<EditUser> {
                       width: width,
                       hinttext: 'Edad',
                       validator: (value) {
-                        if (value != null && value.length < 3) {
+                        String edadpattern = r'^([0-9])*$';
+                        var edad = RegExp(edadpattern);
+
+                        if (edad.hasMatch(value ?? "") &&
+                                value != null &&
+                                value.length < 3 &&
+                                value != "" ||
+                            value == "") {
                           return null;
                         } else {
-                          return "La edad debe ser una edad logica";
+                          return "La edad debe ser menor de 3 caracteres :)";
                         }
                       },
                     ),
@@ -149,10 +178,16 @@ class _EditUserState extends State<EditUser> {
                       width: width,
                       hinttext: 'Estatura',
                       validator: (value) {
-                        if (value != null && value.length < 4) {
+                        var edad = RegExp(r'^([0-9])*$');
+
+                        if (edad.hasMatch(value ?? "") &&
+                                value != null &&
+                                value.length < 4 &&
+                                value != "" ||
+                            value == "") {
                           return null;
                         } else {
-                          return "La altura debe ser de solo 3 digitos";
+                          return "La estatura debe ser menor de 4 caracteres :)";
                         }
                       },
                     ),
@@ -170,10 +205,16 @@ class _EditUserState extends State<EditUser> {
                       width: width,
                       hinttext: 'Peso',
                       validator: (value) {
-                        if (value != null && value.length < 4) {
+                        var edad = RegExp(r'^([0-9])*$');
+
+                        if (edad.hasMatch(value ?? "") &&
+                                value != null &&
+                                value.length < 4 &&
+                                value != "" ||
+                            value == "") {
                           return null;
                         } else {
-                          return "El peso debe ser de solo 3 digitos";
+                          return "El peso debe ser menor de 4 caracteres :)";
                         }
                       },
                     ),
@@ -191,10 +232,16 @@ class _EditUserState extends State<EditUser> {
                       width: width,
                       hinttext: 'Imc',
                       validator: (value) {
-                        if (value != null && value.length < 4) {
+                        var edad = RegExp(r'^([0-9])*$');
+
+                        if (edad.hasMatch(value ?? "") &&
+                                value != null &&
+                                value.length < 3 &&
+                                value != "" ||
+                            value == "") {
                           return null;
                         } else {
-                          return "El Imc debe ser de solo 3 digitos";
+                          return "El IMC debe ser menor de 4 caracteres :)";
                         }
                       },
                     ),
@@ -212,10 +259,16 @@ class _EditUserState extends State<EditUser> {
                       width: width,
                       hinttext: 'Icc',
                       validator: (value) {
-                        if (value == null || value.length < 4) {
+                        var edad = RegExp(r'^([0-9])*$');
+
+                        if (edad.hasMatch(value ?? "") &&
+                                value != null &&
+                                value.length < 3 &&
+                                value != "" ||
+                            value == "") {
                           return null;
                         } else {
-                          return "El Icc debe ser de solo 3 digitos";
+                          return "EL ICC debe ser menor de 4 caracteres :)";
                         }
                       },
                     ),
@@ -234,7 +287,7 @@ class _EditUserState extends State<EditUser> {
                         child: CheckboxListTile(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          title: const Text("Training"),
+                          title: const Text("TRAINING"),
                           value: userFormController.training,
                           onChanged: (bool? value) {
                             setState(() {
@@ -247,28 +300,66 @@ class _EditUserState extends State<EditUser> {
                                     .remove("TRAINING");
                               }
                             });
-                            //     print(userFormController.services);
                           },
                         ),
                       ),
                     ),
+                    _separador(height),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: CheckboxListTile(
-                        title: const Text("Aerobics"),
-                        value: userFormController.aerobics,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            userFormController.aerobics = value;
-                            if (userFormController.aerobics == true) {
-                              userFormController.user!.services.add("AEROBICS");
-                            } else {
-                              userFormController.user!.services
-                                  .remove("AEROBICS");
-                            }
-                          });
-                          //  print(userFormController.services);
-                        },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 25),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.teal),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: CheckboxListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          title: const Text("AEROBICS"),
+                          value: userFormController.aerobics,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              userFormController.aerobics = value;
+                              if (userFormController.aerobics == true) {
+                                userFormController.user!.services
+                                    .add("AEROBICS");
+                              } else {
+                                userFormController.user!.services
+                                    .remove("AEROBICS");
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    _separador(height),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 28),
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 25),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.teal),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: CheckboxListTile(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          title: const Text("MASSAGE"),
+                          value: userFormController.massage,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              userFormController.massage = value;
+                              if (userFormController.massage == true) {
+                                userFormController.user!.services
+                                    .add("MASSAGE");
+                              } else {
+                                userFormController.user!.services
+                                    .remove("MASSAGE");
+                              }
+                            });
+                          },
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -277,30 +368,33 @@ class _EditUserState extends State<EditUser> {
                     CustomButton(
                       title: "Guardar",
                       onPressed: () async {
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            });
+                        if (userFormController.isValidForm()) {
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              });
 
-                        String? userid = await userProvider.updateUser(
-                            user: userFormController.user!);
+                          String? userid = await userProvider.updateUser(
+                              user: userFormController.user!);
 
-                        if (imageProvider.isTouch == false) {
-                          await userProvider.getUsers();
-                          Navigator.pop(context);
-                          Navigator.pushReplacementNamed(context, 'users');
-                        } else {
-                          imageProvider.isTouch = false;
-                          await userProvider.uploadImage(
-                              imageProvider.imagePath!, userid!);
-                          //Evaluar si se puede borrar de aqui el metodo de abajo :)
-                          await userProvider.getUsers();
-                          Navigator.pop(context);
-                          Navigator.pushReplacementNamed(context, 'users');
+                          if (imageProvider.isTouch == false) {
+                            //no se llama la peticion por que aprendimos a organizar la lista//
+                            //  await userProvider.getUsers();
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          } else {
+                            imageProvider.isTouch = false;
+                            await userProvider.uploadImage(
+                                imageProvider.imagePath!, userid!);
+                            //Evaluar si se puede borrar de aqui el metodo de abajo :)
+                            //await userProvider.getUsers();
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          }
                         }
                       },
                     ),

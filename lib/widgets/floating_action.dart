@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/providers/providers.dart';
@@ -15,34 +13,37 @@ class FloatingABCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UsersProvider>(context);
+    final userFormController = Provider.of<UserFormController>(context);
 
     final width = MediaQuery.of(context).size.width;
-    return FloatingActionButton(
-      backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
-      onPressed: () {
-        userProvider.selectedUser = User(
-          id: '',
-          firstname: '',
-          age: 0,
-          height: '',
-          lastname: '',
-          phone: '',
-          services: [],
-          weight: '',
-          email: '',
-          icc: '',
-          imc: '',
-        );
+    return Padding(
+      padding: const EdgeInsets.only(right: 40),
+      child: FloatingActionButton(
+        backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
+        onPressed: () {
+          userFormController.user = User(
+            id: '',
+            firstname: '',
+            age: 0,
+            height: '',
+            lastname: '',
+            phone: '',
+            services: [],
+            weight: '',
+            email: '',
+            icc: '',
+            imc: '',
+          );
 
-        Navigator.pushNamed(context, route);
-      },
-      child: Padding(
-        padding: EdgeInsets.all(width * 0.03),
-        child: const Image(
-          color: Colors.white,
-          fit: BoxFit.cover,
-          image: AssetImage('assets/add_user.png'),
+          Navigator.pushNamed(context, route);
+        },
+        child: Padding(
+          padding: EdgeInsets.all(width * 0.03),
+          child: const Image(
+            color: Colors.white,
+            fit: BoxFit.cover,
+            image: AssetImage('assets/add_user.png'),
+          ),
         ),
       ),
     );

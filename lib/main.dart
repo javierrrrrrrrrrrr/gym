@@ -43,9 +43,8 @@ class GymApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UsersProvider>(context);
     return ChangeNotifierProvider(
-      create: (_) => UserFormController(user: user.selectedUser!),
+      create: (_) => UserFormController(),
       lazy: true,
       child: MaterialApp(
         theme: ThemeData(

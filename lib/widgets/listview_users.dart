@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/providers.dart';
 import 'package:gym/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +46,7 @@ class ListUserBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
+    final userFormController = Provider.of<UserFormController>(context);
 
     return SizedBox(
       height: 75,
@@ -108,6 +110,7 @@ class ListUserBody extends StatelessWidget {
             child: IconButton(
               onPressed: () {
                 userProvider.selectedUser = user;
+                userFormController.user = user;
 
                 Navigator.pushNamed(context, 'edit_user');
               },
