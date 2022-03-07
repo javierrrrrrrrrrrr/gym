@@ -22,14 +22,18 @@ class FloatingABCustom extends StatelessWidget {
       backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
       onPressed: () {
         userProvider.selectedUser = User(
-            id: '',
-            firstname: '',
-            age: 0,
-            height: '',
-            lastname: '',
-            phone: '',
-            services: ["TRAINING"],
-            weight: '');
+          id: '',
+          firstname: '',
+          age: 0,
+          height: '',
+          lastname: '',
+          phone: '',
+          services: [],
+          weight: '',
+          email: '',
+          icc: '',
+          imc: '',
+        );
 
         Navigator.pushNamed(context, route);
       },

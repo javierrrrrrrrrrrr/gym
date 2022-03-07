@@ -42,9 +42,9 @@ class UsersProvider extends ChangeNotifier {
 
   Stream<List> get suggestionStream => _suggestionsStreamController.stream;
 
-  // UsersProvider() {
-  //  getUsers();
-  // }
+  UsersProvider() {
+    getUsers();
+  }
 
   Future<String> readDataFromStorage(String valor) async {
     return await storage.read(key: valor) ?? '';
@@ -60,7 +60,7 @@ class UsersProvider extends ChangeNotifier {
     await getToken();
 
     final resp = await http.get(Uri.parse("$_baseUrl/api/clients?limit=10000"),
-        headers: {HttpHeaders.authorizationHeader: await getToken()});
+        headers: {HttpHeaders.authorizationHeader: token});
 
     final Map<String, dynamic> usersmap = json.decode(resp.body);
 
@@ -81,8 +81,7 @@ class UsersProvider extends ChangeNotifier {
   }) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST', Uri.parse('$_baseUrl/api/clients?limit=1000&page=1'));
+    var request = http.Request('POST', Uri.parse('$_baseUrl/api/clients/'));
     request.body = json.encode({
       "firstname": user.firstname,
       "lastname": user.lastname,
@@ -93,11 +92,13 @@ class UsersProvider extends ChangeNotifier {
       "phone": user.phone,
       "imc": user.imc,
       "icc": user.icc,
-      "services": (user.services),
+      "services": user.services.isEmpty ? "TRAINING" : user.services
     });
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    print(response.reasonPhrase);
+
     final respuesta =
         CreateUserResponse.fromJson(await response.stream.bytesToString());
 
