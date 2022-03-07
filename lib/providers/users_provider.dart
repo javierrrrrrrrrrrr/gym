@@ -103,7 +103,9 @@ class UsersProvider extends ChangeNotifier {
         CreateUserResponse.fromJson(await response.stream.bytesToString());
 
     if (response.statusCode == 201) {
-      await getUsers();
+      users.add(respuesta.client!);
+      users.sort((a, b) => a.firstname.compareTo(b.firstname));
+      notifyListeners();
 
       return respuesta.client!.id;
     } else {
@@ -138,6 +140,13 @@ class UsersProvider extends ChangeNotifier {
         UpdateUserResponse.fromJson(await response.stream.bytesToString());
 
     if (response.statusCode == 200) {
+      final index =
+          users.indexWhere((element) => element.id == respuesta.client.id);
+      print(index);
+
+      users[index] = respuesta.client;
+      notifyListeners();
+      users.sort((a, b) => a.firstname.compareTo(b.firstname));
       print(respuesta.client.id);
       return respuesta.client.id;
     } else {

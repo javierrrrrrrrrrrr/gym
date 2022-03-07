@@ -86,7 +86,7 @@ class ObservationListBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Fecha:${observation.datetime}",
+            "Fecha: ${observation.datetime}",
             style: const TextStyle(fontSize: 22),
           ),
           Row(
@@ -125,7 +125,7 @@ class ObservationListBody extends StatelessWidget {
             ],
           ),
           Text(
-            observation.observation,
+            observation.observation ?? "",
             style: const TextStyle(fontSize: 22),
           ),
         ],
