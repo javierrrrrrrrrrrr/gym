@@ -26,8 +26,18 @@ class PanelAdmin extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await userProvider.getUsers().whenComplete(
-                        () => Navigator.pushNamed(context, 'users'));
+                    showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        });
+                    await userProvider.getUsers().whenComplete(() {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, 'users');
+                    });
                   },
                   child: Carta(
                     width: width,
