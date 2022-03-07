@@ -53,7 +53,7 @@ class GymApp extends StatelessWidget {
         ),
         title: "Gym",
         debugShowCheckedModeBanner: false,
-        initialRoute: 'login',
+        initialRoute: 'admin',
         routes: appRoutes,
       ),
     );
