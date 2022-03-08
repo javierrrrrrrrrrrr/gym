@@ -20,7 +20,9 @@ class _AddUserState extends State<AddUser> {
     imageProvider.imagePath = "";
   }
 
-  final items = ["TRAINING", "AEROBICS", "MASSAGE"];
+  var items = ["TRAINING", "AEROBICS", "MASSAGE"];
+  String initialDropDownValue = "TRAINING";
+
   bool _validateFirstName = false;
   bool _validateLastName = false;
   bool _validateEmail = false;
@@ -379,92 +381,142 @@ class _AddUserState extends State<AddUser> {
                 _separador(height),
                 // DropDown List;
 
-                // DropdownButton(
-                //   items: items.map().toList(),
-                //   onChanged: onChanged),
-
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 25),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.teal),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: CheckboxListTile(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      title: const Text("TRAINING"),
-                      value: userFormController.training,
-                      onChanged: (bool? value) {
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: DropdownButtonFormField(
+                      hint: Text("Services"),
+                      // ignore: prefer_const_constructors
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        enabledBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Color.fromRGBO(45, 49, 146, 1)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        hintStyle: const TextStyle(
+                            color: Colors.black54, fontSize: 20),
+                      ),
+                      // value: initialDropDownValue,
+                      icon: const Icon(Icons.arrow_drop_down),
+                      items: items.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
                         setState(() {
-                          userFormController.training = value;
-                          if (userFormController.training == true) {
+                          initialDropDownValue = value!;
+                          if (value == "TRAINING") {
                             userFormController.user!.services.add("TRAINING");
                           } else {
                             userFormController.user!.services
                                 .remove("TRAINING");
                           }
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                _separador(height),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 25),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.teal),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: CheckboxListTile(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      title: const Text("AEROBICS"),
-                      value: userFormController.aerobics,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          userFormController.aerobics = value;
-                          if (userFormController.aerobics == true) {
+
+                          //
+                          if (value == "AEROBICS") {
                             userFormController.user!.services.add("AEROBICS");
                           } else {
                             userFormController.user!.services
                                 .remove("AEROBICS");
                           }
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                _separador(height),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 25),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.teal),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: CheckboxListTile(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      title: const Text("MASSAGE"),
-                      value: userFormController.massage,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          userFormController.massage = value;
-                          if (userFormController.massage == true) {
+
+                          //
+                          if (value == "MASSAGE") {
                             userFormController.user!.services.add("MASSAGE");
                           } else {
                             userFormController.user!.services.remove("MASSAGE");
                           }
                         });
-                      },
-                    ),
-                  ),
+                      }),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 28),
+                //   child: Container(
+                //     margin: const EdgeInsets.only(right: 25),
+                //     decoration: BoxDecoration(
+                //       border: Border.all(color: Colors.teal),
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     child: CheckboxListTile(
+                //       shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(10)),
+                //       title: const Text("TRAINING"),
+                //       value: userFormController.training,
+                //       onChanged: (bool? value) {
+                //         setState(() {
+                //           userFormController.training = value;
+                //           if (userFormController.training == true) {
+                //             userFormController.user!.services.add("TRAINING");
+                //           } else {
+                //             userFormController.user!.services
+                //                 .remove("TRAINING");
+                //           }
+                //         });
+                //       },
+                //     ),
+                //   ),
+                // ),
+                // _separador(height),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 28),
+                //   child: Container(
+                //     margin: const EdgeInsets.only(right: 25),
+                //     decoration: BoxDecoration(
+                //       border: Border.all(color: Colors.teal),
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     child: CheckboxListTile(
+                //       shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(10)),
+                //       title: const Text("AEROBICS"),
+                //       value: userFormController.aerobics,
+                //       onChanged: (bool? value) {
+                //         setState(() {
+                //           userFormController.aerobics = value;
+                //           if (userFormController.aerobics == true) {
+                //             userFormController.user!.services.add("AEROBICS");
+                //           } else {
+                //             userFormController.user!.services
+                //                 .remove("AEROBICS");
+                //           }
+                //         });
+                //       },
+                //     ),
+                //   ),
+                // ),
+                // _separador(height),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 28),
+                //   child: Container(
+                //     margin: const EdgeInsets.only(right: 25),
+                //     decoration: BoxDecoration(
+                //       border: Border.all(color: Colors.teal),
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     child: CheckboxListTile(
+                //       shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(10)),
+                //       title: const Text("MASSAGE"),
+                //       value: userFormController.massage,
+                //       onChanged: (bool? value) {
+                //         setState(() {
+                //           userFormController.massage = value;
+                //           if (userFormController.massage == true) {
+                //             userFormController.user!.services.add("MASSAGE");
+                //           } else {
+                //             userFormController.user!.services.remove("MASSAGE");
+                //           }
+                //         });
+                //       },
+                //     ),
+                //   ),
+                // ),
 
                 const SizedBox(
                   height: 100,
@@ -519,4 +571,6 @@ class _AddUserState extends State<AddUser> {
       height: height * 0.005,
     );
   }
+
+  buidMenuItem(String item) => DropdownMenuItem(value: item, child: Text(item));
 }
