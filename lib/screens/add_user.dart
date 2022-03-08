@@ -20,6 +20,17 @@ class _AddUserState extends State<AddUser> {
     imageProvider.imagePath = "";
   }
 
+  final items = ["TRAINING", "AEROBICS", "MASSAGE"];
+  bool _validateFirstName = false;
+  bool _validateLastName = false;
+  bool _validateEmail = false;
+  bool _validateAge = false;
+  bool _validateHeight = false;
+  bool _validateWeight = false;
+  bool _validatePhone = false;
+  bool _validateImc = false;
+  bool _validateIcc = false;
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -41,39 +52,59 @@ class _AddUserState extends State<AddUser> {
                   height: height * 0.02,
                 ),
                 InputFieldWidget(
+                  maxLength: 15,
+                  validateIcon: _validateFirstName,
+                  label: const Text('Nombre'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   obscureText: false,
                   keyboardType: TextInputType.text,
                   onChanged: ((value) {
                     userFormController.user!.firstname = value;
+
+                    setState(() {
+                      if (value.isEmpty) {
+                        _validateFirstName = false;
+                      } else {
+                        _validateFirstName = true;
+                      }
+                    });
                   }),
                   validator: (value) {
-                    if (value!.length > 1 && value != "") {
+                    if (value!.isNotEmpty && value != "") {
                       return null;
                     } else {
                       return "El nombre debe tener al menos un caracter :)";
                     }
                   },
                   width: width,
-                  hinttext: 'Nombre',
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 15,
+                  validateIcon: _validateLastName,
+                  label: const Text('Apellidos'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   obscureText: false,
-                  onChanged: (value) =>
-                      userFormController.user!.lastname = value,
+                  onChanged: (value) {
+                    userFormController.user!.lastname = value;
+                    setState(() {
+                      if (value.isEmpty) {
+                        _validateLastName = false;
+                      } else {
+                        _validateLastName = true;
+                      }
+                    });
+                  },
                   keyboardType: TextInputType.text,
                   width: width,
-                  hinttext: 'Apellidos',
                   validator: (value) {
-                    if (value!.length > 1 && value != "" || value == "") {
+                    if (value!.isNotEmpty && value != "" || value == "") {
                       return null;
                     } else {
                       return "El apellido debe tener al menos un caracter :)";
@@ -82,16 +113,27 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 10,
+                  validateIcon: _validatePhone,
+                  label: const Text('Telefono'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.phone,
-                  onChanged: (value) => userFormController.user!.phone = value,
+                  onChanged: (value) {
+                    userFormController.user!.phone = value;
+                    setState(() {
+                      if (value.length > 5) {
+                        _validatePhone = true;
+                      } else {
+                        _validatePhone = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Teléfono',
                   validator: (value) {
                     if (value != null && value.length > 5 && value != "" ||
                         value == "") {
@@ -103,15 +145,29 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 40,
+                  validateIcon: _validateEmail,
+                  label: const Text('Email'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   obscureText: false,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) => userFormController.user!.email = value,
+                  onChanged: (value) {
+                    userFormController.user!.email = value;
+                    setState(() {
+                      String gmailpatter =
+                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                      RegExp regExp = RegExp(gmailpatter);
+                      if (regExp.hasMatch(value)) {
+                        _validateEmail = true;
+                      } else {
+                        _validateEmail = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Email',
                   validator: (value) {
                     String gmailpatter =
                         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -125,17 +181,31 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 2,
+                  validateIcon: _validateAge,
+                  label: const Text('Edad'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) =>
-                      userFormController.user!.age = int.parse(value),
+                  onChanged: (value) {
+                    userFormController.user!.age = int.parse(value);
+                    setState(() {
+                      String edadpattern = r'^([0-9])*$';
+                      var edad = RegExp(edadpattern);
+
+                      if (edad.hasMatch(value)) {
+                        _validateAge = true;
+                      }
+                      if (value.isEmpty) {
+                        _validateAge = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Edad',
                   validator: (value) {
                     String edadpattern = r'^([0-9])*$';
                     var edad = RegExp(edadpattern);
@@ -153,16 +223,28 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 3,
+                  validateIcon: _validateHeight,
+                  label: const Text('Estatura'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.user!.height = value,
+                  onChanged: (value) {
+                    userFormController.user!.height = value;
+                    var edad = RegExp(r'^([0-9])*$');
+                    setState(() {
+                      if (edad.hasMatch(value) && value.length < 4) {
+                        _validateHeight = true;
+                      } else {
+                        _validateHeight = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Estatura',
                   validator: (value) {
                     var edad = RegExp(r'^([0-9])*$');
 
@@ -179,16 +261,29 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 3,
+                  validateIcon: _validateWeight,
+                  label: const Text('Peso'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.user!.weight = value,
+                  onChanged: (value) {
+                    userFormController.user!.weight = value;
+                    setState(() {
+                      var edad = RegExp(r'^([0-9])*$');
+
+                      if (edad.hasMatch(value) && value.length < 4) {
+                        _validateWeight = true;
+                      } else {
+                        _validateWeight = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Peso',
                   validator: (value) {
                     var edad = RegExp(r'^([0-9])*$');
 
@@ -205,16 +300,29 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 3,
+                  validateIcon: _validateImc,
+                  label: const Text('Imc'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.user!.imc = value,
+                  onChanged: (value) {
+                    userFormController.user!.imc = value;
+                    setState(() {
+                      var edad = RegExp(r'^([0-9])*$');
+
+                      if (edad.hasMatch(value) && value.length < 3) {
+                        _validateImc = true;
+                      } else {
+                        _validateImc = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Imc',
                   validator: (value) {
                     var edad = RegExp(r'^([0-9])*$');
 
@@ -231,16 +339,29 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 InputFieldWidget(
+                  maxLength: 3,
+                  validateIcon: _validateIcc,
+                  label: const Text('Icc'),
                   icon: true,
                   maxline: 1,
-                  right: 55,
+                  right: 25,
                   left: 25,
                   initialvalue: "",
                   obscureText: false,
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => userFormController.user!.icc = value,
+                  onChanged: (value) {
+                    userFormController.user!.icc = value;
+                    setState(() {
+                      var edad = RegExp(r'^([0-9])*$');
+
+                      if (edad.hasMatch(value) && value.length < 3) {
+                        _validateIcc = true;
+                      } else {
+                        _validateIcc = false;
+                      }
+                    });
+                  },
                   width: width,
-                  hinttext: 'Icc',
                   validator: (value) {
                     var edad = RegExp(r'^([0-9])*$');
 
@@ -257,6 +378,10 @@ class _AddUserState extends State<AddUser> {
                 ),
                 _separador(height),
                 // DropDown List;
+
+                // DropdownButton(
+                //   items: items.map().toList(),
+                //   onChanged: onChanged),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
@@ -391,7 +516,7 @@ class _AddUserState extends State<AddUser> {
 
   SizedBox _separador(double height) {
     return SizedBox(
-      height: height * 0.02,
+      height: height * 0.005,
     );
   }
 }
