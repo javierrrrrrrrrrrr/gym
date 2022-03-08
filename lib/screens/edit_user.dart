@@ -34,6 +34,34 @@ class _EditUserState extends State<EditUser> {
     if (userProvider.selectedUser!.services.contains("TRAINING")) {
       userFormController.training = true;
     }
+
+    if (userFormController.user!.firstname.isNotEmpty) {
+      _validateFirstName = true;
+    }
+    if (userFormController.user!.lastname.isNotEmpty) {
+      _validateLastName = true;
+    }
+    if (userFormController.user!.email!.isNotEmpty) {
+      _validateEmail = true;
+    }
+    if (userFormController.user!.age > 0) {
+      _validateAge = true;
+    }
+    if (userFormController.user!.height.isNotEmpty) {
+      _validateHeight = true;
+    }
+    if (userFormController.user!.weight.isNotEmpty) {
+      _validateWeight = true;
+    }
+    if (userFormController.user!.phone.isNotEmpty) {
+      _validatePhone = true;
+    }
+    if (userFormController.user!.icc!.isNotEmpty) {
+      _validateIcc = true;
+    }
+    if (userFormController.user!.imc!.isNotEmpty) {
+      _validateImc = true;
+    }
   }
 
   @override
