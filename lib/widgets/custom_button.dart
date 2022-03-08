@@ -14,17 +14,18 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return MaterialButton(
       onPressed: onPressed,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 0,
       splashColor: Colors.transparent,
-      height: 60,
-      minWidth: 240,
+      height: width * 0.15,
+      minWidth: width * 0.61,
       color: (color == null) ? const Color.fromRGBO(45, 49, 146, 1) : color,
       child: Text(
         title,
-        style: const TextStyle(fontSize: 20, color: Colors.white),
+        style: TextStyle(fontSize: width * 0.05, color: Colors.white),
       ),
     );
   }

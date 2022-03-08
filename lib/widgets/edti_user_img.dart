@@ -52,7 +52,7 @@ class _EditUserImgState extends State<EditUserImg> {
                             : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo=')),
                     decoration: BoxDecoration(
                         color: const Color.fromRGBO(196, 196, 196, 1),
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(width * 0.025)),
                   )),
                 )
               : Stack(
@@ -66,15 +66,16 @@ class _EditUserImgState extends State<EditUserImg> {
                       ),
                     ),
                     Positioned(
-                      left: 114,
+                      //114
+                      left: width * 0.29,
                       child: GestureDetector(
                         onTap: () {
                           imageProvider.cropFile();
                         },
                         child: Container(
                           color: Colors.white,
-                          height: 45,
-                          width: 45,
+                          height: width * 0.115,
+                          width: width * 0.115,
                           child: const Icon(
                             Icons.photo_size_select_large_rounded,
                             color: Colors.black,
@@ -98,9 +99,9 @@ class _EditUserImgState extends State<EditUserImg> {
                   fit: BoxFit.cover,
                   height: height * 0.18,
                 ),
-                const Text(
+                Text(
                   'Formulario de Inscripción',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: width * 0.05, color: Colors.black),
                   textAlign: TextAlign.center,
                 )
               ],

@@ -13,11 +13,19 @@ class Pagos extends StatefulWidget {
   State<Pagos> createState() => _PagosState();
 }
 
-int cantidadPago = 1;
-int cantidadMeses = 1;
+int cantidadPago = 0;
+int cantidadMeses = 0;
 double total = 0;
 
 class _PagosState extends State<Pagos> {
+  @override
+  void initState() {
+    total = 0;
+    cantidadPago = 0;
+    cantidadMeses = 0;
+    super.initState();
+  }
+
   String CalcularXmes() {
     total = 0;
     setState(() {
@@ -56,13 +64,17 @@ class _PagosState extends State<Pagos> {
                 keyboardType: TextInputType.number,
                 onChanged: ((value) {
                   if (value != null && value != '') {
-                    cantidadPago = int.parse(value);
+                    try {
+                      cantidadPago = int.parse(value);
+                    } catch (e) {
+                      value = '';
+                    }
                   }
                   CalcularXmes();
                   paymentProvider.amount = value;
                 }),
                 width: width,
-                hinttext: 'Cantidad CUP',
+                label: const Text('Cantidad total a pagar en CUP'),
                 validator: (value) {
                   String edadpattern = r'^([0-9])*$';
                   var cup = RegExp(edadpattern);
@@ -90,6 +102,7 @@ class _PagosState extends State<Pagos> {
               InputFieldWidget(
                 icon: false,
                 maxline: 1,
+                label: const Text('Cantidad / Meses'),
                 right: 160,
                 left: 25,
                 initialvalue: '',
@@ -97,13 +110,16 @@ class _PagosState extends State<Pagos> {
                 keyboardType: TextInputType.number,
                 onChanged: ((value) {
                   if (value != null && value != '') {
-                    cantidadMeses = int.parse(value);
+                    try {
+                      cantidadMeses = int.parse(value);
+                    } catch (e) {
+                      value = '';
+                    }
+                    CalcularXmes();
+                    paymentProvider.cantMeses = value;
                   }
-                  CalcularXmes();
-                  paymentProvider.cantMeses = value;
                 }),
                 width: width,
-                hinttext: 'Cantidad / Meses',
                 validator: (value) {
                   String edadpattern = r'^([0-9])*$';
                   var cantMes = RegExp(edadpattern);
@@ -132,7 +148,7 @@ class _PagosState extends State<Pagos> {
                 keyboardType: TextInputType.text,
                 onChanged: ((value) {}),
                 width: width,
-                hinttext: CalcularXmes(),
+                hinttext: CalcularXmes() + ' CUP por cada Mes ',
               ),
               const SizedBox(
                 height: 15,

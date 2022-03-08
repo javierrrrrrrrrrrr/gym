@@ -50,7 +50,7 @@ class PanelAdmin extends StatelessWidget {
                   width: width * 0.05,
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, 'trainers'),
+                  // onTap: () => Navigator.pushNamed(context, 'trainers'),
                   child: Carta(
                     width: width,
                     height: height,

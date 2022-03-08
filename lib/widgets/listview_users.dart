@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gym/providers/providers.dart';
-import 'package:gym/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../models/models.dart';
@@ -47,19 +46,20 @@ class ListUserBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
     final userFormController = Provider.of<UserFormController>(context);
+    final width = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      height: 75,
+      height: width * 0.19,
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: EdgeInsets.only(left: width * 0.025),
             child: Stack(
               children: [
                 CircleAvatar(
-                  radius: 25,
+                  radius: width * 0.065,
                   backgroundImage: const AssetImage(
                       'assets/JovialMeagerBull-size_restricted.gif'),
                   foregroundImage: NetworkImage((user.img != "no-avatar.png")
@@ -68,12 +68,12 @@ class ListUserBody extends StatelessWidget {
                 ),
                 Positioned(
                   right: 0,
-                  bottom: 5,
+                  bottom: width * 0.012,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(width * 0.080),
                     child: Container(
-                      height: 10,
-                      width: 10,
+                      height: width * 0.025,
+                      width: width * 0.025,
                       color: user.active == true ? Colors.green : Colors.red,
                     ),
                   ),
@@ -83,21 +83,21 @@ class ListUserBody extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: EdgeInsets.only(left: width * 0.04),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "${user.firstname} ${user.lastname}",
-                    style: const TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: width * 0.05),
                   ),
                   Row(
                     children: [
                       const Icon(Icons.phone),
                       Text(
                         user.phone,
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: width * 0.04),
                       ),
                     ],
                   ),
@@ -106,7 +106,7 @@ class ListUserBody extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 15),
+            padding: EdgeInsets.only(right: width * 0.04),
             child: IconButton(
               onPressed: () {
                 userProvider.selectedUser = user;
@@ -114,7 +114,7 @@ class ListUserBody extends StatelessWidget {
 
                 Navigator.pushNamed(context, 'edit_user');
               },
-              icon: const Icon(Icons.edit, size: 35),
+              icon: Icon(Icons.edit, size: width * 0.09),
             ),
           ),
         ],

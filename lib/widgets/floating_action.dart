@@ -17,7 +17,7 @@ class FloatingABCustom extends StatelessWidget {
 
     final width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(right: 40),
+      padding: EdgeInsets.only(right: width * 0.100),
       child: FloatingActionButton(
         backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
         onPressed: () {

@@ -50,27 +50,28 @@ class InputFieldWidget extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         onChanged: onChanged,
-        decoration:
-            inputDecoration(hinttext, icon, label, counter, validateIcon),
+        decoration: inputDecoration(
+            hinttext, icon, label, counter, validateIcon, width),
       ),
     );
   }
 }
 
 InputDecoration inputDecoration(hinttext, bool hasicon, Widget? label,
-    Widget? counter, bool? validateIcon) {
+    Widget? counter, bool? validateIcon, var width) {
   if (hasicon == true) {
     return InputDecoration(
       counter: counter,
       label: label,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12))),
-      enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
-          borderRadius: BorderRadius.all(Radius.circular(12))),
+      contentPadding: EdgeInsets.symmetric(
+          horizontal: width * 0.05, vertical: width * 0.025),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
+      enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
       hintText: hinttext,
-      hintStyle: const TextStyle(color: Colors.black54, fontSize: 20),
+      hintStyle: TextStyle(color: Colors.black54, fontSize: width * 0.05),
       suffixIcon: IconButton(
         onPressed: () {},
         icon: Icon(Icons.check_circle,
@@ -81,14 +82,16 @@ InputDecoration inputDecoration(hinttext, bool hasicon, Widget? label,
     );
   } else {
     return InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12))),
-      enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
-          borderRadius: BorderRadius.all(Radius.circular(12))),
+      label: label,
+      contentPadding: EdgeInsets.symmetric(
+          horizontal: width * 0.05, vertical: width * 0.025),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
+      enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
       hintText: hinttext,
-      hintStyle: const TextStyle(color: Colors.black54, fontSize: 20),
+      hintStyle: TextStyle(color: Colors.black54, fontSize: width * 0.05),
     );
   }
 }

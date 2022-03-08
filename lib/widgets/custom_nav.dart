@@ -26,7 +26,7 @@ class CustomNav extends StatelessWidget {
               ),
               Text(
                 title,
-                style: const TextStyle(color: Colors.white, fontSize: 32),
+                style: TextStyle(color: Colors.white, fontSize: width * 0.082),
               ),
               SizedBox(
                 height: height * 0.015,
@@ -52,9 +52,9 @@ class CustomNav extends StatelessWidget {
                           BorderRadius.all(Radius.circular(width * 0.03)),
                     ),
                     hintText: '    Buscar Usuario',
-                    hintStyle: const TextStyle(
-                      color: Color.fromRGBO(150, 152, 154, 0.5),
-                      fontSize: 20,
+                    hintStyle: TextStyle(
+                      color: const Color.fromRGBO(150, 152, 154, 0.5),
+                      fontSize: width * 0.05,
                     ),
                     suffixIcon: IconButton(
                       onPressed: () {

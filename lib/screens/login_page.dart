@@ -53,8 +53,8 @@ class _LoginPageState extends State<LoginPage> {
                       InputFieldWidget(
                         icon: true,
                         maxline: 1,
-                        right: 18,
-                        left: 15,
+                        right: width * 0.05,
+                        left: width * 0.04,
                         initialvalue: "",
                         obscureText: false,
                         width: width,
@@ -80,8 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                       InputFieldWidget(
                           icon: true,
                           maxline: 1,
-                          right: 18,
-                          left: 15,
+                          right: width * 0.05,
+                          left: width * 0.04,
                           initialvalue: "",
                           obscureText: true,
                           width: width,
@@ -117,12 +117,13 @@ class _LoginPageState extends State<LoginPage> {
       LoginFormController loginController) {
     return GestureDetector(
       child: Container(
-        decoration: _boxDecoration(),
-        child: const Center(
+        decoration: _boxDecoration(width),
+        child: Center(
           child: Text(
             "Acceder",
             style: TextStyle(
-                color: Color.fromRGBO(255, 255, 255, 0.8), fontSize: 22),
+                color: const Color.fromRGBO(255, 255, 255, 0.8),
+                fontSize: width * 0.065),
           ),
         ),
         height: height * 0.055,
@@ -174,10 +175,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  BoxDecoration _boxDecoration() {
+  BoxDecoration _boxDecoration(var width) {
     return BoxDecoration(
       border: Border.all(),
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(width * 0.0025),
       color: const Color.fromRGBO(45, 49, 146, 1),
     );
   }
@@ -202,12 +203,12 @@ class _LoginPageState extends State<LoginPage> {
     return InputDecoration(
       contentPadding: EdgeInsets.symmetric(
           horizontal: width * 0.04, vertical: width * 0.035),
-      border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.0025))),
       enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Color.fromRGBO(45, 49, 146, 1))),
       hintText: hintText,
-      hintStyle: const TextStyle(color: Colors.black54, fontSize: 20),
+      hintStyle: TextStyle(color: Colors.black54, fontSize: width * 0.065),
       suffixIcon: const Icon(Icons.check_circle,
           color: Color.fromRGBO(150, 152, 154, 0.5)),
     );
