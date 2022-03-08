@@ -6,8 +6,25 @@ import 'package:provider/provider.dart';
 
 import '../providers/providers.dart';
 
-class Pagos extends StatelessWidget {
+class Pagos extends StatefulWidget {
   const Pagos({Key? key}) : super(key: key);
+
+  @override
+  State<Pagos> createState() => _PagosState();
+}
+
+int cantidadPago = 1;
+int cantidadMeses = 1;
+double total = 0;
+
+class _PagosState extends State<Pagos> {
+  String CalcularXmes() {
+    total = 0;
+    setState(() {
+      total = cantidadPago / cantidadMeses;
+    });
+    return '$total';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +55,10 @@ class Pagos extends StatelessWidget {
                 obscureText: false,
                 keyboardType: TextInputType.number,
                 onChanged: ((value) {
+                  if (value != null && value != '') {
+                    cantidadPago = int.parse(value);
+                  }
+                  CalcularXmes();
                   paymentProvider.amount = value;
                 }),
                 width: width,
@@ -75,6 +96,10 @@ class Pagos extends StatelessWidget {
                 obscureText: false,
                 keyboardType: TextInputType.number,
                 onChanged: ((value) {
+                  if (value != null && value != '') {
+                    cantidadMeses = int.parse(value);
+                  }
+                  CalcularXmes();
                   paymentProvider.cantMeses = value;
                 }),
                 width: width,
@@ -107,7 +132,7 @@ class Pagos extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 onChanged: ((value) {}),
                 width: width,
-                hinttext: 'Cantidad / Mes',
+                hinttext: CalcularXmes(),
               ),
               const SizedBox(
                 height: 15,
