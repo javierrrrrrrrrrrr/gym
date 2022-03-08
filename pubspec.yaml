@@ -1,4 +1,4 @@
-name: fitness_fodel
+name: fitness_model
 description: A GYM Model 
 
 # The following line prevents the package from being accidentally published to
