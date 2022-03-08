@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
 class InputFieldWidget extends StatelessWidget {
-  const InputFieldWidget({
-    Key? key,
-    required this.icon,
-    required this.maxline,
-    required this.left,
-    required this.right,
-    required this.width,
-    required this.hinttext,
-    this.validator,
-    required this.onChanged,
-    required this.keyboardType,
-    required this.obscureText,
-    this.initialvalue,
-    this.enabled,
-  }) : super(key: key);
+  const InputFieldWidget(
+      {Key? key,
+      required this.icon,
+      required this.maxline,
+      required this.left,
+      required this.right,
+      required this.width,
+      this.hinttext,
+      this.validator,
+      required this.onChanged,
+      required this.keyboardType,
+      required this.obscureText,
+      this.initialvalue,
+      this.enabled,
+      this.label,
+      this.counter,
+      this.validateIcon,
+      this.maxLength})
+      : super(key: key);
   final double width;
-  final String hinttext;
+  final String? hinttext;
 
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
@@ -29,12 +33,16 @@ class InputFieldWidget extends StatelessWidget {
   final int maxline;
   final bool icon;
   final bool? enabled;
-
+  final Widget? label;
+  final Widget? counter;
+  final bool? validateIcon;
+  final int? maxLength;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: left, right: right),
       child: TextFormField(
+        maxLength: maxLength,
         enabled: (enabled == null) ? true : enabled,
         maxLines: maxline,
         initialValue: initialvalue,
@@ -42,16 +50,20 @@ class InputFieldWidget extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         onChanged: onChanged,
-        decoration: inputDecoration(hinttext, icon),
+        decoration:
+            inputDecoration(hinttext, icon, label, counter, validateIcon),
       ),
     );
   }
 }
 
-InputDecoration inputDecoration(hinttext, bool ic) {
-  if (ic == true) {
+InputDecoration inputDecoration(hinttext, bool hasicon, Widget? label,
+    Widget? counter, bool? validateIcon) {
+  if (hasicon == true) {
     return InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      counter: counter,
+      label: label,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(12))),
       enabledBorder: const OutlineInputBorder(
@@ -61,13 +73,15 @@ InputDecoration inputDecoration(hinttext, bool ic) {
       hintStyle: const TextStyle(color: Colors.black54, fontSize: 20),
       suffixIcon: IconButton(
         onPressed: () {},
-        icon: const Icon(Icons.check_circle,
-            color: Color.fromRGBO(150, 152, 154, 0.5)),
+        icon: Icon(Icons.check_circle,
+            color: (validateIcon == true)
+                ? Colors.green
+                : const Color.fromRGBO(150, 152, 154, 0.5)),
       ),
     );
   } else {
     return InputDecoration(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(12))),
       enabledBorder: const OutlineInputBorder(
