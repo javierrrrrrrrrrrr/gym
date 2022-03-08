@@ -12,6 +12,19 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
+  var items = ["TRAINING", "AEROBICS", "MASSAGE"];
+  String initialDropDownValue = "TRAINING";
+
+  bool _validateFirstName = false;
+  bool _validateLastName = false;
+  bool _validateEmail = false;
+  bool _validateAge = false;
+  bool _validateHeight = false;
+  bool _validateWeight = false;
+  bool _validatePhone = false;
+  bool _validateImc = false;
+  bool _validateIcc = false;
+
   @override
   void initState() {
     super.initState();
@@ -49,41 +62,60 @@ class _EditUserState extends State<EditUser> {
                       height: height * 0.02,
                     ),
                     InputFieldWidget(
+                      maxLength: 15,
+                      label: const Text('Nombre'),
+                      validateIcon: _validateFirstName,
                       icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
-                      initialvalue: user.firstname,
+                      initialvalue: userFormController.user!.firstname,
                       obscureText: false,
                       keyboardType: TextInputType.text,
                       onChanged: ((value) {
                         userFormController.user!.firstname = value;
+                        setState(() {
+                          if (value.isEmpty) {
+                            _validateFirstName = false;
+                          } else {
+                            _validateFirstName = true;
+                          }
+                        });
                       }),
                       validator: (value) {
-                        if (value!.length > 1 && value != "") {
+                        if (value!.isNotEmpty && value != "") {
                           return null;
                         } else {
                           return "El nombre debe tener al menos un caracter :)";
                         }
                       },
                       width: width,
-                      hinttext: 'Nombre',
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 15,
+                      validateIcon: _validateLastName,
+                      label: const Text('Apellidos'),
                       icon: true,
                       maxline: 1,
                       right: 55,
                       left: 25,
-                      initialvalue: user.lastname,
+                      initialvalue: userFormController.user!.lastname,
                       obscureText: false,
-                      onChanged: (value) =>
-                          userFormController.user!.lastname = value,
+                      onChanged: (value) {
+                        userFormController.user!.lastname = value;
+                        setState(() {
+                          if (value.isEmpty) {
+                            _validateLastName = false;
+                          } else {
+                            _validateLastName = true;
+                          }
+                        });
+                      },
                       keyboardType: TextInputType.text,
                       width: width,
-                      hinttext: 'Apellidos',
                       validator: (value) {
-                        if (value!.length > 1 && value != "" || value == "") {
+                        if (value!.isNotEmpty && value != "" || value == "") {
                           return null;
                         } else {
                           return "El apellido debe tener al menos un caracter :)";
@@ -92,6 +124,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 10,
+                      validateIcon: _validatePhone,
+                      label: const Text('Telefono'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -99,10 +134,17 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.phone,
                       obscureText: false,
                       keyboardType: TextInputType.phone,
-                      onChanged: (value) =>
-                          userFormController.user!.phone = value,
+                      onChanged: (value) {
+                        userFormController.user!.phone = value;
+                        setState(() {
+                          if (value.length > 5) {
+                            _validatePhone = true;
+                          } else {
+                            _validatePhone = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Teléfono',
                       validator: (value) {
                         if (value != null && value.length > 5 && value != "" ||
                             value == "") {
@@ -114,6 +156,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 40,
+                      validateIcon: _validateEmail,
+                      label: const Text('Email'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -121,10 +166,20 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.email ?? '',
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
-                      onChanged: (value) =>
-                          userFormController.user!.email = value,
+                      onChanged: (value) {
+                        userFormController.user!.email = value;
+                        setState(() {
+                          String gmailpatter =
+                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                          RegExp regExp = RegExp(gmailpatter);
+                          if (regExp.hasMatch(value)) {
+                            _validateEmail = true;
+                          } else {
+                            _validateEmail = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Email',
                       validator: (value) {
                         String gmailpatter =
                             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -138,6 +193,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 2,
+                      validateIcon: _validateAge,
+                      label: const Text('Edad'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -145,10 +203,21 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.age.toString(),
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) =>
-                          userFormController.user!.age = int.parse(value),
+                      onChanged: (value) {
+                        userFormController.user!.age = int.parse(value);
+                        setState(() {
+                          String edadpattern = r'^([0-9])*$';
+                          var edad = RegExp(edadpattern);
+
+                          if (edad.hasMatch(value)) {
+                            _validateAge = true;
+                          }
+                          if (value.isEmpty) {
+                            _validateAge = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Edad',
                       validator: (value) {
                         String edadpattern = r'^([0-9])*$';
                         var edad = RegExp(edadpattern);
@@ -166,6 +235,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 3,
+                      validateIcon: _validateHeight,
+                      label: const Text('Estatura'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -173,10 +245,18 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.height,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) =>
-                          userFormController.user!.height = value,
+                      onChanged: (value) {
+                        userFormController.user!.height = value;
+                        var edad = RegExp(r'^([0-9])*$');
+                        setState(() {
+                          if (edad.hasMatch(value) && value.length < 4) {
+                            _validateHeight = true;
+                          } else {
+                            _validateHeight = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Estatura',
                       validator: (value) {
                         var edad = RegExp(r'^([0-9])*$');
 
@@ -193,6 +273,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 3,
+                      validateIcon: _validateWeight,
+                      label: const Text('Peso'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -200,10 +283,19 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.weight,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) =>
-                          userFormController.user!.weight = value,
+                      onChanged: (value) {
+                        userFormController.user!.weight = value;
+                        setState(() {
+                          var edad = RegExp(r'^([0-9])*$');
+
+                          if (edad.hasMatch(value) && value.length < 4) {
+                            _validateWeight = true;
+                          } else {
+                            _validateWeight = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Peso',
                       validator: (value) {
                         var edad = RegExp(r'^([0-9])*$');
 
@@ -220,6 +312,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 3,
+                      validateIcon: _validateImc,
+                      label: const Text('Imc'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -227,10 +322,19 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.imc!,
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) =>
-                          userFormController.user!.imc = value,
+                      onChanged: (value) {
+                        userFormController.user!.imc = value;
+                        setState(() {
+                          var edad = RegExp(r'^([0-9])*$');
+
+                          if (edad.hasMatch(value) && value.length < 3) {
+                            _validateImc = true;
+                          } else {
+                            _validateImc = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Imc',
                       validator: (value) {
                         var edad = RegExp(r'^([0-9])*$');
 
@@ -247,6 +351,9 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height),
                     InputFieldWidget(
+                      maxLength: 3,
+                      validateIcon: _validateIcc,
+                      label: const Text('Icc'),
                       icon: true,
                       maxline: 1,
                       right: 55,
@@ -254,10 +361,19 @@ class _EditUserState extends State<EditUser> {
                       initialvalue: user.icc ?? '',
                       obscureText: false,
                       keyboardType: TextInputType.number,
-                      onChanged: (value) =>
-                          userFormController.user!.icc = value,
+                      onChanged: (value) {
+                        userFormController.user!.icc = value;
+                        setState(() {
+                          var edad = RegExp(r'^([0-9])*$');
+
+                          if (edad.hasMatch(value) && value.length < 3) {
+                            _validateIcc = true;
+                          } else {
+                            _validateIcc = false;
+                          }
+                        });
+                      },
                       width: width,
-                      hinttext: 'Icc',
                       validator: (value) {
                         var edad = RegExp(r'^([0-9])*$');
 
@@ -275,82 +391,55 @@ class _EditUserState extends State<EditUser> {
                     _separador(height),
 
                     // DropDown List;
-
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 25),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.teal),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: CheckboxListTile(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          title: const Text("TRAINING"),
-                          value: userFormController.training,
-                          onChanged: (bool? value) {
+                      padding: const EdgeInsets.only(left: 25, right: 55),
+                      child: DropdownButtonFormField(
+                          hint: const Text("Services"),
+                          // ignore: prefer_const_constructors
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                            enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(45, 49, 146, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                            hintStyle: const TextStyle(
+                                color: Colors.black54, fontSize: 20),
+                          ),
+                          // value: initialDropDownValue,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(
+                              value: items,
+                              child: Text(items),
+                            );
+                          }).toList(),
+                          onChanged: (String? value) {
                             setState(() {
-                              userFormController.training = value;
-                              if (userFormController.training == true) {
+                              initialDropDownValue = value!;
+                              if (value == "TRAINING") {
                                 userFormController.user!.services
                                     .add("TRAINING");
                               } else {
                                 userFormController.user!.services
                                     .remove("TRAINING");
                               }
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    _separador(height),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 25),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.teal),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: CheckboxListTile(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          title: const Text("AEROBICS"),
-                          value: userFormController.aerobics,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              userFormController.aerobics = value;
-                              if (userFormController.aerobics == true) {
+
+                              //
+                              if (value == "AEROBICS") {
                                 userFormController.user!.services
                                     .add("AEROBICS");
                               } else {
                                 userFormController.user!.services
                                     .remove("AEROBICS");
                               }
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    _separador(height),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 25),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.teal),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: CheckboxListTile(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          title: const Text("MASSAGE"),
-                          value: userFormController.massage,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              userFormController.massage = value;
-                              if (userFormController.massage == true) {
+
+                              //
+                              if (value == "MASSAGE") {
                                 userFormController.user!.services
                                     .add("MASSAGE");
                               } else {
@@ -358,12 +447,96 @@ class _EditUserState extends State<EditUser> {
                                     .remove("MASSAGE");
                               }
                             });
-                          },
-                        ),
-                      ),
+                          }),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 28),
+                    //   child: Container(
+                    //     margin: const EdgeInsets.only(right: 25),
+                    //     decoration: BoxDecoration(
+                    //       border: Border.all(color: Colors.teal),
+                    //       borderRadius: BorderRadius.circular(12),
+                    //     ),
+                    //     child: CheckboxListTile(
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(10)),
+                    //       title: const Text("TRAINING"),
+                    //       value: userFormController.training,
+                    //       onChanged: (bool? value) {
+                    //         setState(() {
+                    //           userFormController.training = value;
+                    //           if (userFormController.training == true) {
+                    //             userFormController.user!.services
+                    //                 .add("TRAINING");
+                    //           } else {
+                    //             userFormController.user!.services
+                    //                 .remove("TRAINING");
+                    //           }
+                    //         });
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
+                    // _separador(height),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 28),
+                    //   child: Container(
+                    //     margin: const EdgeInsets.only(right: 25),
+                    //     decoration: BoxDecoration(
+                    //       border: Border.all(color: Colors.teal),
+                    //       borderRadius: BorderRadius.circular(12),
+                    //     ),
+                    //     child: CheckboxListTile(
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(10)),
+                    //       title: const Text("AEROBICS"),
+                    //       value: userFormController.aerobics,
+                    //       onChanged: (bool? value) {
+                    //         setState(() {
+                    //           userFormController.aerobics = value;
+                    //           if (userFormController.aerobics == true) {
+                    //             userFormController.user!.services
+                    //                 .add("AEROBICS");
+                    //           } else {
+                    //             userFormController.user!.services
+                    //                 .remove("AEROBICS");
+                    //           }
+                    //         });
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
+                    // _separador(height),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 28),
+                    //   child: Container(
+                    //     margin: const EdgeInsets.only(right: 25),
+                    //     decoration: BoxDecoration(
+                    //       border: Border.all(color: Colors.teal),
+                    //       borderRadius: BorderRadius.circular(12),
+                    //     ),
+                    //     child: CheckboxListTile(
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(10)),
+                    //       title: const Text("MASSAGE"),
+                    //       value: userFormController.massage,
+                    //       onChanged: (bool? value) {
+                    //         setState(() {
+                    //           userFormController.massage = value;
+                    //           if (userFormController.massage == true) {
+                    //             userFormController.user!.services
+                    //                 .add("MASSAGE");
+                    //           } else {
+                    //             userFormController.user!.services
+                    //                 .remove("MASSAGE");
+                    //           }
+                    //         });
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(
-                      height: 100,
+                      height: 80,
                     ),
                     CustomButton(
                       title: "Guardar",
@@ -398,7 +571,7 @@ class _EditUserState extends State<EditUser> {
                         }
                       },
                     ),
-                    _separador(height),
+                    _separador(height * 4),
                     CustomButton(
                         color: Colors.red[400],
                         onPressed: () async {
@@ -494,7 +667,7 @@ class _EditUserState extends State<EditUser> {
 
   SizedBox _separador(double height) {
     return SizedBox(
-      height: height * 0.02,
+      height: height * 0.005,
     );
   }
 }

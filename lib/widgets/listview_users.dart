@@ -109,8 +109,8 @@ class ListUserBody extends StatelessWidget {
             padding: EdgeInsets.only(right: width * 0.04),
             child: IconButton(
               onPressed: () {
-                userProvider.selectedUser = user;
-                userFormController.user = user;
+                userProvider.selectedUser = user.copyWith();
+                userFormController.user = user.copyWith();
 
                 Navigator.pushNamed(context, 'edit_user');
               },

@@ -142,12 +142,11 @@ class UsersProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final index =
           users.indexWhere((element) => element.id == respuesta.client.id);
-      print(index);
 
       users[index] = respuesta.client;
-      notifyListeners();
       users.sort((a, b) => a.firstname.compareTo(b.firstname));
-      print(respuesta.client.id);
+      notifyListeners();
+
       return respuesta.client.id;
     } else {
       return response.reasonPhrase.toString();
