@@ -46,7 +46,7 @@ class _ObservState extends State<Observ> {
               ),
               InputFieldWidget(
                 enabled: false,
-                icon: true,
+                icon: false,
                 maxline: 1,
                 right: 55,
                 left: 25,

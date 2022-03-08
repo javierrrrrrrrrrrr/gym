@@ -14,6 +14,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _validateEmail = false;
+  bool _validatePassword = false;
+
   @override
   Widget build(BuildContext context) {
     final loginController = Provider.of<LoginFormController>(context);
@@ -51,16 +54,28 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       InputFieldWidget(
+                        validateIcon: _validateEmail,
                         icon: true,
                         maxline: 1,
-                        right: width * 0.05,
-                        left: width * 0.04,
+                        right: width * 0.02,
+                        left: width * 0.02,
                         initialvalue: "",
                         obscureText: false,
                         width: width,
-                        hinttext: 'Enter Email',
+                        label: const Text('Entrar Email'),
                         onChanged: (value) {
                           loginController.email = value;
+
+                          setState(() {
+                            String gmailpatter =
+                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                            RegExp regExp = RegExp(gmailpatter);
+                            if (regExp.hasMatch(value)) {
+                              _validateEmail = true;
+                            } else {
+                              _validateEmail = false;
+                            }
+                          });
                         },
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
@@ -78,16 +93,25 @@ class _LoginPageState extends State<LoginPage> {
                         height: height * 0.01,
                       ),
                       InputFieldWidget(
+                          validateIcon: _validatePassword,
                           icon: true,
                           maxline: 1,
-                          right: width * 0.05,
-                          left: width * 0.04,
+                          right: width * 0.02,
+                          left: width * 0.02,
                           initialvalue: "",
                           obscureText: true,
                           width: width,
-                          hinttext: 'Enter Password',
+                          label: const Text('Entrar Password'),
                           onChanged: (value) {
                             loginController.password = value;
+
+                            setState(() {
+                              if ((value != null && value.length > 5)) {
+                                _validatePassword = true;
+                              } else {
+                                _validatePassword = false;
+                              }
+                            });
                           },
                           validator: (value) {
                             if ((value != null && value.length > 5)) {
@@ -178,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
   BoxDecoration _boxDecoration(var width) {
     return BoxDecoration(
       border: Border.all(),
-      borderRadius: BorderRadius.circular(width * 0.0025),
+      borderRadius: BorderRadius.circular(width * 0.025),
       color: const Color.fromRGBO(45, 49, 146, 1),
     );
   }
