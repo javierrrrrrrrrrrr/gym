@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/providers.dart';
@@ -30,6 +31,8 @@ class _ObservState extends State<Observ> {
     final userProvider = Provider.of<UsersProvider>(context);
     final obervableController = Provider.of<ObservationFormController>(context);
     return Scaffold(
+      appBar:
+          customAppbar(context, width: width, title: "Adicionar Observacion"),
       backgroundColor: const Color.fromRGBO(253, 254, 255, 1),
       body: SingleChildScrollView(
         child: Form(
@@ -37,9 +40,6 @@ class _ObservState extends State<Observ> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
-              const BannerTop(
-                title: "Añadir Observación",
-              ),
               const EditUserImg(),
               const SizedBox(
                 height: 20,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:gym/widgets/widgets.dart';
 
+import '../helpers/custom_appbar.dart';
 import '../search/search_delegate.dart';
 
 class UsersPage extends StatefulWidget {
@@ -14,10 +15,12 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
+      appBar: customAppbar(
+        context,
+        width: width,
+        title: "GYM Fitness Model",
         actions: [
           IconButton(
             onPressed: () {
@@ -30,17 +33,15 @@ class _UsersPageState extends State<UsersPage> {
             ),
           ),
         ],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
-        title: const Text("GYM Fitness Model"),
       ),
       floatingActionButton: const FloatingABCustom(
         route: "add_user",
       ),
       body: Column(
         children: const [
+          // Center(
+          //   child: Text("Lista de usuarios"),
+          // ),
           ListViewUsers(),
         ],
       ),

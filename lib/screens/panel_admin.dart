@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/providers/users_provider.dart';
 
 import 'package:gym/widgets/widgets.dart';
@@ -15,12 +16,11 @@ class PanelAdmin extends StatelessWidget {
     final userProvider = Provider.of<UsersProvider>(context);
 
     return Scaffold(
+      appBar:
+          customAppbar(context, width: width, title: "Panel de Administracion"),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const BannerTop(
-              title: "Panel de Administración",
-            ),
             separador(height),
             Row(
               children: [
