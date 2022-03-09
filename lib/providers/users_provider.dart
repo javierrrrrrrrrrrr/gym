@@ -272,6 +272,7 @@ class UsersProvider extends ChangeNotifier {
         client: selectedUser!);
 
     payments.add(pago);
+
     selectedUser!.active = true;
     notifyListeners();
     return pago;
