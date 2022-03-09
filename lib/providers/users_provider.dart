@@ -273,6 +273,11 @@ class UsersProvider extends ChangeNotifier {
 
     payments.add(pago);
 
+    final index = users.indexWhere((element) => element.id == id);
+
+    users[index].payments!.add(pago.id);
+    users[index].active = true;
+
     selectedUser!.active = true;
     notifyListeners();
     return pago;
