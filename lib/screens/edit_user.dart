@@ -602,7 +602,7 @@ class _EditUserState extends State<EditUser> {
                     ),
                     _separador(height * 4),
                     CustomButton(
-                        color: Colors.red[400],
+                        color: Colors.black,
                         onPressed: () async {
                           _showMyDialog(context, user.id);
                           // showDialog(

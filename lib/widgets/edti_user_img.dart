@@ -43,13 +43,18 @@ class _EditUserImgState extends State<EditUserImg> {
                       child: Container(
                     height: height * 0.25,
                     width: width * 0.4,
-                    child: FadeInImage(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(width * 0.025),
+                      child: FadeInImage(
                         fit: BoxFit.cover,
                         placeholder: const AssetImage(
                             'assets/JovialMeagerBull-size_restricted.gif'),
                         image: NetworkImage((user.img != "no-avatar.png")
                             ? 'http://78.108.216.56:3000/api/uploads/clients/${user.id}'
-                            : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo=')),
+                            : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo='),
+                        placeholderFit: BoxFit.cover,
+                      ),
+                    ),
                     decoration: BoxDecoration(
                         color: const Color.fromRGBO(196, 196, 196, 1),
                         borderRadius: BorderRadius.circular(width * 0.025)),
@@ -60,9 +65,12 @@ class _EditUserImgState extends State<EditUserImg> {
                     SizedBox(
                       height: height * 0.25,
                       width: width * 0.4,
-                      child: Image.file(
-                        imageProvider.img,
-                        fit: BoxFit.cover,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(width * 0.025),
+                        child: Image.file(
+                          imageProvider.img,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Positioned(
