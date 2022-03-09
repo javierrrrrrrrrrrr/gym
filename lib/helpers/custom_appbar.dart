@@ -8,6 +8,12 @@ AppBar customAppbar(BuildContext context,
       borderRadius: BorderRadius.circular(10.0),
     ),
     backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
-    title: Text(title),
+    title: Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 25),
+      ),
+    ),
   );
 }
