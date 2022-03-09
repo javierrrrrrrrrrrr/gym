@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/users_provider.dart';
-import 'package:gym/screens/charging_page.dart';
+
 import 'package:gym/widgets/widgets.dart';
-import 'package:provider/provider.dart';
+
+import '../search/search_delegate.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -14,10 +14,22 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UsersProvider>(context);
-
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: UserSerch());
+            },
+            icon: Icon(
+              Icons.search,
+              color: const Color.fromRGBO(150, 152, 154, 0.5),
+              size: width * 0.090,
+            ),
+          ),
+        ],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
