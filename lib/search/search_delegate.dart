@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym/models/usersmodel.dart';
 import 'package:gym/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +45,13 @@ class UserSerch extends SearchDelegate {
         if (!snapshot.hasData) return empty();
 
         final user = snapshot.data!;
+
+        if (user.isEmpty) {
+          return const Center(
+              child: Center(
+            child: Icon(Icons.not_interested_outlined),
+          ));
+        }
 
         return ListView.builder(
             itemCount: user.length,
