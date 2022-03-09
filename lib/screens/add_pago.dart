@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/providers/payment_form_controller.dart';
 import 'package:gym/widgets/widgets.dart';
@@ -42,6 +43,7 @@ class _PagosState extends State<Pagos> {
     User user = userProvider.selectedUser!;
 
     return Scaffold(
+      appBar: customAppbar(context, width: width, title: "Adicionar Pago"),
       body: SingleChildScrollView(
         child: Form(
           key: paymentProvider.formkey,
@@ -49,7 +51,6 @@ class _PagosState extends State<Pagos> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BannerTop(title: "Anadir Pago"),
               const EditUserImg(),
               const SizedBox(
                 height: 25,

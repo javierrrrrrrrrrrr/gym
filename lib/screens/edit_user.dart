@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
 import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
@@ -74,6 +75,7 @@ class _EditUserState extends State<EditUser> {
     User user = userProvider.selectedUser!;
 
     return Scaffold(
+      appBar: customAppbar(context, width: width, title: "Editar Cliente"),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -84,7 +86,6 @@ class _EditUserState extends State<EditUser> {
                 key: userFormController.userformkey,
                 child: Column(
                   children: [
-                    const BannerTop(title: "Editar Cliente"),
                     const EditUserImg(),
                     SizedBox(
                       height: height * 0.02,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -15,12 +16,12 @@ class ListaObservaciones extends StatefulWidget {
 class _ListaObservacionesState extends State<ListaObservaciones> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
+        appBar: customAppbar(context,
+            width: width, title: "Lista de Observaciones"),
         body: Column(
           children: const [
-            CustomNav(
-              title: "Lista de observaciones",
-            ),
             ListViewOB(),
           ],
         ),

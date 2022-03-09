@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 
 import 'package:provider/provider.dart';
 
@@ -40,6 +41,7 @@ class _AddUserState extends State<AddUser> {
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
     return Scaffold(
+      appBar: customAppbar(context, width: width, title: "Crear Cliente"),
       body: SingleChildScrollView(
         child: Container(
           color: const Color.fromRGBO(253, 254, 255, 1),
@@ -48,7 +50,6 @@ class _AddUserState extends State<AddUser> {
             key: _formKey,
             child: Column(
               children: [
-                const BannerTop(title: "Crear Cliente"),
                 SelectIMGWidget(width: width, height: height),
                 SizedBox(
                   height: height * 0.02,
