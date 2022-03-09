@@ -17,15 +17,19 @@ class _UsersPageState extends State<UsersPage> {
     final userProvider = Provider.of<UsersProvider>(context);
 
     return Scaffold(
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
+        title: const Text("GYM Fitness Model"),
+      ),
       floatingActionButton: const FloatingABCustom(
         route: "add_user",
       ),
       body: Column(
-        children: [
-          const CustomNav(
-            title: "Gestion de Clientes",
-          ),
-          userProvider.isLoading ? const ChargingPage() : const ListViewUsers(),
+        children: const [
+          ListViewUsers(),
         ],
       ),
     );

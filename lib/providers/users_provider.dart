@@ -220,10 +220,6 @@ class UsersProvider extends ChangeNotifier {
     final searchResponse =
         SearchModel.fromJson(await response.stream.bytesToString());
 
-    if (response.statusCode == 200) {
-    } else {
-      print(response.reasonPhrase);
-    }
     return searchResponse.clientes;
   }
 
