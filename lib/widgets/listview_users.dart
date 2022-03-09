@@ -58,13 +58,17 @@ class ListUserBody extends StatelessWidget {
             padding: EdgeInsets.only(left: width * 0.025),
             child: Stack(
               children: [
-                CircleAvatar(
-                  radius: width * 0.065,
-                  backgroundImage: const AssetImage('assets/images.jpg'),
-                  foregroundImage: NetworkImage((user.img != "no-avatar.png")
-                      ? 'http://78.108.216.56:3000/api/uploads/clients/${user.id}'
-                      : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo='),
-                ),
+                (user.img != "no-avatar.png")
+                    ? CircleAvatar(
+                        radius: width * 0.065,
+                        backgroundImage: const AssetImage('assets/images.jpg'),
+                        foregroundImage: NetworkImage(
+                            'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
+                      )
+                    : CircleAvatar(
+                        radius: width * 0.065,
+                        backgroundImage: const AssetImage('assets/images.jpg'),
+                      ),
                 Positioned(
                   right: 0,
                   bottom: width * 0.012,
