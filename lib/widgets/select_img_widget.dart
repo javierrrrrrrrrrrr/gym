@@ -37,8 +37,9 @@ class SelectIMGWidget extends StatelessWidget {
                           color: Color.fromRGBO(240, 240, 240, 1)),
                     )),
                     decoration: BoxDecoration(
-                        color: const Color.fromRGBO(196, 196, 196, 1),
-                        borderRadius: BorderRadius.circular(10)),
+                      color: const Color.fromRGBO(196, 196, 196, 1),
+                      borderRadius: BorderRadius.circular(width * 0.025),
+                    ),
                   )),
                 )
               : Stack(
@@ -46,9 +47,12 @@ class SelectIMGWidget extends StatelessWidget {
                     SizedBox(
                       height: height * 0.25,
                       width: width * 0.4,
-                      child: Image.file(
-                        imageProvider.img,
-                        fit: BoxFit.cover,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(width * 0.025),
+                        child: Image.file(
+                          imageProvider.img,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Positioned(
@@ -73,6 +77,7 @@ class SelectIMGWidget extends StatelessWidget {
           SizedBox(
             width: width * 0.065,
           ),
+          //Segunda foto del GYM
           SizedBox(
             height: height * 0.25,
             width: width * 0.4,

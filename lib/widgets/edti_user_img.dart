@@ -56,8 +56,7 @@ class _EditUserImgState extends State<EditUserImg> {
                       ),
                     ),
                     decoration: BoxDecoration(
-                        color: Colors.red,
-                        //color: const Color.fromRGBO(196, 196, 196, 1),
+                        color: const Color.fromRGBO(196, 196, 196, 1),
                         borderRadius: BorderRadius.circular(width * 0.025)),
                   )),
                 )
@@ -66,9 +65,12 @@ class _EditUserImgState extends State<EditUserImg> {
                     SizedBox(
                       height: height * 0.25,
                       width: width * 0.4,
-                      child: Image.file(
-                        imageProvider.img,
-                        fit: BoxFit.cover,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(width * 0.025),
+                        child: Image.file(
+                          imageProvider.img,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Positioned(
