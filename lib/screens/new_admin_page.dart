@@ -4,8 +4,57 @@ import 'package:provider/provider.dart';
 
 import '../providers/providers.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  String diaSemana() {
+    String diasemana = '';
+    setState(() {
+      int dia = DateTime.now().weekday;
+
+      if (dia == 1) {
+        diasemana = "Lunes";
+      }
+      if (dia == 2) {
+        diasemana = "Martes";
+      }
+      if (dia == 3) {
+        diasemana = "Miércoles";
+      }
+      if (dia == 4) {
+        diasemana = "Jueves";
+      }
+      if (dia == 5) {
+        diasemana = "Viernes";
+      }
+      if (dia == 6) {
+        diasemana = "Sábado";
+      }
+      if (dia == 7) {
+        diasemana = "Domingo";
+      }
+    });
+
+    return diasemana;
+  }
+
+  String devolverFecha() {
+    String fecha = '';
+    setState(() {
+      int day = DateTime.now().day;
+      int mes = DateTime.now().month;
+      int year = DateTime.now().year;
+
+      fecha = "$day/$mes/$year";
+    });
+
+    return fecha;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,40 +168,4 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
-}
-
-String diaSemana() {
-  int dia = DateTime.now().weekday;
-
-  if (dia == 1) {
-    return "Lunes";
-  }
-  if (dia == 2) {
-    return "Martes";
-  }
-  if (dia == 3) {
-    return "Miércoles";
-  }
-  if (dia == 4) {
-    return "Jueves";
-  }
-  if (dia == 5) {
-    return "Viernes";
-  }
-  if (dia == 6) {
-    return "Sábado";
-  }
-  if (dia == 7) {
-    return "Domingo";
-  }
-
-  return "";
-}
-
-String devolverFecha() {
-  int day = DateTime.now().day;
-  int mes = DateTime.now().month;
-  int year = DateTime.now().year;
-
-  return '$day/$mes/$year';
 }
