@@ -495,7 +495,7 @@ class _EditUserState extends State<EditUser> {
                             ),
 
                             const SizedBox(
-                              height: 80,
+                              height: 50,
                             ),
                             CustomButton(
                               title: "Guardar",
