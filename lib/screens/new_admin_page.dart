@@ -131,7 +131,7 @@ String diaSemana() {
     return "Martes";
   }
   if (dia == 3) {
-    return "Miercoles";
+    return "Miércoles";
   }
   if (dia == 4) {
     return "Jueves";
@@ -140,7 +140,7 @@ String diaSemana() {
     return "Viernes";
   }
   if (dia == 6) {
-    return "Sabado";
+    return "Sábado";
   }
   if (dia == 7) {
     return "Domingo";
