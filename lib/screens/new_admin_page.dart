@@ -92,7 +92,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       "DashBoard",
                       style: TextStyle(fontSize: 30, color: Colors.white),
                     ),
-                    Text(diaSemana() + " " + devolverFecha(),
+                    Text("${diaSemana()} ${devolverFecha()}",
                         style:
                             const TextStyle(fontSize: 18, color: Colors.white)),
                   ],

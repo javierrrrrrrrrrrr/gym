@@ -46,16 +46,19 @@ class _EditUserImgState extends State<EditUserImg> {
                       height: height * 0.25,
                       width: width * 0.4,
                       child: (user.img != "no-avatar.png")
-                          ? ClipRRect(
-                              borderRadius:
-                                  BorderRadius.circular(width * 0.025),
-                              child: FadeInImage(
-                                fit: BoxFit.cover,
-                                placeholder:
-                                    const AssetImage('assets/images.jpg'),
-                                image: NetworkImage(
-                                    'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
-                                placeholderFit: BoxFit.cover,
+                          ? Hero(
+                              tag: user.id,
+                              child: ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(width * 0.025),
+                                child: FadeInImage(
+                                  fit: BoxFit.cover,
+                                  placeholder:
+                                      const AssetImage('assets/images.jpg'),
+                                  image: NetworkImage(
+                                      'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
+                                  placeholderFit: BoxFit.cover,
+                                ),
                               ),
                             )
                           : Container(

@@ -66,17 +66,23 @@ class ListUserBody extends StatelessWidget {
               child: Stack(
                 children: [
                   (user.img != "no-avatar.png")
-                      ? CircleAvatar(
-                          radius: width * 0.065,
-                          backgroundImage:
-                              const AssetImage('assets/images.jpg'),
-                          foregroundImage: NetworkImage(
-                              'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
+                      ? Hero(
+                          tag: user.id,
+                          child: CircleAvatar(
+                            radius: width * 0.065,
+                            backgroundImage:
+                                const AssetImage('assets/images.jpg'),
+                            foregroundImage: NetworkImage(
+                                'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
+                          ),
                         )
-                      : CircleAvatar(
-                          radius: width * 0.065,
-                          backgroundImage:
-                              const AssetImage('assets/images.jpg'),
+                      : Hero(
+                          tag: user.id,
+                          child: CircleAvatar(
+                            radius: width * 0.065,
+                            backgroundImage:
+                                const AssetImage('assets/images.jpg'),
+                          ),
                         ),
                   Positioned(
                     right: 0,
