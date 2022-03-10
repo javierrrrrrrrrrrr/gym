@@ -4,7 +4,8 @@ import 'package:gym/screens/pages.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
   'login': (BuildContext context) => const LoginPage(),
-  'admin': (BuildContext context) => const PanelAdmin(),
+  //'admin': (BuildContext context) => const PanelAdmin(),
+  'admin': (BuildContext context) => const DashboardPage(),
   'users': (BuildContext context) => const UsersPage(),
   'trainers': (BuildContext context) => const TrainerPage(),
   'add_user': (BuildContext context) => const AddUser(),

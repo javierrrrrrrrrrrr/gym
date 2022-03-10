@@ -39,9 +39,7 @@ class PanelAdmin extends StatelessWidget {
                       Navigator.pushNamed(context, 'users');
                     });
                   },
-                  child: Carta(
-                    width: width,
-                    height: height,
+                  child: const Carta(
                     texto: "Gestión de clientes",
                     imgurl: "assets/add_user.png",
                   ),
@@ -51,9 +49,7 @@ class PanelAdmin extends StatelessWidget {
                 ),
                 GestureDetector(
                   // onTap: () => Navigator.pushNamed(context, 'trainers'),
-                  child: Carta(
-                    width: width,
-                    height: height,
+                  child: const Carta(
                     texto: "Gestión de Entrenador",
                     imgurl: "assets/add_user.png",
                   ),
@@ -63,18 +59,14 @@ class PanelAdmin extends StatelessWidget {
             separador(height),
             Row(
               children: [
-                Carta(
-                  width: width,
-                  height: height,
+                const Carta(
                   texto: "Gestión de clientes",
                   imgurl: "assets/supplies.png",
                 ),
                 SizedBox(
                   width: width * 0.05,
                 ),
-                Carta(
-                  width: width,
-                  height: height,
+                const Carta(
                   texto: "Gestión de Entrenador",
                   imgurl: "assets/add_user.png",
                 ),
