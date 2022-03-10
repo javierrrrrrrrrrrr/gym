@@ -38,13 +38,14 @@ class DashboardPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 30, left: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "DashBoard",
                       style: TextStyle(fontSize: 30, color: Colors.white),
                     ),
-                    Text("Jueves 1/4/2022",
-                        style: TextStyle(fontSize: 18, color: Colors.white)),
+                    Text(diaSemana() + " " + devolverFecha(),
+                        style:
+                            const TextStyle(fontSize: 18, color: Colors.white)),
                   ],
                 ),
               ),
@@ -88,7 +89,7 @@ class DashboardPage extends StatelessWidget {
                           imgurl: "assets/clients.png",
                         ),
                       ),
-                      Carta(
+                      const Carta(
                         texto: "Entrenadores",
                         imgurl: "assets/trainers.png",
                       ),
@@ -118,4 +119,40 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String diaSemana() {
+  int dia = DateTime.now().weekday;
+
+  if (dia == 1) {
+    return "Lunes";
+  }
+  if (dia == 2) {
+    return "Martes";
+  }
+  if (dia == 3) {
+    return "Miercoles";
+  }
+  if (dia == 4) {
+    return "Jueves";
+  }
+  if (dia == 5) {
+    return "Viernes";
+  }
+  if (dia == 6) {
+    return "Sabado";
+  }
+  if (dia == 7) {
+    return "Domingo";
+  }
+
+  return "";
+}
+
+String devolverFecha() {
+  int day = DateTime.now().day;
+  int mes = DateTime.now().month;
+  int year = DateTime.now().year;
+
+  return '$day/$mes/$year';
 }
