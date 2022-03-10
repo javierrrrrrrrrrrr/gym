@@ -16,34 +16,31 @@ class FloatingABCustom extends StatelessWidget {
     final userFormController = Provider.of<UserFormController>(context);
 
     final width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: EdgeInsets.only(right: width * 0.100),
-      child: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(77, 82, 233, 1),
-        onPressed: () {
-          userFormController.user = User(
-            id: '',
-            firstname: '',
-            age: 0,
-            height: '',
-            lastname: '',
-            phone: '',
-            services: [],
-            weight: '',
-            email: '',
-            icc: '',
-            imc: '',
-          );
+    return FloatingActionButton(
+      backgroundColor: const Color.fromRGBO(77, 82, 233, 1),
+      onPressed: () {
+        userFormController.user = User(
+          id: '',
+          firstname: '',
+          age: 0,
+          height: '',
+          lastname: '',
+          phone: '',
+          services: [],
+          weight: '',
+          email: '',
+          icc: '',
+          imc: '',
+        );
 
-          Navigator.pushNamed(context, route);
-        },
-        child: Padding(
-          padding: EdgeInsets.all(width * 0.03),
-          child: const Image(
-            color: Colors.white,
-            fit: BoxFit.cover,
-            image: AssetImage('assets/add_user.png'),
-          ),
+        Navigator.pushNamed(context, route);
+      },
+      child: Padding(
+        padding: EdgeInsets.all(width * 0.03),
+        child: const Image(
+          color: Colors.white,
+          fit: BoxFit.cover,
+          image: AssetImage('assets/add_user.png'),
         ),
       ),
     );

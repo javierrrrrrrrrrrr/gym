@@ -34,153 +34,161 @@ class _ObservState extends State<Observ> {
       appBar:
           customAppbar(context, width: width, title: "Adicionar Observacion"),
       backgroundColor: const Color.fromRGBO(253, 254, 255, 1),
-      body: SingleChildScrollView(
-        child: Form(
-          key: obervableController.formkey,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          child: Column(
-            children: [
-              const EditUserImg(),
-              const SizedBox(
-                height: 20,
-              ),
-              InputFieldWidget(
-                enabled: false,
-                icon: false,
-                maxline: 1,
-                right: 55,
-                left: 25,
-                initialvalue: userProvider.selectedUser!.firstname,
-                obscureText: false,
-                width: width,
-                keyboardType: TextInputType.name,
-                hinttext: "",
-                onChanged: null,
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              InputFieldWidget(
-                icon: false,
-                maxline: 10,
-                right: 55,
-                left: 25,
-                initialvalue: "",
-                obscureText: false,
-                width: width,
-                keyboardType: TextInputType.name,
-                hinttext: "Comentario de la Observacion",
-                onChanged: (value) {
-                  obervableController.comment = value;
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    width: 95,
-                    child: textFormFieldChiquito(
-                        text: "Peso",
-                        validator: (value) {
-                          String edadpattern = r'^([0-9])*$';
-                          var peso = RegExp(edadpattern);
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 270),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Form(
+                key: obervableController.formkey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InputFieldWidget(
+                      enabled: false,
+                      icon: false,
+                      maxline: 1,
+                      right: 55,
+                      left: 25,
+                      initialvalue: userProvider.selectedUser!.firstname,
+                      obscureText: false,
+                      width: width,
+                      keyboardType: TextInputType.name,
+                      hinttext: "",
+                      onChanged: null,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    InputFieldWidget(
+                      icon: false,
+                      maxline: 10,
+                      right: 55,
+                      left: 25,
+                      initialvalue: "",
+                      obscureText: false,
+                      width: width,
+                      keyboardType: TextInputType.name,
+                      hinttext: "Comentario de la Observacion",
+                      onChanged: (value) {
+                        obervableController.comment = value;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 95,
+                          child: textFormFieldChiquito(
+                              text: "Peso",
+                              validator: (value) {
+                                String edadpattern = r'^([0-9])*$';
+                                var peso = RegExp(edadpattern);
 
-                          if (peso.hasMatch(value ?? "") &&
-                                  value != null &&
-                                  value.length > 1 &&
-                                  value != "" ||
-                              value == "") {
-                            return null;
-                          } else {
-                            return "Error";
-                          }
-                        },
-                        onChanged: (value) {
-                          obervableController.peso = value;
-                        }),
-                  ),
-                  SizedBox(
-                    width: 95,
-                    child: textFormFieldChiquito(
-                        text: "IMC",
-                        validator: (value) {
-                          String edadpattern = r'^([0-9])*$';
-                          var imc = RegExp(edadpattern);
+                                if (peso.hasMatch(value ?? "") &&
+                                        value != null &&
+                                        value.length > 1 &&
+                                        value != "" ||
+                                    value == "") {
+                                  return null;
+                                } else {
+                                  return "Error";
+                                }
+                              },
+                              onChanged: (value) {
+                                obervableController.peso = value;
+                              }),
+                        ),
+                        SizedBox(
+                          width: 95,
+                          child: textFormFieldChiquito(
+                              text: "IMC",
+                              validator: (value) {
+                                String edadpattern = r'^([0-9])*$';
+                                var imc = RegExp(edadpattern);
 
-                          if (imc.hasMatch(value ?? "") &&
-                                  value != null &&
-                                  value.length > 1 &&
-                                  value != "" ||
-                              value == "") {
-                            return null;
-                          } else {
-                            return "Error";
-                          }
-                        },
-                        onChanged: (value) {
-                          obervableController.imc = value;
-                        }),
-                  ),
-                  SizedBox(
-                    width: 95,
-                    child: textFormFieldChiquito(
-                        validator: (value) {
-                          String edadpattern = r'^([0-9])*$';
-                          var icc = RegExp(edadpattern);
+                                if (imc.hasMatch(value ?? "") &&
+                                        value != null &&
+                                        value.length > 1 &&
+                                        value != "" ||
+                                    value == "") {
+                                  return null;
+                                } else {
+                                  return "Error";
+                                }
+                              },
+                              onChanged: (value) {
+                                obervableController.imc = value;
+                              }),
+                        ),
+                        SizedBox(
+                          width: 95,
+                          child: textFormFieldChiquito(
+                              validator: (value) {
+                                String edadpattern = r'^([0-9])*$';
+                                var icc = RegExp(edadpattern);
 
-                          if (icc.hasMatch(value ?? "") &&
-                                  value != null &&
-                                  value.length > 1 &&
-                                  value != "" ||
-                              value == "") {
-                            return null;
-                          } else {
-                            return "Error";
+                                if (icc.hasMatch(value ?? "") &&
+                                        value != null &&
+                                        value.length > 1 &&
+                                        value != "" ||
+                                    value == "") {
+                                  return null;
+                                } else {
+                                  return "Error";
+                                }
+                              },
+                              text: "ICC",
+                              onChanged: (value) {
+                                obervableController.icc = value;
+                              }),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                        title: "Guardar",
+                        onPressed: () async {
+                          if (obervableController.isValidForm()) {
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            await userProvider
+                                .createObservation(
+                              icc: obervableController.icc,
+                              idUser: userProvider.selectedUser!.id,
+                              imc: obervableController.imc,
+                              observations: obervableController.comment,
+                              weight: obervableController.peso,
+                            )
+                                .whenComplete(() {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              // Navigator.pushReplacementNamed(context, 'lista_obs');
+                            });
                           }
-                        },
-                        text: "ICC",
-                        onChanged: (value) {
-                          obervableController.icc = value;
-                        }),
-                  ),
-                ],
+                        })
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              CustomButton(
-                  title: "Guardar",
-                  onPressed: () async {
-                    if (obervableController.isValidForm()) {
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          });
-                      await userProvider
-                          .createObservation(
-                        icc: obervableController.icc,
-                        idUser: userProvider.selectedUser!.id,
-                        imc: obervableController.imc,
-                        observations: obervableController.comment,
-                        weight: obervableController.peso,
-                      )
-                          .whenComplete(() {
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        // Navigator.pushReplacementNamed(context, 'lista_obs');
-                      });
-                    }
-                  })
-            ],
+            ),
           ),
-        ),
+          const EditUserImg(),
+        ],
       ),
     );
   }
