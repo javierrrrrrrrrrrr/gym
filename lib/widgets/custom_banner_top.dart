@@ -19,9 +19,9 @@ class BannerTop extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           border: Border.all(),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(width * 0.025),
-              bottomRight: Radius.circular(width * 0.025)),
+          //  borderRadius: BorderRadius.only(
+          //      bottomLeft: Radius.circular(width * 0.025),
+          //      bottomRight: Radius.circular(width * 0.025)),
           color: const Color.fromRGBO(45, 49, 146, 1),
         ),
         child: Center(

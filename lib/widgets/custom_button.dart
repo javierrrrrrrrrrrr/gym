@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
       splashColor: Colors.transparent,
       height: width * 0.15,
       minWidth: width * 0.61,
-      color: (color == null) ? const Color.fromRGBO(45, 49, 146, 1) : color,
+      color: (color == null) ? const Color.fromRGBO(77, 82, 233, 1) : color,
       child: Text(
         title,
         style: TextStyle(fontSize: width * 0.05, color: Colors.white),

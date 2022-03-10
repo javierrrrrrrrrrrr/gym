@@ -68,7 +68,7 @@ InputDecoration inputDecoration(hinttext, bool hasicon, Widget? label,
       border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
       enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
+          borderSide: const BorderSide(color: Color.fromRGBO(77, 82, 233, 1)),
           borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
       hintText: hinttext,
       hintStyle: TextStyle(color: Colors.black54, fontSize: width * 0.05),
@@ -88,7 +88,7 @@ InputDecoration inputDecoration(hinttext, bool hasicon, Widget? label,
       border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
       enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
+          borderSide: const BorderSide(color: Color.fromRGBO(77, 82, 233, 1)),
           borderRadius: BorderRadius.all(Radius.circular(width * 0.04))),
       hintText: hinttext,
       hintStyle: TextStyle(color: Colors.black54, fontSize: width * 0.05),

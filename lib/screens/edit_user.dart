@@ -624,15 +624,15 @@ class _EditUserState extends State<EditUser> {
             ),
             Positioned(
               right: 0,
-              top: height / 2.4,
+              top: height / 3.2,
               child: Container(
                 decoration: const BoxDecoration(
-                    color: Color.fromRGBO(45, 49, 146, 1),
+                    color: Color.fromRGBO(77, 82, 233, 1),
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
                         bottomLeft: Radius.circular(10))),
-                height: 140,
-                width: 48,
+                height: width * 0.29,
+                width: width * 0.12,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -660,7 +660,7 @@ class _EditUserState extends State<EditUser> {
                         },
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       IconButton(
                         icon: const Icon(

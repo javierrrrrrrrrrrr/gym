@@ -19,7 +19,7 @@ class FloatingABCustom extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: width * 0.100),
       child: FloatingActionButton(
-        backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
+        backgroundColor: const Color.fromRGBO(77, 82, 233, 1),
         onPressed: () {
           userFormController.user = User(
             id: '',
