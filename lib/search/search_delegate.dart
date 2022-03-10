@@ -42,15 +42,14 @@ class UserSerch extends SearchDelegate {
     return StreamBuilder(
       stream: userProvaider.suggestionStream,
       builder: (_, AsyncSnapshot<List> snapshot) {
-        if (!snapshot.hasData) return empty();
+        if (!snapshot.hasData) {
+          return const Image(image: AssetImage('assets/ic.gif'));
+        }
 
         final user = snapshot.data!;
 
         if (user.isEmpty) {
-          return const Center(
-              child: Center(
-            child: Icon(Icons.not_interested_outlined),
-          ));
+          return const Image(image: AssetImage('assets/triste.gif'));
         }
 
         return ListView.builder(
