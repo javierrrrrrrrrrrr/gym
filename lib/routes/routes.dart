@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/splash_screen.dart';
 
 import 'package:gym/screens/pages.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
   'login': (BuildContext context) => const LoginPage(),
+  'splash': (BuildContext context) => const SplashScreen(),
   //'admin': (BuildContext context) => const PanelAdmin(),
   'admin': (BuildContext context) => const DashboardPage(),
   'users': (BuildContext context) => const UsersPage(),
