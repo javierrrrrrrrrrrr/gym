@@ -13,6 +13,10 @@ class Observ extends StatefulWidget {
 }
 
 class _ObservState extends State<Observ> {
+  bool _validateImc = false;
+  bool _validateIcc = false;
+  bool _validatePeso = false;
+
   @override
   void initState() {
     super.initState();
@@ -87,67 +91,88 @@ class _ObservState extends State<Observ> {
                         SizedBox(
                           width: 95,
                           child: textFormFieldChiquito(
+                              keyboardType: TextInputType.number,
+                              validateIcon: _validatePeso,
                               text: "Peso",
                               validator: (value) {
-                                String edadpattern = r'^([0-9])*$';
-                                var peso = RegExp(edadpattern);
+                                var edad = RegExp(r'^([0-9])*$');
 
-                                if (peso.hasMatch(value ?? "") &&
-                                        value != null &&
-                                        value.length > 1 &&
-                                        value != "" ||
-                                    value == "") {
+                                if (edad.hasMatch(value!) && value.length < 4) {
                                   return null;
                                 } else {
-                                  return "Error";
+                                  return "error";
                                 }
                               },
                               onChanged: (value) {
                                 obervableController.peso = value;
+                                setState(() {
+                                  var edad = RegExp(r'^([0-9])*$');
+
+                                  if (edad.hasMatch(value) &&
+                                      value.length < 4) {
+                                    _validatePeso = true;
+                                  } else {
+                                    _validatePeso = false;
+                                  }
+                                });
                               }),
                         ),
                         SizedBox(
                           width: 95,
                           child: textFormFieldChiquito(
+                              keyboardType: TextInputType.number,
+                              validateIcon: _validateImc,
                               text: "IMC",
                               validator: (value) {
-                                String edadpattern = r'^([0-9])*$';
-                                var imc = RegExp(edadpattern);
+                                var edad = RegExp(r'^([0-9])*$');
 
-                                if (imc.hasMatch(value ?? "") &&
-                                        value != null &&
-                                        value.length > 1 &&
-                                        value != "" ||
-                                    value == "") {
+                                if (edad.hasMatch(value!) && value.length < 3) {
                                   return null;
                                 } else {
-                                  return "Error";
+                                  return "error";
                                 }
                               },
                               onChanged: (value) {
                                 obervableController.imc = value;
+                                setState(() {
+                                  var edad = RegExp(r'^([0-9])*$');
+
+                                  if (edad.hasMatch(value) &&
+                                      value.length < 3) {
+                                    _validateImc = true;
+                                  } else {
+                                    _validateImc = false;
+                                  }
+                                });
                               }),
                         ),
                         SizedBox(
                           width: 95,
                           child: textFormFieldChiquito(
+                              keyboardType: TextInputType.number,
+                              validateIcon: _validateIcc,
                               validator: (value) {
-                                String edadpattern = r'^([0-9])*$';
-                                var icc = RegExp(edadpattern);
+                                var edad = RegExp(r'^([0-9])*$');
 
-                                if (icc.hasMatch(value ?? "") &&
-                                        value != null &&
-                                        value.length > 1 &&
-                                        value != "" ||
-                                    value == "") {
+                                if (edad.hasMatch(value!) && value.length < 3) {
                                   return null;
                                 } else {
-                                  return "Error";
+                                  return "error";
                                 }
                               },
                               text: "ICC",
                               onChanged: (value) {
                                 obervableController.icc = value;
+                                setState(() {
+                                  var edad = RegExp(r'^([0-9])*$');
+
+                                  if (edad.hasMatch(value) &&
+                                      value.length < 3) {
+                                    _validateIcc = true;
+                                  } else {
+                                    _validateIcc = false;
+                                  }
+                                });
                               }),
                         ),
                       ],
@@ -195,26 +220,35 @@ class _ObservState extends State<Observ> {
 
   Stack textFormFieldChiquito(
       {required String text,
+      required final TextInputType? keyboardType,
+      required bool validateIcon,
       String? initialvalue,
       Function(String)? onChanged,
       String? Function(String?)? validator}) {
     return Stack(
       children: [
         TextFormField(
+            keyboardType: keyboardType,
             validator: validator,
             onChanged: onChanged,
             initialValue: initialvalue,
-            decoration: _inputDecoration(text)),
-        const Positioned(
+            decoration: _inputDecoration(
+              text,
+            )),
+        Positioned(
             right: 5,
             top: 12,
             child: Icon(Icons.check_circle,
-                color: Color.fromRGBO(150, 152, 154, 0.5)))
+                color: (validateIcon == true)
+                    ? Colors.green
+                    : const Color.fromARGB(255, 150, 152, 154)))
       ],
     );
   }
 
-  InputDecoration _inputDecoration(String text) {
+  InputDecoration _inputDecoration(
+    String text,
+  ) {
     return InputDecoration(
       contentPadding: const EdgeInsets.only(left: 10, right: 35),
       border: const OutlineInputBorder(
