@@ -203,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
     return BoxDecoration(
       border: Border.all(),
       borderRadius: BorderRadius.circular(width * 0.025),
-      color: const Color.fromRGBO(45, 49, 146, 1),
+      color: const Color.fromRGBO(77, 82, 233, 1),
     );
   }
 
