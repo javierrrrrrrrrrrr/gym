@@ -12,6 +12,8 @@ class AddTrainer extends StatefulWidget {
 
 bool _validatePassword = false;
 bool _validateEmail = false;
+bool _validApellidos = false;
+bool _validNombre = false;
 
 class _AddTrainerState extends State<AddTrainer> {
   @override
@@ -46,6 +48,7 @@ class _AddTrainerState extends State<AddTrainer> {
                 height: height * 0.02,
               ),
               InputFieldWidget(
+                validateIcon: _validNombre,
                 icon: true,
                 maxline: 1,
                 right: 55,
@@ -69,6 +72,7 @@ class _AddTrainerState extends State<AddTrainer> {
               ),
               _separador(height),
               InputFieldWidget(
+                validateIcon: _validApellidos,
                 icon: true,
                 maxline: 1,
                 right: 55,
