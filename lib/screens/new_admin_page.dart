@@ -140,9 +140,14 @@ class _DashboardPageState extends State<DashboardPage> {
                             imgurl: "assets/clients.png",
                           ),
                         ),
-                        const Carta(
-                          texto: "Entrenadores",
-                          imgurl: "assets/trainers.png",
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, 'trainers');
+                          },
+                          child: const Carta(
+                            texto: "Entrenadores",
+                            imgurl: "assets/trainers.png",
+                          ),
                         ),
                       ],
                     ),
