@@ -7,7 +7,6 @@ class TrainerProvider extends ChangeNotifier {
   final String _baseUrl = "http://78.108.216.56:3000";
   String token = '';
   final storage = const FlutterSecureStorage();
-  // List<> users = [];
 
   Future<String> readDataFromStorage(String valor) async {
     return await storage.read(key: valor) ?? '';
@@ -20,19 +19,22 @@ class TrainerProvider extends ChangeNotifier {
   }
 
   Future<String> CrearEntrandor(
-      String nombre, String email, String password) async {
+      String nombre, String apellidos, String email, String password) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
     var request =
         http.Request('POST', Uri.parse('$_baseUrl/api/auth/register'));
-    request.body =
-        json.encode({"name": nombre, "email": email, "password": password});
+    request.body = json.encode({
+      "name": nombre,
+      "apellido": apellidos,
+      "email": email,
+      "password": password
+    });
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
     }

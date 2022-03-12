@@ -14,6 +14,14 @@ void main() {
         lazy: true,
       ),
       ChangeNotifierProvider(
+        create: (_) => TrainersFormController(),
+        lazy: true,
+      ),
+      ChangeNotifierProvider(
+        create: (_) => TrainerProvider(),
+        lazy: true,
+      ),
+      ChangeNotifierProvider(
         create: (_) => LoginFormController(),
         lazy: false,
       ),
