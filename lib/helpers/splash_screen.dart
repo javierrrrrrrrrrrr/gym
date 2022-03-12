@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           style: TextStyle(fontSize: 36),
         ),
       ]),
-      nextScreen: const DashboardPage(),
+      nextScreen: const LoginPage(),
       splashIconSize: 500,
       splashTransition: SplashTransition.fadeTransition,
     );
