@@ -34,6 +34,5 @@ class _SplashScreenState extends State<SplashScreen> {
       splashIconSize: 500,
       splashTransition: SplashTransition.fadeTransition,
     );
-    //  displayLoading: false,
   }
 }
