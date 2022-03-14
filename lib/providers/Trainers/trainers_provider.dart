@@ -106,6 +106,29 @@ class TrainerProvider extends ChangeNotifier {
     }
   }
 
+  Future<Trainer?> deleteTrainer(Trainer trainer) async {
+    await getToken();
+    var headers = {
+      'Authorization': token,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    var request = http.Request('DELETE',
+        Uri.parse('http://78.108.216.56:3000/api/trainers/${trainer.uid}'));
+    request.bodyFields = {'Authoriza': ''};
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      final index =
+          trainers.indexWhere((element) => element.uid == trainer.uid);
+      trainers.removeAt(index);
+      notifyListeners();
+    } else {
+      print(response.reasonPhrase);
+    }
+  }
+
   Future uploadImage(String path, String userid) async {
     await getToken();
     var headers = {

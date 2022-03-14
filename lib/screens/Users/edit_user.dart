@@ -688,7 +688,8 @@ Future<void> _showMyDialog(BuildContext context, String id) async {
               await userProvider.deleteUser(id);
               Navigator.pop(context);
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'users');
+              Navigator.pop(context);
+              //  Navigator.pushReplacementNamed(context, 'users');
             },
           ),
           TextButton(

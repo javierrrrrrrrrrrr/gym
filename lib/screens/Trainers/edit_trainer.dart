@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym/models/trainer_model.dart';
 import 'package:gym/providers/Trainers/trainers_form_controller.dart';
 import 'package:gym/providers/Trainers/trainers_provider.dart';
 import 'package:gym/providers/providers.dart';
@@ -198,7 +199,10 @@ class _EditTrainerState extends State<EditTrainer> {
                           _separador(width * 0.6),
                           CustomButton(
                               color: Colors.black,
-                              onPressed: () async {},
+                              onPressed: () async {
+                                _showMyDialog(
+                                    context, trainerFormController.trainer!);
+                              },
                               title: "Eliminar"),
                         ],
                       ),
@@ -219,4 +223,60 @@ class _EditTrainerState extends State<EditTrainer> {
       height: width * 0.1,
     );
   }
+}
+
+Future<void> _showMyDialog(BuildContext context, Trainer trainer) async {
+  final trainerProvider = Provider.of<TrainerProvider>(context, listen: false);
+  return showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Borrar Entrenador'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text(
+                'Esta accion borrara de forma permanente el entrenador del sistema',
+                textAlign: TextAlign.start,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                '¿ Desea Continuar ?',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Si'),
+            onPressed: () async {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  });
+              await trainerProvider.deleteTrainer(trainer);
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.pop(context);
+              //  Navigator.pushReplacementNamed(context, 'trainers');
+            },
+          ),
+          TextButton(
+            child: const Text('No'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
