@@ -12,6 +12,7 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'trainers': (BuildContext context) => const TrainerPage(),
   'add_user': (BuildContext context) => const AddUser(),
   'edit_user': (BuildContext context) => const EditUser(),
+  'edit_trainer': (BuildContext context) => const EditTrainer(),
   'add_trainer': (BuildContext context) => const AddTrainer(),
   'ob': (BuildContext context) => const Observ(),
   'pago': (BuildContext context) => const Pagos(),
