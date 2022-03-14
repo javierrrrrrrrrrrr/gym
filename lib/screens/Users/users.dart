@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:gym/widgets/widgets.dart';
 
-import '../helpers/custom_appbar.dart';
-import '../search/search_delegate.dart';
+import '../../helpers/custom_appbar.dart';
+import '../../search/search_delegate.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -35,6 +35,7 @@ class _UsersPageState extends State<UsersPage> {
         ],
       ),
       floatingActionButton: const FloatingABCustom(
+        isUser: true,
         route: "add_user",
       ),
       body: Column(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/providers.dart';
-import '../widgets/widgets.dart';
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 
 class Observ extends StatefulWidget {
   const Observ({Key? key}) : super(key: key);

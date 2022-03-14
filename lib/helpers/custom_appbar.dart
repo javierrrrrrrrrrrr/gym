@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 AppBar customAppbar(BuildContext context,
-    {required double width, List<Widget>? actions, required String title}) {
+    {required double width,
+    List<Widget>? actions,
+    required String title,
+    Widget? leading}) {
   return AppBar(
+    leading: leading,
     centerTitle: true,
     actions: actions,
     leadingWidth: 50,

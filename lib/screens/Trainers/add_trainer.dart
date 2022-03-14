@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/Users/image_provider.dart';
+import 'package:gym/providers/Users/users_provider.dart';
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../helpers/custom_appbar.dart';
-import '../providers/trainers_form_controller.dart';
-import '../providers/trainers_provider.dart';
+import '../../helpers/custom_appbar.dart';
+import '../../providers/Trainers/trainers_form_controller.dart';
+import '../../providers/Trainers/trainers_provider.dart';
 
 class AddTrainer extends StatefulWidget {
   const AddTrainer({Key? key}) : super(key: key);
@@ -15,16 +17,23 @@ class AddTrainer extends StatefulWidget {
 
 bool _validatePassword = false;
 bool _validateEmail = false;
-bool _validApellidos = false;
 bool _validNombre = false;
 
 class _AddTrainerState extends State<AddTrainer> {
+  @override
+  void initState() {
+    super.initState();
+    final imageProvider = Provider.of<SelectImg>(context, listen: false);
+    imageProvider.imagePath = "";
+  }
+
   @override
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     final trainerProvaider = Provider.of<TrainerProvider>(context);
+
     final trainerFormController = Provider.of<TrainersFormController>(context);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -68,7 +77,7 @@ class _AddTrainerState extends State<AddTrainer> {
                   obscureText: false,
                   keyboardType: TextInputType.text,
                   onChanged: (value) {
-                    trainerFormController.nombre = value;
+                    trainerFormController.trainer!.name = value;
 
                     setState(() {
                       if (value.isEmpty) {
@@ -93,29 +102,6 @@ class _AddTrainerState extends State<AddTrainer> {
                 ),
                 _separador(height),
                 InputFieldWidget(
-                  validateIcon: _validApellidos,
-                  icon: true,
-                  maxline: 1,
-                  right: 55,
-                  left: 25,
-                  initialvalue: "",
-                  obscureText: false,
-                  onChanged: (value) {
-                    trainerFormController.apellidos = value;
-                    setState(() {
-                      if (value.isEmpty) {
-                        _validApellidos = false;
-                      } else {
-                        _validApellidos = true;
-                      }
-                    });
-                  },
-                  keyboardType: TextInputType.text,
-                  width: width,
-                  label: const Text('Apellidos'),
-                ),
-                _separador(height),
-                InputFieldWidget(
                   validateIcon: _validateEmail,
                   icon: true,
                   maxline: 1,
@@ -126,7 +112,7 @@ class _AddTrainerState extends State<AddTrainer> {
                   width: width,
                   label: const Text(' Email'),
                   onChanged: (value) {
-                    trainerFormController.email = value;
+                    trainerFormController.trainer!.email = value;
 
                     setState(() {
                       String gmailpatter =
@@ -198,7 +184,7 @@ class _AddTrainerState extends State<AddTrainer> {
                     borderRadius: BorderRadius.circular(18.0),
                   ),
                   color: const Color.fromRGBO(77, 82, 233, 1),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       showDialog(
                           barrierDismissible: false,
@@ -208,16 +194,24 @@ class _AddTrainerState extends State<AddTrainer> {
                               child: CircularProgressIndicator(),
                             );
                           });
+                      final imageProvider =
+                          Provider.of<SelectImg>(context, listen: false);
 
-                      trainerProvaider.CrearEntrandor(
-                              trainerFormController.nombre,
-                              trainerFormController.apellidos,
-                              trainerFormController.email,
-                              trainerFormController.password)
-                          .whenComplete(() {
+                      String uid = await trainerProvaider.crearEntrandor(
+                          trainer: trainerFormController.trainer!,
+                          password: trainerFormController.password!);
+
+                      if (imageProvider.imagePath != '') {
+                        await trainerProvaider
+                            .uploadImage(imageProvider.imagePath!, uid)
+                            .whenComplete(() async {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        });
+                      } else {
                         Navigator.pop(context);
                         Navigator.pop(context);
-                      });
+                      }
                     }
                   },
                 ),

@@ -5,8 +5,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:gym/models/create_observation_response.dart';
-import 'package:gym/models/create_payment_response.dart';
+import 'package:gym/models/Users/create_observation_response.dart';
+import 'package:gym/models/Users/create_payment_response.dart';
 
 import 'package:gym/helpers/debouncer.dart';
 
@@ -14,7 +14,7 @@ import 'package:gym/models/search_model.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../models/models.dart';
+import '../../models/models.dart';
 
 class UsersProvider extends ChangeNotifier {
   final String _baseUrl = "http://78.108.216.56:3000";
@@ -41,10 +41,6 @@ class UsersProvider extends ChangeNotifier {
       StreamController.broadcast();
 
   Stream<List> get suggestionStream => _suggestionsStreamController.stream;
-
-  UsersProvider() {
-    getUsers();
-  }
 
   Future<String> readDataFromStorage(String valor) async {
     return await storage.read(key: valor) ?? '';

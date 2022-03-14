@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/widgets/widgets.dart';
-
-import '../helpers/custom_appbar.dart';
+import '../../helpers/custom_appbar.dart';
 
 class TrainerPage extends StatefulWidget {
   const TrainerPage({Key? key}) : super(key: key);
@@ -19,6 +18,11 @@ class _TrainerPageState extends State<TrainerPage> {
           context,
           width: width,
           title: "GYM Fitness Model",
+          leading: IconButton(
+              onPressed: (() {
+                Navigator.pop(context);
+              }),
+              icon: const Icon(Icons.arrow_back)),
           actions: [
             IconButton(
               onPressed: () {
@@ -33,9 +37,10 @@ class _TrainerPageState extends State<TrainerPage> {
           ],
         ),
         body: Column(
-          children: const [],
+          children: const [ListViewTrainers()],
         ),
         floatingActionButton: const FloatingABCustom(
+          isTrainer: true,
           route: "add_trainer",
         ));
   }

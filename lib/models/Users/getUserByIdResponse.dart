@@ -26,32 +26,33 @@ class GetUserByIdResponse {
       };
 }
 
-class Trainer {
-  Trainer({
-    required this.id,
+class Entrenador {
+  Entrenador({
+    this.id,
     required this.name,
     required this.email,
     required this.password,
-    required this.img,
-    required this.rol,
-    required this.status,
-    required this.v,
+    this.img,
+    this.rol,
+    this.status,
+    this.v,
   });
 
-  String id;
+  String? id;
   String name;
   String email;
   String password;
-  String img;
-  String rol;
-  bool status;
-  int v;
+  String? img;
+  String? rol;
+  bool? status;
+  int? v;
 
-  factory Trainer.fromJson(String str) => Trainer.fromMap(json.decode(str));
+  factory Entrenador.fromJson(String str) =>
+      Entrenador.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Trainer.fromMap(Map<String, dynamic> json) => Trainer(
+  factory Entrenador.fromMap(Map<String, dynamic> json) => Entrenador(
         id: json["_id"],
         name: json["name"],
         email: json["email"],

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
-import 'package:gym/providers/payment_form_controller.dart';
+import 'package:gym/providers/Users/payment_form_controller.dart';
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/providers.dart';
+import '../../providers/providers.dart';
 
 class Pagos extends StatefulWidget {
   const Pagos({Key? key}) : super(key: key);

@@ -59,6 +59,7 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
+    final trainerProvider = Provider.of<TrainerProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -141,8 +142,21 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, 'trainers');
+                          onTap: () async {
+                            showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                });
+                            await trainerProvider
+                                .getTrainers()
+                                .whenComplete(() {
+                              Navigator.pop(context);
+                              Navigator.pushNamed(context, 'trainers');
+                            });
                           },
                           child: const Carta(
                             texto: "Entrenadores",

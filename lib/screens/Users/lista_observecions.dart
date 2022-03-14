@@ -4,7 +4,7 @@ import 'package:gym/models/models.dart';
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/providers.dart';
+import '../../providers/providers.dart';
 
 class ListaObservaciones extends StatefulWidget {
   const ListaObservaciones({Key? key}) : super(key: key);

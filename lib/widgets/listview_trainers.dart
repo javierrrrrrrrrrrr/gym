@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/users_provider.dart';
+import 'package:gym/models/trainer_model.dart';
+import 'package:gym/providers/Trainers/trainers_form_controller.dart';
+
 import 'package:provider/provider.dart';
-import '../models/getUsersModel.dart';
+
+import '../providers/Trainers/trainers_provider.dart';
 
 class ListViewTrainers extends StatefulWidget {
   const ListViewTrainers({
@@ -15,14 +18,15 @@ class ListViewTrainers extends StatefulWidget {
 class _ListViewUsersState extends State<ListViewTrainers> {
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UsersProvider>(context);
+    final trainerProvider = Provider.of<TrainerProvider>(context);
     // final trainerProvider = Provider.of<TrainerProvider>(context);
 
     return Expanded(
       child: ListView.builder(
-        itemCount: userProvider.users.length,
+        physics: const BouncingScrollPhysics(),
+        itemCount: trainerProvider.trainers.length,
         itemBuilder: (BuildContext context, index) {
-          return ListTrainerWidget(user: userProvider.users[index]);
+          return ListTrainerWidget(trainer: trainerProvider.trainers[index]);
         },
         padding: const EdgeInsets.all(0),
         //  padding: const EdgeInsets.only(bottom: 10),
@@ -34,68 +38,88 @@ class _ListViewUsersState extends State<ListViewTrainers> {
 class ListTrainerWidget extends StatelessWidget {
   const ListTrainerWidget({
     Key? key,
-    required this.user,
+    required this.trainer,
   }) : super(key: key);
 
-  final User user;
+  final Trainer trainer;
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UsersProvider>(context);
-    return SizedBox(
-      height: 75,
-      width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 10),
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(500),
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage((user.img != "no-avatar.png")
-                        ? 'http://152.206.177.70:3000/api/uploads/clients/${user.id}'
-                        : 'https://media.istockphoto.com/vectors/no-image-available-sign-vector-id922962354?k=20&m=922962354&s=612x612&w=0&h=f-9tPXlFXtz9vg_-WonCXKCdBuPUevOBkp3DQ-i0xqo='))),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${user.firstname} ${user.lastname}",
-                    style: const TextStyle(fontSize: 20),
+    final width = MediaQuery.of(context).size.width;
+    final trainerProvider = Provider.of<TrainerProvider>(context);
+    final trainerFormController = Provider.of<TrainersFormController>(context);
+    return Padding(
+      padding: EdgeInsets.only(left: width * 0.025),
+      child: SizedBox(
+        height: 75,
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            (trainer.img != "no-avatar.png")
+                ? Hero(
+                    tag: trainer.uid!,
+                    child: CircleAvatar(
+                      radius: width * 0.065,
+                      backgroundImage: const AssetImage('assets/images.jpg'),
+                      foregroundImage: NetworkImage(
+                          'http://78.108.216.56:3000/api/uploads/users/${trainer.uid}'),
+                    ),
+                  )
+                : Hero(
+                    tag: trainer.uid!,
+                    child: CircleAvatar(
+                      radius: width * 0.065,
+                      backgroundImage: const AssetImage('assets/images.jpg'),
+                    ),
                   ),
-                  Row(
-                    children: [
-                      const Icon(Icons.phone),
-                      Text(
-                        user.phone,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ],
+            Padding(
+              padding: EdgeInsets.only(left: width * 0.025),
+              child: Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      trainer.name,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.email),
+                        SizedBox(
+                          width: width * 0.025,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.cover,
+                          child: SizedBox(
+                            width: width * 0.55,
+                            child: Text(
+                              trainer.email,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: IconButton(
-              onPressed: () {
-                userProvider.selectedUser = user;
+            Padding(
+              padding: EdgeInsets.only(right: width * 0.025),
+              child: IconButton(
+                onPressed: () {
+                  trainerProvider.selectedTrainer = trainer;
+                  trainerFormController.trainer = trainer;
 
-                Navigator.pushReplacementNamed(context, 'edit_user');
-              },
-              icon: const Icon(Icons.edit, size: 35),
+                  Navigator.pushNamed(context, 'edit_trainer');
+                },
+                icon: const Icon(Icons.edit, size: 35),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

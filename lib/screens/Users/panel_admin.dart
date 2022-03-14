@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
-import 'package:gym/providers/users_provider.dart';
+import 'package:gym/providers/Users/users_provider.dart';
 
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/image_provider.dart';
+import 'package:gym/providers/Users/image_provider.dart';
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
