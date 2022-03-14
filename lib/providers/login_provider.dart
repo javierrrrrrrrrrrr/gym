@@ -24,7 +24,6 @@ class LoginProvider extends ChangeNotifier {
       }
       return '';
     } else {
-      print('la respuesta de la Ipi ${response.reasonPhrase}');
       return response.reasonPhrase;
     }
   }
