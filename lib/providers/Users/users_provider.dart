@@ -17,7 +17,7 @@ import 'package:http/http.dart' as http;
 import '../../models/models.dart';
 
 class UsersProvider extends ChangeNotifier {
-  final String _baseUrl = "http://78.108.216.56:3000";
+  final String _baseUrl = "https://a72d-152-206-119-224.ngrok.io";
   final storage = const FlutterSecureStorage();
 
   List<User> users = [];
