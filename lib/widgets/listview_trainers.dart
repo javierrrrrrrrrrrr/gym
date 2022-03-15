@@ -19,7 +19,6 @@ class _ListViewUsersState extends State<ListViewTrainers> {
   @override
   Widget build(BuildContext context) {
     final trainerProvider = Provider.of<TrainerProvider>(context);
-    // final trainerProvider = Provider.of<TrainerProvider>(context);
 
     return Expanded(
       child: ListView.builder(
@@ -48,77 +47,85 @@ class ListTrainerWidget extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final trainerProvider = Provider.of<TrainerProvider>(context);
     final trainerFormController = Provider.of<TrainersFormController>(context);
-    return Padding(
-      padding: EdgeInsets.only(left: width * 0.025),
-      child: SizedBox(
-        height: 75,
-        width: double.infinity,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            (trainer.img != "no-avatar.png")
-                ? Hero(
-                    tag: trainer.uid!,
-                    child: CircleAvatar(
-                      radius: width * 0.065,
-                      backgroundImage: const AssetImage('assets/images.jpg'),
-                      foregroundImage: NetworkImage(
-                          'http://78.108.216.56:3000/api/uploads/users/${trainer.uid}'),
+    return GestureDetector(
+      onTap: () {
+        trainerProvider.selectedTrainer = trainer.copyWith();
+        trainerFormController.trainer = trainer.copyWith();
+
+        Navigator.pushNamed(context, 'edit_trainer');
+      },
+      child: Padding(
+        padding: EdgeInsets.only(left: width * 0.025),
+        child: SizedBox(
+          height: 75,
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              (trainer.img != "no-avatar.png")
+                  ? Hero(
+                      tag: trainer.uid!,
+                      child: CircleAvatar(
+                        radius: width * 0.065,
+                        backgroundImage: const AssetImage('assets/images.jpg'),
+                        foregroundImage: NetworkImage(
+                            'http://78.108.216.56:3000/api/uploads/users/${trainer.uid}'),
+                      ),
+                    )
+                  : Hero(
+                      tag: trainer.uid!,
+                      child: CircleAvatar(
+                        radius: width * 0.065,
+                        backgroundImage: const AssetImage('assets/images.jpg'),
+                      ),
                     ),
-                  )
-                : Hero(
-                    tag: trainer.uid!,
-                    child: CircleAvatar(
-                      radius: width * 0.065,
-                      backgroundImage: const AssetImage('assets/images.jpg'),
-                    ),
-                  ),
-            Padding(
-              padding: EdgeInsets.only(left: width * 0.025),
-              child: Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      trainer.name,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.email),
-                        SizedBox(
-                          width: width * 0.025,
-                        ),
-                        FittedBox(
-                          fit: BoxFit.cover,
-                          child: SizedBox(
-                            width: width * 0.55,
-                            child: Text(
-                              trainer.email,
-                              style: const TextStyle(fontSize: 16),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: width * 0.025),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        trainer.name,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(Icons.email),
+                          SizedBox(
+                            width: width * 0.025,
+                          ),
+                          FittedBox(
+                            fit: BoxFit.cover,
+                            child: SizedBox(
+                              width: width * 0.55,
+                              child: Text(
+                                trainer.email,
+                                style: const TextStyle(fontSize: 16),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: width * 0.025),
-              child: IconButton(
-                onPressed: () {
-                  trainerProvider.selectedTrainer = trainer;
-                  trainerFormController.trainer = trainer;
+              Padding(
+                padding: EdgeInsets.only(right: width * 0.025),
+                child: IconButton(
+                  onPressed: () {
+                    trainerProvider.selectedTrainer = trainer.copyWith();
+                    trainerFormController.trainer = trainer.copyWith();
 
-                  Navigator.pushNamed(context, 'edit_trainer');
-                },
-                icon: const Icon(Icons.edit, size: 35),
+                    Navigator.pushNamed(context, 'edit_trainer');
+                  },
+                  icon: const Icon(Icons.edit, size: 35),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
