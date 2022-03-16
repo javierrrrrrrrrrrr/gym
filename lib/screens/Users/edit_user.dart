@@ -75,7 +75,9 @@ class _EditUserState extends State<EditUser> {
     List<Trainer> listTrainer = trainerProvaider.trainers;
     final userProvider = Provider.of<UsersProvider>(context);
     final imageProvider = Provider.of<SelectImg>(context, listen: false);
+    final loginProvider = Provider.of<LoginProvider>(context, listen: false);
     User user = userProvider.selectedUser!;
+    String? trainerId = '';
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(253, 254, 255, 1),
@@ -528,10 +530,10 @@ class _EditUserState extends State<EditUser> {
                                   );
                                 }).toList(),
                                 onChanged: (value) {
-                                  String? id = '';
                                   Trainer? tra = value as Trainer?;
 
-                                  id = tra!.uid;
+                                  trainerId = tra!.uid;
+
                                   //falta entonces guaradr ese id y mandarlo en la peticion validando si se sellciono o no
                                   //y ver el tema de si hay que limpiar la variable y demas
                                   //ya el metodo get trainer se llama cuando se toca el lapiz x si entrar directoa esta vista
@@ -557,7 +559,10 @@ class _EditUserState extends State<EditUser> {
 
                                   String? userid =
                                       await userProvider.updateUser(
-                                          user: userFormController.user!);
+                                    idUserlogin: loginProvider.idUserLogin,
+                                    trainerId: trainerId,
+                                    user: userFormController.user!,
+                                  );
 
                                   if (imageProvider.isTouch == false) {
                                     //no se llama la peticion por que aprendimos a organizar la lista//

@@ -11,6 +11,7 @@ class LoginProvider extends ChangeNotifier {
   bool recordarContrasena = false;
   String contrsenaGuardada = '';
   String usuarioGuardado = '';
+  String idUserLogin = "";
   Future<String?> loginUser(String email, String password, bool check) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse('$_baseUrl/api/auth/login'));
@@ -32,7 +33,10 @@ class LoginProvider extends ChangeNotifier {
           await storage.write(key: 'recordar', value: 'false');
         }
       }
-      return '';
+      idUserLogin = decodedResp["user"]["uid"];
+      print(idUserLogin);
+      notifyListeners();
+      return "";
     } else {
       return response.reasonPhrase;
     }
