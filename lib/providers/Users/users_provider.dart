@@ -110,6 +110,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   Future<String?> updateUser({
+    String? idUserlogin,
     String? trainerId,
     required User user,
   }) async {
@@ -118,6 +119,7 @@ class UsersProvider extends ChangeNotifier {
     var request =
         http.Request('PUT', Uri.parse('$_baseUrl/api/clients/${user.id}'));
     request.body = json.encode({
+      "trainer": trainerId == "" ? idUserlogin : trainerId,
       "firstname": user.firstname,
       "lastname": user.lastname,
       "age": user.age,
@@ -127,13 +129,13 @@ class UsersProvider extends ChangeNotifier {
       "phone": user.phone,
       "imc": user.imc,
       "icc": user.icc,
-      "services": user.services,
-      "trainer": trainerId ?? ""
+      "services": user.services
     });
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    print(response.statusCode);
     final respuesta =
         UpdateUserResponse.fromJson(await response.stream.bytesToString());
 
