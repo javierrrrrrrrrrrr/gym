@@ -531,6 +531,9 @@ class _EditUserState extends State<EditUser> {
                                   String? id = '';
                                   Trainer? tra = value as Trainer?;
                                   id = tra!.uid;
+                                  //falta entonces guaradr ese id y mandarlo en la peticion validando si se sellciono o no
+                                  //y ver el tema de si hay que limpiar la variable y demas
+                                  //ya el metodo get trainer se llama cuando se toca el lapiz x si entrar directoa esta vista
                                 },
                               ),
                             ),
