@@ -72,7 +72,7 @@ class _EditUserState extends State<EditUser> {
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
     final trainerProvaider = Provider.of<TrainerProvider>(context);
-    var listTrainer = trainerProvaider.trainers;
+    List<Trainer> listTrainer = trainerProvaider.trainers;
     final userProvider = Provider.of<UsersProvider>(context);
     final imageProvider = Provider.of<SelectImg>(context, listen: false);
     User user = userProvider.selectedUser!;
@@ -530,6 +530,7 @@ class _EditUserState extends State<EditUser> {
                                 onChanged: (value) {
                                   String? id = '';
                                   Trainer? tra = value as Trainer?;
+
                                   id = tra!.uid;
                                   //falta entonces guaradr ese id y mandarlo en la peticion validando si se sellciono o no
                                   //y ver el tema de si hay que limpiar la variable y demas

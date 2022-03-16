@@ -110,6 +110,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   Future<String?> updateUser({
+    String? trainerId,
     required User user,
   }) async {
     await getToken();
@@ -126,7 +127,8 @@ class UsersProvider extends ChangeNotifier {
       "phone": user.phone,
       "imc": user.imc,
       "icc": user.icc,
-      "services": user.services
+      "services": user.services,
+      "trainer": trainerId ?? ""
     });
 
     request.headers.addAll(headers);
