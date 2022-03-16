@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:elegant_notification/resources/arrays.dart';
