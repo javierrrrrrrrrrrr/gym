@@ -195,8 +195,6 @@ class _LoginPageState extends State<LoginPage> {
       onTap: () async {
         String? resp = '';
         if (loginController.isValidForm()) {
-          final login_user_provaider =
-              Provider.of<LoginProvider>(context, listen: false);
           final loginProvider =
               Provider.of<LoginProvider>(context, listen: false);
 
@@ -212,10 +210,10 @@ class _LoginPageState extends State<LoginPage> {
               });
 
           try {
-            if (login_user_provaider.recordarContrasena == true) {
+            if (loginProvider.recordarContrasena == true) {
               resp = await loginProvider.loginUser(
-                  login_user_provaider.usuarioGuardado,
-                  login_user_provaider.contrsenaGuardada,
+                  loginProvider.usuarioGuardado,
+                  loginProvider.contrsenaGuardada,
                   valor);
             } else {
               resp = await loginProvider.loginUser(
