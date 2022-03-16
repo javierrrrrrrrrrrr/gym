@@ -142,22 +142,23 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           keyboardType: TextInputType.emailAddress),
                       Padding(
-                        padding: const EdgeInsets.only(left: 80, right: 60),
+                        padding: const EdgeInsets.only(right: 140),
                         child: Row(
                           children: [
-                            const Text(
-                              "Recordar contraseña",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color.fromRGBO(155, 155, 155, 1)),
-                            ),
                             Checkbox(
+                              activeColor: const Color.fromRGBO(77, 82, 233, 1),
                               value: valor,
                               onChanged: (value) {
                                 setState(() {
                                   valor = value!;
                                 });
                               },
+                            ),
+                            const Text(
+                              "Recordar contraseña",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(155, 155, 155, 1)),
                             ),
                           ],
                         ),
@@ -249,7 +250,6 @@ class _LoginPageState extends State<LoginPage> {
 
   BoxDecoration _boxDecoration(var width) {
     return BoxDecoration(
-      border: Border.all(),
       borderRadius: BorderRadius.circular(width * 0.025),
       color: const Color.fromRGBO(77, 82, 233, 1),
     );
