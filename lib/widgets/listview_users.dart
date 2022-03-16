@@ -126,11 +126,14 @@ class ListUserBody extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: width * 0.04),
               child: IconButton(
-                onPressed: () {
+                onPressed: () async {
+                  final trainerProvaider =
+                      Provider.of<TrainerProvider>(context, listen: false);
                   userProvider.selectedUser = user.copyWith();
                   userFormController.user = user.copyWith();
 
-                  Navigator.pushNamed(context, 'edit_user');
+                  await trainerProvaider.getTrainers().whenComplete(
+                      () => Navigator.pushNamed(context, 'edit_user'));
                 },
                 icon: Icon(Icons.edit, size: width * 0.09),
               ),
