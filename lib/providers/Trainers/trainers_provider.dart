@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import '../../models/trainer_model.dart';
 
 class TrainerProvider extends ChangeNotifier {
-  final String _baseUrl = "https://a72d-152-206-119-224.ngrok.io";
+  final String _baseUrl = "http://b6f6-152-206-119-224.ngrok.io";
   String token = '';
   final storage = const FlutterSecureStorage();
 
@@ -32,7 +32,8 @@ class TrainerProvider extends ChangeNotifier {
       'Authorization': token,
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    var request = http.Request('GET', Uri.parse('$_baseUrl/api/trainers/'));
+    var request = http.Request('GET',
+        Uri.parse("https://b6f6-152-206-119-224.ngrok.io/api/trainers/"));
     request.bodyFields = {'Authoriza': ''};
     request.headers.addAll(headers);
 
