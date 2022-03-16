@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
+import 'package:gym/models/trainer_model.dart';
 import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
@@ -70,6 +71,8 @@ class _EditUserState extends State<EditUser> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final userFormController = Provider.of<UserFormController>(context);
+    final trainerProvaider = Provider.of<TrainerProvider>(context);
+    var listTrainer = trainerProvaider.trainers;
     final userProvider = Provider.of<UsersProvider>(context);
     final imageProvider = Provider.of<SelectImg>(context, listen: false);
     User user = userProvider.selectedUser!;
@@ -492,6 +495,44 @@ class _EditUserState extends State<EditUser> {
                                       }
                                     });
                                   }),
+                            ),
+                            _separador(height * 4),
+
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 25, right: 55),
+                              child: DropdownButtonFormField(
+                                hint: const Text("Select Trainer"),
+                                // ignore: prefer_const_constructors
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  border: const OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12))),
+                                  enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color:
+                                              Color.fromRGBO(45, 49, 146, 1)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(12))),
+                                  hintStyle: const TextStyle(
+                                      color: Colors.black54, fontSize: 20),
+                                ),
+                                // value: initialDropDownValue,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                items: listTrainer.map((Trainer items) {
+                                  return DropdownMenuItem(
+                                    value: items,
+                                    child: Text(items.name),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  String? id = '';
+                                  Trainer? tra = value as Trainer?;
+                                  id = tra!.uid;
+                                },
+                              ),
                             ),
 
                             const SizedBox(
