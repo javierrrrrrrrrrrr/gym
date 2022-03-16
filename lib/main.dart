@@ -60,7 +60,7 @@ class GymApp extends StatelessWidget {
         ),
         title: "Gym",
         debugShowCheckedModeBanner: false,
-        initialRoute: 'login',
+        initialRoute: 'splash',
         routes: appRoutes,
       ),
     );

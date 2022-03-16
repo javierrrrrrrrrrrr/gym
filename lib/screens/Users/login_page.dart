@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/elegant_notification.dart';
@@ -16,10 +18,19 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _validateEmail = false;
   bool _validatePassword = false;
+  bool valor = false;
+
+  @override
+  void initState() {
+    final loginProvaider = Provider.of<LoginProvider>(context, listen: false);
+    valor = loginProvaider.recordarContrasena;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final loginController = Provider.of<LoginFormController>(context);
+    final loginProvaider = Provider.of<LoginProvider>(context);
 
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
@@ -54,12 +65,16 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       InputFieldWidget(
-                        validateIcon: _validateEmail,
+                        validateIcon: loginProvaider.recordarContrasena
+                            ? !_validateEmail
+                            : _validateEmail,
                         icon: true,
                         maxline: 1,
                         right: width * 0.02,
                         left: width * 0.02,
-                        initialvalue: "",
+                        initialvalue: loginProvaider.recordarContrasena
+                            ? loginProvaider.usuarioGuardado.toString()
+                            : "",
                         obscureText: false,
                         width: width,
                         label: const Text('Entrar Email'),
@@ -93,12 +108,16 @@ class _LoginPageState extends State<LoginPage> {
                         height: height * 0.01,
                       ),
                       InputFieldWidget(
-                          validateIcon: _validatePassword,
+                          validateIcon: loginProvaider.recordarContrasena
+                              ? !_validateEmail
+                              : _validateEmail,
                           icon: true,
                           maxline: 1,
                           right: width * 0.02,
                           left: width * 0.02,
-                          initialvalue: "",
+                          initialvalue: loginProvaider.recordarContrasena
+                              ? loginProvaider.contrsenaGuardada.toString()
+                              : "",
                           obscureText: true,
                           width: width,
                           label: const Text('Entrar Password'),
@@ -124,6 +143,17 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           keyboardType: TextInputType.emailAddress),
+                      Padding(
+                        padding: EdgeInsets.only(left: width * 0.65),
+                        child: Checkbox(
+                          value: valor,
+                          onChanged: (value) {
+                            setState(() {
+                              valor = value!;
+                            });
+                          },
+                        ),
+                      ),
                       SizedBox(
                         height: height * 0.05,
                       ),
@@ -154,7 +184,10 @@ class _LoginPageState extends State<LoginPage> {
         width: width * 0.65,
       ),
       onTap: () async {
+        String? resp = '';
         if (loginController.isValidForm()) {
+          final login_user_provaider =
+              Provider.of<LoginProvider>(context, listen: false);
           final loginProvider =
               Provider.of<LoginProvider>(context, listen: false);
 
@@ -170,8 +203,15 @@ class _LoginPageState extends State<LoginPage> {
               });
 
           try {
-            String? resp = await loginProvider.loginUser(
-                loginController.email, loginController.password);
+            if (login_user_provaider.recordarContrasena == true) {
+              resp = await loginProvider.loginUser(
+                  login_user_provaider.usuarioGuardado,
+                  login_user_provaider.contrsenaGuardada,
+                  valor);
+            } else {
+              resp = await loginProvider.loginUser(
+                  loginController.email, loginController.password, valor);
+            }
 
             if (resp == '') {
               Navigator.pop(context);
