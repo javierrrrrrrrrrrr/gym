@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, unused_field
-
 import 'package:flutter/material.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/elegant_notification.dart';
@@ -109,8 +107,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       InputFieldWidget(
                           validateIcon: loginProvaider.recordarContrasena
-                              ? !_validateEmail
-                              : _validateEmail,
+                              ? !_validatePassword
+                              : _validatePassword,
                           icon: true,
                           maxline: 1,
                           right: width * 0.02,
@@ -144,14 +142,24 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           keyboardType: TextInputType.emailAddress),
                       Padding(
-                        padding: EdgeInsets.only(left: width * 0.65),
-                        child: Checkbox(
-                          value: valor,
-                          onChanged: (value) {
-                            setState(() {
-                              valor = value!;
-                            });
-                          },
+                        padding: const EdgeInsets.only(left: 80, right: 60),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "Recordar contraseña",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(155, 155, 155, 1)),
+                            ),
+                            Checkbox(
+                              value: valor,
+                              onChanged: (value) {
+                                setState(() {
+                                  valor = value!;
+                                });
+                              },
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
