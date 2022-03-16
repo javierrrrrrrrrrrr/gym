@@ -12,6 +12,9 @@ class LoginProvider extends ChangeNotifier {
   String contrsenaGuardada = '';
   String usuarioGuardado = '';
   String idUserLogin = "";
+
+  String userRole = "";
+
   Future<String?> loginUser(String email, String password, bool check) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse('$_baseUrl/api/auth/login'));
@@ -34,7 +37,9 @@ class LoginProvider extends ChangeNotifier {
         }
       }
       idUserLogin = decodedResp["user"]["uid"];
-      print(idUserLogin);
+
+      userRole = decodedResp["user"]["rol"];
+      print(userRole);
       notifyListeners();
       return "";
     } else {

@@ -34,7 +34,7 @@ class FloatingABCustom extends StatelessWidget {
             height: '',
             lastname: '',
             phone: '',
-            services: [],
+            services: '',
             weight: '',
             email: '',
             icc: '',

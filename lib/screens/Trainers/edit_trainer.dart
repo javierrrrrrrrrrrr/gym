@@ -105,7 +105,7 @@ class _EditTrainerState extends State<EditTrainer> {
                             obscureText: false,
                             keyboardType: TextInputType.emailAddress,
                             onChanged: (value) {
-                              trainerProvider.selectedTrainer!.email = value;
+                              trainerFormController.trainer!.email = value;
                               // userFormController.user!.email = value;
                               setState(() {
                                 String gmailpatter =
@@ -142,7 +142,7 @@ class _EditTrainerState extends State<EditTrainer> {
                               label: const Text('Entrar Password'),
                               onChanged: (value) {
                                 // loginController.password = value;
-
+                                trainerFormController.password = value;
                                 setState(() {
                                   if ((value != null && value.length > 5)) {
                                     _validatePassword = true;

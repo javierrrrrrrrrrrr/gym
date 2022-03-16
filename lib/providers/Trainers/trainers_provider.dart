@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:gym/models/Users/create_trainers_response.dart';
 import 'package:gym/models/edit_trainer_response.dart';
 import 'package:gym/models/get_trainer_response.dart';
+import 'package:gym/models/models.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,8 @@ class TrainerProvider extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
 
   List<Trainer> trainers = [];
+
+  List<User> usersByTrainer = [];
   Trainer? selectedTrainer;
 
   Future<String> readDataFromStorage(String valor) async {
@@ -32,13 +35,12 @@ class TrainerProvider extends ChangeNotifier {
       'Authorization': token,
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    var request = http.Request('GET',
-        Uri.parse("https://b6f6-152-206-119-224.ngrok.io/api/trainers/"));
+    var request = http.Request('GET', Uri.parse("$_baseUrl/api/trainers/"));
     request.bodyFields = {'Authoriza': ''};
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
+    print(response.reasonPhrase);
     if (response.statusCode == 200) {
       final respuesta =
           GetTrainerResponse.fromJson(await response.stream.bytesToString());
@@ -53,7 +55,7 @@ class TrainerProvider extends ChangeNotifier {
     }
   }
 
-  Future<String> crearEntrandor(
+  Future<String> addTrainer(
       {required Trainer trainer, required String password}) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
@@ -64,7 +66,7 @@ class TrainerProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final respuesta =
           CreateTrainerResponse.fromJson(await response.stream.bytesToString());
@@ -82,8 +84,8 @@ class TrainerProvider extends ChangeNotifier {
       {required Trainer trainer, required String? password}) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
-    var request = http.Request('PUT',
-        Uri.parse('http://78.108.216.56:3000/api/trainers/${trainer.uid}'));
+    var request =
+        http.Request('PUT', Uri.parse('$_baseUrl/api/trainers/${trainer.uid}'));
     request.body = json.encode({
       "name": trainer.name,
       "email": trainer.email,
@@ -112,8 +114,8 @@ class TrainerProvider extends ChangeNotifier {
       'Authorization': token,
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    var request = http.Request('DELETE',
-        Uri.parse('http://78.108.216.56:3000/api/trainers/${trainer.uid}'));
+    var request = http.Request(
+        'DELETE', Uri.parse('$_baseUrl/api/trainers/${trainer.uid}'));
     request.bodyFields = {'Authoriza': ''};
     request.headers.addAll(headers);
 
@@ -126,6 +128,32 @@ class TrainerProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       print(response.reasonPhrase);
+    }
+  }
+
+  Future<List<User>> getUsersByTrainerId(String trainerId) async {
+    await getToken();
+    var headers = {
+      'Authorization': token,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    var request = http.Request(
+        'GET', Uri.parse('$_baseUrl/api/trainers/users/$trainerId'));
+    request.bodyFields = {'Authoriza': ''};
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      final respuesta =
+          GetAllUsersResponse.fromJson(await response.stream.bytesToString());
+      usersByTrainer = respuesta.clients;
+      usersByTrainer.sort((a, b) => a.firstname.compareTo(b.firstname));
+      notifyListeners();
+      return usersByTrainer;
+    } else {
+      print(response.reasonPhrase);
+      return [];
     }
   }
 

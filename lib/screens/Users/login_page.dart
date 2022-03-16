@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       InputFieldWidget(
                         validateIcon: loginProvaider.recordarContrasena
-                            ? !_validateEmail
+                            ? _validateEmail = !_validateEmail
                             : _validateEmail,
                         icon: true,
                         maxline: 1,
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       InputFieldWidget(
                           validateIcon: loginProvaider.recordarContrasena
-                              ? !_validatePassword
+                              ? _validatePassword = !_validatePassword
                               : _validatePassword,
                           icon: true,
                           maxline: 1,
@@ -151,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                               onChanged: (value) {
                                 setState(() {
                                   valor = value!;
+                                  // loginProvaider.recordarContrasena = value;
                                 });
                               },
                             ),
@@ -222,7 +223,12 @@ class _LoginPageState extends State<LoginPage> {
 
             if (resp == '') {
               Navigator.pop(context);
-              Navigator.pushReplacementNamed(context, 'admin');
+              if (loginProvider.userRole == 'ADMIN_ROLE') {
+                Navigator.pushReplacementNamed(context, 'admin');
+              }
+              if (loginProvider.userRole == 'TRAINEE_ROLE') {
+                Navigator.pushReplacementNamed(context, 'trainer-dash');
+              }
             } else {
               Navigator.pop(context);
               ElegantNotification.error(

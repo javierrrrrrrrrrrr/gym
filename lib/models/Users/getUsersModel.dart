@@ -69,7 +69,7 @@ class User {
   String phone;
   String? imc;
   String? icc;
-  List<String> services;
+  String services;
   bool? status;
   List<String>? payments;
   List<String>? observations;
@@ -92,7 +92,7 @@ class User {
     String? phone,
     String? imc,
     String? icc,
-    List<String>? services,
+    String? services,
     bool? status,
     List<String>? payments,
     List<String>? observations,
@@ -143,7 +143,7 @@ class User {
         phone: json["phone"],
         imc: json["imc"],
         icc: json["icc"],
-        services: List<String>.from(json["services"].map((x) => x)),
+        services: json["services"],
         status: json["status"],
         payments: List<String>.from(json["payments"].map((x) => x)),
         observations: List<String>.from(json["observations"].map((x) => x)),
@@ -167,7 +167,7 @@ class User {
         "phone": phone,
         "imc": imc,
         "icc": icc,
-        "services": List<dynamic>.from(services.map((x) => x)),
+        "services": services,
         "status": status,
         "payments": List<dynamic>.from(payments!.map((x) => x)),
         "observations": List<dynamic>.from(observations!.map((x) => x)),

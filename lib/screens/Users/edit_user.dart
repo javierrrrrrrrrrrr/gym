@@ -471,29 +471,19 @@ class _EditUserState extends State<EditUser> {
                                     setState(() {
                                       initialDropDownValue = value!;
                                       if (value == "TRAINING") {
-                                        userFormController.user!.services
-                                            .add("TRAINING");
-                                      } else {
-                                        userFormController.user!.services
-                                            .remove("TRAINING");
+                                        userFormController.user!.services =
+                                            "TRAINING";
                                       }
-
                                       //
                                       if (value == "AEROBICS") {
-                                        userFormController.user!.services
-                                            .add("AEROBICS");
-                                      } else {
-                                        userFormController.user!.services
-                                            .remove("AEROBICS");
+                                        userFormController.user!.services =
+                                            "AEROBICS";
                                       }
 
                                       //
                                       if (value == "MASSAGE") {
-                                        userFormController.user!.services
-                                            .add("MASSAGE");
-                                      } else {
-                                        userFormController.user!.services
-                                            .remove("MASSAGE");
+                                        userFormController.user!.services =
+                                            "MASSAGE";
                                       }
                                     });
                                   }),

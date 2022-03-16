@@ -197,7 +197,7 @@ class _AddTrainerState extends State<AddTrainer> {
                       final imageProvider =
                           Provider.of<SelectImg>(context, listen: false);
 
-                      String uid = await trainerProvaider.crearEntrandor(
+                      String uid = await trainerProvaider.addTrainer(
                           trainer: trainerFormController.trainer!,
                           password: trainerFormController.password!);
 

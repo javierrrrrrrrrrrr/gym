@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 
 import '../providers/providers.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class AdminDashboard extends StatefulWidget {
+  const AdminDashboard({Key? key}) : super(key: key);
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<AdminDashboard> createState() => _AdminDashboardState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _AdminDashboardState extends State<AdminDashboard> {
   String diaSemana() {
     String diasemana = '';
     setState(() {
@@ -60,6 +60,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
