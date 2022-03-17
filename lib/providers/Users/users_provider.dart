@@ -156,8 +156,8 @@ class UsersProvider extends ChangeNotifier {
   deleteUser(String id) async {
     await getToken();
     var headers = {'Authorization': token};
-    var request = http.Request(
-        'DELETE', Uri.parse('http://78.108.216.56:3000/api/clients/$id'));
+    var request =
+        http.Request('DELETE', Uri.parse('http://$_baseUrl/api/clients/$id'));
 
     request.headers.addAll(headers);
 
@@ -171,8 +171,8 @@ class UsersProvider extends ChangeNotifier {
   getUserByID(String id) async {
     await getToken();
     var headers = {'Authorization': token};
-    var request = http.Request(
-        'GET', Uri.parse('http://78.108.216.56:3000/api/clients/$id'));
+    var request =
+        http.Request('GET', Uri.parse('http://$_baseUrl/api/clients/$id'));
 
     request.headers.addAll(headers);
 
@@ -247,8 +247,8 @@ class UsersProvider extends ChangeNotifier {
       required String mounth}) async {
     await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
-    var request = http.Request(
-        'POST', Uri.parse('http://78.108.216.56:3000/api/payments'));
+    var request =
+        http.Request('POST', Uri.parse('http://$_baseUrl/api/payments'));
     request.body = json.encode(
         {"amount": amount, "client": id, "months": mounth, "comment": comment});
     request.headers.addAll(headers);
@@ -282,8 +282,8 @@ class UsersProvider extends ChangeNotifier {
   Future<Payment?> getPaymentByIdentifier(String id) async {
     await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
-    var request = http.Request(
-        'GET', Uri.parse('http://78.108.216.56:3000/api/payments/$id'));
+    var request =
+        http.Request('GET', Uri.parse('http://$_baseUrl/api/payments/$id'));
     request.body = '''''';
     request.headers.addAll(headers);
 
@@ -390,8 +390,8 @@ class UsersProvider extends ChangeNotifier {
   }) async {
     getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
-    var request = http.Request(
-        'POST', Uri.parse('http://78.108.216.56:3000/api/observations'));
+    var request =
+        http.Request('POST', Uri.parse('http://$_baseUrl/api/observations'));
     request.body = json.encode({
       "icc": icc,
       "imc": imc,
@@ -429,8 +429,8 @@ class UsersProvider extends ChangeNotifier {
   deleteObservation(String idOb) async {
     getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
-    var request = http.Request('DELETE',
-        Uri.parse('http://78.108.216.56:3000/api/observations/$idOb'));
+    var request = http.Request(
+        'DELETE', Uri.parse('http://$_baseUrl/api/observations/$idOb'));
     request.body = '''''';
     request.headers.addAll(headers);
 
