@@ -296,7 +296,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   Future getAllPaymentsByUserId(String userId) async {
-    getToken();
+    await getToken();
     payments = [];
     notifyListeners();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
@@ -326,7 +326,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   deletePayment(String idPago) async {
-    getToken();
+    await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
     var request =
         http.Request('DELETE', Uri.parse('$_baseUrl/api/payments/$idPago'));
@@ -350,7 +350,7 @@ class UsersProvider extends ChangeNotifier {
   //Observaciones del user !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   Future getObservationsByIdUser(String idUser) async {
-    getToken();
+    await getToken();
     observation = [];
     notifyListeners();
 
@@ -385,7 +385,7 @@ class UsersProvider extends ChangeNotifier {
     required String observations,
     required String idUser,
   }) async {
-    getToken();
+    await getToken();
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
     var request = http.Request('POST', Uri.parse('$_baseUrl/api/observations'));
     request.body = json.encode({
@@ -424,7 +424,7 @@ class UsersProvider extends ChangeNotifier {
   }
 
   deleteObservation(String idOb) async {
-    getToken();
+    await getToken();
     var headers = {'Authorization': token, 'Content-Type': 'application/json'};
     var request =
         http.Request('DELETE', Uri.parse('$_baseUrl/api/observations/$idOb'));

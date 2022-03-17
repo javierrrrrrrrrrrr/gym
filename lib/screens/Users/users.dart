@@ -20,6 +20,7 @@ class _UsersPageState extends State<UsersPage> {
       appBar: customAppbar(
         context,
         width: width,
+        centerTitle: false,
         title: "GYM Fitness Model",
         actions: [
           IconButton(

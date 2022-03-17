@@ -48,11 +48,10 @@ class ListUserBody extends StatelessWidget {
 
     return GestureDetector(
       onTap: () async {
-        // userProvider.selectedUser = user.copyWith();
-        // userFormController.user = user.copyWith();
-
-        // trainerProvider.getTrainers();
-        // Navigator.pushNamed(context, 'edit_user');
+        userProvider.selectedUser = user.copyWith();
+        await userProvider.getObservationsByIdUser(user.id).whenComplete(() {
+          Navigator.pushNamed(context, 'lista_obs');
+        });
       },
       child: SizedBox(
         height: width * 0.19,
@@ -127,8 +126,11 @@ class ListUserBody extends StatelessWidget {
               child: IconButton(
                 onPressed: () async {
                   userProvider.selectedUser = user.copyWith();
-
-                  Navigator.pushNamed(context, 'lista_obs');
+                  await userProvider
+                      .getObservationsByIdUser(user.id)
+                      .whenComplete(() {
+                    Navigator.pushNamed(context, 'lista_obs');
+                  });
                 },
                 icon: Icon(Icons.remove_red_eye_sharp, size: width * 0.09),
               ),
