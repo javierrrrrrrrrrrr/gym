@@ -56,7 +56,7 @@ class _EditUserImgState extends State<EditUserImg> {
                                   placeholder:
                                       const AssetImage('assets/images.jpg'),
                                   image: NetworkImage(
-                                      'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
+                                      'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
                                   placeholderFit: BoxFit.cover,
                                 ),
                               ),

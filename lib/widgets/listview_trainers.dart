@@ -69,7 +69,7 @@ class ListTrainerWidget extends StatelessWidget {
                         radius: width * 0.065,
                         backgroundImage: const AssetImage('assets/images.jpg'),
                         foregroundImage: NetworkImage(
-                            'http://78.108.216.56:3000/api/uploads/users/${trainer.uid}'),
+                            'http://181.225.253.122:3000/api/uploads/users/${trainer.uid}'),
                       ),
                     )
                   : Hero(

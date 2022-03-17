@@ -398,6 +398,7 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
+    print(response.reasonPhrase);
     final respuesta = CreateObservationResponse.fromJson(
         await response.stream.bytesToString());
 
