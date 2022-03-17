@@ -56,6 +56,7 @@ class _ListViewOBState extends State<ListViewOB> {
           itemCount: userProvider.observation.length,
           itemBuilder: (BuildContext context, index) {
             return ObservationListBody(
+              index: index,
               observation: userProvider.observation[index],
             );
           },
@@ -74,62 +75,67 @@ class _ListViewOBState extends State<ListViewOB> {
 
 class ObservationListBody extends StatelessWidget {
   final Observation observation;
-  const ObservationListBody({Key? key, required this.observation})
+  final int index;
+  const ObservationListBody(
+      {Key? key, required this.observation, required this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UsersProvider>(context);
-
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Fecha: ${observation.datetime}",
-            style: const TextStyle(fontSize: 22),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "IMC: ${observation.imc}",
-                style: const TextStyle(fontSize: 21),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                "ICC: ${observation.icc}",
-                style: const TextStyle(fontSize: 21),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                "Peso: ${observation.weight}Kg",
-                style: const TextStyle(fontSize: 21),
-              ),
-              const SizedBox(
-                width: 25,
-              ),
-              IconButton(
-                onPressed: () {
-                  _showMyDeleteDialog(context, observation.id);
-                },
-                icon: const Icon(
-                  Icons.delete,
-                  size: 30,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'view_obs', arguments: index);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Fecha: ${observation.datetime}",
+              style: const TextStyle(fontSize: 22),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "IMC: ${observation.imc}",
+                  style: const TextStyle(fontSize: 21),
                 ),
-              ),
-            ],
-          ),
-          Text(
-            observation.observation,
-            style: const TextStyle(fontSize: 22),
-          ),
-        ],
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "ICC: ${observation.icc}",
+                  style: const TextStyle(fontSize: 21),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Peso: ${observation.weight}Kg",
+                  style: const TextStyle(fontSize: 21),
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                IconButton(
+                  onPressed: () {
+                    _showMyDeleteDialog(context, observation.id);
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    size: 30,
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              observation.observation,
+              style: const TextStyle(fontSize: 22),
+            ),
+          ],
+        ),
       ),
     );
   }
