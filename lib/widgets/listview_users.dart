@@ -47,12 +47,14 @@ class ListUserBody extends StatelessWidget {
     final userProvider = Provider.of<UsersProvider>(context);
     final userFormController = Provider.of<UserFormController>(context);
     final width = MediaQuery.of(context).size.width;
+    final trainerProvider = Provider.of<TrainerProvider>(context);
 
     return GestureDetector(
       onTap: () {
         userProvider.selectedUser = user.copyWith();
         userFormController.user = user.copyWith();
 
+        trainerProvider.getTrainers();
         Navigator.pushNamed(context, 'edit_user');
       },
       child: SizedBox(
@@ -131,7 +133,7 @@ class ListUserBody extends StatelessWidget {
                       Provider.of<TrainerProvider>(context, listen: false);
                   userProvider.selectedUser = user.copyWith();
                   userFormController.user = user.copyWith();
-
+                  trainerProvider.getTrainers();
                   await trainerProvaider.getTrainers().whenComplete(
                       () => Navigator.pushNamed(context, 'edit_user'));
                 },
