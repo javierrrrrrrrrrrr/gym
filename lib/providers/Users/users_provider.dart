@@ -293,7 +293,7 @@ class UsersProvider extends ChangeNotifier {
 
     users[index].payments!.add(pago.id);
     users[index].active = true;
-
+    await getUsersSinPagar();
     selectedUser!.active = true;
     notifyListeners();
     return pago;

@@ -30,7 +30,7 @@ class _TrainerPageState extends State<TrainerPage> {
               },
               icon: Icon(
                 Icons.search,
-                color: const Color.fromRGBO(150, 152, 154, 0.5),
+                color: Colors.white,
                 size: width * 0.080,
               ),
             ),

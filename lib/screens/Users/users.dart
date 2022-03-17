@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/providers/Users/users_provider.dart';
+import 'package:gym/search/search_delegate.dart';
 
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-
-import '../../helpers/custom_appbar.dart';
-import '../../search/search_delegate.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -55,9 +54,6 @@ class _UsersPageState extends State<UsersPage> {
       ),
       body: Column(
         children: const [
-          // Center(
-          //   child: Text("Lista de usuarios"),
-          // ),
           ListViewUsers(),
         ],
       ),
