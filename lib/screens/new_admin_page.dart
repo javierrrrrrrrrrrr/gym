@@ -132,10 +132,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                     child: CircularProgressIndicator(),
                                   );
                                 });
+
                             await userProvider.getUsers().whenComplete(() {
                               Navigator.pop(context);
                               Navigator.pushNamed(context, 'users');
                             });
+                            await userProvider.getUsersSinPagar();
                           },
                           child: const Carta(
                             texto: "Clientes",

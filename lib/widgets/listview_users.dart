@@ -18,19 +18,34 @@ class _ListViewUsersState extends State<ListViewUsers> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
 
-    return Expanded(
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: userProvider.users.length,
-        itemBuilder: (BuildContext context, index) {
-          return ListUserBody(
-            user: userProvider.users[index],
-          );
-        },
-        padding: const EdgeInsets.all(0),
-        //  padding: const EdgeInsets.only(bottom: 10),
-      ),
-    );
+    if (userProvider.sinPagar == false) {
+      return Expanded(
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          itemCount: userProvider.users.length,
+          itemBuilder: (BuildContext context, index) {
+            return ListUserBody(
+              user: userProvider.users[index],
+            );
+          },
+          padding: const EdgeInsets.all(0),
+          //  padding: const EdgeInsets.only(bottom: 10),
+        ),
+      );
+    } else {
+      return Expanded(
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          itemCount: userProvider.usersSinPagar.length,
+
+          itemBuilder: (BuildContext context, index) {
+            return ListUserBody(user: userProvider.usersSinPagar[index]);
+          },
+          padding: const EdgeInsets.all(0),
+          //  padding: const EdgeInsets.only(bottom: 10),
+        ),
+      );
+    }
   }
 }
 

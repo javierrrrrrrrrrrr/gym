@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/Users/users_provider.dart';
 
 import 'package:gym/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 import '../../helpers/custom_appbar.dart';
 import '../../search/search_delegate.dart';
@@ -15,14 +17,36 @@ class UsersPage extends StatefulWidget {
 class _UsersPageState extends State<UsersPage> {
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UsersProvider>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: customAppbar(
         context,
         width: width,
         centerTitle: false,
-        title: "GYM Fitness Model",
+        title: "Usuarios",
         actions: [
+          (userProvider.sinPagar == false)
+              ? IconButton(
+                  onPressed: () {
+                    userProvider.sinPagar = true;
+                  },
+                  icon: const Icon(Icons.attach_money))
+              : IconButton(
+                  onPressed: () {
+                    userProvider.sinPagar = false;
+                  },
+                  icon: const Icon(Icons.money_off)),
+
+          // Checkbox(
+
+          //   value: userProvider.sinPagar,
+          //   onChanged: (bool? value) {
+          //     userProvider.sinPagar = value!;
+
+          //     print(userProvider.sinPagar);
+          //   },
+          // ),
           IconButton(
             onPressed: () {
               showSearch(context: context, delegate: UserSerch());

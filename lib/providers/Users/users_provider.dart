@@ -21,6 +21,7 @@ class UsersProvider extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
 
   List<User> users = [];
+  List<User> usersSinPagar = [];
   List<Payment> payments = [];
   List<Observation> observation = [];
 
@@ -31,6 +32,16 @@ class UsersProvider extends ChangeNotifier {
   bool isLoading = true;
 
   Payment? payment;
+  bool? _sinPagar = false;
+
+  bool? get sinPagar {
+    return _sinPagar;
+  }
+
+  set sinPagar(value) {
+    _sinPagar = value;
+    notifyListeners();
+  }
 
   final debauncer = Debouncer(
     duration: const Duration(milliseconds: 500),
@@ -70,6 +81,17 @@ class UsersProvider extends ChangeNotifier {
     users = respuesta.clients;
     notifyListeners();
     return users;
+  }
+
+  Future<List<User>> getUsersSinPagar() async {
+    usersSinPagar = [];
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].active == false) {
+        usersSinPagar.add(users[i]);
+      }
+    }
+    print(usersSinPagar.length);
+    return usersSinPagar;
   }
 
   Future<String?> createUser({
