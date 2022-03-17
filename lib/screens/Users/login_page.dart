@@ -21,6 +21,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     final loginProvaider = Provider.of<LoginProvider>(context, listen: false);
+    final loginController =
+        Provider.of<LoginFormController>(context, listen: false);
+    loginController.email = loginProvaider.usuarioGuardado;
+    loginController.password = loginProvaider.contrsenaGuardada;
     valor = loginProvaider.recordarContrasena;
     super.initState();
   }
@@ -64,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       InputFieldWidget(
                         validateIcon: loginProvaider.recordarContrasena
-                            ? _validateEmail = !_validateEmail
+                            ? !_validateEmail
                             : _validateEmail,
                         icon: true,
                         maxline: 1,
@@ -84,9 +88,13 @@ class _LoginPageState extends State<LoginPage> {
                                 r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                             RegExp regExp = RegExp(gmailpatter);
                             if (regExp.hasMatch(value)) {
-                              _validateEmail = true;
+                              loginProvaider.recordarContrasena
+                                  ? _validateEmail = false
+                                  : _validateEmail = true;
                             } else {
-                              _validateEmail = false;
+                              loginProvaider.recordarContrasena
+                                  ? _validateEmail = true
+                                  : _validateEmail = false;
                             }
                           });
                         },
@@ -107,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       InputFieldWidget(
                           validateIcon: loginProvaider.recordarContrasena
-                              ? _validatePassword = !_validatePassword
+                              ? !_validatePassword
                               : _validatePassword,
                           icon: true,
                           maxline: 1,
@@ -124,9 +132,13 @@ class _LoginPageState extends State<LoginPage> {
 
                             setState(() {
                               if ((value != null && value.length > 5)) {
-                                _validatePassword = true;
+                                loginProvaider.recordarContrasena
+                                    ? _validatePassword = false
+                                    : _validatePassword = true;
                               } else {
-                                _validatePassword = false;
+                                loginProvaider.recordarContrasena
+                                    ? _validatePassword = true
+                                    : _validatePassword = false;
                               }
                             });
                           },
@@ -211,15 +223,8 @@ class _LoginPageState extends State<LoginPage> {
               });
 
           try {
-            if (loginProvider.recordarContrasena == true) {
-              resp = await loginProvider.loginUser(
-                  loginProvider.usuarioGuardado,
-                  loginProvider.contrsenaGuardada,
-                  valor);
-            } else {
-              resp = await loginProvider.loginUser(
-                  loginController.email, loginController.password, valor);
-            }
+            resp = await loginProvider.loginUser(
+                loginController.email, loginController.password, valor);
 
             if (resp == '') {
               Navigator.pop(context);
