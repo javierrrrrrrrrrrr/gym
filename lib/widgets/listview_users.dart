@@ -50,7 +50,7 @@ class ListUserBody extends StatelessWidget {
     final trainerProvider = Provider.of<TrainerProvider>(context);
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         userProvider.selectedUser = user.copyWith();
         userFormController.user = user.copyWith();
 
@@ -75,7 +75,7 @@ class ListUserBody extends StatelessWidget {
                             backgroundImage:
                                 const AssetImage('assets/images.jpg'),
                             foregroundImage: NetworkImage(
-                                'http://78.108.216.56:3000/api/uploads/clients/${user.id}'),
+                                'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
                           ),
                         )
                       : Hero(
@@ -133,7 +133,7 @@ class ListUserBody extends StatelessWidget {
                       Provider.of<TrainerProvider>(context, listen: false);
                   userProvider.selectedUser = user.copyWith();
                   userFormController.user = user.copyWith();
-                  trainerProvider.getTrainers();
+
                   await trainerProvaider.getTrainers().whenComplete(
                       () => Navigator.pushNamed(context, 'edit_user'));
                 },
