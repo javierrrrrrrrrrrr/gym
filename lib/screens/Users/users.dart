@@ -37,16 +37,6 @@ class _UsersPageState extends State<UsersPage> {
                     userProvider.sinPagar = false;
                   },
                   icon: const Icon(Icons.money_off)),
-
-          // Checkbox(
-
-          //   value: userProvider.sinPagar,
-          //   onChanged: (bool? value) {
-          //     userProvider.sinPagar = value!;
-
-          //     print(userProvider.sinPagar);
-          //   },
-          // ),
           IconButton(
             onPressed: () {
               showSearch(context: context, delegate: UserSerch());
