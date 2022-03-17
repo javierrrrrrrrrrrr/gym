@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/splash_screen.dart';
 import 'package:gym/screens/Trainers/trainer_dasboard.dart';
+import 'package:gym/screens/Trainers/users_by_trainers.dart';
 
 import 'package:gym/screens/pages.dart';
 
@@ -10,6 +11,7 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'admin': (BuildContext context) => const AdminDashboard(),
   'users': (BuildContext context) => const UsersPage(),
   'trainers': (BuildContext context) => const TrainerPage(),
+  'users-trainer': (BuildContext context) => const UsersByTrainer(),
   'trainer-dash': (BuildContext context) => const TrainerDasboard(),
   'add_user': (BuildContext context) => const AddUser(),
   'edit_user': (BuildContext context) => const EditUser(),

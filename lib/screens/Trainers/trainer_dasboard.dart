@@ -140,8 +140,13 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
                                       child: CircularProgressIndicator(),
                                     );
                                   });
-                              trainerProvider.getUsersByTrainerId(
-                                  loginProvider.idUserLogin);
+                              await trainerProvider
+                                  .getUsersByTrainerId(
+                                      loginProvider.idUserLogin)
+                                  .whenComplete(() {
+                                Navigator.pop(context);
+                                Navigator.pushNamed(context, 'users-trainer');
+                              });
                               //:TODO Hacer el Metodo de devolver la lista de users del trainer.
                             },
                             child: const Carta(

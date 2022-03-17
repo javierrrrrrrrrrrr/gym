@@ -150,6 +150,7 @@ class TrainerProvider extends ChangeNotifier {
       usersByTrainer = respuesta.clients;
       usersByTrainer.sort((a, b) => a.firstname.compareTo(b.firstname));
       notifyListeners();
+
       return usersByTrainer;
     } else {
       print(response.reasonPhrase);
