@@ -1,41 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gym/models/Trainers/trainer_model.dart';
-import 'package:gym/providers/Trainers/trainers_form_controller.dart';
-
+import 'package:gym/providers/providers.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/Trainers/trainers_provider.dart';
-
-class ListViewTrainers extends StatefulWidget {
-  const ListViewTrainers({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<ListViewTrainers> createState() => _ListViewUsersState();
-}
-
-class _ListViewUsersState extends State<ListViewTrainers> {
-  @override
-  Widget build(BuildContext context) {
-    final trainerProvider = Provider.of<TrainerProvider>(context);
-
-    return Expanded(
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: trainerProvider.trainers.length,
-        itemBuilder: (BuildContext context, index) {
-          return ListTrainerWidget(trainer: trainerProvider.trainers[index]);
-        },
-        padding: const EdgeInsets.all(0),
-        //  padding: const EdgeInsets.only(bottom: 10),
-      ),
-    );
-  }
-}
-
-class ListTrainerWidget extends StatelessWidget {
-  const ListTrainerWidget({
+class ListViewTrainerBody extends StatelessWidget {
+  const ListViewTrainerBody({
     Key? key,
     required this.trainer,
   }) : super(key: key);
