@@ -3,11 +3,10 @@ import 'package:gym/models/Users/create_trainers_response.dart';
 import 'package:gym/models/edit_trainer_response.dart';
 import 'package:gym/models/get_trainer_response.dart';
 import 'package:gym/models/models.dart';
+import 'package:gym/models/trainer_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../../models/trainer_model.dart';
 
 class TrainerProvider extends ChangeNotifier {
   final String _baseUrl = "http://181.225.253.122:3000";
@@ -40,7 +39,7 @@ class TrainerProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(response.reasonPhrase);
+
     if (response.statusCode == 200) {
       final respuesta =
           GetTrainerResponse.fromJson(await response.stream.bytesToString());
