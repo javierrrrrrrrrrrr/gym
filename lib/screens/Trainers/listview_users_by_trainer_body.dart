@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/models/Users/getUsersModel.dart';
 import 'package:gym/providers/providers.dart';
@@ -45,13 +47,22 @@ class ListUserBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final userProvider = Provider.of<UsersProvider>(context);
+    final userFormController = Provider.of<UserFormController>(context);
 
     return GestureDetector(
       onTap: () async {
-        userProvider.selectedUser = user.copyWith();
-        await userProvider.getObservationsByIdUser(user.id).whenComplete(() {
-          Navigator.pushNamed(context, 'lista_obs');
-        });
+        try {
+          userProvider.selectedUser = user.copyWith();
+
+          Navigator.pushNamed(context, 'view_userBytrainer');
+        } on Exception catch (e) {
+          ElegantNotification.error(
+            toastDuration: const Duration(milliseconds: 3000),
+            animation: ANIMATION.fromRight,
+            title: const Text('Error'),
+            description: const Text('Problemas de conexion'),
+          ).show(context);
+        }
       },
       child: SizedBox(
         height: width * 0.19,
@@ -125,12 +136,18 @@ class ListUserBody extends StatelessWidget {
               padding: EdgeInsets.only(right: width * 0.04),
               child: IconButton(
                 onPressed: () async {
-                  userProvider.selectedUser = user.copyWith();
-                  await userProvider
-                      .getObservationsByIdUser(user.id)
-                      .whenComplete(() {
-                    Navigator.pushNamed(context, 'lista_obs');
-                  });
+                  try {
+                    userProvider.selectedUser = user.copyWith();
+
+                    Navigator.pushNamed(context, 'view_userBytrainer');
+                  } on Exception catch (e) {
+                    ElegantNotification.error(
+                      toastDuration: const Duration(milliseconds: 3000),
+                      animation: ANIMATION.fromRight,
+                      title: const Text('Error'),
+                      description: const Text('Problemas de conexion'),
+                    ).show(context);
+                  }
                 },
                 icon: Icon(Icons.remove_red_eye_sharp, size: width * 0.09),
               ),

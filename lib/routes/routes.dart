@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gym/helpers/splash_screen.dart';
 import 'package:gym/screens/Trainers/trainer_dasboard.dart';
 import 'package:gym/screens/Trainers/users_by_trainers.dart';
+import 'package:gym/screens/Trainers/view_userBytrainer.dart';
 import 'package:gym/screens/Users/view_observaciones.dart';
 
 import 'package:gym/screens/pages.dart';
@@ -24,4 +25,5 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'view_obs': (BuildContext context) => const ViewObservaciones(),
   'lista_pagos': (BuildContext context) => const ListaPagos(),
   'charging_page': (BuildContext context) => const ChargingPage(),
+  'view_userBytrainer': (BuildContext context) => const ViewUserByTrainer(),
 };
