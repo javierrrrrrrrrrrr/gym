@@ -229,10 +229,10 @@ class _LoginPageState extends State<LoginPage> {
             if (resp == '') {
               Navigator.pop(context);
               if (loginProvider.userRole == 'ADMIN_ROLE') {
-                Navigator.pushReplacementNamed(context, 'admin');
+                Navigator.pushNamed(context, 'admin');
               }
               if (loginProvider.userRole == 'TRAINEE_ROLE') {
-                Navigator.pushReplacementNamed(context, 'trainer-dash');
+                Navigator.pushNamed(context, 'trainer-dash');
               }
             } else {
               Navigator.pop(context);

@@ -95,7 +95,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "DashBoard",
+                            "Dashboard",
                             style: TextStyle(fontSize: 30, color: Colors.white),
                           ),
                           Text("${diaSemana()} ${devolverFecha()}",
@@ -141,9 +141,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                               Navigator.pushNamed(context, 'users');
 
                               await userProvider.getUsersSinPagar();
-                            } on Exception catch (e) {
+                            } on Exception catch (error) {
                               Navigator.pop(context);
-                              print(e);
+
                               ElegantNotification.error(
                                 toastDuration:
                                     const Duration(milliseconds: 3000),
