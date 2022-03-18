@@ -1,5 +1,4 @@
 export 'package:gym/screens/Users/login_page.dart';
-export 'package:gym/screens/Users/panel_admin.dart';
 export 'package:gym/screens/Users/users.dart';
 export 'package:gym/screens/Users/add_user.dart';
 export 'package:gym/screens/Trainers/trainers.dart';
