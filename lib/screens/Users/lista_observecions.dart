@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
+import 'package:gym/providers/providers.dart';
 
 import 'package:provider/provider.dart';
-
-import '../../providers/providers.dart';
 
 class ListaObservaciones extends StatefulWidget {
   const ListaObservaciones({Key? key}) : super(key: key);
@@ -41,7 +40,6 @@ class _ListaObservacionesState extends State<ListaObservaciones> {
 
 class ListViewOB extends StatefulWidget {
   const ListViewOB({Key? key}) : super(key: key);
-
   @override
   State<ListViewOB> createState() => _ListViewOBState();
 }
