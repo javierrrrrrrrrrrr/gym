@@ -3,8 +3,6 @@ import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/listview_user_body.dart';
 import 'package:provider/provider.dart';
 
-import '../models/models.dart';
-
 class ListViewUsers extends StatefulWidget {
   const ListViewUsers({
     Key? key,
