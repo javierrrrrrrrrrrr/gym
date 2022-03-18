@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/helpers/page_transitions.dart';
@@ -548,7 +550,8 @@ class _EditUserState extends State<EditUser> {
                                           child: CircularProgressIndicator(),
                                         );
                                       });
-
+                               try{
+                                 
                                   String? userid =
                                       await userProvider.updateUser(
                                     idUserlogin: loginProvider.idUserLogin,
@@ -570,6 +573,21 @@ class _EditUserState extends State<EditUser> {
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                   }
+
+                               }on Exception {
+                                  Navigator.pop(context);
+
+                              ElegantNotification.error(
+                                toastDuration:
+                                    const Duration(milliseconds: 3000),
+                                animation: ANIMATION.fromTop,
+                                title: const Text('Error'),
+                                description:
+                                    const Text('Problemas de conexion'),
+                              ).show(context);
+
+
+                               }
                                 }
                               },
                             ),
@@ -727,11 +745,26 @@ Future<void> _showMyDialog(BuildContext context, String id) async {
                       child: CircularProgressIndicator(),
                     );
                   });
-              await userProvider.deleteUser(id);
+              try{
+                  await userProvider.deleteUser(id);
               Navigator.pop(context);
               Navigator.pop(context);
               Navigator.pop(context);
               //  Navigator.pushReplacementNamed(context, 'users');
+                            }on Exception {
+                              Navigator.pop(context);
+
+                              ElegantNotification.error(
+                                toastDuration:
+                                    const Duration(milliseconds: 3000),
+                                animation: ANIMATION.fromTop,
+                                title: const Text('Error'),
+                                description:
+                                    const Text('Problemas de conexion'),
+                              ).show(context);
+                            }
+
+            
             },
           ),
           TextButton(

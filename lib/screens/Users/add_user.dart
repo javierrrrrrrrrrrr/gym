@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 
@@ -459,21 +461,32 @@ class _AddUserState extends State<AddUser> {
                                 context,
                                 listen: false);
 
-                            final userId = await userProvider.createUser(
-                                user: userFormController.user!);
-                            if (imageProvider.imagePath != '') {
-                              await userProvider
-                                  .uploadImage(
-                                      imageProvider.imagePath!, userId!)
-                                  .whenComplete(() async {
+                            try {
+                              final userId = await userProvider.createUser(
+                                  user: userFormController.user!);
+                              if (imageProvider.imagePath != '') {
+                                await userProvider.uploadImage(
+                                    imageProvider.imagePath!, userId!);
+
                                 // await userProvider.getUsers();
                                 Navigator.pop(context);
                                 Navigator.pop(context);
-                              });
-                            } else {
-                              // await userProvider.getUsers();
+                              } else {
+                                // await userProvider.getUsers();
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
+                            } on Exception {
                               Navigator.pop(context);
-                              Navigator.pop(context);
+
+                              ElegantNotification.error(
+                                toastDuration:
+                                    const Duration(milliseconds: 3000),
+                                animation: ANIMATION.fromTop,
+                                title: const Text('Error'),
+                                description:
+                                    const Text('Problemas de conexion'),
+                              ).show(context);
                             }
                           }
                         },
