@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym/helpers/splash_screen.dart';
-import 'package:gym/screens/Trainers/trainer_dasboard.dart';
-import 'package:gym/screens/Trainers/users_by_trainers.dart';
-import 'package:gym/screens/Users/view_observaciones.dart';
 
 import 'package:gym/screens/pages.dart';
 
