@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
-import 'package:gym/models/trainer_model.dart';
+import 'package:gym/models/Trainers/trainer_model.dart';
 import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
@@ -522,7 +522,7 @@ class _EditUserState extends State<EditUser> {
                                 onChanged: (value) {
                                   Trainer? tra = value as Trainer?;
 
-                                  trainerId = tra!.uid;
+                                  userFormController.user!.trainer=tra!.uid;
 
                                   //falta entonces guaradr ese id y mandarlo en la peticion validando si se sellciono o no
                                   //y ver el tema de si hay que limpiar la variable y demas
@@ -550,7 +550,7 @@ class _EditUserState extends State<EditUser> {
                                   String? userid =
                                       await userProvider.updateUser(
                                     idUserlogin: loginProvider.idUserLogin,
-                                    trainerId: trainerId,
+                                    trainerId: userFormController.user!.trainer
                                     user: userFormController.user!,
                                   );
 

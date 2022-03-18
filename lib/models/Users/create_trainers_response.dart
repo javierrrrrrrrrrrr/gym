@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import '../trainer_model.dart';
+import '../Trainers/trainer_model.dart';
 
 class CreateTrainerResponse {
   CreateTrainerResponse({

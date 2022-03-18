@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/models/trainer_model.dart';
+import 'package:gym/models/Trainers/trainer_model.dart';
 
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/edit_trainer_img.dart';

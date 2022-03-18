@@ -1,6 +1,5 @@
 export 'package:gym/models/Users/createUserModel.dart';
 export 'package:gym/models/Users/getUsersModel.dart';
-export 'package:gym/models/Users/usersmodel.dart';
 export 'package:gym/models/Users/payments.dart';
 export 'package:gym/models/Users/uploadImgUserResponse.dart';
 export 'package:gym/models/Users/updateUserResponse.dart';

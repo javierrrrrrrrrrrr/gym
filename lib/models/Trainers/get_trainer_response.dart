@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'trainer_model.dart';
+import 'package:gym/models/Trainers/trainer_model.dart';
 
 class GetTrainerResponse {
   GetTrainerResponse({
