@@ -13,5 +13,5 @@ export 'package:gym/screens/Users/add_pago.dart';
 export 'package:gym/screens/Users/lista_observecions.dart';
 export 'package:gym/screens/Users/lista_pagos.dart';
 export 'package:gym/screens/charging_page.dart';
-export 'package:gym/screens/new_admin_page.dart';
+export 'package:gym/screens/admin_dashboard.dart';
 export '../screens/Trainers/edit_trainer.dart';

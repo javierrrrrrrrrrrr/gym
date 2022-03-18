@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/widgets/card.dart';
 import 'package:provider/provider.dart';
@@ -133,11 +135,24 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   );
                                 });
 
-                            await userProvider.getUsers().whenComplete(() {
+                            try {
+                              await userProvider.getUsers();
                               Navigator.pop(context);
                               Navigator.pushNamed(context, 'users');
-                            });
-                            await userProvider.getUsersSinPagar();
+
+                              await userProvider.getUsersSinPagar();
+                            } on Exception catch (e) {
+                              Navigator.pop(context);
+                              print(e);
+                              ElegantNotification.error(
+                                toastDuration:
+                                    const Duration(milliseconds: 3000),
+                                animation: ANIMATION.fromTop,
+                                title: const Text('Error'),
+                                description:
+                                    const Text('Problemas de conexion'),
+                              ).show(context);
+                            }
                           },
                           child: const Carta(
                             texto: "Clientes",
@@ -154,12 +169,23 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                     child: CircularProgressIndicator(),
                                   );
                                 });
-                            await trainerProvider
-                                .getTrainers()
-                                .whenComplete(() {
+                            try {
+                              await trainerProvider.getTrainers();
+
                               Navigator.pop(context);
                               Navigator.pushNamed(context, 'trainers');
-                            });
+                            } on Exception catch (e) {
+                              Navigator.pop(context);
+                              print(e);
+                              ElegantNotification.error(
+                                toastDuration:
+                                    const Duration(milliseconds: 3000),
+                                animation: ANIMATION.fromTop,
+                                title: const Text('Error'),
+                                description:
+                                    const Text('Problemas de conexion'),
+                              ).show(context);
+                            }
                           },
                           child: const Carta(
                             texto: "Entrenadores",
@@ -173,10 +199,21 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Carta(
-                          texto: "Insumos",
-                          imgurl: "assets/insumos.png",
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            ElegantNotification.info(
+                              toastDuration: const Duration(milliseconds: 3000),
+                              animation: ANIMATION.fromTop,
+                              title: const Text('Upss!!'),
+                              description: const Text(
+                                  'Para mas informacion contacte a los desarrolladores'),
+                            ).show(context);
+                          },
+                          child: const Carta(
+                            texto: "Insumos",
+                            imgurl: "assets/insumos.png",
+                          ),
                         ),
                         Carta(
                           texto: "Estadisticas",

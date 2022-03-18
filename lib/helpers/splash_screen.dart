@@ -16,14 +16,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Future verificarCredenciales() async {
-      final loginProvaider = Provider.of<LoginProvider>(context, listen: false);
-      String recordar = await loginProvaider.readDataFromStorage('recordar');
-      if (recordar == "true") {
-        loginProvaider.recordarContrasena = true;
-        loginProvaider.contrsenaGuardada =
-            await loginProvaider.readDataFromStorage('contrasena');
-        loginProvaider.usuarioGuardado =
-            await loginProvaider.readDataFromStorage('usuario');
+      try {
+        final loginProvaider =
+            Provider.of<LoginProvider>(context, listen: false);
+        String recordar = await loginProvaider.readDataFromStorage('recordar');
+        if (recordar == "true") {
+          loginProvaider.recordarContrasena = true;
+          loginProvaider.contrsenaGuardada =
+              await loginProvaider.readDataFromStorage('contrasena');
+          loginProvaider.usuarioGuardado =
+              await loginProvaider.readDataFromStorage('usuario');
+        }
+      } on Exception catch (e) {
+        Navigator.pushReplacementNamed(context, 'login');
       }
     }
 
