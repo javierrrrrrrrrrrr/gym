@@ -1,3 +1,5 @@
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
@@ -207,17 +209,29 @@ class _PagosState extends State<Pagos> {
                                       );
                                     });
 
-                                await userProvider
-                                    .createPaymnet(
-                                        id: user.id,
-                                        amount: paymentProvider.amount,
-                                        comment: paymentProvider.comentario,
-                                        mounth: paymentProvider.cantMeses)
-                                    .whenComplete(() async {
+                                try {
+                                  await userProvider.createPaymnet(
+                                      id: user.id,
+                                      amount: paymentProvider.amount,
+                                      comment: paymentProvider.comentario,
+                                      mounth: paymentProvider.cantMeses);
+
                                   Navigator.pop(context);
                                   Navigator.pop(context);
                                   // Navigator.pushReplacementNamed(context, 'lista_pagos');
-                                });
+
+                                } on Exception {
+                                  Navigator.pop(context);
+
+                                  ElegantNotification.error(
+                                    toastDuration:
+                                        const Duration(milliseconds: 3000),
+                                    animation: ANIMATION.fromTop,
+                                    title: const Text('Error'),
+                                    description:
+                                        const Text('Problemas de conexion'),
+                                  ).show(context);
+                                }
                               }
                             },
                             title: "Añadir Pago")),
