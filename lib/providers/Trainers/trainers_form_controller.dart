@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/trainer_model.dart';
+import '../../models/Trainers/trainer_model.dart';
 
 class TrainersFormController extends ChangeNotifier {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
 import 'package:gym/models/models.dart';
-import 'package:gym/models/trainer_model.dart';
+import 'package:gym/models/Trainers/trainer_model.dart';
 import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';

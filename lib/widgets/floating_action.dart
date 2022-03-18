@@ -3,7 +3,7 @@ import 'package:gym/models/models.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:provider/provider.dart';
 
-import '../models/trainer_model.dart';
+import '../models/Trainers/trainer_model.dart';
 
 class FloatingABCustom extends StatelessWidget {
   const FloatingABCustom({

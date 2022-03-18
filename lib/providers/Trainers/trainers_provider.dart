@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:gym/models/Users/create_trainers_response.dart';
-import 'package:gym/models/edit_trainer_response.dart';
-import 'package:gym/models/get_trainer_response.dart';
+import 'package:gym/models/Trainers/edit_trainer_response.dart';
+import 'package:gym/models/Trainers/get_trainer_response.dart';
 import 'package:gym/models/models.dart';
-import 'package:gym/models/trainer_model.dart';
+import 'package:gym/models/Trainers/trainer_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
