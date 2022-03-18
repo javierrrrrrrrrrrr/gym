@@ -58,7 +58,7 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                                   placeholder:
                                       const AssetImage('assets/images.jpg'),
                                   image: NetworkImage(
-                                      'http://78.108.216.56:3000/api/uploads/users/${trainer.uid}'),
+                                      'http://181.225.253.122:3000/api/uploads/users/${trainer.uid}'),
                                   placeholderFit: BoxFit.cover,
                                 ),
                               ),
