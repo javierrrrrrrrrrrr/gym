@@ -215,9 +215,20 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             imgurl: "assets/insumos.png",
                           ),
                         ),
-                        Carta(
-                          texto: "Estadisticas",
-                          imgurl: "assets/estadisticas.png",
+                        GestureDetector(
+                          onTap: () {
+                            ElegantNotification.info(
+                              toastDuration: const Duration(milliseconds: 3000),
+                              animation: ANIMATION.fromTop,
+                              title: const Text('Upss!!'),
+                              description: const Text(
+                                  'Para mas informacion contacte a los desarrolladores'),
+                            ).show(context);
+                          },
+                          child: const Carta(
+                            texto: "Estadisticas",
+                            imgurl: "assets/estadisticas.png",
+                          ),
                         ),
                       ],
                     )
