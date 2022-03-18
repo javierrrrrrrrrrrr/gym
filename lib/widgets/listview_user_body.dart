@@ -20,10 +20,19 @@ class ListViewUserBody extends StatelessWidget {
 
     return GestureDetector(
       onTap: () async {
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (BuildContext context) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            });
         userProvider.selectedUser = user.copyWith();
         userFormController.user = user.copyWith();
 
         trainerProvider.getTrainers();
+        Navigator.pop(context);
         Navigator.pushNamed(context, 'edit_user');
       },
       child: SizedBox(
@@ -98,13 +107,20 @@ class ListViewUserBody extends StatelessWidget {
               padding: EdgeInsets.only(right: width * 0.04),
               child: IconButton(
                 onPressed: () async {
-                  final trainerProvaider =
-                      Provider.of<TrainerProvider>(context, listen: false);
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      });
                   userProvider.selectedUser = user.copyWith();
                   userFormController.user = user.copyWith();
 
-                  await trainerProvaider.getTrainers().whenComplete(
-                      () => Navigator.pushNamed(context, 'edit_user'));
+                  trainerProvider.getTrainers();
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, 'edit_user');
                 },
                 icon: Icon(Icons.edit, size: width * 0.09),
               ),
