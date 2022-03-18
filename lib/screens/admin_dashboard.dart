@@ -63,63 +63,69 @@ class _AdminDashboardState extends State<AdminDashboard> {
     final userProvider = Provider.of<UsersProvider>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
 
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
-              height: 300,
+              height: width * 0.7653,
               width: double.infinity,
               color: const Color.fromRGBO(45, 49, 146, 1),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 65),
+                      padding: EdgeInsets.only(top: width * 0.16),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
+                        children: [
                           Padding(
-                            padding: EdgeInsets.only(right: 20),
+                            padding: EdgeInsets.only(right: width * 0.05),
                             child: CircleAvatar(
-                              radius: 28,
-                              backgroundImage: AssetImage('assets/images.jpg'),
+                              radius: width * 0.07129,
+                              backgroundImage:
+                                  const AssetImage('assets/images.jpg'),
                             ),
                           )
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 30),
+                      padding: EdgeInsets.only(
+                          top: width * 0.07639, left: width * 0.07639),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Dashboard",
-                            style: TextStyle(fontSize: 30, color: Colors.white),
+                            style: TextStyle(
+                                fontSize: width * 0.07639, color: Colors.white),
                           ),
                           Text("${diaSemana()} ${devolverFecha()}",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white)),
+                              style: TextStyle(
+                                  fontSize: width * 0.04583,
+                                  color: Colors.white)),
                         ],
                       ),
                     ),
                   ]),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 250),
+              padding: EdgeInsets.only(top: width * 0.6365),
               child: Container(
-                height: 600,
+                height: width * 1.5278,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(43),
-                        topRight: Radius.circular(43))),
+                        topLeft: Radius.circular(width * 0.115),
+                        topRight: Radius.circular(width * 0.115))),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 60,
+                    SizedBox(
+                      height: width * 0.15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -194,8 +200,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: width * 0.07639,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

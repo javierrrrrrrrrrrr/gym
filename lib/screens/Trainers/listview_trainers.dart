@@ -5,8 +5,6 @@ import 'package:gym/widgets/listview_trainer_body.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../providers/Trainers/trainers_provider.dart';
-
 class ListViewTrainers extends StatefulWidget {
   const ListViewTrainers({
     Key? key,
