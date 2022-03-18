@@ -27,11 +27,13 @@ class _UsersPageState extends State<UsersPage> {
         actions: [
           (userProvider.sinPagar == false)
               ? IconButton(
+                  iconSize: width * 0.080,
                   onPressed: () {
                     userProvider.sinPagar = true;
                   },
                   icon: const Icon(Icons.attach_money))
               : IconButton(
+                  iconSize: width * 0.080,
                   onPressed: () {
                     userProvider.sinPagar = false;
                   },
@@ -42,7 +44,7 @@ class _UsersPageState extends State<UsersPage> {
             },
             icon: Icon(
               Icons.search,
-              color: const Color.fromRGBO(150, 152, 154, 0.5),
+              color: Colors.white,
               size: width * 0.080,
             ),
           ),

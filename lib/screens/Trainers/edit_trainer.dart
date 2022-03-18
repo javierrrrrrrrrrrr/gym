@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/models/trainer_model.dart';
-import 'package:gym/providers/Trainers/trainers_form_controller.dart';
-import 'package:gym/providers/Trainers/trainers_provider.dart';
+
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/edit_trainer_img.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +44,7 @@ class _EditTrainerState extends State<EditTrainer> {
     final width = MediaQuery.of(context).size.width;
     final imageProvider = Provider.of<SelectImg>(context, listen: false);
     return Scaffold(
-      appBar: customAppbar(context, width: width, title: "Editar Cliente"),
+      appBar: customAppbar(context, width: width, title: "Editar Entrenador"),
       body: Stack(
         children: [
           Stack(

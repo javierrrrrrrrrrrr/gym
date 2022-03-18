@@ -17,24 +17,13 @@ class _TrainerPageState extends State<TrainerPage> {
         appBar: customAppbar(
           context,
           width: width,
-          title: "GYM Fitness Model",
+          title: "Entrenadores",
           leading: IconButton(
               onPressed: (() {
                 Navigator.pop(context);
               }),
               icon: const Icon(Icons.arrow_back)),
-          actions: [
-            IconButton(
-              onPressed: () {
-                //showSearch(context: context, delegate: UserSerch());
-              },
-              icon: Icon(
-                Icons.search,
-                color: Colors.white,
-                size: width * 0.080,
-              ),
-            ),
-          ],
+          actions: [],
         ),
         body: Column(
           children: const [ListViewTrainers()],

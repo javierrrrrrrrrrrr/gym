@@ -50,7 +50,6 @@ class TrainerProvider extends ChangeNotifier {
 
       return '';
     } else {
-      print(response.reasonPhrase);
       return '';
     }
   }
@@ -66,7 +65,7 @@ class TrainerProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(response.statusCode);
+
     if (response.statusCode == 200) {
       final respuesta =
           CreateTrainerResponse.fromJson(await response.stream.bytesToString());
@@ -106,6 +105,7 @@ class TrainerProvider extends ChangeNotifier {
       notifyListeners();
       return respuesta.client;
     }
+    return null;
   }
 
   Future<Trainer?> deleteTrainer(Trainer trainer) async {
@@ -126,9 +126,8 @@ class TrainerProvider extends ChangeNotifier {
           trainers.indexWhere((element) => element.uid == trainer.uid);
       trainers.removeAt(index);
       notifyListeners();
-    } else {
-      print(response.reasonPhrase);
     }
+    return null;
   }
 
   Future<List<User>> getUsersByTrainerId(String trainerId) async {
@@ -153,7 +152,6 @@ class TrainerProvider extends ChangeNotifier {
 
       return usersByTrainer;
     } else {
-      print(response.reasonPhrase);
       return [];
     }
   }
