@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/elegant_notification.dart';
+import 'package:gym/helpers/page_transitions.dart';
+import 'package:gym/screens/Trainers/trainer_dasboard.dart';
+import 'package:gym/screens/admin_dashboard.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gym/providers/providers.dart';
@@ -230,10 +233,18 @@ class _LoginPageState extends State<LoginPage> {
             if (resp == '') {
               Navigator.pop(context);
               if (loginProvider.userRole == 'ADMIN_ROLE') {
-                Navigator.pushNamed(context, 'admin');
+                Navigator.push(
+                    context,
+                    crearRuta(
+                      screen: const AdminDashboard(),
+                    ));
               }
               if (loginProvider.userRole == 'TRAINEE_ROLE') {
-                Navigator.pushNamed(context, 'trainer-dash');
+                Navigator.push(
+                    context,
+                    crearRuta(
+                      screen: const TrainerDasboard(),
+                    ));
               }
             } else {
               Navigator.pop(context);

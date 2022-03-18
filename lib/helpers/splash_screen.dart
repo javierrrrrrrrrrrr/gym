@@ -4,6 +4,7 @@ import 'package:gym/screens/pages.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/login_provider.dart';
+import 'page_transitions.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -28,7 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
               await loginProvaider.readDataFromStorage('usuario');
         }
       } on Exception {
-        Navigator.pushReplacementNamed(context, 'login');
+        Navigator.pushReplacement(
+            context, crearRuta(screen: const LoginPage()));
       }
     }
 

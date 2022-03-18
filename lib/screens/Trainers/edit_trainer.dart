@@ -266,7 +266,6 @@ Future<void> _showMyDialog(BuildContext context, Trainer trainer) async {
               Navigator.pop(context);
               Navigator.pop(context);
               Navigator.pop(context);
-              //  Navigator.pushReplacementNamed(context, 'trainers');
             },
           ),
           TextButton(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/providers/providers.dart';
+import 'package:gym/screens/pages.dart';
 
 import 'package:provider/provider.dart';
 
@@ -27,7 +29,7 @@ class _ListaObservacionesState extends State<ListaObservaciones> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
           onPressed: () {
-            Navigator.pushNamed(context, 'ob');
+            Navigator.push(context, crearRuta(screen: const Observ()));
           },
           child: const Icon(
             Icons.remove_red_eye_sharp,
@@ -82,7 +84,12 @@ class ObservationListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, 'view_obs', arguments: index);
+        Navigator.push(
+          context,
+          crearRuta(
+            screen: ViewObservaciones(index: index),
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),

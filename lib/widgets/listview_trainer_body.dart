@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/Trainers/trainer_model.dart';
 import 'package:gym/providers/providers.dart';
+import 'package:gym/screens/Trainers/edit_trainer.dart';
 import 'package:provider/provider.dart';
 
 class ListViewTrainerBody extends StatelessWidget {
@@ -21,7 +23,7 @@ class ListViewTrainerBody extends StatelessWidget {
         trainerProvider.selectedTrainer = trainer.copyWith();
         trainerFormController.trainer = trainer.copyWith();
 
-        Navigator.pushNamed(context, 'edit_trainer');
+        Navigator.push(context, crearRuta(screen: const EditTrainer()));
       },
       child: Padding(
         padding: EdgeInsets.only(left: width * 0.025),
@@ -88,7 +90,8 @@ class ListViewTrainerBody extends StatelessWidget {
                     trainerProvider.selectedTrainer = trainer.copyWith();
                     trainerFormController.trainer = trainer.copyWith();
 
-                    Navigator.pushNamed(context, 'edit_trainer');
+                    Navigator.push(
+                        context, crearRuta(screen: const EditTrainer()));
                   },
                   icon: const Icon(Icons.edit, size: 35),
                 ),

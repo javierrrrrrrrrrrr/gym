@@ -1,8 +1,10 @@
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/Users/getUsersModel.dart';
 import 'package:gym/providers/providers.dart';
+import 'package:gym/screens/Trainers/view_userBytrainer.dart';
 import 'package:provider/provider.dart';
 
 class UsersByTrainerListView extends StatefulWidget {
@@ -53,7 +55,7 @@ class ListUserBody extends StatelessWidget {
         try {
           userProvider.selectedUser = user.copyWith();
 
-          Navigator.pushNamed(context, 'view_userBytrainer');
+          Navigator.push(context, crearRuta(screen: const ViewUserByTrainer()));
         } on Exception {
           ElegantNotification.error(
             toastDuration: const Duration(milliseconds: 3000),
@@ -138,7 +140,8 @@ class ListUserBody extends StatelessWidget {
                   try {
                     userProvider.selectedUser = user.copyWith();
 
-                    Navigator.pushNamed(context, 'view_userBytrainer');
+                    Navigator.push(
+                        context, crearRuta(screen: const ViewUserByTrainer()));
                   } on Exception {
                     ElegantNotification.error(
                       toastDuration: const Duration(milliseconds: 3000),

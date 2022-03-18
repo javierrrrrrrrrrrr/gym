@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/providers/providers.dart';
+import 'package:gym/screens/pages.dart';
 import 'package:gym/widgets/card.dart';
 import 'package:provider/provider.dart';
 
@@ -142,7 +144,8 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
                                       loginProvider.idUserLogin)
                                   .whenComplete(() {
                                 Navigator.pop(context);
-                                Navigator.pushNamed(context, 'users-trainer');
+                                Navigator.push(context,
+                                    crearRuta(screen: const UsersByTrainer()));
                               });
                               //:TODO Hacer el Metodo de devolver la lista de users del trainer.
                             },

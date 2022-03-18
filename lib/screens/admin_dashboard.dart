@@ -1,6 +1,9 @@
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/page_transitions.dart';
+import 'package:gym/screens/Users/users.dart';
+import 'package:gym/screens/pages.dart';
 import 'package:gym/widgets/card.dart';
 import 'package:provider/provider.dart';
 
@@ -144,7 +147,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             try {
                               await userProvider.getUsers();
                               Navigator.pop(context);
-                              Navigator.pushNamed(context, 'users');
+
+                              Navigator.push(context,
+                                  crearRuta(screen: const UsersPage()));
 
                               await userProvider.getUsersSinPagar();
                             } on Exception {
@@ -179,7 +184,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                               await trainerProvider.getTrainers();
 
                               Navigator.pop(context);
-                              Navigator.pushNamed(context, 'trainers');
+                              Navigator.push(context,
+                                  crearRuta(screen: const TrainerPage()));
                             } on Exception {
                               Navigator.pop(context);
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/providers/providers.dart';
+import 'package:gym/screens/pages.dart';
 import 'package:provider/provider.dart';
 
 class ListaPagos extends StatelessWidget {
@@ -18,7 +20,7 @@ class ListaPagos extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromRGBO(45, 49, 146, 1),
         onPressed: () {
-          Navigator.pushNamed(context, 'pago');
+          Navigator.push(context, crearRuta(screen: const Pagos()));
         },
         child: const Icon(
           Icons.payments_outlined,

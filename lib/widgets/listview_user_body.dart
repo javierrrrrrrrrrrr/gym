@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/providers/providers.dart';
+import 'package:gym/screens/Users/edit_user.dart';
 import 'package:provider/provider.dart';
 
 class ListViewUserBody extends StatelessWidget {
@@ -33,7 +35,7 @@ class ListViewUserBody extends StatelessWidget {
 
         trainerProvider.getTrainers();
         Navigator.pop(context);
-        Navigator.pushNamed(context, 'edit_user');
+        Navigator.push(context, crearRuta(screen: const EditUser()));
       },
       child: SizedBox(
         height: width * 0.19,
@@ -120,7 +122,7 @@ class ListViewUserBody extends StatelessWidget {
 
                   trainerProvider.getTrainers();
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, 'edit_user');
+                  Navigator.push(context, crearRuta(screen: const EditUser()));
                 },
                 icon: Icon(Icons.edit, size: width * 0.09),
               ),

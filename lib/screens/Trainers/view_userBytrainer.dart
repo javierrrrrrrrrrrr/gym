@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/models.dart';
+import 'package:gym/screens/pages.dart';
 
 import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
@@ -220,7 +222,8 @@ class MenuLateral extends StatelessWidget {
                   .getObservationsByIdUser(user.id)
                   .whenComplete(() {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, 'lista_obs');
+                Navigator.push(
+                    context, crearRuta(screen: const ListaObservaciones()));
               });
             },
           ),

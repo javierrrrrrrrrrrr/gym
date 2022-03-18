@@ -6,7 +6,8 @@ import '../../providers/providers.dart';
 import '../../widgets/widgets.dart';
 
 class ViewObservaciones extends StatefulWidget {
-  const ViewObservaciones({Key? key}) : super(key: key);
+  const ViewObservaciones({Key? key, this.index}) : super(key: key);
+  final int? index;
 
   @override
   State<ViewObservaciones> createState() => _ObservState();

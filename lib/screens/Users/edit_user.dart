@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/custom_appbar.dart';
+import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/models/Trainers/trainer_model.dart';
+import 'package:gym/screens/pages.dart';
 import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
@@ -652,7 +654,7 @@ class MenuLateral extends StatelessWidget {
                   .getAllPaymentsByUserId(user.id)
                   .whenComplete(() {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, 'lista_pagos');
+                Navigator.push(context, crearRuta(screen:const ListaPagos()) );
               });
             },
           ),
@@ -678,7 +680,7 @@ class MenuLateral extends StatelessWidget {
                   .getObservationsByIdUser(user.id)
                   .whenComplete(() {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, 'lista_obs');
+                Navigator.push(context, crearRuta(screen: const ListaObservaciones()));
               });
             },
           ),
