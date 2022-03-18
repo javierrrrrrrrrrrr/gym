@@ -70,7 +70,7 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
             Container(
               height: 300,
               width: double.infinity,
-              color: Colors.blue,
+              color: const Color.fromRGBO(45, 49, 146, 1),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gym/screens/Trainers/view_userBytrainer.dart';
-
 import 'package:gym/screens/pages.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
