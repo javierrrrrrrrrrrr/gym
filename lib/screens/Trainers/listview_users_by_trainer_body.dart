@@ -47,7 +47,6 @@ class ListUserBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final userProvider = Provider.of<UsersProvider>(context);
-    final userFormController = Provider.of<UserFormController>(context);
 
     return GestureDetector(
       onTap: () async {
@@ -55,7 +54,7 @@ class ListUserBody extends StatelessWidget {
           userProvider.selectedUser = user.copyWith();
 
           Navigator.pushNamed(context, 'view_userBytrainer');
-        } on Exception catch (e) {
+        } on Exception {
           ElegantNotification.error(
             toastDuration: const Duration(milliseconds: 3000),
             animation: ANIMATION.fromRight,
@@ -140,7 +139,7 @@ class ListUserBody extends StatelessWidget {
                     userProvider.selectedUser = user.copyWith();
 
                     Navigator.pushNamed(context, 'view_userBytrainer');
-                  } on Exception catch (e) {
+                  } on Exception {
                     ElegantNotification.error(
                       toastDuration: const Duration(milliseconds: 3000),
                       animation: ANIMATION.fromRight,

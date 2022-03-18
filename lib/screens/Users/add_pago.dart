@@ -27,7 +27,7 @@ class _PagosState extends State<Pagos> {
     super.initState();
   }
 
-  String CalcularXmes() {
+  String calcularXmes() {
     total = 0;
     setState(() {
       total = cantidadPago / cantidadMeses;
@@ -69,6 +69,7 @@ class _PagosState extends State<Pagos> {
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       onChanged: ((value) {
+                        // ignore: unnecessary_null_comparison
                         if (value != null && value != '') {
                           try {
                             cantidadPago = int.parse(value);
@@ -76,7 +77,7 @@ class _PagosState extends State<Pagos> {
                             value = '';
                           }
                         }
-                        CalcularXmes();
+                        calcularXmes();
                         paymentProvider.amount = value;
                       }),
                       width: width,
@@ -115,13 +116,14 @@ class _PagosState extends State<Pagos> {
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       onChanged: ((value) {
+                        // ignore: unnecessary_null_comparison
                         if (value != null && value != '') {
                           try {
                             cantidadMeses = int.parse(value);
                           } catch (e) {
                             value = '';
                           }
-                          CalcularXmes();
+                          calcularXmes();
                           paymentProvider.cantMeses = value;
                         }
                       }),
@@ -154,7 +156,7 @@ class _PagosState extends State<Pagos> {
                       keyboardType: TextInputType.text,
                       onChanged: ((value) {}),
                       width: width,
-                      hinttext: CalcularXmes() + ' CUP por cada Mes ',
+                      hinttext: calcularXmes() + ' CUP por cada Mes ',
                     ),
                     const SizedBox(
                       height: 15,

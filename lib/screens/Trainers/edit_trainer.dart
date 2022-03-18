@@ -143,6 +143,7 @@ class _EditTrainerState extends State<EditTrainer> {
                                 // loginController.password = value;
                                 trainerFormController.password = value;
                                 setState(() {
+                                  // ignore: unnecessary_null_comparison
                                   if ((value != null && value.length > 5)) {
                                     _validatePassword = true;
                                   } else {

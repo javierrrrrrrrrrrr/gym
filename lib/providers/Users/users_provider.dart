@@ -90,7 +90,7 @@ class UsersProvider extends ChangeNotifier {
         usersSinPagar.add(users[i]);
       }
     }
-    print(usersSinPagar.length);
+
     return usersSinPagar;
   }
 
@@ -115,7 +115,6 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(response.reasonPhrase);
 
     final respuesta =
         CreateUserResponse.fromJson(await response.stream.bytesToString());
@@ -157,7 +156,7 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(response.statusCode);
+
     final respuesta =
         UpdateUserResponse.fromJson(await response.stream.bytesToString());
 
@@ -204,9 +203,7 @@ class UsersProvider extends ChangeNotifier {
 
     imgCreateUser = respuesta.client!.img!;
     notifyListeners();
-    if (response.statusCode == 200) {
-      print('Userid del cliente' + await response.stream.bytesToString());
-    } else {}
+    if (response.statusCode == 200) {}
   }
 
   Future uploadImage(String path, String userid) async {
@@ -342,8 +339,6 @@ class UsersProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
       return payments;
-    } else {
-      print(response.reasonPhrase);
     }
   }
 
@@ -364,8 +359,6 @@ class UsersProvider extends ChangeNotifier {
       payments.remove(payments[index]);
       selectedUser!.active = false;
       notifyListeners();
-    } else {
-      print(response.reasonPhrase);
     }
   }
 
@@ -395,8 +388,6 @@ class UsersProvider extends ChangeNotifier {
 
     if (response.statusCode == 200) {
       return observation;
-    } else {
-      print(response.reasonPhrase);
     }
   }
 
@@ -420,7 +411,7 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(response.reasonPhrase);
+
     final respuesta = CreateObservationResponse.fromJson(
         await response.stream.bytesToString());
 
@@ -440,9 +431,8 @@ class UsersProvider extends ChangeNotifier {
       observation.add(obs);
       notifyListeners();
       return obs;
-    } else {
-      print(response.reasonPhrase);
     }
+    return null;
   }
 
   deleteObservation(String idOb) async {
@@ -458,8 +448,6 @@ class UsersProvider extends ChangeNotifier {
       final index = observation.indexWhere((element) => element.id == idOb);
       observation.remove(observation[index]);
       notifyListeners();
-    } else {
-      print(response.reasonPhrase);
     }
   }
 }

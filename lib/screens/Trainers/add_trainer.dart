@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/providers/Users/image_provider.dart';
-import 'package:gym/providers/Users/users_provider.dart';
+
 import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +27,6 @@ class _AddTrainerState extends State<AddTrainer> {
     imageProvider.imagePath = "";
   }
 
-  @override
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -152,6 +151,7 @@ class _AddTrainerState extends State<AddTrainer> {
                       trainerFormController.password = value;
 
                       setState(() {
+                        // ignore: unnecessary_null_comparison
                         if ((value != null && value.length > 5)) {
                           _validatePassword = true;
                         } else {

@@ -131,6 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                             loginController.password = value;
 
                             setState(() {
+                              // ignore: unnecessary_null_comparison
                               if ((value != null && value.length > 5)) {
                                 loginProvaider.recordarContrasena
                                     ? _validatePassword = false

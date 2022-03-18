@@ -56,6 +56,7 @@ class SelectImg extends ChangeNotifier {
       img = croppedFile ?? img;
       // print(img.lengthSync());
       notifyListeners();
+      // ignore: empty_catches
     } catch (e) {}
   }
 

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/Trainers/trainers_provider.dart';
-import 'package:gym/providers/Users/users_provider.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/card.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +57,6 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UsersProvider>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
     final loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(

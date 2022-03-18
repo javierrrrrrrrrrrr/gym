@@ -31,7 +31,7 @@ class _ObservState extends State<ViewObservaciones> {
     final userProvider = Provider.of<UsersProvider>(context);
 
     final int index = ModalRoute.of(context)!.settings.arguments as int;
-    print(index);
+
     return Scaffold(
       appBar: customAppbar(context, width: width, title: "Observacion"),
       backgroundColor: const Color.fromRGBO(253, 254, 255, 1),

@@ -39,7 +39,7 @@ class LoginProvider extends ChangeNotifier {
       idUserLogin = decodedResp["user"]["uid"];
 
       userRole = decodedResp["user"]["rol"];
-      print(userRole);
+
       notifyListeners();
       return "";
     } else {

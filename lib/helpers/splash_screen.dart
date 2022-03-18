@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
           loginProvaider.usuarioGuardado =
               await loginProvaider.readDataFromStorage('usuario');
         }
-      } on Exception catch (e) {
+      } on Exception {
         Navigator.pushReplacementNamed(context, 'login');
       }
     }

@@ -77,7 +77,7 @@ class _EditUserState extends State<EditUser> {
     final imageProvider = Provider.of<SelectImg>(context, listen: false);
     final loginProvider = Provider.of<LoginProvider>(context, listen: false);
     User user = userProvider.selectedUser!;
-    String? trainerId = '';
+    
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(253, 254, 255, 1),

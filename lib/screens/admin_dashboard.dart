@@ -141,7 +141,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                               Navigator.pushNamed(context, 'users');
 
                               await userProvider.getUsersSinPagar();
-                            } on Exception catch (error) {
+                            } on Exception {
                               Navigator.pop(context);
 
                               ElegantNotification.error(
@@ -174,9 +174,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
                               Navigator.pop(context);
                               Navigator.pushNamed(context, 'trainers');
-                            } on Exception catch (e) {
+                            } on Exception {
                               Navigator.pop(context);
-                              print(e);
+
                               ElegantNotification.error(
                                 toastDuration:
                                     const Duration(milliseconds: 3000),
