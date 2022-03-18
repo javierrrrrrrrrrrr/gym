@@ -38,13 +38,13 @@ class _ObservState extends State<ViewObservaciones> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 270),
+            padding: EdgeInsets.only(top: width * 0.6875),
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: width * 0.05,
                   ),
                   InputFieldWidget(
                     enabled: false,
@@ -59,8 +59,8 @@ class _ObservState extends State<ViewObservaciones> {
                     hinttext: "",
                     onChanged: null,
                   ),
-                  const SizedBox(
-                    height: 25,
+                  SizedBox(
+                    height: width * 0.06365,
                   ),
                   InputFieldWidget(
                     icon: false,
@@ -74,15 +74,16 @@ class _ObservState extends State<ViewObservaciones> {
                     hinttext: "Comentario de la Observacion",
                     onChanged: (value) {},
                   ),
-                  const SizedBox(
-                    height: 16,
+                  SizedBox(
+                    height: width * 0.04,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       SizedBox(
-                        width: 95,
+                        width: width * 0.2419,
                         child: textFormFieldChiquito(
+                            width: width,
                             keyboardType: TextInputType.number,
                             text: "Peso",
                             initialvalue: userProvider.observation[index].weight
@@ -90,8 +91,9 @@ class _ObservState extends State<ViewObservaciones> {
                             onChanged: (value) {}),
                       ),
                       SizedBox(
-                        width: 95,
+                        width: width * 0.2419,
                         child: textFormFieldChiquito(
+                            width: width,
                             keyboardType: TextInputType.number,
                             text: "IMC",
                             initialvalue:
@@ -99,8 +101,9 @@ class _ObservState extends State<ViewObservaciones> {
                             onChanged: (value) {}),
                       ),
                       SizedBox(
-                        width: 95,
+                        width: width * 0.2419,
                         child: textFormFieldChiquito(
+                            width: width,
                             keyboardType: TextInputType.number,
                             initialvalue:
                                 userProvider.observation[index].icc.toString(),
@@ -109,8 +112,8 @@ class _ObservState extends State<ViewObservaciones> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: width * 0.05,
                   ),
                 ],
               ),
@@ -123,7 +126,8 @@ class _ObservState extends State<ViewObservaciones> {
   }
 
   Stack textFormFieldChiquito(
-      {required String text,
+      {required double width,
+      required String text,
       required final TextInputType? keyboardType,
       bool? validateIcon,
       String? initialvalue,
@@ -139,6 +143,7 @@ class _ObservState extends State<ViewObservaciones> {
             initialValue: initialvalue,
             decoration: _inputDecoration(
               text,
+              width,
             )),
       ],
     );
@@ -146,16 +151,18 @@ class _ObservState extends State<ViewObservaciones> {
 
   InputDecoration _inputDecoration(
     String text,
+    double width,
   ) {
     return InputDecoration(
-      contentPadding: const EdgeInsets.only(left: 10, right: 35),
-      border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12))),
-      enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
-          borderRadius: BorderRadius.all(Radius.circular(12))),
+      contentPadding:
+          EdgeInsets.only(left: width * 0.0254, right: width * 0.09),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.0254))),
+      enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color.fromRGBO(45, 49, 146, 1)),
+          borderRadius: BorderRadius.all(Radius.circular(width * 0.0254))),
       hintText: text,
-      hintStyle: const TextStyle(color: Colors.black54, fontSize: 16),
+      hintStyle: TextStyle(color: Colors.black54, fontSize: width * 0.04),
     );
   }
 }

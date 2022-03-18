@@ -13,9 +13,10 @@ class ChargingPage extends StatefulWidget {
 class ChargingPageState extends State<ChargingPage> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     final userProvider = Provider.of<UsersProvider>(context);
     return (Container(
-      height: 600,
+      height: width * 1.5278,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: Column(
