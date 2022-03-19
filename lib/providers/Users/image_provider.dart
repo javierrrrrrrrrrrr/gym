@@ -12,24 +12,28 @@ class SelectImg extends ChangeNotifier {
   final ImagePicker _picker = ImagePicker();
   ImageCropper crop = ImageCropper();
 
-  late File img;
+  File? img;
 
   pikeImage() async {
-    final photo = await _picker.pickImage(
-        source: ImageSource.camera,
-        imageQuality: 100,
-        maxHeight: 900,
-        maxWidth: 600);
-    if (photo != null) {
-      img = File(photo.path);
-      // print(img.lengthSync());
-      imagePath = photo.path;
-      notifyListeners();
-    }
+    try {
+      final photo = await _picker.pickImage(
+          source: ImageSource.camera,
+          imageQuality: 100,
+          maxHeight: 900,
+          maxWidth: 600);
+      if (photo != null) {
+        img = File(photo.path);
+        // print(img.lengthSync());
+        imagePath = photo.path;
+        notifyListeners();
+      }
 
-    lowImgQuality(img, imagePath!);
-    // print(img.lengthSync());
-    notifyListeners();
+      lowImgQuality(img!, imagePath!);
+      // print(img.lengthSync());
+      notifyListeners();
+    } catch (e) {
+      print('error');
+    }
   }
 
   cropFile() async {
