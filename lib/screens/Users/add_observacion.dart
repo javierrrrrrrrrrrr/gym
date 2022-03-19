@@ -31,6 +31,7 @@ class _ObservState extends State<Observ> {
     obervableController.peso = '';
   }
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -47,7 +48,7 @@ class _ObservState extends State<Observ> {
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Form(
-                key: obervableController.formkey,
+                key: _formKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Column(
                   children: [
@@ -128,7 +129,10 @@ class _ObservState extends State<Observ> {
                               validator: (value) {
                                 var edad = RegExp(r'^([0-9])*$');
 
-                                if (edad.hasMatch(value!) && value.length < 3) {
+                                if (edad.hasMatch(value ?? "") &&
+                                    value != null &&
+                                    value.length < 3 &&
+                                    value != "") {
                                   return null;
                                 } else {
                                   return "error";
@@ -185,7 +189,9 @@ class _ObservState extends State<Observ> {
                     CustomButton(
                         title: "Guardar",
                         onPressed: () async {
-                          if (obervableController.isValidForm()) {
+                          if (obervableController.icc.isNotEmpty &&
+                              (obervableController.imc.isNotEmpty) &&
+                              (obervableController.peso.isNotEmpty)) {
                             showDialog(
                                 barrierDismissible: false,
                                 context: context,
