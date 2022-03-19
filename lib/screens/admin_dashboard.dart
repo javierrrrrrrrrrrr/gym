@@ -62,11 +62,18 @@ class _AdminDashboardState extends State<AdminDashboard> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
-
+    final loginProvider = Provider.of<LoginProvider>(context);
+    final imageProvider = Provider.of<SelectImg>(context);
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -86,12 +93,79 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(right: width * 0.05),
-                            child: CircleAvatar(
-                              radius: width * 0.07129,
-                              backgroundImage:
-                                  const AssetImage('assets/images.jpg'),
+                            child: Column(
+                              children: [
+                                imageProvider.imagePath == ""
+                                    ? (loginProvider.userloginImg !=
+                                            "no-avatar.png")
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              await imageProvider.pikeImage();
+                                              await userProvider
+                                                  .uploadImagenGenerica(
+                                                      imageProvider.imagePath!,
+                                                      loginProvider
+                                                          .idUserLogin);
+                                            },
+                                            child: SizedBox(
+                                              height: 56,
+                                              width: 56,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(28),
+                                                child: FadeInImage(
+                                                  fit: BoxFit.cover,
+                                                  placeholder: const AssetImage(
+                                                      'assets/images.jpg'),
+                                                  image: NetworkImage(
+                                                      'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
+                                                  placeholderFit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : GestureDetector(
+                                            onTap: () async {
+                                              await imageProvider.pikeImage();
+                                              await userProvider
+                                                  .uploadImagenGenerica(
+                                                      imageProvider.imagePath!,
+                                                      loginProvider
+                                                          .idUserLogin);
+                                            },
+                                            child: const CircleAvatar(
+                                              radius: 28,
+                                              backgroundImage: AssetImage(
+                                                  'assets/images.jpg'),
+                                            ),
+                                          )
+                                    : GestureDetector(
+                                        onTap: () async {
+                                          await imageProvider.pikeImage();
+                                          await userProvider
+                                              .uploadImagenGenerica(
+                                                  imageProvider.imagePath!,
+                                                  loginProvider.idUserLogin);
+                                        },
+                                        child: SizedBox(
+                                          height: 56,
+                                          width: 56,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(28),
+                                            child: Image.file(
+                                              imageProvider.img!,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                Text(loginProvider.userloginName,
+                                    style: const TextStyle(
+                                        fontSize: 15, color: Colors.white)),
+                              ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),

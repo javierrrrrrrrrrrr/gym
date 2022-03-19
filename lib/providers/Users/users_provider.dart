@@ -224,7 +224,24 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
     if (response.statusCode == 200) {
       await getUsers();
+      print("ok");
     }
+  }
+
+  Future uploadImagenGenerica(String path, String userid) async {
+    await getToken();
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': token
+    };
+    var request = http.MultipartRequest(
+        'PUT', Uri.parse('$_baseUrl/api/uploads/users/$userid'));
+    request.files.add(await http.MultipartFile.fromPath('archivo', path));
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    print(response.statusCode);
+    print(response.reasonPhrase);
   }
 
   Future<List> searchUser(String query) async {

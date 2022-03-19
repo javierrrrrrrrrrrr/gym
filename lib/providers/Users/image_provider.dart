@@ -14,7 +14,7 @@ class SelectImg extends ChangeNotifier {
 
   File? img;
 
-  pikeImage() async {
+  Future pikeImage() async {
     try {
       final photo = await _picker.pickImage(
           source: ImageSource.camera,
@@ -31,9 +31,8 @@ class SelectImg extends ChangeNotifier {
       lowImgQuality(img!, imagePath!);
       // print(img.lengthSync());
       notifyListeners();
-    } catch (e) {
-      print('error');
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   cropFile() async {

@@ -42,7 +42,7 @@ class _EditTrainerState extends State<EditTrainer> {
     final trainerFormController = Provider.of<TrainersFormController>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
     final width = MediaQuery.of(context).size.width;
-    final imageProvider = Provider.of<SelectImg>(context, listen: false);
+    final imageProvider = Provider.of<SelectImg>(context);
     return Scaffold(
       appBar: customAppbar(context, width: width, title: "Editar Entrenador"),
       body: Stack(

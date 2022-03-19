@@ -12,6 +12,8 @@ class LoginProvider extends ChangeNotifier {
   String contrsenaGuardada = '';
   String usuarioGuardado = '';
   String idUserLogin = "";
+  String userloginImg = "";
+  String userloginName = "";
 
   String userRole = "";
 
@@ -39,7 +41,8 @@ class LoginProvider extends ChangeNotifier {
       idUserLogin = decodedResp["user"]["uid"];
 
       userRole = decodedResp["user"]["rol"];
-
+      userloginImg = decodedResp["user"]["img"];
+      userloginName = decodedResp["user"]["name"];
       notifyListeners();
       return "";
     } else {
