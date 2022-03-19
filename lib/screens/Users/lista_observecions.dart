@@ -84,12 +84,7 @@ class ObservationListBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          crearRuta(
-            screen: ViewObservaciones(index: index),
-          ),
-        );
+        Navigator.pushNamed(context, 'view_obs', arguments: index);
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),
