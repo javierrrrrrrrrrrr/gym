@@ -38,8 +38,12 @@ class _EditUserImgState extends State<EditUserImg> {
             imageProvider.imagePath == ""
                 ? GestureDetector(
                     onTap: () {
-                      imageProvider.isTouch = true;
-                      imageProvider.pikeImage();
+                      try {
+                        imageProvider.isTouch = true;
+                        imageProvider.pikeImage();
+                      } on Exception catch (e) {
+                        // TODO
+                      }
                     },
                     child: ImgUserContainer(
                         child: Container(

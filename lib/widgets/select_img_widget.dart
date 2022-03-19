@@ -22,7 +22,11 @@ class SelectIMGWidget extends StatelessWidget {
           imageProvider.imagePath == ""
               ? GestureDetector(
                   onTap: () {
-                    imageProvider.pikeImage();
+                    try {
+                      imageProvider.pikeImage();
+                    } on Exception catch (e) {
+                      // TODO
+                    }
                   },
                   child: ImgUserContainer(
                       child: Container(

@@ -90,12 +90,17 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
                                             "no-avatar.png")
                                         ? GestureDetector(
                                             onTap: () async {
-                                              await imageProvider.pikeImage();
-                                              await userProvider
-                                                  .uploadImagenGenerica(
-                                                      imageProvider.imagePath!,
-                                                      loginProvider
-                                                          .idUserLogin);
+                                              try {
+                                                await imageProvider.pikeImage();
+                                                await userProvider
+                                                    .uploadImagenGenerica(
+                                                        imageProvider
+                                                            .imagePath!,
+                                                        loginProvider
+                                                            .idUserLogin);
+                                              } on Exception catch (e) {
+                                                // TODO
+                                              }
                                             },
                                             child: SizedBox(
                                               height: 56,
@@ -116,12 +121,17 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
                                           )
                                         : GestureDetector(
                                             onTap: () async {
-                                              await imageProvider.pikeImage();
-                                              await userProvider
-                                                  .uploadImagenGenerica(
-                                                      imageProvider.imagePath!,
-                                                      loginProvider
-                                                          .idUserLogin);
+                                              try {
+                                                await imageProvider.pikeImage();
+                                                await userProvider
+                                                    .uploadImagenGenerica(
+                                                        imageProvider
+                                                            .imagePath!,
+                                                        loginProvider
+                                                            .idUserLogin);
+                                              } on Exception catch (e) {
+                                                // TODO
+                                              }
                                             },
                                             child: const CircleAvatar(
                                               radius: 28,
@@ -131,11 +141,15 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
                                           )
                                     : GestureDetector(
                                         onTap: () async {
-                                          await imageProvider.pikeImage();
-                                          await userProvider
-                                              .uploadImagenGenerica(
-                                                  imageProvider.imagePath!,
-                                                  loginProvider.idUserLogin);
+                                          try {
+                                            await imageProvider.pikeImage();
+                                            await userProvider
+                                                .uploadImagenGenerica(
+                                                    imageProvider.imagePath!,
+                                                    loginProvider.idUserLogin);
+                                          } on Exception catch (e) {
+                                            // TODO
+                                          }
                                         },
                                         child: SizedBox(
                                           height: 56,
