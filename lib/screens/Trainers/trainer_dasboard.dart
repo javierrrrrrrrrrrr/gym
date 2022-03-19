@@ -59,50 +59,135 @@ class _TrainerDasboardState extends State<TrainerDasboard> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UsersProvider>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
     final loginProvider = Provider.of<LoginProvider>(context);
+    final imageProvider = Provider.of<SelectImg>(context);
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
-              height: 300,
+              height: width * 0.7653,
               width: double.infinity,
               color: const Color.fromRGBO(45, 49, 146, 1),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 65),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.only(right: 20),
-                              child: CircleAvatar(
-                                radius: 28,
-                                backgroundImage:
-                                    AssetImage('assets/images.jpg'),
-                              ),
-                            )
-                          ],
-                        ),
+                      padding: EdgeInsets.only(top: width * 0.16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: width * 0.05),
+                            child: Column(
+                              children: [
+                                imageProvider.imagePath == ""
+                                    ? (loginProvider.userloginImg !=
+                                            "no-avatar.png")
+                                        ? GestureDetector(
+                                            onTap: () async {
+                                              try {
+                                                await imageProvider.pikeImage();
+                                                await userProvider
+                                                    .uploadImagenGenerica(
+                                                        imageProvider
+                                                            .imagePath!,
+                                                        loginProvider
+                                                            .idUserLogin);
+                                              } on Exception catch (e) {
+                                                // TODO
+                                              }
+                                            },
+                                            child: SizedBox(
+                                              height: 56,
+                                              width: 56,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(28),
+                                                child: FadeInImage(
+                                                  fit: BoxFit.cover,
+                                                  placeholder: const AssetImage(
+                                                      'assets/images.jpg'),
+                                                  image: NetworkImage(
+                                                      'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
+                                                  placeholderFit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : GestureDetector(
+                                            onTap: () async {
+                                              try {
+                                                await imageProvider.pikeImage();
+                                                await userProvider
+                                                    .uploadImagenGenerica(
+                                                        imageProvider
+                                                            .imagePath!,
+                                                        loginProvider
+                                                            .idUserLogin);
+                                              } on Exception catch (e) {
+                                                // TODO
+                                              }
+                                            },
+                                            child: const CircleAvatar(
+                                              radius: 28,
+                                              backgroundImage: AssetImage(
+                                                  'assets/images.jpg'),
+                                            ),
+                                          )
+                                    : GestureDetector(
+                                        onTap: () async {
+                                          try {
+                                            await imageProvider.pikeImage();
+                                            await userProvider
+                                                .uploadImagenGenerica(
+                                                    imageProvider.imagePath!,
+                                                    loginProvider.idUserLogin);
+                                          } on Exception catch (e) {
+                                            // TODO
+                                          }
+                                        },
+                                        child: SizedBox(
+                                          height: 56,
+                                          width: 56,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(28),
+                                            child: Image.file(
+                                              imageProvider.img!,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                Text(loginProvider.userloginName,
+                                    style: const TextStyle(
+                                        fontSize: 15, color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 30),
+                      padding: EdgeInsets.only(
+                          top: width * 0.07639, left: width * 0.07639),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "DashBoard",
-                            style: TextStyle(fontSize: 30, color: Colors.white),
+                          Text(
+                            "Dashboard",
+                            style: TextStyle(
+                                fontSize: width * 0.07639, color: Colors.white),
                           ),
                           Text("${diaSemana()} ${devolverFecha()}",
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.white)),
+                              style: TextStyle(
+                                  fontSize: width * 0.04583,
+                                  color: Colors.white)),
                         ],
                       ),
                     ),

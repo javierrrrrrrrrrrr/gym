@@ -73,7 +73,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
     final loginProvider = Provider.of<LoginProvider>(context);
     final imageProvider = Provider.of<SelectImg>(context);
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -100,12 +99,17 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                             "no-avatar.png")
                                         ? GestureDetector(
                                             onTap: () async {
-                                              await imageProvider.pikeImage();
-                                              await userProvider
-                                                  .uploadImagenGenerica(
-                                                      imageProvider.imagePath!,
-                                                      loginProvider
-                                                          .idUserLogin);
+                                              try {
+                                                await imageProvider.pikeImage();
+                                                await userProvider
+                                                    .uploadImagenGenerica(
+                                                        imageProvider
+                                                            .imagePath!,
+                                                        loginProvider
+                                                            .idUserLogin);
+                                              } on Exception {
+                                                null;
+                                              }
                                             },
                                             child: SizedBox(
                                               height: 56,
@@ -126,12 +130,17 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                           )
                                         : GestureDetector(
                                             onTap: () async {
-                                              await imageProvider.pikeImage();
-                                              await userProvider
-                                                  .uploadImagenGenerica(
-                                                      imageProvider.imagePath!,
-                                                      loginProvider
-                                                          .idUserLogin);
+                                              try {
+                                                await imageProvider.pikeImage();
+                                                await userProvider
+                                                    .uploadImagenGenerica(
+                                                        imageProvider
+                                                            .imagePath!,
+                                                        loginProvider
+                                                            .idUserLogin);
+                                              } on Exception catch (e) {
+                                                // TODO
+                                              }
                                             },
                                             child: const CircleAvatar(
                                               radius: 28,
@@ -141,11 +150,15 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                           )
                                     : GestureDetector(
                                         onTap: () async {
-                                          await imageProvider.pikeImage();
-                                          await userProvider
-                                              .uploadImagenGenerica(
-                                                  imageProvider.imagePath!,
-                                                  loginProvider.idUserLogin);
+                                          try {
+                                            await imageProvider.pikeImage();
+                                            await userProvider
+                                                .uploadImagenGenerica(
+                                                    imageProvider.imagePath!,
+                                                    loginProvider.idUserLogin);
+                                          } on Exception catch (e) {
+                                            // TODO
+                                          }
                                         },
                                         child: SizedBox(
                                           height: 56,
