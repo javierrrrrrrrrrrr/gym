@@ -105,6 +105,10 @@ class ListViewUserBody extends StatelessWidget {
                 ),
               ),
             ),
+            Text(user.activeto.toString()),
+            const SizedBox(
+              width: 20,
+            ),
             Padding(
               padding: EdgeInsets.only(right: width * 0.04),
               child: IconButton(
