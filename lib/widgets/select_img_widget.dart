@@ -50,7 +50,7 @@ class SelectIMGWidget extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(width * 0.025),
                         child: Image.file(
-                          imageProvider.img,
+                          imageProvider.img!,
                           fit: BoxFit.cover,
                         ),
                       ),

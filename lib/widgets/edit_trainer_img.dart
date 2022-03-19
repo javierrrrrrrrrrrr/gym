@@ -41,7 +41,11 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                 ? GestureDetector(
                     onTap: () {
                       imageProvider.isTouch = true;
-                      imageProvider.pikeImage();
+                      try {
+                        imageProvider.pikeImage();
+                      } on Exception {
+                        null;
+                      }
                     },
                     child: ImgUserContainer(
                         child: Container(
@@ -82,7 +86,7 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(width * 0.025),
                           child: Image.file(
-                            imageProvider.img,
+                            imageProvider.img!,
                             fit: BoxFit.cover,
                           ),
                         ),
