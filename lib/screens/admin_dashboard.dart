@@ -73,7 +73,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
     final loginProvider = Provider.of<LoginProvider>(context);
     final imageProvider = Provider.of<SelectImg>(context);
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SingleChildScrollView(
