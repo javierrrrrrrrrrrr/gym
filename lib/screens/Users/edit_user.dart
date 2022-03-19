@@ -463,7 +463,10 @@ class _EditUserState extends State<EditUser> {
                                     hintStyle: const TextStyle(
                                         color: Colors.black54, fontSize: 20),
                                   ),
-                                  // value: initialDropDownValue,
+                                   value: userFormController.user!.services==''
+                                   ? "TRAINING"
+                                   : userFormController.user!.services
+                                     ,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   items: items.map((String items) {
                                     return DropdownMenuItem(
@@ -515,7 +518,8 @@ class _EditUserState extends State<EditUser> {
                                   hintStyle: const TextStyle(
                                       color: Colors.black54, fontSize: 20),
                                 ),
-                                // value: initialDropDownValue,
+                                // value:userFormController.user!.trainer, 
+                                 
                                 icon: const Icon(Icons.arrow_drop_down),
                                 items: listTrainer.map((Trainer items) {
                                   return DropdownMenuItem(
