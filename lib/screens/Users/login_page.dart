@@ -49,8 +49,11 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.only(top: height * 0.04),
                 height: height * 0.5,
                 width: width,
-                child: const Image(
-                  image: AssetImage('assets/gym.jpeg'),
+                child: const Hero(
+                  tag: 'hero_id',
+                  child: Image(
+                    image: AssetImage('assets/gym.jpeg'),
+                  ),
                 )),
             SizedBox(
               height: height * 0.12,

@@ -9,10 +9,12 @@ import 'package:image_cropper/image_cropper.dart';
 class SelectImg extends ChangeNotifier {
   bool isTouch = false;
   String? imagePath = "";
+  String? imageAdminPath = "";
   final ImagePicker _picker = ImagePicker();
   ImageCropper crop = ImageCropper();
 
   File? img;
+  File? imgAdmin;
 
   Future pikeImage() async {
     try {
@@ -23,14 +25,38 @@ class SelectImg extends ChangeNotifier {
           maxWidth: 600);
       if (photo != null) {
         img = File(photo.path);
-        // print(img.lengthSync());
+
         imagePath = photo.path;
+
         notifyListeners();
       }
 
       lowImgQuality(img!, imagePath!);
-      // print(img.lengthSync());
+
       notifyListeners();
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
+  Future pickAdminImage() async {
+    try {
+      final photo = await _picker.pickImage(
+          source: ImageSource.camera,
+          imageQuality: 100,
+          maxHeight: 900,
+          maxWidth: 600);
+      if (photo != null) {
+        imgAdmin = File(photo.path);
+
+        // print(img.lengthSync());
+
+        imageAdminPath = photo.path;
+        notifyListeners();
+      }
+      lowAdminImgQuality(imgAdmin!, imageAdminPath!);
+
+      notifyListeners();
+
       // ignore: empty_catches
     } catch (e) {}
   }
@@ -67,6 +93,21 @@ class SelectImg extends ChangeNotifier {
     var result = await FlutterImageCompress.compressAndGetFile(
       imagePath!,
       imagePath! + '_img.jpg',
+      quality: 50,
+    );
+
+    img = result!;
+    notifyListeners();
+    //print(file.lengthSync());
+
+    notifyListeners();
+    return result;
+  }
+
+  Future<File> lowAdminImgQuality(File file, String targetPath) async {
+    var result = await FlutterImageCompress.compressAndGetFile(
+      imageAdminPath!,
+      imageAdminPath! + '_img.jpg',
       quality: 50,
     );
 

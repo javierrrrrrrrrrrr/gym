@@ -29,8 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
               await loginProvaider.readDataFromStorage('usuario');
         }
       } on Exception {
-        Navigator.pushReplacement(
-            context, crearRuta(screen: const LoginPage()));
+        Navigator.push(context, crearRuta(screen: const LoginPage()));
       }
     }
 
@@ -38,16 +37,14 @@ class _SplashScreenState extends State<SplashScreen> {
         future: verificarCredenciales(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return AnimatedSplashScreen(
-            splash: Column(children: [
-              Image.asset('assets/gym.jpeg'),
-              const Text(
-                "GYM Fitness Model",
-                style: TextStyle(fontSize: 36),
-              ),
+            splash:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Hero(tag: 'hero_id', child: Image.asset('assets/gym.jpeg')),
             ]),
+            animationDuration: const Duration(milliseconds: 500),
             nextScreen: const LoginPage(),
             splashIconSize: 500,
-            splashTransition: SplashTransition.fadeTransition,
+            splashTransition: SplashTransition.scaleTransition,
           );
         });
   }

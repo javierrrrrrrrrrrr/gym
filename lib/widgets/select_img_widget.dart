@@ -19,65 +19,64 @@ class SelectIMGWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          imageProvider.imagePath == ""
-              ? GestureDetector(
-                  onTap: () {
-                    try {
-                      imageProvider.pikeImage();
-                    } on Exception catch (e) {
-                      // TODO
-                    }
-                  },
-                  child: ImgUserContainer(
-                      child: Container(
-                    height: height * 0.25,
-                    width: width * 0.4,
-                    child: const Center(
-                        child: Text(
-                      'Seleccione la imagen',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromRGBO(240, 240, 240, 1)),
-                    )),
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(196, 196, 196, 1),
-                      borderRadius: BorderRadius.circular(width * 0.025),
-                    ),
-                  )),
-                )
-              : Stack(
-                  children: [
-                    SizedBox(
-                      height: height * 0.25,
-                      width: width * 0.4,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(width * 0.025),
-                        child: Image.file(
-                          imageProvider.img!,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 114,
-                      child: GestureDetector(
-                        onTap: () {
-                          imageProvider.cropFile();
-                        },
-                        child: Container(
-                          color: Colors.white,
-                          height: 45,
-                          width: 45,
-                          child: const Icon(
-                            Icons.photo_size_select_large_rounded,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+          if (imageProvider.imagePath == "")
+            GestureDetector(
+              onTap: () {
+                try {
+                  imageProvider.pikeImage();
+                  // ignore: empty_catches
+                } on Exception {}
+              },
+              child: ImgUserContainer(
+                  child: Container(
+                height: height * 0.25,
+                width: width * 0.4,
+                child: const Center(
+                    child: Text(
+                  'Seleccione la imagen',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20, color: Color.fromRGBO(240, 240, 240, 1)),
+                )),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(196, 196, 196, 1),
+                  borderRadius: BorderRadius.circular(width * 0.025),
                 ),
+              )),
+            )
+          else
+            Stack(
+              children: [
+                SizedBox(
+                  height: height * 0.25,
+                  width: width * 0.4,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(width * 0.025),
+                    child: Image.file(
+                      imageProvider.img!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 114,
+                  child: GestureDetector(
+                    onTap: () {
+                      imageProvider.cropFile();
+                    },
+                    child: Container(
+                      color: Colors.white,
+                      height: 45,
+                      width: 45,
+                      child: const Icon(
+                        Icons.photo_size_select_large_rounded,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           SizedBox(
             width: width * 0.065,
           ),

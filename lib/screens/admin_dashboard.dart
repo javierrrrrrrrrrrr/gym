@@ -2,7 +2,6 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:gym/helpers/page_transitions.dart';
-import 'package:gym/screens/Users/users.dart';
 import 'package:gym/screens/pages.dart';
 import 'package:gym/widgets/card.dart';
 import 'package:provider/provider.dart';
@@ -62,11 +61,6 @@ class _AdminDashboardState extends State<AdminDashboard> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
     final trainerProvider = Provider.of<TrainerProvider>(context);
@@ -94,88 +88,23 @@ class _AdminDashboardState extends State<AdminDashboard> {
                             padding: EdgeInsets.only(right: width * 0.05),
                             child: Column(
                               children: [
-                                imageProvider.imagePath == ""
-                                    ? (loginProvider.userloginImg !=
-                                            "no-avatar.png")
-                                        ? GestureDetector(
-                                            onTap: () async {
-                                              try {
-                                                await imageProvider.pikeImage();
-                                                await userProvider
-                                                    .uploadImagenGenerica(
-                                                        imageProvider
-                                                            .imagePath!,
-                                                        loginProvider
-                                                            .idUserLogin);
-                                              } on Exception {
-                                                null;
-                                              }
-                                            },
-                                            child: SizedBox(
-                                              height: 56,
-                                              width: 56,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(28),
-                                                child: FadeInImage(
-                                                  fit: BoxFit.cover,
-                                                  placeholder: const AssetImage(
-                                                      'assets/images.jpg'),
-                                                  image: NetworkImage(
-                                                      'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
-                                                  placeholderFit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        : GestureDetector(
-                                            onTap: () async {
-                                              try {
-                                                await imageProvider.pikeImage();
-                                                await userProvider
-                                                    .uploadImagenGenerica(
-                                                        imageProvider
-                                                            .imagePath!,
-                                                        loginProvider
-                                                            .idUserLogin);
-                                              } on Exception catch (e) {
-                                                // TODO
-                                              }
-                                            },
-                                            child: const CircleAvatar(
-                                              radius: 28,
-                                              backgroundImage: AssetImage(
-                                                  'assets/images.jpg'),
-                                            ),
-                                          )
-                                    : GestureDetector(
-                                        onTap: () async {
-                                          try {
-                                            await imageProvider.pikeImage();
-                                            await userProvider
-                                                .uploadImagenGenerica(
-                                                    imageProvider.imagePath!,
-                                                    loginProvider.idUserLogin);
-                                          } on Exception catch (e) {
-                                            // TODO
-                                          }
-                                        },
-                                        child: SizedBox(
-                                          height: 56,
-                                          width: 56,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(28),
-                                            child: Image.file(
-                                              imageProvider.img!,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                Text(loginProvider.userloginName,
-                                    style: const TextStyle(
-                                        fontSize: 15, color: Colors.white)),
+                                if (imageProvider.imageAdminPath == "")
+                                  (loginProvider.userloginImg !=
+                                          "no-avatar.png")
+                                      ? LoadImgFromApi(
+                                          imageProvider: imageProvider,
+                                          userProvider: userProvider,
+                                          loginProvider: loginProvider)
+                                      : NoImgFromApi(
+                                          imageProvider: imageProvider,
+                                          userProvider: userProvider,
+                                          loginProvider: loginProvider)
+                                else
+                                  SelectImgFromCamara(
+                                      imageProvider: imageProvider,
+                                      userProvider: userProvider,
+                                      loginProvider: loginProvider),
+                                NameUserLogIn(loginProvider: loginProvider),
                               ],
                             ),
                           ),
@@ -336,6 +265,137 @@ class _AdminDashboardState extends State<AdminDashboard> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class NameUserLogIn extends StatelessWidget {
+  const NameUserLogIn({
+    Key? key,
+    required this.loginProvider,
+  }) : super(key: key);
+
+  final LoginProvider loginProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(loginProvider.userloginName,
+        style: const TextStyle(fontSize: 15, color: Colors.white));
+  }
+}
+
+class SelectImgFromCamara extends StatelessWidget {
+  const SelectImgFromCamara({
+    Key? key,
+    required this.imageProvider,
+    required this.userProvider,
+    required this.loginProvider,
+  }) : super(key: key);
+
+  final SelectImg imageProvider;
+  final UsersProvider userProvider;
+  final LoginProvider loginProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        try {
+          await imageProvider.pickAdminImage();
+          await userProvider.uploadImagenGenerica(
+              imageProvider.imageAdminPath!, loginProvider.idUserLogin);
+
+          imageProvider.imageAdminPath = "";
+        } on Exception catch (e) {
+          // TODO
+        }
+      },
+      child: SizedBox(
+        height: 56,
+        width: 56,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Image.file(
+            imageProvider.imgAdmin!,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NoImgFromApi extends StatelessWidget {
+  const NoImgFromApi({
+    Key? key,
+    required this.imageProvider,
+    required this.userProvider,
+    required this.loginProvider,
+  }) : super(key: key);
+
+  final SelectImg imageProvider;
+  final UsersProvider userProvider;
+  final LoginProvider loginProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        try {
+          await imageProvider.pickAdminImage();
+          await userProvider.uploadImagenGenerica(
+              imageProvider.imageAdminPath!, loginProvider.idUserLogin);
+          imageProvider.imageAdminPath = "";
+          // ignore: empty_catches
+        } on Exception {}
+      },
+      child: const CircleAvatar(
+        radius: 28,
+        backgroundImage: AssetImage('assets/images.jpg'),
+      ),
+    );
+  }
+}
+
+class LoadImgFromApi extends StatelessWidget {
+  const LoadImgFromApi({
+    Key? key,
+    required this.imageProvider,
+    required this.userProvider,
+    required this.loginProvider,
+  }) : super(key: key);
+
+  final SelectImg imageProvider;
+  final UsersProvider userProvider;
+  final LoginProvider loginProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        try {
+          await imageProvider.pickAdminImage();
+          await userProvider.uploadImagenGenerica(
+              imageProvider.imageAdminPath!, loginProvider.idUserLogin);
+          imageProvider.imageAdminPath = "";
+        } on Exception {
+          null;
+        }
+      },
+      child: SizedBox(
+        height: 56,
+        width: 56,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: FadeInImage(
+            fit: BoxFit.cover,
+            placeholder: const AssetImage('assets/images.jpg'),
+            image: NetworkImage(
+                'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
+            placeholderFit: BoxFit.cover,
+          ),
         ),
       ),
     );

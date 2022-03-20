@@ -13,4 +13,3 @@ export '../screens/Trainers/edit_trainer.dart';
 export 'package:gym/screens/Users/view_observaciones.dart';
 export 'package:gym/screens/Trainers/users_by_trainers.dart';
 export 'package:gym/helpers/splash_screen.dart';
-export 'package:gym/screens/Trainers/trainer_dasboard.dart';
