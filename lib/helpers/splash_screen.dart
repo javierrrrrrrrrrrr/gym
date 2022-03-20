@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return AnimatedSplashScreen(
             splash: Column(children: [
-              Image.asset('assets/gym-1.gif'),
+              Image.asset('assets/gym.jpeg'),
               const Text(
                 "GYM Fitness Model",
                 style: TextStyle(fontSize: 36),

@@ -23,9 +23,11 @@ class _ListViewUsersState extends State<ListViewUsers> {
           physics: const BouncingScrollPhysics(),
           itemCount: userProvider.users.length,
           itemBuilder: (BuildContext context, index) {
-            return ListViewUserBody(
-              user: userProvider.users[index],
-            );
+            return userProvider.users.isEmpty
+                ? const Icon(Icons.no_accounts)
+                : ListViewUserBody(
+                    user: userProvider.users[index],
+                  );
           },
           padding: const EdgeInsets.all(0),
           //  padding: const EdgeInsets.only(bottom: 10),

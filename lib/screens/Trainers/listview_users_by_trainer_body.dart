@@ -22,17 +22,23 @@ class _UsersByTrainerListViewState extends State<UsersByTrainerListView> {
     final trainerProvider = Provider.of<TrainerProvider>(context);
 
     return Expanded(
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: trainerProvider.usersByTrainer.length,
-        itemBuilder: (BuildContext context, index) {
-          return ListUserBody(
-            user: trainerProvider.usersByTrainer[index],
-          );
-        },
-        padding: const EdgeInsets.all(0),
-        //  padding: const EdgeInsets.only(bottom: 10),
-      ),
+      child: trainerProvider.usersByTrainer.isEmpty
+          ? const Center(
+              child: Icon(
+              Icons.no_accounts,
+              size: 250,
+            ))
+          : ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: trainerProvider.usersByTrainer.length,
+              itemBuilder: (BuildContext context, index) {
+                return ListUserBody(
+                  user: trainerProvider.usersByTrainer[index],
+                );
+              },
+              padding: const EdgeInsets.all(0),
+              //  padding: const EdgeInsets.only(bottom: 10),
+            ),
     );
   }
 }
