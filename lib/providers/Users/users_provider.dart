@@ -240,7 +240,6 @@ class UsersProvider extends ChangeNotifier {
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
-    print(response.statusCode);
     print(response.reasonPhrase);
   }
 
