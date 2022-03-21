@@ -3,6 +3,8 @@ import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/Trainers/trainer_model.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/screens/Trainers/edit_trainer.dart';
+import 'package:gym/screens/Trainers/listview_users_by_trainer_body.dart';
+import 'package:gym/screens/Trainers/users_by_trainers.dart';
 import 'package:provider/provider.dart';
 
 class ListViewTrainerBody extends StatelessWidget {
@@ -57,9 +59,18 @@ class ListViewTrainerBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        trainer.name,
-                        style: const TextStyle(fontSize: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            trainer.name,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: width * 0.025),
+                            child: const Icon(Icons.edit, size: 18),
+                          ),
+                        ],
                       ),
                       Row(
                         children: [
@@ -86,14 +97,12 @@ class ListViewTrainerBody extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(right: width * 0.025),
                 child: IconButton(
-                  onPressed: () {
-                    trainerProvider.selectedTrainer = trainer.copyWith();
-                    trainerFormController.trainer = trainer.copyWith();
-
+                  onPressed: () async {
+                    await trainerProvider.getUsersByTrainerId(trainer.uid!);
                     Navigator.push(
-                        context, crearRuta(screen: const EditTrainer()));
+                        context, crearRuta(screen: const UsersByTrainer()));
                   },
-                  icon: const Icon(Icons.edit, size: 35),
+                  icon: const Icon(Icons.people_alt_outlined, size: 35),
                 ),
               ),
             ],

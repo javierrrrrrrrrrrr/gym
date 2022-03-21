@@ -53,13 +53,6 @@ class _ViewUserByTrainerState extends State<ViewUserByTrainer> {
                           obscureText: false,
                           keyboardType: TextInputType.text,
                           onChanged: ((value) {}),
-                          validator: (value) {
-                            if (value!.isNotEmpty && value != "") {
-                              return null;
-                            } else {
-                              return "El nombre debe tener al menos un caracter :)";
-                            }
-                          },
                           width: width,
                         ),
                         _separador(height),
@@ -71,6 +64,20 @@ class _ViewUserByTrainerState extends State<ViewUserByTrainer> {
                           right: 55,
                           left: 25,
                           initialvalue: userProvider.selectedUser!.lastname,
+                          obscureText: false,
+                          onChanged: (value) {},
+                          keyboardType: TextInputType.text,
+                          width: width,
+                        ),
+                        _separador(height),
+                        InputFieldWidget(
+                          enabled: false,
+                          label: const Text('Telefono'),
+                          icon: false,
+                          maxline: 1,
+                          right: 55,
+                          left: 25,
+                          initialvalue: userProvider.selectedUser!.phone,
                           obscureText: false,
                           onChanged: (value) {},
                           keyboardType: TextInputType.text,

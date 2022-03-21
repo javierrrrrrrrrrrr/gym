@@ -18,17 +18,25 @@ class _ListViewUsersState extends State<ListViewTrainers> {
   @override
   Widget build(BuildContext context) {
     final trainerProvider = Provider.of<TrainerProvider>(context);
-
+    final width = MediaQuery.of(context).size.width;
     return Expanded(
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        itemCount: trainerProvider.trainers.length,
-        itemBuilder: (BuildContext context, index) {
-          return ListViewTrainerBody(trainer: trainerProvider.trainers[index]);
-        },
-        padding: const EdgeInsets.all(0),
-        //  padding: const EdgeInsets.only(bottom: 10),
-      ),
+      child: trainerProvider.trainers.isEmpty
+          ? Center(
+              child: Icon(
+              Icons.no_accounts,
+              color: Colors.blue,
+              size: width * 0.50,
+            ))
+          : ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: trainerProvider.trainers.length,
+              itemBuilder: (BuildContext context, index) {
+                return ListViewTrainerBody(
+                    trainer: trainerProvider.trainers[index]);
+              },
+              padding: const EdgeInsets.all(0),
+              //  padding: const EdgeInsets.only(bottom: 10),
+            ),
     );
   }
 }

@@ -16,35 +16,56 @@ class _ListViewUsersState extends State<ListViewUsers> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UsersProvider>(context);
+    final width = MediaQuery.of(context).size.width;
 
     if (userProvider.sinPagar == false) {
       return Expanded(
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: userProvider.users.length,
-          itemBuilder: (BuildContext context, index) {
-            return userProvider.users.isEmpty
-                ? const Icon(Icons.no_accounts)
-                : ListViewUserBody(
-                    user: userProvider.users[index],
-                  );
-          },
-          padding: const EdgeInsets.all(0),
-          //  padding: const EdgeInsets.only(bottom: 10),
+        child: RefreshIndicator(
+          onRefresh: (() async {
+            await userProvider.getUsers();
+          }),
+          child: userProvider.users.isEmpty
+              ? Center(
+                  child: Icon(
+                  Icons.no_accounts,
+                  color: Colors.blue,
+                  size: width * 0.50,
+                ))
+              : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: userProvider.users.length,
+                  itemBuilder: (BuildContext context, index) {
+                    return userProvider.users.isEmpty
+                        ? const Icon(Icons.no_accounts)
+                        : ListViewUserBody(
+                            user: userProvider.users[index],
+                          );
+                  },
+                  padding: const EdgeInsets.all(0),
+                  //  padding: const EdgeInsets.only(bottom: 10),
+                ),
         ),
       );
     } else {
       return Expanded(
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          itemCount: userProvider.usersSinPagar.length,
+        child: userProvider.usersSinPagar.isEmpty
+            ? Center(
+                child: Icon(
+                Icons.no_accounts,
+                color: Colors.blue,
+                size: width * 0.50,
+              ))
+            : ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: userProvider.usersSinPagar.length,
 
-          itemBuilder: (BuildContext context, index) {
-            return ListViewUserBody(user: userProvider.usersSinPagar[index]);
-          },
-          padding: const EdgeInsets.all(0),
-          //  padding: const EdgeInsets.only(bottom: 10),
-        ),
+                itemBuilder: (BuildContext context, index) {
+                  return ListViewUserBody(
+                      user: userProvider.usersSinPagar[index]);
+                },
+                padding: const EdgeInsets.all(0),
+                //  padding: const EdgeInsets.only(bottom: 10),
+              ),
       );
     }
   }

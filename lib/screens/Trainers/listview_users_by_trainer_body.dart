@@ -20,13 +20,15 @@ class _UsersByTrainerListViewState extends State<UsersByTrainerListView> {
   @override
   Widget build(BuildContext context) {
     final trainerProvider = Provider.of<TrainerProvider>(context);
+    final width = MediaQuery.of(context).size.width;
 
     return Expanded(
       child: trainerProvider.usersByTrainer.isEmpty
-          ? const Center(
+          ? Center(
               child: Icon(
               Icons.no_accounts,
-              size: 250,
+              color: Colors.blue,
+              size: width * 0.50,
             ))
           : ListView.builder(
               physics: const BouncingScrollPhysics(),

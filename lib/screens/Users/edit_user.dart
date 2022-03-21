@@ -89,7 +89,7 @@ class _EditUserState extends State<EditUser> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 270),
+            padding: const EdgeInsets.only(top: 290),
             child: ListView(physics: const BouncingScrollPhysics(), children: [
               Stack(
                 children: [
@@ -648,7 +648,7 @@ class MenuLateral extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       right: 0,
-      top: height / 3.2,
+      top: height / 2.8,
       child: Container(
         decoration: const BoxDecoration(
             color: Color.fromRGBO(77, 82, 233, 1),

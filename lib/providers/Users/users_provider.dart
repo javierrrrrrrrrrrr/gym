@@ -222,10 +222,6 @@ class UsersProvider extends ChangeNotifier {
     final index = users.indexWhere((element) => element.id == respuesta.id);
     users[index] = respuesta;
     notifyListeners();
-    if (response.statusCode == 200) {
-      await getUsers();
-      print("ok");
-    }
   }
 
   Future uploadImagenGenerica(String path, String userid) async {
