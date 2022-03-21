@@ -29,7 +29,7 @@ class BannerBlue extends StatelessWidget {
             children: [
               const PrimaryText(text: "Miembro"),
               SecondaryText(
-                text: "$day/$month/$year",
+                text: user.datetime!,
               )
             ],
           ),

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/models.dart';
 import 'package:gym/providers/providers.dart';
-import 'package:gym/screens/Users/edit_user.dart';
 import 'package:gym/screens/pages.dart';
-import 'package:gym/widgets/banner_blue.dart';
 import 'package:provider/provider.dart';
-
 import 'widgets.dart';
 
 class ListViewUserBody extends StatelessWidget {
@@ -37,7 +34,7 @@ class ListViewUserBody extends StatelessWidget {
         userProvider.selectedUser = user.copyWith();
         userFormController.user = user.copyWith();
 
-        trainerProvider.getTrainers();
+        await trainerProvider.getTrainers();
         Navigator.pop(context);
         Navigator.push(context, crearRuta(screen: const EditUser()));
       },
@@ -134,7 +131,7 @@ class ListViewUserBody extends StatelessWidget {
                   userProvider.selectedUser = user.copyWith();
                   userFormController.user = user.copyWith();
 
-                  trainerProvider.getTrainers();
+                  await trainerProvider.getTrainers();
                   Navigator.pop(context);
                   Navigator.push(context, crearRuta(screen: const EditUser()));
                 },
@@ -159,8 +156,8 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-          insetPadding: EdgeInsets.all(15),
-          contentPadding: EdgeInsets.all(12),
+          insetPadding: const EdgeInsets.all(15),
+          contentPadding: const EdgeInsets.all(12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18.0),
           ),
@@ -201,7 +198,7 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
                                 userProvider.selectedUser = user.copyWith();
                                 userFormController.user = user.copyWith();
 
-                                trainerProvider.getTrainers();
+                                await trainerProvider.getTrainers();
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 Navigator.push(context,
@@ -225,6 +222,8 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
                                       });
                                   await userProvider
                                       .getObservationsByIdUser(user.id);
+                                  userProvider.selectedUser = user.copyWith();
+                                  userFormController.user = user.copyWith();
 
                                   Navigator.pop(context);
                                   Navigator.pop(context);
@@ -254,6 +253,8 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
                                       });
                                   await userProvider
                                       .getAllPaymentsByUserId(user.id);
+                                  userProvider.selectedUser = user.copyWith();
+                                  userFormController.user = user.copyWith();
                                   Navigator.pop(context);
                                   Navigator.pop(context);
                                   Navigator.push(context,
@@ -322,13 +323,9 @@ class PopUpBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String datetime = user.datetime.toString().substring(0, 9);
-    String year = datetime.substring(0, 4);
-    String month = datetime.substring(5, 7);
-    String day = datetime.substring(8, datetime.length);
-
     final width = MediaQuery.of(context).size.width;
     return Container(
+      padding: EdgeInsets.all(10),
       height: width * 0.48,
       width: width * 0.87,
       decoration: BoxDecoration(
@@ -413,7 +410,7 @@ class SecondaryText extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Text(text,
         style: TextStyle(
-            fontSize: 20,
+            fontSize: 16,
             color: active != null
                 ? active!
                     ? const Color.fromRGBO(75, 232, 119, 1)
@@ -433,7 +430,7 @@ class PrimaryText extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Text(text,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 16,
           color: const Color.fromRGBO(255, 255, 255, 0.6),
         ));
   }
