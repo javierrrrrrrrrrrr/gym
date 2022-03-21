@@ -87,6 +87,20 @@ class PikedImg extends StatelessWidget {
             ),
           ),
         ),
+        GestureDetector(
+          onTap: () {
+            imageProvider.cropFile();
+          },
+          child: Container(
+            color: Colors.white,
+            height: width * 0.115,
+            width: width * 0.115,
+            child: const Icon(
+              Icons.photo_size_select_large_rounded,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -117,34 +131,7 @@ class UserImgFromApi extends StatelessWidget {
           // TODO
         }
       },
-      child: ImgUserContainer(
-          child: Container(
-        height: height * 0.18,
-        width: width * 0.40,
-        child: (user.img != "no-avatar.png")
-            ? Hero(
-                tag: user.id,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(width * 0.025),
-                  child: FadeInImage(
-                    fit: BoxFit.cover,
-                    placeholder: const AssetImage('assets/images.jpg'),
-                    image: NetworkImage(
-                        'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
-                    placeholderFit: BoxFit.cover,
-                  ),
-                ),
-              )
-            : Container(
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images.jpg'),
-                        fit: BoxFit.cover)),
-              ),
-        decoration: BoxDecoration(
-            color: const Color.fromRGBO(196, 196, 196, 1),
-            borderRadius: BorderRadius.circular(width * 0.025)),
-      )),
+      child: ImgUserContainer(user: user),
     );
   }
 }

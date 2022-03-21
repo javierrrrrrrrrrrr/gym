@@ -47,8 +47,7 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                         null;
                       }
                     },
-                    child: ImgUserContainer(
-                        child: Container(
+                    child: Container(
                       height: height * 0.25,
                       width: width * 0.4,
                       child: (trainer.img != "no-avatar.png")
@@ -76,7 +75,7 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                       decoration: BoxDecoration(
                           color: const Color.fromRGBO(196, 196, 196, 1),
                           borderRadius: BorderRadius.circular(width * 0.025)),
-                    )),
+                    ),
                   )
                 : Stack(
                     children: [
