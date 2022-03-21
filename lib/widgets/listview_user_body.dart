@@ -335,7 +335,7 @@ class PopUpBanner extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(15),
             child: Column(
               children: [
                 Text(
@@ -429,7 +429,7 @@ class PrimaryText extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Text(text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 16,
           color: const Color.fromRGBO(255, 255, 255, 0.6),
         ));
