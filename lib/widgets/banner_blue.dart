@@ -34,7 +34,7 @@ class BannerBlue extends StatelessWidget {
             ],
           ),
           Container(
-            width: 2,
+            width: 1,
             height: width * 0.2036,
             color: const Color.fromRGBO(255, 255, 255, 0.8),
           ),
@@ -52,7 +52,7 @@ class BannerBlue extends StatelessWidget {
             ),
           ),
           Container(
-            width: 2,
+            width: 1,
             height: width * 0.2036,
             color: const Color.fromRGBO(255, 255, 255, 0.8),
           ),

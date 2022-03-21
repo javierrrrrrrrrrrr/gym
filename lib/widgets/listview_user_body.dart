@@ -164,13 +164,13 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
           content: Stack(
             children: [
               SizedBox(
-                  height: width * 1.01,
+                  height: width * 0.88,
                   width: width,
                   child: Column(
                     children: [
                       ImgUserContainer(
-                        height: 120,
-                        width: 100,
+                        height: width * 0.3055,
+                        width: width * 0.254,
                         user: user,
                       ),
                       const SizedBox(
@@ -304,9 +304,17 @@ class IconButtonModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      width: 50,
+      height: width * 0.1273,
+      width: width * 0.1273,
       decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.25),
+              blurRadius: 5,
+              spreadRadius: 2,
+              //offset: Offset(1, 1)
+            ),
+          ],
           color: const Color.fromRGBO(77, 82, 233, 1),
           borderRadius: BorderRadius.circular(50)),
       child: IconButton(
@@ -325,8 +333,7 @@ class PopUpBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(10),
-      height: width * 0.48,
+      height: width * 0.35,
       width: width * 0.87,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(77, 82, 233, 1),
@@ -335,7 +342,7 @@ class PopUpBanner extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 Text(
@@ -361,8 +368,8 @@ class PopUpBanner extends StatelessWidget {
                 ],
               ),
               Container(
-                width: 2,
-                height: width * 0.2036,
+                width: 1,
+                height: width * 0.1273,
                 color: const Color.fromRGBO(255, 255, 255, 0.8),
               ),
               Padding(
@@ -379,8 +386,8 @@ class PopUpBanner extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 2,
-                height: width * 0.2036,
+                width: 1,
+                height: width * 0.1273,
                 color: const Color.fromRGBO(255, 255, 255, 0.8),
               ),
               Column(
