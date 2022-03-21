@@ -45,40 +45,46 @@ class ListViewUserBody extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: width * 0.025),
-              child: Stack(
-                children: [
-                  (user.img != "no-avatar.png")
-                      ? Hero(
-                          tag: user.id,
-                          child: CircleAvatar(
-                            radius: width * 0.065,
-                            backgroundImage:
-                                const AssetImage('assets/images.jpg'),
-                            foregroundImage: NetworkImage(
-                                'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
+              child: GestureDetector(
+                onTap: () {
+                  _showUserInfoPopUp(context);
+                },
+                child: Stack(
+                  children: [
+                    (user.img != "no-avatar.png")
+                        ? Hero(
+                            tag: user.id,
+                            child: CircleAvatar(
+                              radius: width * 0.065,
+                              backgroundImage:
+                                  const AssetImage('assets/images.jpg'),
+                              foregroundImage: NetworkImage(
+                                  'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
+                            ),
+                          )
+                        : Hero(
+                            tag: user.id,
+                            child: CircleAvatar(
+                              radius: width * 0.065,
+                              backgroundImage:
+                                  const AssetImage('assets/images.jpg'),
+                            ),
                           ),
-                        )
-                      : Hero(
-                          tag: user.id,
-                          child: CircleAvatar(
-                            radius: width * 0.065,
-                            backgroundImage:
-                                const AssetImage('assets/images.jpg'),
-                          ),
+                    Positioned(
+                      right: 0,
+                      bottom: width * 0.012,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(width * 0.080),
+                        child: Container(
+                          height: width * 0.025,
+                          width: width * 0.025,
+                          color:
+                              user.active == true ? Colors.green : Colors.red,
                         ),
-                  Positioned(
-                    right: 0,
-                    bottom: width * 0.012,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(width * 0.080),
-                      child: Container(
-                        height: width * 0.025,
-                        width: width * 0.025,
-                        color: user.active == true ? Colors.green : Colors.red,
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -136,4 +142,23 @@ class ListViewUserBody extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _showUserInfoPopUp(BuildContext context) async {
+  final width = MediaQuery.of(context).size.width;
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          content: Container(
+              height: width * 0.8,
+              width: width * 0.8,
+              child: Column(
+                children: [],
+              )));
+    },
+  );
 }

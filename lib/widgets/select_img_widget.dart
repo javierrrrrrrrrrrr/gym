@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym/providers/Users/image_provider.dart';
-import 'package:gym/widgets/widgets.dart';
+
 import 'package:provider/provider.dart';
 
 class SelectIMGWidget extends StatelessWidget {
@@ -27,8 +27,7 @@ class SelectIMGWidget extends StatelessWidget {
                   // ignore: empty_catches
                 } on Exception {}
               },
-              child: ImgUserContainer(
-                  child: Container(
+              child: Container(
                 height: height * 0.25,
                 width: width * 0.4,
                 child: const Center(
@@ -42,7 +41,7 @@ class SelectIMGWidget extends StatelessWidget {
                   color: const Color.fromRGBO(196, 196, 196, 1),
                   borderRadius: BorderRadius.circular(width * 0.025),
                 ),
-              )),
+              ),
             )
           else
             Stack(
