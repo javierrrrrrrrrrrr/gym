@@ -89,7 +89,7 @@ class _EditUserState extends State<EditUser> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 290),
+            padding:  EdgeInsets.only(top: width*0.6875),
             child: ListView(physics: const BouncingScrollPhysics(), children: [
               Stack(
                 children: [

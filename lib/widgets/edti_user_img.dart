@@ -30,7 +30,7 @@ class _EditUserImgState extends State<EditUserImg> {
     User user = usersProvider.selectedUser!;
 
     return Padding(
-      padding: EdgeInsets.only(top: height * 0.035),
+      padding: EdgeInsets.only(top: height * 0.02),
       child: Container(
           color: const Color.fromRGBO(253, 254, 255, 1),
           child: Row(
@@ -134,7 +134,7 @@ class UserImgFromApi extends StatelessWidget {
       },
       child: ImgUserContainer(
         user: user,
-        height: width * 0.2902,
+        height: width * 0.3902,
         width: width * 0.3208,
       ),
     );

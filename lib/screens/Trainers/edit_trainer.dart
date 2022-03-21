@@ -50,7 +50,7 @@ class _EditTrainerState extends State<EditTrainer> {
           Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 270),
+                padding: EdgeInsets.only(top: width * 0.6875),
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
