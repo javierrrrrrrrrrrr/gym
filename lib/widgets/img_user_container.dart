@@ -5,21 +5,22 @@ class ImgUserContainer extends StatelessWidget {
   const ImgUserContainer({
     Key? key,
     required this.user,
+    required this.height,
+    required this.width,
   }) : super(key: key);
   final User user;
-
+  final double height;
+  final double width;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Container(
-      height: height * 0.18,
-      width: width * 0.40,
+      height: height,
+      width: width,
       child: (user.img != "no-avatar.png")
           ? Hero(
               tag: user.id,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(width * 0.025),
+                borderRadius: BorderRadius.circular(15),
                 child: FadeInImage(
                   fit: BoxFit.cover,
                   placeholder: const AssetImage('assets/images.jpg'),
@@ -37,7 +38,7 @@ class ImgUserContainer extends StatelessWidget {
             ),
       decoration: BoxDecoration(
           color: const Color.fromRGBO(196, 196, 196, 1),
-          borderRadius: BorderRadius.circular(width * 0.025)),
+          borderRadius: BorderRadius.circular(15)),
     );
   }
 }

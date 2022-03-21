@@ -110,7 +110,7 @@ class UsersProvider extends ChangeNotifier {
       "phone": user.phone,
       "imc": user.imc,
       "icc": user.icc,
-      "services": user.services.isEmpty ? "TRAINING" : user.services[0]
+      "services": user.services.isEmpty ? "TRAINING" : user.services
     });
     request.headers.addAll(headers);
 

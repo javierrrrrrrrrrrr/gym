@@ -1,8 +1,3 @@
-// ignore: file_names
-// To parse this JSON data, do
-//
-//     final createPaymentResponse = createPaymentResponseFromMap(jsonString);
-
 import 'dart:convert';
 
 class GetAllUsersResponse {
@@ -66,7 +61,7 @@ class User {
   String height;
   String weight;
   String? email;
-  DateTime? datetime;
+  String? datetime;
   String phone;
   String? imc;
   String? icc;
@@ -89,7 +84,7 @@ class User {
     String? height,
     String? weight,
     String? email,
-    DateTime? datetime,
+    String? datetime,
     String? phone,
     String? imc,
     String? icc,
@@ -140,7 +135,7 @@ class User {
         height: json["height"],
         weight: json["weight"],
         email: json["email"],
-        datetime: DateTime.parse(json["datetime"]),
+        datetime: json["datetime"],
         phone: json["phone"],
         imc: json["imc"],
         icc: json["icc"],
