@@ -25,7 +25,7 @@ class ExampleExpandableFab extends StatelessWidget {
     BuildContext context,
   ) {
     return ExpandableFab(
-      distance: 112.0,
+      distance: 50.0,
       children: [
         ActionButton(
           onPressed: () async {
@@ -47,13 +47,6 @@ class ExampleExpandableFab extends StatelessWidget {
           },
           icon: const Icon(
             Icons.remove_red_eye_sharp,
-            color: Colors.white,
-          ),
-        ),
-        ActionButton(
-          onPressed: () {}, //_showAction(context, 1),
-          icon: const Icon(
-            Icons.insert_photo,
             color: Colors.white,
           ),
         ),
@@ -179,14 +172,14 @@ class _ExpandableFabState extends State<ExpandableFab>
   List<Widget> _buildExpandingActionButtons() {
     final children = <Widget>[];
     final count = widget.children.length;
-    final step = 90.0 / (count - 1);
-    for (var i = 0, angleInDegrees = 0.0;
+    final step = 80.0;
+    for (var i = 0, angleInDegrees = 20.0;
         i < count;
         i++, angleInDegrees += step) {
       children.add(
         _ExpandingActionButton(
-          directionInDegrees: angleInDegrees,
-          maxDistance: widget.distance,
+          directionInDegrees: 90,
+          maxDistance: widget.distance + angleInDegrees,
           progress: _expandAnimation,
           child: widget.children[i],
         ),
