@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/widgets.dart';
 
+import '../../widgets/Floting_expanded.dart';
+
 class EditUser extends StatefulWidget {
   const EditUser({Key? key}) : super(key: key);
 
@@ -110,7 +112,7 @@ class _EditUserState extends State<EditUser> {
                               validateIcon: _validateFirstName,
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: userFormController.user!.firstname,
                               obscureText: false,
@@ -141,7 +143,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Apellidos'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: userFormController.user!.lastname,
                               obscureText: false,
@@ -173,7 +175,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Telefono'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.phone,
                               obscureText: false,
@@ -207,7 +209,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Email'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.email ?? '',
                               obscureText: false,
@@ -245,7 +247,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Edad'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.age.toString(),
                               obscureText: false,
@@ -287,7 +289,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Estatura'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.height,
                               obscureText: false,
@@ -326,7 +328,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Peso'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.weight,
                               obscureText: false,
@@ -366,7 +368,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Imc'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.imc!,
                               obscureText: false,
@@ -406,7 +408,7 @@ class _EditUserState extends State<EditUser> {
                               label: const Text('Icc'),
                               icon: true,
                               maxline: 1,
-                              right: 55,
+                              right: 25,
                               left: 25,
                               initialvalue: user.icc ?? '',
                               obscureText: false,
@@ -444,7 +446,7 @@ class _EditUserState extends State<EditUser> {
                             // DropDown List;
                             Padding(
                               padding:
-                                  const EdgeInsets.only(left: 25, right: 55),
+                                  const EdgeInsets.only(left: 25, right: 25),
                               child: DropdownButtonFormField(
                                   hint: const Text("Services"),
                                   // ignore: prefer_const_constructors
@@ -499,7 +501,7 @@ class _EditUserState extends State<EditUser> {
 
                             Padding(
                               padding:
-                                  const EdgeInsets.only(left: 25, right: 55),
+                                  const EdgeInsets.only(left: 25, right: 25),
                               child: DropdownButtonFormField(
                                 hint: const Text("Select Trainer"),
                                 // ignore: prefer_const_constructors
@@ -612,14 +614,16 @@ class _EditUserState extends State<EditUser> {
               ),
             ]),
           ),
-          MenuLateral(
-              height: height,
-              width: width,
-              userProvider: userProvider,
-              user: user),
+        //  MenuLateral(
+        //     height: height,
+        ////      width: width,
+        //     userProvider: userProvider,
+        //     user: user),
           const EditUserImg()
         ],
       ),
+
+      floatingActionButton:  ExampleExpandableFab(user: user, userProvider: userProvider),
     );
   }
 
