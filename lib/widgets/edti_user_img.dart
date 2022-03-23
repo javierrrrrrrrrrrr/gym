@@ -127,7 +127,7 @@ class UserImgFromApi extends StatelessWidget {
       onTap: () {
         try {
           imageProvider.isTouch = true;
-          imageProvider.pikeImage();
+          imageProvider.pikeImage(false);
         } on Exception {
           // TODO
         }

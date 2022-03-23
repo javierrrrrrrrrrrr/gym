@@ -23,7 +23,7 @@ class SelectIMGWidget extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 try {
-                  imageProvider.pikeImage();
+                  imageProvider.pikeImage(false);
                   // ignore: empty_catches
                 } on Exception {}
               },

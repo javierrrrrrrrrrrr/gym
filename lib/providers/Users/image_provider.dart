@@ -16,10 +16,10 @@ class SelectImg extends ChangeNotifier {
   File? img;
   File? imgAdmin;
 
-  Future pikeImage() async {
+  Future pikeImage(bool camara) async {
     try {
       final photo = await _picker.pickImage(
-          source: ImageSource.camera,
+          source: camara == false ? ImageSource.gallery : ImageSource.camera,
           imageQuality: 100,
           maxHeight: 900,
           maxWidth: 600);

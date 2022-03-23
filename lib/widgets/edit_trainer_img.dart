@@ -42,7 +42,7 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                     onTap: () {
                       imageProvider.isTouch = true;
                       try {
-                        imageProvider.pikeImage();
+                        imageProvider.pikeImage(false);
                       } on Exception {
                         null;
                       }

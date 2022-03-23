@@ -619,11 +619,39 @@ class _EditUserState extends State<EditUser> {
         ////      width: width,
         //     userProvider: userProvider,
         //     user: user),
-          const EditUserImg()
+          const EditUserImg(),
+          Padding(
+           
+           padding: const  EdgeInsets.only(left: 240,top:140),
+           child:   
+           Container(
+             decoration:  const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                 color:Color.fromRGBO(196, 196, 196, 1),
+             ),
+           
+             height: 35,
+             width: 35,
+             child:  GestureDetector(
+               onTap: (){
+                   try {
+             imageProvider.isTouch = true;
+             imageProvider.pikeImage(true);
+        } on Exception {
+          // TODO
+        }
+               },
+               child: const 
+               Icon(Icons.camera_enhance,color: Color.fromRGBO(77, 82, 233, 1),size: 30,),
+             )),
+         )
+
         ],
+        
       ),
 
       floatingActionButton:  ExampleExpandableFab(user: user, userProvider: userProvider),
+      
     );
   }
 
