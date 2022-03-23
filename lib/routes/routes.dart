@@ -21,4 +21,5 @@ final Map<String, Widget Function(BuildContext)> appRoutes = {
   'view_obs': (BuildContext context) => const ViewObservaciones(),
   'lista_pagos': (BuildContext context) => const ListaPagos(),
   'view_userBytrainer': (BuildContext context) => const ViewUserByTrainer(),
+  'estadisticas': (BuildContext context) => const Estadisticas(),
 };

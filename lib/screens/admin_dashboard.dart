@@ -245,13 +245,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            ElegantNotification.info(
-                              toastDuration: const Duration(milliseconds: 3000),
-                              animation: ANIMATION.fromTop,
-                              title: const Text('Upss!!'),
-                              description: const Text(
-                                  'Para mas informacion contacte a los desarrolladores'),
-                            ).show(context);
+                            Navigator.push(context,
+                                crearRuta(screen: const Estadisticas()));
                           },
                           child: const Carta(
                             texto: "Estadisticas",
