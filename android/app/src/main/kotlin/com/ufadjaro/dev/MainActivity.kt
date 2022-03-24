@@ -1,4 +1,4 @@
-package com.new.adonys.gym
+package com.ufadjaro.dev
 
 import io.flutter.embedding.android.FlutterActivity
 
