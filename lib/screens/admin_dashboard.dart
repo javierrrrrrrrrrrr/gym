@@ -245,9 +245,20 @@ class _AdminDashboardState extends State<AdminDashboard> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            await userProvider.Mostrarestadisticas();
-                            Navigator.push(context,
-                                crearRuta(screen: const Estadisticas()));
+                            try {
+                              await userProvider.Mostrarestadisticas();
+                              Navigator.push(context,
+                                  crearRuta(screen: const Estadisticas()));
+                            } on Exception {
+                              ElegantNotification.error(
+                                toastDuration:
+                                    const Duration(milliseconds: 3000),
+                                animation: ANIMATION.fromTop,
+                                title: const Text('Error'),
+                                description:
+                                    const Text('Problemas de conexion'),
+                              ).show(context);
+                            }
                           },
                           child: const Carta(
                             texto: "Estadisticas",
