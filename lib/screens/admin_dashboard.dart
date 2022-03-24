@@ -244,7 +244,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            await userProvider.Mostrarestadisticas();
                             Navigator.push(context,
                                 crearRuta(screen: const Estadisticas()));
                           },

@@ -14,6 +14,7 @@ import 'package:gym/models/search_model.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../../models/estadisticas_model.dart';
 import '../../models/models.dart';
 
 class UsersProvider extends ChangeNotifier {
@@ -24,6 +25,12 @@ class UsersProvider extends ChangeNotifier {
   List<User> usersSinPagar = [];
   List<Payment> payments = [];
   List<Observation> observation = [];
+
+  String clients = '';
+  String newclients = '';
+  String trainers = '';
+  String newtrainers = '';
+  String newpayments = '';
 
   String token = '';
   String imgCreateUser = '';
@@ -464,6 +471,31 @@ class UsersProvider extends ChangeNotifier {
       final index = observation.indexWhere((element) => element.id == idOb);
       observation.remove(observation[index]);
       notifyListeners();
+    }
+  }
+
+  Mostrarestadisticas() async {
+    await getToken();
+    var headers = {'Authorization': token};
+    var request =
+        http.Request('GET', Uri.parse('$_baseUrl/api/dashboard/stadistics'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      final respuesta =
+          EstadisticasModel.fromJson(await response.stream.bytesToString());
+
+      clients = respuesta.clients.toString();
+      newclients = respuesta.newclients.toString();
+      trainers = respuesta.trainers.toString();
+      newtrainers = respuesta.newtrainers.toString();
+      newpayments = respuesta.newpayments.toString();
+      notifyListeners();
+    } else {
+      print('error');
     }
   }
 }

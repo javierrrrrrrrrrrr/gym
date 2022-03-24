@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 class EstadisticaCard extends StatelessWidget {
   const EstadisticaCard(
-      {Key? key, required this.texto, required this.numero, this.simbolo})
+      {Key? key,
+      required this.texto,
+      required this.numero,
+      this.simbolo,
+      required this.foto})
       : super(key: key);
   final String texto;
   final String numero;
   final bool? simbolo;
+  final String foto;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +32,11 @@ class EstadisticaCard extends StatelessWidget {
         ],
       ),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 15),
+        Padding(
+          padding: const EdgeInsets.only(left: 15),
           child: Image(
-            image: AssetImage('assets/add_user.png'),
-            color: Color.fromRGBO(137, 140, 229, 1),
+            image: AssetImage('assets/$foto'),
+            color: const Color.fromRGBO(137, 140, 229, 1),
           ),
         ),
         Expanded(

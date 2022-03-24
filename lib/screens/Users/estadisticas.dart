@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/providers/login_provider.dart';
+import 'package:gym/providers/providers.dart';
 import 'package:gym/widgets/estadistica_card.dart';
 import 'package:provider/provider.dart';
 
@@ -11,6 +11,7 @@ class Estadisticas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
+    final userProvider = Provider.of<UsersProvider>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: customAppbar(context,
@@ -32,20 +33,33 @@ class Estadisticas extends StatelessWidget {
             ),
           ]),
       body: RefreshIndicator(
-        onRefresh: _refresh,
+        onRefresh: () => refresh(context),
         child: ListView(
           children: [
             separador(),
-            const EstadisticaCard(texto: 'Clientes', numero: '136'),
+            EstadisticaCard(
+                texto: 'Clientes', numero: userProvider.clients, foto: '1.png'),
             separador(),
-            const EstadisticaCard(texto: 'Clientes Nuevos', numero: '20'),
+            EstadisticaCard(
+                texto: 'Clientes Nuevos',
+                numero: userProvider.newclients,
+                foto: '2.png'),
             separador(),
-            const EstadisticaCard(texto: 'Entrenadores', numero: '20'),
+            EstadisticaCard(
+                texto: 'Entrenadores',
+                numero: userProvider.trainers,
+                foto: '3.png'),
             separador(),
-            const EstadisticaCard(texto: 'Entrenadores Nuevos', numero: '20'),
+            EstadisticaCard(
+                texto: 'Entrenadores Nuevos',
+                numero: userProvider.newtrainers,
+                foto: '4.png'),
             separador(),
-            const EstadisticaCard(
-                simbolo: true, texto: 'Ganancias del mes', numero: '95000'),
+            EstadisticaCard(
+                simbolo: true,
+                texto: 'Ganancias del mes',
+                numero: userProvider.newpayments,
+                foto: '5.png'),
             separador(),
           ],
         ),
@@ -59,7 +73,8 @@ class Estadisticas extends StatelessWidget {
     );
   }
 
-  Future<void> _refresh() async {
-    // TODO:Hacer el metodo que llame desde el api
+  Future<void> refresh(BuildContext context) async {
+    final userProvider = Provider.of<UsersProvider>(context, listen: false);
+    await userProvider.Mostrarestadisticas();
   }
 }
