@@ -1,12 +1,9 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
-import 'package:provider/provider.dart';
 import 'dart:math' as math;
-
 import '../helpers/page_transitions.dart';
 import '../providers/Users/users_provider.dart';
-import '../screens/Users/lista_pagos.dart';
 import '../screens/pages.dart';
 
 @immutable

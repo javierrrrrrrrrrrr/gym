@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gym/providers/login_provider.dart';
+import 'package:gym/widgets/estadistica_card.dart';
+import 'package:provider/provider.dart';
 
 import '../../helpers/custom_appbar.dart';
 
@@ -7,21 +10,46 @@ class Estadisticas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: customAppbar(context, width: width, title: "Estadisticas"),
-      body: Column(children: [
-        separador(),
-        Contenedor('Clientes', '136'),
-        separador(),
-        Contenedor('Clientes Nuevos', '20'),
-        separador(),
-        Contenedor('Entrenadores', '20'),
-        separador(),
-        Contenedor('Entrenadores Nuevos', '20'),
-        separador(),
-        Contenedor('Ganancias del mes', '95000')
-      ]),
+      appBar: customAppbar(context,
+          width: width,
+          title: "Estadisticas",
+          subtitle: "actualizadas el 20/20/2022",
+          toolbarHeight: 70,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(
+                right: 20,
+              ),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundImage: const AssetImage('assets/images.jpg'),
+                foregroundImage: NetworkImage(
+                    'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
+              ),
+            ),
+          ]),
+      body: RefreshIndicator(
+        onRefresh: _refresh,
+        child: ListView(
+          children: [
+            separador(),
+            const EstadisticaCard(texto: 'Clientes', numero: '136'),
+            separador(),
+            const EstadisticaCard(texto: 'Clientes Nuevos', numero: '20'),
+            separador(),
+            const EstadisticaCard(texto: 'Entrenadores', numero: '20'),
+            separador(),
+            const EstadisticaCard(texto: 'Entrenadores Nuevos', numero: '20'),
+            separador(),
+            const EstadisticaCard(
+                simbolo: true, texto: 'Ganancias del mes', numero: '95000'),
+            separador(),
+          ],
+        ),
+      ),
     );
   }
 
@@ -31,42 +59,7 @@ class Estadisticas extends StatelessWidget {
     );
   }
 
-  Container Contenedor(String texto, String numeros) {
-    return Container(
-      margin: const EdgeInsets.only(left: 18, right: 18),
-      height: 120,
-      width: 900,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset.zero,
-            blurRadius: 6,
-          ),
-        ],
-      ),
-      child: Row(children: [
-        const Image(
-          image: AssetImage('assets/add_user.png'),
-          color: Color.fromRGBO(137, 140, 229, 1),
-        ),
-        Column(
-          children: [
-            Text(
-              texto,
-              style: const TextStyle(
-                  fontSize: 23, color: Color.fromRGBO(137, 140, 229, 1)),
-            ),
-            Text(
-              numeros,
-              style: const TextStyle(
-                  fontSize: 25, color: Color.fromRGBO(137, 140, 229, 1)),
-            ),
-          ],
-        ),
-      ]),
-    );
+  Future<void> _refresh() async {
+    // TODO:Hacer el metodo que llame desde el api
   }
 }
