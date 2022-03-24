@@ -29,14 +29,14 @@ class Estadisticas extends StatelessWidget {
           width: width,
           title: "Estadisticas",
           subtitle: "actualizadas ${devolverFecha()}",
-          toolbarHeight: 70,
+          toolbarHeight: width * 0.19,
           actions: [
             Padding(
-              padding: const EdgeInsets.only(
-                right: 20,
+              padding: EdgeInsets.only(
+                right: width * 0.05,
               ),
               child: CircleAvatar(
-                radius: 25,
+                radius: width * 0.0650,
                 backgroundImage: const AssetImage('assets/images.jpg'),
                 foregroundImage: NetworkImage(
                     'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
@@ -47,40 +47,40 @@ class Estadisticas extends StatelessWidget {
         onRefresh: () => refresh(context),
         child: ListView(
           children: [
-            separador(),
+            separador(width),
             EstadisticaCard(
                 texto: 'Clientes', numero: userProvider.clients, foto: '1.png'),
-            separador(),
+            separador(width),
             EstadisticaCard(
                 texto: 'Clientes Nuevos',
                 numero: userProvider.newclients,
                 foto: '2.png'),
-            separador(),
+            separador(width),
             EstadisticaCard(
                 texto: 'Entrenadores',
                 numero: userProvider.trainers,
                 foto: '3.png'),
-            separador(),
+            separador(width),
             EstadisticaCard(
                 texto: 'Entrenadores Nuevos',
                 numero: userProvider.newtrainers,
                 foto: '4.png'),
-            separador(),
+            separador(width),
             EstadisticaCard(
                 simbolo: true,
                 texto: 'Ganancias del mes',
                 numero: userProvider.newpayments,
                 foto: '5.png'),
-            separador(),
+            separador(width),
           ],
         ),
       ),
     );
   }
 
-  SizedBox separador() {
-    return const SizedBox(
-      height: 20,
+  SizedBox separador(var width) {
+    return SizedBox(
+      height: width * 0.05,
     );
   }
 
