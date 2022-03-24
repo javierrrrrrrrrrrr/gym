@@ -48,7 +48,7 @@ class _AddUserState extends State<AddUser> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 270),
+            padding: EdgeInsets.only(top: width * 0.64),
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Container(
@@ -67,8 +67,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Nombre'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         obscureText: false,
                         keyboardType: TextInputType.text,
                         onChanged: ((value) {
@@ -98,8 +98,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Apellidos'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         obscureText: false,
                         onChanged: (value) {
                           userFormController.user!.lastname = value;
@@ -128,8 +128,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Telefono'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         initialvalue: "",
                         obscureText: false,
                         keyboardType: TextInputType.phone,
@@ -162,8 +162,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Email'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         obscureText: false,
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (value) {
@@ -198,8 +198,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Edad'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         initialvalue: "",
                         obscureText: false,
                         keyboardType: TextInputType.number,
@@ -240,8 +240,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Estatura'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         initialvalue: "",
                         obscureText: false,
                         keyboardType: TextInputType.number,
@@ -278,8 +278,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Peso'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         initialvalue: "",
                         obscureText: false,
                         keyboardType: TextInputType.number,
@@ -317,8 +317,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Imc'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         initialvalue: "",
                         obscureText: false,
                         keyboardType: TextInputType.number,
@@ -356,8 +356,8 @@ class _AddUserState extends State<AddUser> {
                         label: const Text('Icc'),
                         icon: true,
                         maxline: 1,
-                        right: 25,
-                        left: 25,
+                        right: width * 0.0650,
+                        left: width * 0.0650,
                         initialvalue: "",
                         obscureText: false,
                         keyboardType: TextInputType.number,
@@ -392,23 +392,26 @@ class _AddUserState extends State<AddUser> {
                       // DropDown List;
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: width * 0.0650),
                         child: DropdownButtonFormField(
                             hint: const Text("Services"),
                             // ignore: prefer_const_constructors
                             decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12))),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: width * 0.05,
+                                  vertical: width * 0.025),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(width * 0.04))),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
                                       color: Color.fromRGBO(45, 49, 146, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12))),
-                              hintStyle: const TextStyle(
-                                  color: Colors.black54, fontSize: 20),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(width * 0.04))),
+                              hintStyle: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: width * 0.05),
                             ),
                             // value: initialDropDownValue,
                             icon: const Icon(Icons.arrow_drop_down),
@@ -439,8 +442,8 @@ class _AddUserState extends State<AddUser> {
                             }),
                       ),
 
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                        height: width * 0.115,
                       ),
                       CustomButton(
                         title: "Crear",
