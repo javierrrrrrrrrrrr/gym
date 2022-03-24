@@ -7,6 +7,17 @@ import '../../helpers/custom_appbar.dart';
 
 class Estadisticas extends StatelessWidget {
   const Estadisticas({Key? key}) : super(key: key);
+  String devolverFecha() {
+    String fecha = '';
+
+    int day = DateTime.now().day;
+    int mes = DateTime.now().month;
+    int year = DateTime.now().year;
+
+    fecha = "$day/$mes/$year";
+
+    return fecha;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +28,7 @@ class Estadisticas extends StatelessWidget {
       appBar: customAppbar(context,
           width: width,
           title: "Estadisticas",
-          subtitle: "actualizadas el 20/20/2022",
+          subtitle: "actualizadas ${devolverFecha()}",
           toolbarHeight: 70,
           actions: [
             Padding(
