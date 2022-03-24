@@ -32,7 +32,6 @@ class _ListViewUsersState extends State<ListViewUsers> {
                   size: width * 0.50,
                 ))
               : ListView.builder(
-                  physics: const BouncingScrollPhysics(),
                   itemCount: userProvider.users.length,
                   itemBuilder: (BuildContext context, index) {
                     return userProvider.users.isEmpty
@@ -56,7 +55,6 @@ class _ListViewUsersState extends State<ListViewUsers> {
                 size: width * 0.50,
               ))
             : ListView.builder(
-                physics: const BouncingScrollPhysics(),
                 itemCount: userProvider.usersSinPagar.length,
 
                 itemBuilder: (BuildContext context, index) {
