@@ -36,7 +36,7 @@ class EstadisticaCard extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15),
           child: Image(
             image: AssetImage('assets/$foto'),
-            color: const Color.fromRGBO(137, 140, 229, 1),
+            color: const Color.fromRGBO(77, 82, 233, 1),
           ),
         ),
         Expanded(
@@ -46,13 +46,13 @@ class EstadisticaCard extends StatelessWidget {
               Text(
                 texto,
                 style: const TextStyle(
-                    fontSize: 20, color: Color.fromRGBO(137, 140, 229, 1)),
+                    fontSize: 20, color: Color.fromRGBO(77, 82, 233, 1)),
               ),
               Text(
                 simbolo == true ? "\$-" + numero : numero,
                 style: const TextStyle(
                     fontSize: 35,
-                    color: Color.fromRGBO(137, 140, 229, 1),
+                    color: Color.fromRGBO(77, 82, 233, 1),
                     fontWeight: FontWeight.w500),
               ),
             ],
