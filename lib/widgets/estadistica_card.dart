@@ -49,7 +49,7 @@ class EstadisticaCard extends StatelessWidget {
                     fontSize: 20, color: Color.fromRGBO(77, 82, 233, 1)),
               ),
               Text(
-                simbolo == true ? "\$-" + numero : numero,
+                simbolo == true ? "\$" + numero : numero,
                 style: const TextStyle(
                     fontSize: 35,
                     color: Color.fromRGBO(77, 82, 233, 1),
