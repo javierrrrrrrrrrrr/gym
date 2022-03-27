@@ -474,7 +474,7 @@ class UsersProvider extends ChangeNotifier {
     }
   }
 
-  Mostrarestadisticas() async {
+  mostrarestadisticas() async {
     await getToken();
     var headers = {'Authorization': token};
     var request =

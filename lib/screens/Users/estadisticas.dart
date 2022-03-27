@@ -86,6 +86,6 @@ class Estadisticas extends StatelessWidget {
 
   Future<void> refresh(BuildContext context) async {
     final userProvider = Provider.of<UsersProvider>(context, listen: false);
-    await userProvider.Mostrarestadisticas();
+    await userProvider.mostrarestadisticas();
   }
 }
