@@ -10,6 +10,16 @@ class UserFormController extends ChangeNotifier {
 
   UserFormController({this.user});
 
+  changeDayActive() {
+    if (user!.daysback == true) {
+      user!.daysback = false;
+    } else {
+      user!.daysback = true;
+    }
+
+    notifyListeners();
+  }
+
   bool isValidForm() {
     return userformkey.currentState?.validate() ?? false;
   }

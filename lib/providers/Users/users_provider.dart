@@ -147,6 +147,7 @@ class UsersProvider extends ChangeNotifier {
     var request =
         http.Request('PUT', Uri.parse('$_baseUrl/api/clients/${user.id}'));
     request.body = json.encode({
+      "daysback": user.daysback,
       "trainer": trainerId == "" ? idUserlogin : trainerId,
       "firstname": user.firstname,
       "lastname": user.lastname,

@@ -31,6 +31,7 @@ class GetAllUsersResponse {
 
 class User {
   User({
+    this.daysback,
     required this.id,
     required this.firstname,
     required this.lastname,
@@ -53,7 +54,7 @@ class User {
     this.active,
     this.activeto,
   });
-
+  bool? daysback;
   String id;
   String firstname;
   String lastname;
@@ -77,6 +78,7 @@ class User {
   String? activeto;
 
   User copyWith({
+    bool? daysback,
     String? id,
     String? firstname,
     String? lastname,
@@ -100,6 +102,7 @@ class User {
     String? activeto,
   }) =>
       User(
+        daysback: daysback ?? this.daysback,
         id: id ?? this.id,
         firstname: firstname ?? this.firstname,
         lastname: lastname ?? this.lastname,
@@ -128,6 +131,7 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromMap(Map<String, dynamic> json) => User(
+        daysback: json['daysback'],
         id: json["_id"],
         firstname: json["firstname"],
         lastname: json["lastname"],
@@ -152,6 +156,7 @@ class User {
       );
 
   Map<String, dynamic> toMap() => {
+        "daysback": daysback,
         "_id": id,
         "firstname": firstname,
         "lastname": lastname,

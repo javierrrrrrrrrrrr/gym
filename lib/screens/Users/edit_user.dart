@@ -168,7 +168,25 @@ class _EditUserState extends State<EditUser> {
                                 }
                               },
                             ),
-                            _separador(height),
+                            
+                            SizedBox(
+                              height: height*0.05,
+                              width: width*0.85,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children:   [
+                                  const Text('Descontar Días',style: TextStyle(fontSize: 20)),
+                                  Switch(
+                                    value: userFormController.user!.daysback!, 
+                                    onChanged:(value){
+                                      userFormController.changeDayActive();
+
+                                  })
+                          
+                                                       ]
+                       ),
+                            ),
+                            _separador(height*6),
                             InputFieldWidget(
                               maxLength: 10,
                               validateIcon: _validatePhone,
