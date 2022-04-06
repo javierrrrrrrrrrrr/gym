@@ -48,7 +48,12 @@ class BannerBlue extends StatelessWidget {
                       lastDate: DateTime(DateTime.now().year + 1))
                   .then((value) {
                 if (value != null) {
-                  user.datetime = "${value.day}/${value.month}/${value.year}";
+                  if (value.day > 10) {
+                    user.datetime = "${value.day}/${value.month}/${value.year}";
+                  } else {
+                    user.datetime =
+                        "0${value.day}/${value.month}/${value.year}";
+                  }
                   userFormController.ChangeFecha(user.datetime.toString());
                 }
               });
