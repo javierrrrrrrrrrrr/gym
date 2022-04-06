@@ -20,6 +20,12 @@ class UserFormController extends ChangeNotifier {
     notifyListeners();
   }
 
+  ChangeFecha(String x) {
+    user!.datetime = x;
+
+    notifyListeners();
+  }
+
   bool isValidForm() {
     return userformkey.currentState?.validate() ?? false;
   }

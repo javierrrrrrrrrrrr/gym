@@ -632,11 +632,7 @@ class _EditUserState extends State<EditUser> {
               ),
             ]),
           ),
-        //  MenuLateral(
-        //     height: height,
-        ////      width: width,
-        //     userProvider: userProvider,
-        //     user: user),
+      
           const EditUserImg(),
           Padding(
            

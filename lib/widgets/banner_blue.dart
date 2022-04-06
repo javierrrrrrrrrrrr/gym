@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gym/models/models.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/Users/user_form_controller.dart';
 
 class BannerBlue extends StatelessWidget {
   const BannerBlue({Key? key, required this.user}) : super(key: key);
@@ -7,6 +10,9 @@ class BannerBlue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userFormController = Provider.of<UserFormController>(
+      context,
+    );
     String datetime = user.datetime.toString().substring(0, 9);
     String year = datetime.substring(0, 4);
     String month = datetime.substring(5, 7);
@@ -28,8 +34,24 @@ class BannerBlue extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const PrimaryText(text: "Miembro"),
-              SecondaryText(
-                text: user.datetime!,
+              GestureDetector(
+                child: SecondaryText(
+                  text: user.datetime!,
+                ),
+                onTap: () async {
+                  await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(DateTime.now().year - 100),
+                          lastDate: DateTime(DateTime.now().year + 1))
+                      .then((value) {
+                    if (value != null) {
+                      user.datetime =
+                          "${value.day}/${value.month}/${value.year}";
+                      userFormController.ChangeFecha(user.datetime.toString());
+                    }
+                  });
+                },
               )
             ],
           ),
