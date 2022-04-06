@@ -30,30 +30,29 @@ class BannerBlue extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const PrimaryText(text: "Miembro"),
-              GestureDetector(
-                child: SecondaryText(
+          GestureDetector(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const PrimaryText(text: "Miembro"),
+                SecondaryText(
                   text: user.datetime!,
-                ),
-                onTap: () async {
-                  await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(DateTime.now().year - 100),
-                          lastDate: DateTime(DateTime.now().year + 1))
-                      .then((value) {
-                    if (value != null) {
-                      user.datetime =
-                          "${value.day}/${value.month}/${value.year}";
-                      userFormController.ChangeFecha(user.datetime.toString());
-                    }
-                  });
-                },
-              )
-            ],
+                )
+              ],
+            ),
+            onTap: () async {
+              await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(DateTime.now().year - 100),
+                      lastDate: DateTime(DateTime.now().year + 1))
+                  .then((value) {
+                if (value != null) {
+                  user.datetime = "${value.day}/${value.month}/${value.year}";
+                  userFormController.ChangeFecha(user.datetime.toString());
+                }
+              });
+            },
           ),
           Container(
             width: 1,
