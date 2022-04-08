@@ -18,7 +18,7 @@ import '../../models/estadisticas_model.dart';
 import '../../models/models.dart';
 
 class UsersProvider extends ChangeNotifier {
-  final String _baseUrl = "http://181.225.253.122:3000";
+  final String _baseUrl = 'http://152.206.85.91:3000';
   final storage = const FlutterSecureStorage();
 
   List<User> users = [];

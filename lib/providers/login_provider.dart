@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import 'package:http/http.dart' as http;
 
-const String _baseUrl = "http://181.225.253.122:3000";
+String _baseUrl = 'http://152.206.85.91:3000';
 const storage = FlutterSecureStorage();
 
 class LoginProvider extends ChangeNotifier {

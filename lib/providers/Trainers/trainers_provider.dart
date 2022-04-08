@@ -9,7 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
 
 class TrainerProvider extends ChangeNotifier {
-  final String _baseUrl = "http://181.225.253.122:3000";
+  final String _baseUrl = 'http://152.206.85.91:3000';
   String token = '';
   final storage = const FlutterSecureStorage();
 
