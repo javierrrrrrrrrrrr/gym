@@ -39,7 +39,7 @@ class Estadisticas extends StatelessWidget {
                 radius: width * 0.0650,
                 backgroundImage: const AssetImage('assets/images.jpg'),
                 foregroundImage: NetworkImage(
-                    'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
+                    'http://152.206.85.91:3000/api/uploads/users/${loginProvider.idUserLogin}'),
               ),
             ),
           ]),

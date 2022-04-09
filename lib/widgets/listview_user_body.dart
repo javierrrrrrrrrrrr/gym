@@ -60,7 +60,7 @@ class ListViewUserBody extends StatelessWidget {
                               backgroundImage:
                                   const AssetImage('assets/images.jpg'),
                               foregroundImage: NetworkImage(
-                                  'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
+                                  'http://152.206.85.91:3000/api/uploads/clients/${user.id}'),
                             ),
                           )
                         : Hero(
@@ -231,7 +231,7 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
                                       context,
                                       crearRuta(
                                           screen: const ListaObservaciones()));
-                                } on Exception catch (e) {
+                                } on Exception {
                                   // TODO
                                 }
                               },
@@ -259,7 +259,7 @@ Future<void> _showUserInfoPopUp(BuildContext context, User user) async {
                                   Navigator.pop(context);
                                   Navigator.push(context,
                                       crearRuta(screen: const ListaPagos()));
-                                } on Exception catch (e) {
+                                } on Exception {
                                   // TODO
                                 }
                               },
@@ -438,7 +438,7 @@ class PrimaryText extends StatelessWidget {
     return Text(text,
         style: const TextStyle(
           fontSize: 16,
-          color: const Color.fromRGBO(255, 255, 255, 0.6),
+          color: Color.fromRGBO(255, 255, 255, 0.6),
         ));
   }
 }

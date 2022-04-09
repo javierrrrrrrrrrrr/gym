@@ -3,7 +3,6 @@ import 'package:gym/helpers/page_transitions.dart';
 import 'package:gym/models/Trainers/trainer_model.dart';
 import 'package:gym/providers/providers.dart';
 import 'package:gym/screens/Trainers/edit_trainer.dart';
-import 'package:gym/screens/Trainers/listview_users_by_trainer_body.dart';
 import 'package:gym/screens/Trainers/users_by_trainers.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +41,7 @@ class ListViewTrainerBody extends StatelessWidget {
                         radius: width * 0.065,
                         backgroundImage: const AssetImage('assets/images.jpg'),
                         foregroundImage: NetworkImage(
-                            'http://181.225.253.122:3000/api/uploads/users/${trainer.uid}'),
+                            'http://152.206.85.91:3000/api/uploads/users/${trainer.uid}'),
                       ),
                     )
                   : Hero(

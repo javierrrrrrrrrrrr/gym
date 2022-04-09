@@ -228,7 +228,7 @@ class SelectImgFromCamara extends StatelessWidget {
               imageProvider.imageAdminPath!, loginProvider.idUserLogin);
 
           imageProvider.imageAdminPath = "";
-        } on Exception catch (e) {
+        } on Exception {
           // TODO
         }
       },
@@ -313,7 +313,7 @@ class LoadImgFromApi extends StatelessWidget {
             fit: BoxFit.cover,
             placeholder: const AssetImage('assets/images.jpg'),
             image: NetworkImage(
-                'http://181.225.253.122:3000/api/uploads/users/${loginProvider.idUserLogin}'),
+                'http://152.206.85.91:3000/api/uploads/users/${loginProvider.idUserLogin}'),
             placeholderFit: BoxFit.cover,
           ),
         ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gym/models/Trainers/trainer_model.dart';
 
 import 'package:gym/providers/providers.dart';
-import 'package:gym/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class EditTrainerImg extends StatefulWidget {
@@ -61,7 +60,7 @@ class _EditTrainerImgState extends State<EditTrainerImg> {
                                   placeholder:
                                       const AssetImage('assets/images.jpg'),
                                   image: NetworkImage(
-                                      'http://181.225.253.122:3000/api/uploads/users/${trainer.uid}'),
+                                      'http://152.206.85.91:3000/api/uploads/users/${trainer.uid}'),
                                   placeholderFit: BoxFit.cover,
                                 ),
                               ),

@@ -91,7 +91,7 @@ class ListUserBody extends StatelessWidget {
                             backgroundImage:
                                 const AssetImage('assets/images.jpg'),
                             foregroundImage: NetworkImage(
-                                'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
+                                'http://152.206.85.91:3000/api/uploads/clients/${user.id}'),
                           ),
                         )
                       : Hero(

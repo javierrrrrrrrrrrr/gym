@@ -25,7 +25,7 @@ class ImgUserContainer extends StatelessWidget {
                   fit: BoxFit.cover,
                   placeholder: const AssetImage('assets/images.jpg'),
                   image: NetworkImage(
-                      'http://181.225.253.122:3000/api/uploads/clients/${user.id}'),
+                      'http://152.206.85.91:3000/api/uploads/clients/${user.id}'),
                   placeholderFit: BoxFit.cover,
                 ),
               ),
